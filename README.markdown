@@ -81,7 +81,15 @@ The tool will try to do a search for existing similar entities on the remote OGC
 
 ### Step 3: Downloading Sensor Observations
 
-TODO
+After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
+
+```
+$ transload get observations --source environment_canada --station XCM --destination /datastore/weather
+```
+
+In this example, observations for the Environment Canada station `XCM` (Cambridge Bay) are downloaded to a local cache in the `/datastore/weather/environment_canada/XCM/YYYY/MM/DD/HHMMSS.xml` file. The year/month/day and hour/minute/second are parsed from the observation file provided by the data source.
+
+If a file already exists with the same name, it is **overwritten**.
 
 ### Step 4: Uploading Sensor Observations to OGC SensorThings API
 
