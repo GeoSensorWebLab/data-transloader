@@ -40,7 +40,7 @@ Weather station sources with planned support:
 To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `Sensors`, `Observed Properties`, and `Datastreams` must be initialized using the weather station details before sensor data observations can be uploaded. The metadata can be downloaded using a command:
 
 ```
-$ transload get metadata --source environment_canada --station XCM --destination /datastore/weather
+$ transload get metadata --source environment_canada --station XCM --cache /datastore/weather
 ```
 
 This will download the sensor metadata from the Environment Canada source for the station with the identifier `XCM` (Cambridge Bay), and store the metadata in a JSON file in the `/datastore/weather` directory.
@@ -68,7 +68,7 @@ Other entities such as the `Feature of Interest` and `Observation` are handled i
 To execute the upload, the tool has a put command:
 
 ```
-$ transload put metadata --source environment_canada --station XCM --destination /datastore/weather
+$ transload put metadata --source environment_canada --station XCM --cache /datastore/weather
 ```
 
 In this case, the tool will upload the sensor metadata from the Environment Canada source for the station with the identifier `XCM` (Cambridge Bay), and look for the metadata in a JSON file in the `/datastore/weather/environment_canada` directory.
@@ -84,7 +84,7 @@ The tool will try to do a search for existing similar entities on the remote OGC
 After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
 
 ```
-$ transload get observations --source environment_canada --station XCM --destination /datastore/weather
+$ transload get observations --source environment_canada --station XCM --cache /datastore/weather
 ```
 
 In this example, observations for the Environment Canada station `XCM` (Cambridge Bay) are downloaded to a local cache in the `/datastore/weather/environment_canada/XCM/YYYY/MM/DD/HHMMSS.xml` file. The year/month/day and hour/minute/second are parsed from the observation file provided by the data source.
@@ -98,6 +98,15 @@ Once the original observations have been downloaded to disk, they can be convert
 A `Feature of Interest` entity will be created for the observation, based on the location of the feature being observed. For a stationary weather station, this will be a point that does not move and any existing matching entity will be re-used on the OGC SensorThings API service. For a mobile sensor device, the location for this entity will likely be changing and a new entity will be created on the remote service for each `Observation`.
 
 Once a `Feature of Interest` has been created or found, it is linked to a new `Observation` entity that contains the readings for the weather station observation. If an identical `Observation` already exists on the remote service, then no upload is done. If an `Observation` already exists under the same `Datastream` with the same timestamp but a different reading value, then the value is updated with a `PUT` request. If no `Observation` already exists, then a new one is created with a `POST` request.
+
+```
+$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date 20180501T00:00:00Z
+$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date latest
+```
+
+In the first example above, the observations for Environment Canada station `XCM` are read from the filesystem cache in `/datastore/weather/environment_canada/XCM/2018/05/01/000000.xml`.
+
+In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
 
 Safety Tip: It is possible to create multiple OGC SensorThings API `Observation` entities for the same timestamp, which can confuse clients who don't expect that.
 
