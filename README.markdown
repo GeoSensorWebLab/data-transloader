@@ -103,7 +103,7 @@ Safety Tip: It is possible to create multiple OGC SensorThings API `Observation`
 
 ## Development Instructions
 
-TODO
+This tool can be modified and extended by editing its source files. There are no special requirements for development after following the "Setup Instructions" section above.
 
 ## Authors
 
