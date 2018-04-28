@@ -93,7 +93,13 @@ If a file already exists with the same name, it is **overwritten**.
 
 ### Step 4: Uploading Sensor Observations to OGC SensorThings API
 
-TODO
+Once the original observations have been downloaded to disk, they can be converted to OGC SensorThings API entities and uploaded to a compatible service.
+
+A `Feature of Interest` entity will be created for the observation, based on the location of the feature being observed. For a stationary weather station, this will be a point that does not move and any existing matching entity will be re-used on the OGC SensorThings API service. For a mobile sensor device, the location for this entity will likely be changing and a new entity will be created on the remote service for each `Observation`.
+
+Once a `Feature of Interest` has been created or found, it is linked to a new `Observation` entity that contains the readings for the weather station observation. If an identical `Observation` already exists on the remote service, then no upload is done. If an `Observation` already exists under the same `Datastream` with the same timestamp but a different reading value, then the value is updated with a `PUT` request. If no `Observation` already exists, then a new one is created with a `POST` request.
+
+Safety Tip: It is possible to create multiple OGC SensorThings API `Observation` entities for the same timestamp, which can confuse clients who don't expect that.
 
 ## Development Instructions
 
