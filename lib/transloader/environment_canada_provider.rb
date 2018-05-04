@@ -119,6 +119,7 @@ module Transloader
       # Get station metadata
       metadata = get_station_metadata(station)
 
+      # THING entity
       # Create Thing entity
       thing_json = JSON.generate({
         name: metadata["name"],
@@ -134,6 +135,7 @@ module Transloader
       metadata['Thing@iot.navigationLink'] = thing_link
       save_station_metadata(station, metadata)
 
+      # LOCATION entity
       # Create Location entity
       location_json = JSON.generate({
         name: metadata["name"],
@@ -154,6 +156,26 @@ module Transloader
 
       # Cache URL
       metadata['Location@iot.navigationLink'] = location_link
+      save_station_metadata(station, metadata)
+
+      # SENSOR entities
+      sensors_url = URI.join(destination, "Sensors")
+      metadata['datastreams'].each do |stream|
+        # Create Sensor entities
+        sensor_json = JSON.generate({
+          name: "Station #{station} #{stream['name']} Sensor",
+          description: "Environment Canada Station #{station} #{stream['name']} Sensor",
+          encodingType: 'text/plain',
+          metadata: metadata['procedure']
+        })
+
+        # Upload entity and return URL
+        sensor_link = upload_entity(sensor_json, sensors_url)
+
+        # Cache URL
+        stream['Sensor@iot.navigationLink'] = sensor_link
+      end
+
       save_station_metadata(station, metadata)
     end
 
