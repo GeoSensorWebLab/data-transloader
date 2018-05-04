@@ -142,11 +142,8 @@ module Transloader
         description: metadata["description"],
         encodingType: "application/vnd.geo+json",
         location: {
-          type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [metadata["properties"]["Longitude"].to_f, metadata["properties"]["Latitude"].to_f]
-          }
+          type: "Point",
+          coordinates: [metadata["properties"]["Longitude"].to_f, metadata["properties"]["Latitude"].to_f]
         }
       })
 
@@ -165,7 +162,10 @@ module Transloader
         sensor_json = JSON.generate({
           name: "Station #{station} #{stream['name']} Sensor",
           description: "Environment Canada Station #{station} #{stream['name']} Sensor",
-          encodingType: 'text/plain',
+          # This encoding type is a lie, because there are only two types in
+          # the spec and none apply here. Implementations are strict about those
+          # two types, so we have to pretend.
+          encodingType: 'application/pdf',
           metadata: metadata['procedure']
         })
 
@@ -192,7 +192,7 @@ module Transloader
       when Net::HTTPCreated
         location = response["Location"]
       else
-        raise "Error: Could not upload entity"
+        raise "Error: Could not upload entity. #{upload_url}\n #{response.body}\n #{request.body}"
         exit 2
       end
 
