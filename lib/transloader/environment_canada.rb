@@ -58,7 +58,8 @@ module Transloader
       }
 
       # Write to cache file
-      IO.write("#{cache}/#{CACHE_DIRECTORY}/#{station}.json", JSON.pretty_generate(station_details))
+      FileUtils.mkdir_p("#{cache}/#{CACHE_DIRECTORY}/metadata")
+      IO.write("#{cache}/#{CACHE_DIRECTORY}/metadata/#{station}.json", JSON.pretty_generate(station_details))
     end
   end
 end
