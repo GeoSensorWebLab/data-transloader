@@ -4,7 +4,8 @@ require 'transloader'
 def get_station_metadata(source, station, cache)
   case source
   when "environment_canada"
-    Transloader::EnvironmentCanada.get_station_metadata(station, cache)
+    provider = Transloader::EnvironmentCanadaProvider.new(cache)
+    provider.get_station_metadata(station)
   else
     puts "Support for source not implemented"
   end
