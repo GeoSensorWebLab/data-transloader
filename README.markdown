@@ -68,10 +68,12 @@ Other entities such as the `Feature of Interest` and `Observation` are handled i
 To execute the upload, the tool has a put command:
 
 ```
-$ transload put metadata --source environment_canada --station XCM --cache /datastore/weather
+$ transload put metadata --source environment_canada --station XCM --cache /datastore/weather --destination https://example.org/v1.0/
 ```
 
 In this case, the tool will upload the sensor metadata from the Environment Canada source for the station with the identifier `XCM` (Cambridge Bay), and look for the metadata in a JSON file in the `/datastore/weather/environment_canada` directory.
+
+An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
 
 If any of the uploads fail, the error will be logged to `STDERR`.
 

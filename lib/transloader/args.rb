@@ -2,7 +2,7 @@ require 'date'
 
 module Transloader
   class Args
-    attr_reader :cache, :date, :object, :source, :station, :verb
+    attr_reader :cache, :date, :destination, :object, :source, :station, :verb
 
     def initialize(args)
       if args.count == 0
@@ -51,6 +51,8 @@ module Transloader
           @cache = args.shift
         when "--date"
           @date = args.shift
+        when "--destination"
+          @destination = args.shift
         else
           puts "ERROR: unknown argument: #{arg}"
           print_help
@@ -67,6 +69,7 @@ module Transloader
       validate_source
       validate_cache
       validate_date
+      validate_destination
     end
 
     def validate_cache
@@ -87,6 +90,16 @@ module Transloader
             print_help
             exit 1
           end
+        end
+      end
+    end
+
+    def validate_destination
+      if @verb == :put
+        if @destination.nil?
+          puts "Error: missing destination argument"
+          print_help
+          exit 1
         end
       end
     end
