@@ -12,6 +12,7 @@ module Transloader
       @cache_path = cache_path
 
       FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}")
+      FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}/metadata")
       @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
     end
 
@@ -27,28 +28,17 @@ module Transloader
       body = body.encode(Encoding::UTF_8)
     end
 
-    # Download the metadata for a station and store in cache file
+    # Load the metadata for a station.
+    # If the station data is already cached, use that. If not, download and
+    # save to a cache file.
     def get_station_metadata(station)
-      stations = get_stations_list
-
-      station_row = stations.detect do |row|
-        row["#IATA"] == station
-      end
-
-      raise "Station not found in list" if station_row.nil?
-
-      # Convert to Hash
-      station_details = {
-        name: "Environment Canada Station #{station_row["#IATA"]}",
-        description: "Environment Canada Weather Station #{station_row["EN name"]}",
-        updated_at: Time.now,
-        properties: station_row.to_hash
-      }
-
-      # Write to cache file
-      FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}/metadata")
       metadata_path = "#{@cache_path}/#{CACHE_DIRECTORY}/metadata/#{station}.json"
-      IO.write(metadata_path, JSON.pretty_generate(station_details))
+      if File.exist?(metadata_path)
+        metadata = JSON.parse(IO.read(metadata_path))
+      else
+        metadata = load_station_metadata(station)
+        save_station_metadata(station, metadata)
+      end
     end
 
     # Download list of stations from Environment Canada. If cache file exists,
@@ -64,9 +54,33 @@ module Transloader
       CSV.parse(body, headers: :first_row)
     end
 
+    # Load the stations list and parse the desired station metadata
+    def load_station_metadata(station)
+      stations = get_stations_list
+
+      station_row = stations.detect do |row|
+        row["#IATA"] == station
+      end
+
+      raise "Station not found in list" if station_row.nil?
+
+      # Convert to Hash
+      {
+        name: "Environment Canada Station #{station_row["#IATA"]}",
+        description: "Environment Canada Weather Station #{station_row["EN name"]}",
+        updated_at: Time.now,
+        properties: station_row.to_hash
+      }
+    end
+
     # Cache the raw body data to a file for re-use
     def save_station_list(body)
       IO.write(@station_list_path, body, 0)
+    end
+
+    def save_station_metadata(id, metadata)
+      metadata_path = "#{@cache_path}/#{CACHE_DIRECTORY}/metadata/#{id}.json"
+      IO.write(metadata_path, JSON.pretty_generate(metadata))
     end
   end
 end
