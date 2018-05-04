@@ -2,12 +2,20 @@ require 'csv'
 require 'fileutils'
 require 'json'
 require 'net/http'
+require 'nokogiri'
 require 'uri'
 
 module Transloader
   class EnvironmentCanadaProvider
     CACHE_DIRECTORY = "environment_canada"
     METADATA_URL = "http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
+    NAMESPACES = {
+      'gml' => 'http://www.opengis.net/gml',
+      'om' => 'http://www.opengis.net/om/1.0',
+      'po' => 'http://dms.ec.gc.ca/schema/point-observation/2.0',
+      'xlink' => 'http://www.w3.org/1999/xlink'
+    }
+    OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml/latest/"
 
     def initialize(cache_path)
       @cache_path = cache_path
@@ -27,6 +35,17 @@ module Transloader
       # must be manually applied. I then convert to UTF-8 for re-use later.
       body = response.body.force_encoding(Encoding::ISO_8859_1)
       body = body.encode(Encoding::UTF_8)
+    end
+
+    # Some station metadata is contained in the SWOB-ML files, such as the
+    # sensor/observed property details.
+    def download_station_metadata(station, type)
+      swobml_url = URI.join(OBSERVATIONS_URL, "C#{station}-#{type}-swob.xml")
+      response = Net::HTTP.get_response(swobml_url)
+
+      raise "Error downloading station list" if response.code != '200'
+
+      Nokogiri::XML(response.body)
     end
 
     # Load the metadata for a station.
@@ -65,11 +84,33 @@ module Transloader
 
       raise "Station not found in list" if station_row.nil?
 
+      case station_row['AUTO/MAN']
+      when "Auto", "Manned/Auto"
+        type = "AUTO"
+      when "Manned"
+        type = "MAN"
+      else
+        raise "Error: unknown station type"
+      end
+      xml = download_station_metadata(station, type)
+
+      # Extract results from XML, use to build metadata needed for Sensor/
+      # Observed Property/Datastream
+      datastreams = xml.xpath('//om:result/po:elements/po:element', NAMESPACES).collect do |node|
+        {
+          name: node.xpath('@name').text,
+          uom: node.xpath('@uom').text
+        }
+      end
+
       # Convert to Hash
       {
         name: "Environment Canada Station #{station_row["#IATA"]}",
         description: "Environment Canada Weather Station #{station_row["EN name"]}",
+        elevation: xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
         updated_at: Time.now,
+        datastreams: datastreams,
+        procedure: xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
         properties: station_row.to_hash
       }
     end

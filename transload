@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby -w -Ilib
+require 'pry'
 require 'transloader'
 
 def get_station_metadata(source, station, cache)
