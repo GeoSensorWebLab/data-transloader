@@ -12,6 +12,16 @@ def get_station_metadata(source, station, cache)
   end
 end
 
+def put_station_metadata(source, station, cache, destination)
+  case source
+  when "environment_canada"
+    provider = Transloader::EnvironmentCanadaProvider.new(cache)
+    provider.put_station_metadata(station, destination)
+  else
+    puts "Support for source not implemented"
+  end
+end
+
 # Parse Args
 args = Transloader::Args.new(ARGV)
 
@@ -28,7 +38,7 @@ when :get
 when :put
   case args.object
   when :metadata
-    puts "Not yet implemented"
+    put_station_metadata(args.source, args.station, args.cache, args.destination)
   when :observations
     puts "Not yet implemented"
   end

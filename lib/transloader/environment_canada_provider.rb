@@ -2,6 +2,7 @@ require 'csv'
 require 'fileutils'
 require 'json'
 require 'net/http'
+require 'uri'
 
 module Transloader
   class EnvironmentCanadaProvider
@@ -71,6 +72,68 @@ module Transloader
         updated_at: Time.now,
         properties: station_row.to_hash
       }
+    end
+
+    def put_station_metadata(station, destination)
+      # Get station metadata
+      metadata = get_station_metadata(station)
+
+      # Create Thing entity
+      thing_json = JSON.generate({
+        name: metadata["name"],
+        description: metadata["description"],
+        properties: metadata["properties"]
+      })
+
+      # Upload entity and return URL
+      things_url = URI.join(destination, "Things")
+      thing_link = upload_entity(thing_json, things_url)
+
+      # Cache URL
+      metadata['Thing@iot.navigationLink'] = thing_link
+      save_station_metadata(station, metadata)
+
+      # Create Location entity
+      location_json = JSON.generate({
+        name: metadata["name"],
+        description: metadata["description"],
+        encodingType: "application/vnd.geo+json",
+        location: {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [metadata["properties"]["Longitude"].to_f, metadata["properties"]["Latitude"].to_f]
+          }
+        }
+      })
+
+      # Upload entity and return URL
+      locations_url = URI.join(thing_link, "Locations")
+      location_link = upload_entity(location_json, locations_url)
+
+      # Cache URL
+      metadata['Location@iot.navigationLink'] = location_link
+      save_station_metadata(station, metadata)
+    end
+
+    def upload_entity(entity, upload_url)
+      request = Net::HTTP::Post.new(upload_url)
+      request.body = entity
+      request.content_type = 'application/json'
+
+      response = Net::HTTP.start(upload_url.hostname, upload_url.port) do |http|
+        http.request(request)
+      end
+
+      case response
+      when Net::HTTPCreated
+        location = response["Location"]
+      else
+        raise "Error: Could not upload entity"
+        exit 2
+      end
+
+      location
     end
 
     # Cache the raw body data to a file for re-use
