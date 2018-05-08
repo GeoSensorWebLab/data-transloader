@@ -132,7 +132,7 @@ module Transloader
 
       # Upload entity and return URL
       things_url = URI.join(destination, "Things")
-      thing_link = upload_entity(thing_json, things_url)
+      thing_link = upload_entity(thing_json, things_url)["Location"]
 
       # Cache URL
       metadata['Thing@iot.navigationLink'] = thing_link
@@ -152,7 +152,7 @@ module Transloader
 
       # Upload entity and return URL
       locations_url = URI.join(thing_link, "Locations")
-      location_link = upload_entity(location_json, locations_url)
+      location_link = upload_entity(location_json, locations_url)["Location"]
 
       # Cache URL
       metadata['Location@iot.navigationLink'] = location_link
@@ -174,11 +174,12 @@ module Transloader
           metadata: metadata['procedure']
         })
 
-        # Upload entity and return URL
-        sensor_link = upload_entity(sensor_json, sensors_url)
+        # Upload entity and return response
+        sensor_response = upload_entity(sensor_json, sensors_url)
 
-        # Cache URL
-        stream['Sensor@iot.navigationLink'] = sensor_link
+        # Cache URL and ID
+        stream['Sensor@iot.navigationLink'] = sensor_response["Location"]
+        stream['Sensor@iot.id'] = JSON.parse(sensor_response.body)["@iot.id"]
       end
 
       save_station_metadata(station, metadata)
@@ -194,16 +195,53 @@ module Transloader
           description: stream['name']
         })
 
-        # Upload entity and return URL
-        observed_property_link = upload_entity(observed_property_json, observed_properties_url)
+        # Upload entity and return response
+        observed_property_response = upload_entity(observed_property_json, observed_properties_url)
 
         # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property_link
+        stream['ObservedProperty@iot.navigationLink'] = observed_property_response['Location']
+        stream['ObservedProperty@iot.id'] = JSON.parse(observed_property_response.body)['@iot.id']
+      end
+
+      save_station_metadata(station, metadata)
+
+      # DATASTREAM entities
+      datastreams_url = URI(thing_link + "/Datastreams")
+      metadata['datastreams'].each do |stream|
+        # Create Datastream entities
+        # TODO: Use mapping to improve these entities
+        datastream_json = JSON.generate({
+          name: "Station #{station} #{stream['name']}",
+          description: "Environment Canada Station #{station} #{stream['name']}",
+          # TODO: Use mapping to improve unit of measurement
+          unitOfMeasurement: {
+            name: stream['uom'],
+            symbol: '',
+            definition: ''
+          },
+          # TODO: Use more specific observation types, if possible
+          observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
+          Sensor: {
+            "@iot.id" => stream['Sensor@iot.id']
+          },
+          ObservedProperty: {
+            "@iot.id" => stream['ObservedProperty@iot.id']
+          }
+        })
+
+        # Upload entity and return URL
+        datastream_response = upload_entity(datastream_json, datastreams_url)
+
+        # Cache URL
+        stream['Datastream@iot.navigationLink'] = datastream_response["Location"]
+        stream['Datastream@iot.id'] = JSON.parse(datastream_response.body)['@iot.id']
       end
 
       save_station_metadata(station, metadata)
     end
 
+    # Upload JSON string of entity to upload_url and return the response
+    # Raises if upload failed.
     def upload_entity(entity, upload_url)
       request = Net::HTTP::Post.new(upload_url)
       request.body = entity
@@ -213,15 +251,16 @@ module Transloader
         http.request(request)
       end
 
-      case response
-      when Net::HTTPCreated
-        location = response["Location"]
-      else
+      # Force encoding on response body
+      # See https://bugs.ruby-lang.org/issues/2567
+      response.body = response.body.force_encoding('UTF-8')
+
+      if response.class != Net::HTTPCreated
         raise "Error: Could not upload entity. #{upload_url}\n #{response.body}\n #{request.body}"
         exit 2
       end
 
-      location
+      response
     end
 
     # Cache the raw body data to a file for re-use
