@@ -115,6 +115,9 @@ module Transloader
       }
     end
 
+    # Create and upload SensorThings API entities for `station` id to the server
+    # at `destination`. Metadata for the station is read from the station
+    # metadata cache files.
     def put_station_metadata(station, destination)
       # Get station metadata
       metadata = get_station_metadata(station)
@@ -176,6 +179,26 @@ module Transloader
 
         # Cache URL
         stream['Sensor@iot.navigationLink'] = sensor_link
+      end
+
+      save_station_metadata(station, metadata)
+
+      # OBSERVED PROPERTY entities
+      observed_properties_url = URI.join(destination, "ObservedProperties")
+      metadata['datastreams'].each do |stream|
+        # Create Observed Property entities
+        # TODO: Use mapping to improve these entities
+        observed_property_json = JSON.generate({
+          name: stream['name'],
+          definition: "http://example.org/#{stream['name']}",
+          description: stream['name']
+        })
+
+        # Upload entity and return URL
+        observed_property_link = upload_entity(observed_property_json, observed_properties_url)
+
+        # Cache URL
+        stream['ObservedProperty@iot.navigationLink'] = observed_property_link
       end
 
       save_station_metadata(station, metadata)
