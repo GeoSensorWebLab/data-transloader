@@ -139,7 +139,7 @@ module Transloader
 
       # LOCATION entity
       # Create Location entity
-      location_json = JSON.generate({
+      location = Location.new({
         name: metadata["name"],
         description: metadata["description"],
         encodingType: "application/vnd.geo+json",
@@ -150,11 +150,10 @@ module Transloader
       })
 
       # Upload entity and parse response
-      locations_url = URI(thing.link + "/Locations")
-      location_link = upload_entity(location_json, locations_url)["Location"]
+      location.upload_to(thing.link)
 
       # Cache URL
-      metadata['Location@iot.navigationLink'] = location_link
+      metadata['Location@iot.navigationLink'] = location.link
       save_station_metadata(station, metadata)
 
       # SENSOR entities
