@@ -25,7 +25,7 @@ module Transloader
     end
 
     def upload_to(url)
-      upload_url = URI(url + "ObservedProperties")
+      upload_url = self.join_uris(url, "ObservedProperties")
       self.upload_to_path(upload_url)
     end
   end

@@ -13,6 +13,17 @@ module Transloader
       @attributes = attributes
     end
 
+    # Override URI join function to handle OData style parenthesis properly
+    def join_uris(*uris)
+      uris.reduce("") do |memo, uri|
+        if memo.to_s[-1] == ")"
+          URI.join(memo.to_s + '/', uri)
+        else
+          URI.join(memo, uri)
+        end
+      end
+    end
+
     # Subclasses must override this.
     def to_json
       JSON.generate({})
