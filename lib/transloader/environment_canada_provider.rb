@@ -165,6 +165,8 @@ module Transloader
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
+          # More discussion on specification that could change this:
+          # https://github.com/opengeospatial/sensorthings/issues/39
           encodingType: 'application/pdf',
           metadata: metadata['procedure']
         })
