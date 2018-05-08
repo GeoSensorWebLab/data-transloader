@@ -1,6 +1,8 @@
 require 'json'
 require 'uri'
 
+require 'transloader/entity'
+
 module Transloader
   # ObservedProperty entity class.
   class ObservedProperty < Entity

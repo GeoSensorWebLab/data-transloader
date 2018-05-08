@@ -1,6 +1,8 @@
 require 'json'
 require 'uri'
 
+require 'transloader/entity'
+
 module Transloader
   # Thing entity class.
   class Thing < Entity

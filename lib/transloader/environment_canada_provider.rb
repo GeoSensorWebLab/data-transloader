@@ -202,11 +202,10 @@ module Transloader
       save_station_metadata(station, metadata)
 
       # DATASTREAM entities
-      datastreams_url = URI(thing.link + "/Datastreams")
       metadata['datastreams'].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
-        datastream_json = JSON.generate({
+        datastream = Datastream.new({
           name: "Station #{station} #{stream['name']}",
           description: "Environment Canada Station #{station} #{stream['name']}",
           # TODO: Use mapping to improve unit of measurement
@@ -226,11 +225,11 @@ module Transloader
         })
 
         # Upload entity and parse response
-        datastream_response = upload_entity(datastream_json, datastreams_url)
+        datastream.upload_to(thing.link)
 
         # Cache URL
-        stream['Datastream@iot.navigationLink'] = datastream_response["Location"]
-        stream['Datastream@iot.id'] = JSON.parse(datastream_response.body)['@iot.id']
+        stream['Datastream@iot.navigationLink'] = datastream.link
+        stream['Datastream@iot.id'] = datastream.id
       end
 
       save_station_metadata(station, metadata)
