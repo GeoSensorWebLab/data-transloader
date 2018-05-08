@@ -157,7 +157,6 @@ module Transloader
       save_station_metadata(station, metadata)
 
       # SENSOR entities
-      sensors_url = URI.join(destination, "Sensors")
       metadata['datastreams'].each do |stream|
         # Create Sensor entities
         sensor = Sensor.new({
@@ -173,7 +172,7 @@ module Transloader
         })
 
         # Upload entity and parse response
-        sensor.upload_to(sensors_url)
+        sensor.upload_to(destination)
 
         # Cache URL and ID
         stream['Sensor@iot.navigationLink'] = sensor.link
@@ -183,22 +182,21 @@ module Transloader
       save_station_metadata(station, metadata)
 
       # OBSERVED PROPERTY entities
-      observed_properties_url = URI.join(destination, "ObservedProperties")
       metadata['datastreams'].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
-        observed_property_json = JSON.generate({
+        observed_property = ObservedProperty.new({
           name: stream['name'],
           definition: "http://example.org/#{stream['name']}",
           description: stream['name']
         })
 
         # Upload entity and parse response
-        observed_property_response = upload_entity(observed_property_json, observed_properties_url)
+        observed_property.upload_to(destination)
 
         # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property_response['Location']
-        stream['ObservedProperty@iot.id'] = JSON.parse(observed_property_response.body)['@iot.id']
+        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
+        stream['ObservedProperty@iot.id'] = observed_property.id
       end
 
       save_station_metadata(station, metadata)
