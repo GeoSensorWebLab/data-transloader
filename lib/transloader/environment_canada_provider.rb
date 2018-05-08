@@ -130,7 +130,7 @@ module Transloader
         properties: metadata["properties"]
       })
 
-      # Upload entity and return URL
+      # Upload entity and parse response
       things_url = URI.join(destination, "Things")
       thing_link = upload_entity(thing_json, things_url)["Location"]
 
@@ -150,8 +150,8 @@ module Transloader
         }
       })
 
-      # Upload entity and return URL
-      locations_url = URI.join(thing_link, "Locations")
+      # Upload entity and parse response
+      locations_url = URI(thing_link + "/Locations")
       location_link = upload_entity(location_json, locations_url)["Location"]
 
       # Cache URL
@@ -174,7 +174,7 @@ module Transloader
           metadata: metadata['procedure']
         })
 
-        # Upload entity and return response
+        # Upload entity and parse response
         sensor_response = upload_entity(sensor_json, sensors_url)
 
         # Cache URL and ID
@@ -195,7 +195,7 @@ module Transloader
           description: stream['name']
         })
 
-        # Upload entity and return response
+        # Upload entity and parse response
         observed_property_response = upload_entity(observed_property_json, observed_properties_url)
 
         # Cache URL
@@ -229,7 +229,7 @@ module Transloader
           }
         })
 
-        # Upload entity and return URL
+        # Upload entity and parse response
         datastream_response = upload_entity(datastream_json, datastreams_url)
 
         # Cache URL
