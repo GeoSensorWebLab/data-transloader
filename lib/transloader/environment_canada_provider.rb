@@ -160,7 +160,7 @@ module Transloader
       sensors_url = URI.join(destination, "Sensors")
       metadata['datastreams'].each do |stream|
         # Create Sensor entities
-        sensor_json = JSON.generate({
+        sensor = Sensor.new({
           name: "Station #{station} #{stream['name']} Sensor",
           description: "Environment Canada Station #{station} #{stream['name']} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -173,11 +173,11 @@ module Transloader
         })
 
         # Upload entity and parse response
-        sensor_response = upload_entity(sensor_json, sensors_url)
+        sensor.upload_to(sensors_url)
 
         # Cache URL and ID
-        stream['Sensor@iot.navigationLink'] = sensor_response["Location"]
-        stream['Sensor@iot.id'] = JSON.parse(sensor_response.body)["@iot.id"]
+        stream['Sensor@iot.navigationLink'] = sensor.link
+        stream['Sensor@iot.id'] = sensor.id
       end
 
       save_station_metadata(station, metadata)
