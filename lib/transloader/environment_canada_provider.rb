@@ -124,18 +124,17 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing_json = JSON.generate({
+      thing = Thing.new({
         name: metadata["name"],
         description: metadata["description"],
         properties: metadata["properties"]
       })
 
       # Upload entity and parse response
-      things_url = URI.join(destination, "Things")
-      thing_link = upload_entity(thing_json, things_url)["Location"]
+      thing.upload_to(destination)
 
       # Cache URL
-      metadata['Thing@iot.navigationLink'] = thing_link
+      metadata['Thing@iot.navigationLink'] = thing.link
       save_station_metadata(station, metadata)
 
       # LOCATION entity
@@ -151,7 +150,7 @@ module Transloader
       })
 
       # Upload entity and parse response
-      locations_url = URI(thing_link + "/Locations")
+      locations_url = URI(thing.link + "/Locations")
       location_link = upload_entity(location_json, locations_url)["Location"]
 
       # Cache URL
@@ -206,7 +205,7 @@ module Transloader
       save_station_metadata(station, metadata)
 
       # DATASTREAM entities
-      datastreams_url = URI(thing_link + "/Datastreams")
+      datastreams_url = URI(thing.link + "/Datastreams")
       metadata['datastreams'].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
