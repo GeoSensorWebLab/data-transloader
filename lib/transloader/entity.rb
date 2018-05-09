@@ -40,6 +40,10 @@ module Transloader
         http.request(request)
       end
 
+      # Force encoding on response body
+      # See https://bugs.ruby-lang.org/issues/2567
+      response.body = response.body.force_encoding('UTF-8')
+
       # Log output of response
       puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
       response.each do |header, value|
@@ -47,10 +51,6 @@ module Transloader
       end
       puts response.body
       puts ''
-
-      # Force encoding on response body
-      # See https://bugs.ruby-lang.org/issues/2567
-      response.body = response.body.force_encoding('UTF-8')
 
       response
     end
@@ -103,6 +103,10 @@ module Transloader
         http.request(request)
       end
 
+      # Force encoding on response body
+      # See https://bugs.ruby-lang.org/issues/2567
+      response.body = response.body.force_encoding('UTF-8')
+
       # Log output of response
       puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
       response.each do |header, value|
@@ -110,10 +114,6 @@ module Transloader
       end
       puts response.body
       puts ''
-
-      # Force encoding on response body
-      # See https://bugs.ruby-lang.org/issues/2567
-      response.body = response.body.force_encoding('UTF-8')
 
       if response.class != Net::HTTPCreated
         raise "Error: Could not POST entity. #{url}\n #{response.body}\n #{request.body}"
