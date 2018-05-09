@@ -14,10 +14,19 @@ module Transloader
       @id = id
       @provider = provider
       @properties = properties
+      @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
     end
 
-    def observation_xml
-      @xml ||= Nokogiri::XML(get_observations())
+    # Load the metadata for a station.
+    # If the station data is already cached, use that. If not, download and
+    # save to a cache file.
+    def get_metadata
+      if File.exist?(@metadata_path)
+        @metadata = JSON.parse(IO.read(@metadata_path))
+      else
+        @metadata = load_metadata
+        save
+      end
     end
 
     def get_observations
@@ -37,7 +46,7 @@ module Transloader
       response.body
     end
 
-    def save
+    def load_metadata
       xml = observation_xml
 
       # Extract results from XML, use to build metadata needed for Sensor/
@@ -50,7 +59,7 @@ module Transloader
       end
 
       # Convert to Hash
-      attributes = {
+      @metadata = {
         name: "Environment Canada Station #{@id}",
         description: "Environment Canada Weather Station #{@properties["EN name"]}",
         elevation: xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
@@ -59,9 +68,14 @@ module Transloader
         procedure: xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
         properties: @properties
       }
+    end
 
-      metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
-      IO.write(metadata_path, JSON.pretty_generate(attributes))
+    def observation_xml
+      @xml ||= Nokogiri::XML(get_observations())
+    end
+
+    def save_metadata
+      IO.write(@metadata_path, JSON.pretty_generate(@metadata))
     end
   end
 end

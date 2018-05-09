@@ -7,7 +7,8 @@ def get_station_metadata(source, station_id, cache)
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
-    station.save
+    station.load_metadata
+    station.save_metadata
   else
     puts "Support for source not implemented"
   end
