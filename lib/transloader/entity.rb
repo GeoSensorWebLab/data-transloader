@@ -29,7 +29,33 @@ module Transloader
       JSON.generate({})
     end
 
-    def upload_to_path(url)
+    def get(url)
+      request = Net::HTTP::Get.new(url)
+
+      # Log output of request
+      puts "#{request.method} #{request.uri}"
+      puts ''
+
+      response = Net::HTTP.start(url.hostname, url.port) do |http|
+        http.request(request)
+      end
+
+      # Log output of response
+      puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
+      response.each do |header, value|
+        puts "#{header}: #{value}"
+      end
+      puts response.body
+      puts ''
+
+      # Force encoding on response body
+      # See https://bugs.ruby-lang.org/issues/2567
+      response.body = response.body.force_encoding('UTF-8')
+
+      response
+    end
+
+    def post_to_path(url)
       request = Net::HTTP::Post.new(url)
       request.body = self.to_json
       request.content_type = 'application/json'
@@ -45,7 +71,7 @@ module Transloader
       end
 
       # Log output of response
-      puts "#{response.http_version} #{response.message} #{response.code}"
+      puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
       response.each do |header, value|
         puts "#{header}: #{value}"
       end
