@@ -251,43 +251,6 @@ module Transloader
       save_station_metadata(station, metadata)
     end
 
-    # Upload JSON string of entity to upload_url and return the response
-    # Raises if upload failed.
-    def upload_entity(entity, upload_url)
-      request = Net::HTTP::Post.new(upload_url)
-      request.body = entity
-      request.content_type = 'application/json'
-
-      # Log output of request
-      puts "#{request.method} #{request.uri}"
-      puts "Content-Type: #{request.content_type}"
-      puts entity
-      puts ''
-
-      response = Net::HTTP.start(upload_url.hostname, upload_url.port) do |http|
-        http.request(request)
-      end
-
-      # Log output of response
-      puts "#{response.http_version} #{response.message} #{response.code}"
-      response.each do |header, value|
-        puts "#{header}: #{value}"
-      end
-      puts response.body
-      puts ''
-
-      # Force encoding on response body
-      # See https://bugs.ruby-lang.org/issues/2567
-      response.body = response.body.force_encoding('UTF-8')
-
-      if response.class != Net::HTTPCreated
-        raise "Error: Could not upload entity. #{upload_url}\n #{response.body}\n #{request.body}"
-        exit 2
-      end
-
-      response
-    end
-
     # Cache the raw body data to a file for re-use
     def save_station_list(body)
       IO.write(@station_list_path, body, 0)
