@@ -51,11 +51,11 @@ module Transloader
       if body["@iot.count"] == 0
         self.post_to_path(upload_url)
       else
-        existing_location = body["value"].first
-        @link = existing_location['@iot.selfLink']
-        @id = existing_location['@iot.id']
+        existing_entity = body["value"].first
+        @link = existing_entity['@iot.selfLink']
+        @id = existing_entity['@iot.id']
 
-        if same_as?(existing_location)
+        if same_as?(existing_entity)
           puts "Re-using existing Location entity."
         else
           self.post_to_path(upload_url)

@@ -24,7 +24,8 @@ module Transloader
       })
     end
 
-    # Check if self is a subset of entity
+    # Check if self is a subset of entity.
+    # Cycling through JSON makes the keys the same order and all stringified.
     def same_as?(entity)
       JSON.parse(self.to_json) == JSON.parse(JSON.generate({
         name: entity['name'],
@@ -47,12 +48,12 @@ module Transloader
       if body["@iot.count"] == 0
         self.post_to_path(upload_url)
       else
-        existing_thing = body["value"].first
-        @link = existing_thing['@iot.selfLink']
-        @id = existing_thing['@iot.id']
+        existing_entity = body["value"].first
+        @link = existing_entity['@iot.selfLink']
+        @id = existing_entity['@iot.id']
 
-        if same_as?(existing_thing)
-          puts "Re-using existing entity."
+        if same_as?(existing_entity)
+          puts "Re-using existing Thing entity."
         else
           self.patch_to_path(URI(@link))
         end
