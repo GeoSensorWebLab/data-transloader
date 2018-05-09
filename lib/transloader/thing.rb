@@ -45,7 +45,7 @@ module Transloader
       # create a new entity. If one or more entities match, then the first is
       # re-used. If the matching entity has the same name/description but
       # different properties, then a PATCH request is used to synchronize.
-      if body["@iot.count"] == 0
+      if body["value"].length == 0
         self.post_to_path(upload_url)
       else
         existing_entity = body["value"].first

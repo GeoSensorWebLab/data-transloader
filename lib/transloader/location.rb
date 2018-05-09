@@ -48,7 +48,7 @@ module Transloader
       # create a new entity. If one or more entities match **exactly**, then the
       # first result is re-used. If entities match name/description but not the
       # location or encoding type, then a POST is used to create a new Location.
-      if body["@iot.count"] == 0
+      if body["value"].length == 0
         self.post_to_path(upload_url)
       else
         existing_entity = body["value"].first
