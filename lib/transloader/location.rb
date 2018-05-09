@@ -26,9 +26,41 @@ module Transloader
       })
     end
 
+    # Check if self is a subset of entity.
+    # Cycling through JSON makes the keys the same order and all stringified.
+    def same_as?(entity)
+      JSON.parse(self.to_json) == JSON.parse(JSON.generate({
+        name: entity['name'],
+        description: entity['description'],
+        encodingType: entity['encodingType'],
+        location: entity['location']
+      }))
+    end
+
     def upload_to(url)
       upload_url = self.join_uris(url, "Locations")
-      self.post_to_path(upload_url)
+
+      filter = "name eq '#{@name}' and description eq '#{@description}'"
+      response = self.get(URI(upload_url + "?$filter=#{filter}"))
+      body = JSON.parse(response.body)
+
+      # Look for matching existing entities. If no entities match, use POST to
+      # create a new entity. If one or more entities match **exactly**, then the
+      # first result is re-used. If entities match name/description but not the
+      # location or encoding type, then a POST is used to create a new Location.
+      if body["@iot.count"] == 0
+        self.post_to_path(upload_url)
+      else
+        existing_location = body["value"].first
+        @link = existing_location['@iot.selfLink']
+        @id = existing_location['@iot.id']
+
+        if same_as?(existing_location)
+          puts "Re-using existing Location entity."
+        else
+          self.post_to_path(upload_url)
+        end
+      end
     end
   end
 end

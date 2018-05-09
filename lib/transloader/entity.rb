@@ -82,7 +82,7 @@ module Transloader
       puts response.body
       puts ''
 
-      if response.code != "200" && response.code != "204"
+      if response.class != Net::HTTPOK && response.class != Net::HTTPNoContent
         raise "Error: Could not PATCH entity. #{url}\n #{response.body}\n #{request.body}"
         exit 2
       end
