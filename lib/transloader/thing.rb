@@ -26,9 +26,11 @@ module Transloader
 
     # Check if self is a subset of entity
     def same_as?(entity)
-      entity['name'] == @name &&
-      entity['description'] == @description &&
-      entity['properties'] == @properties
+      JSON.parse(self.to_json) == JSON.parse(JSON.generate({
+        name: entity['name'],
+        description: entity['description'],
+        properties: entity['properties']
+      }))
     end
 
     def upload_to(url)
