@@ -5,6 +5,8 @@ require 'net/http'
 require 'nokogiri'
 require 'uri'
 
+require 'transloader/environment_canada_station'
+
 module Transloader
   class EnvironmentCanadaProvider
     CACHE_DIRECTORY = "environment_canada"
@@ -16,6 +18,8 @@ module Transloader
       'xlink' => 'http://www.w3.org/1999/xlink'
     }
     OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml/latest/"
+
+    attr_accessor :cache_path
 
     def initialize(cache_path)
       @cache_path = cache_path
@@ -46,6 +50,18 @@ module Transloader
       raise "Error downloading station list" if response.code != '200'
 
       Nokogiri::XML(response.body)
+    end
+
+    def get_station(station_id)
+      stations = get_stations_list
+
+      station_row = stations.detect do |row|
+        row["#IATA"] == station_id
+      end
+
+      raise "Station not found in list" if station_row.nil?
+
+      EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
     end
 
     # Load the metadata for a station.

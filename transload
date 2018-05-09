@@ -2,22 +2,22 @@
 require 'pry'
 require 'transloader'
 
-def get_station_metadata(source, station, cache)
+def get_station_metadata(source, station_id, cache)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    metadata = provider.load_station_metadata(station)
-    provider.save_station_metadata(station, metadata)
+    station = provider.get_station(station_id)
+    station.save
   else
     puts "Support for source not implemented"
   end
 end
 
-def put_station_metadata(source, station, cache, destination)
+def put_station_metadata(source, station_id, cache, destination)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    provider.put_station_metadata(station, destination)
+    provider.put_station_metadata(station_id, destination)
   else
     puts "Support for source not implemented"
   end
