@@ -38,17 +38,21 @@ module Transloader
       response = self.get(URI(upload_url + "?$filter=#{filter}"))
       body = JSON.parse(response.body)
 
-
+      # Look for matching existing entities. If no entities match, use POST to
+      # create a new entity. If one or more entities match, then the first is
+      # re-used. If the matching entity has the same name/description but
+      # different properties, then a PATCH request is used to synchronize.
       if body["@iot.count"] == 0
         self.post_to_path(upload_url)
       else
         existing_thing = body["value"].first
-        if !same_as?(existing_thing)
-          # self.patch_to_path(thing, existing_thing)
-        else
+        @link = existing_thing['@iot.selfLink']
+        @id = existing_thing['@iot.id']
+
+        if same_as?(existing_thing)
           puts "Re-using existing entity."
-          @link = existing_thing['@iot.selfLink']
-          @id = existing_thing['@iot.id']
+        else
+          self.patch_to_path(URI(@link))
         end
       end
     end

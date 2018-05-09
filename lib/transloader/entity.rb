@@ -55,6 +55,39 @@ module Transloader
       response
     end
 
+    def patch_to_path(url)
+      request = Net::HTTP::Patch.new(url)
+      request.body = self.to_json
+      request.content_type = 'application/json'
+
+      # Log output of request
+      puts "#{request.method} #{request.uri}"
+      puts "Content-Type: #{request.content_type}"
+      puts self.to_json
+      puts ''
+
+      response = Net::HTTP.start(url.hostname, url.port) do |http|
+        http.request(request)
+      end
+
+      # Force encoding on response body
+      # See https://bugs.ruby-lang.org/issues/2567
+      response.body = response.body.force_encoding('UTF-8')
+
+      # Log output of response
+      puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
+      response.each do |header, value|
+        puts "#{header}: #{value}"
+      end
+      puts response.body
+      puts ''
+
+      if response.code != "200" && response.code != "204"
+        raise "Error: Could not PATCH entity. #{url}\n #{response.body}\n #{request.body}"
+        exit 2
+      end
+    end
+
     def post_to_path(url)
       request = Net::HTTP::Post.new(url)
       request.body = self.to_json
@@ -83,7 +116,7 @@ module Transloader
       response.body = response.body.force_encoding('UTF-8')
 
       if response.class != Net::HTTPCreated
-        raise "Error: Could not upload entity. #{url}\n #{response.body}\n #{request.body}"
+        raise "Error: Could not POST entity. #{url}\n #{response.body}\n #{request.body}"
         exit 2
       end
 
