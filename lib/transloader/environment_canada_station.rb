@@ -1,3 +1,6 @@
+require 'json'
+require 'nokogiri'
+
 module Transloader
   class EnvironmentCanadaStation
     NAMESPACES = {

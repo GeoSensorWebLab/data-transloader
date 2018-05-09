@@ -1,8 +1,6 @@
 require 'csv'
 require 'fileutils'
-require 'json'
 require 'net/http'
-require 'nokogiri'
 require 'uri'
 
 require 'transloader/environment_canada_station'
@@ -11,13 +9,6 @@ module Transloader
   class EnvironmentCanadaProvider
     CACHE_DIRECTORY = "environment_canada"
     METADATA_URL = "http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
-    NAMESPACES = {
-      'gml' => 'http://www.opengis.net/gml',
-      'om' => 'http://www.opengis.net/om/1.0',
-      'po' => 'http://dms.ec.gc.ca/schema/point-observation/2.0',
-      'xlink' => 'http://www.w3.org/1999/xlink'
-    }
-    OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml/latest/"
 
     attr_accessor :cache_path
 
@@ -41,17 +32,6 @@ module Transloader
       body = body.encode(Encoding::UTF_8)
     end
 
-    # Some station metadata is contained in the SWOB-ML files, such as the
-    # sensor/observed property details.
-    def download_station_metadata(station, type)
-      swobml_url = URI.join(OBSERVATIONS_URL, "C#{station}-#{type}-swob.xml")
-      response = Net::HTTP.get_response(swobml_url)
-
-      raise "Error downloading station list" if response.code != '200'
-
-      Nokogiri::XML(response.body)
-    end
-
     def get_station(station_id)
       stations = get_stations_list
 
@@ -62,19 +42,6 @@ module Transloader
       raise "Station not found in list" if station_row.nil?
 
       EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
-    end
-
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download and
-    # save to a cache file.
-    def get_station_metadata(station)
-      metadata_path = "#{@cache_path}/#{CACHE_DIRECTORY}/metadata/#{station}.json"
-      if File.exist?(metadata_path)
-        metadata = JSON.parse(IO.read(metadata_path))
-      else
-        metadata = load_station_metadata(station)
-        save_station_metadata(station, metadata)
-      end
     end
 
     # Download list of stations from Environment Canada. If cache file exists,
@@ -90,175 +57,9 @@ module Transloader
       CSV.parse(body, headers: :first_row)
     end
 
-    # Load the stations list and parse the desired station metadata
-    def load_station_metadata(station)
-      stations = get_stations_list
-
-      station_row = stations.detect do |row|
-        row["#IATA"] == station
-      end
-
-      raise "Station not found in list" if station_row.nil?
-
-      case station_row['AUTO/MAN']
-      when "Auto", "Manned/Auto"
-        type = "AUTO"
-      when "Manned"
-        type = "MAN"
-      else
-        raise "Error: unknown station type"
-      end
-      xml = download_station_metadata(station, type)
-
-      # Extract results from XML, use to build metadata needed for Sensor/
-      # Observed Property/Datastream
-      datastreams = xml.xpath('//om:result/po:elements/po:element', NAMESPACES).collect do |node|
-        {
-          name: node.xpath('@name').text,
-          uom: node.xpath('@uom').text
-        }
-      end
-
-      # Convert to Hash
-      {
-        name: "Environment Canada Station #{station_row["#IATA"]}",
-        description: "Environment Canada Weather Station #{station_row["EN name"]}",
-        elevation: xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
-        updated_at: Time.now,
-        datastreams: datastreams,
-        procedure: xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
-        properties: station_row.to_hash
-      }
-    end
-
-    # Create and upload SensorThings API entities for `station` id to the server
-    # at `destination`. Metadata for the station is read from the station
-    # metadata cache files.
-    def put_station_metadata(station, destination)
-      # Get station metadata
-      metadata = get_station_metadata(station)
-
-      # THING entity
-      # Create Thing entity
-      thing = Thing.new({
-        name: metadata["name"],
-        description: metadata["description"],
-        properties: metadata["properties"]
-      })
-
-      # Upload entity and parse response
-      thing.upload_to(destination)
-
-      # Cache URL
-      metadata['Thing@iot.navigationLink'] = thing.link
-      save_station_metadata(station, metadata)
-
-      # LOCATION entity
-      # Create Location entity
-      location = Location.new({
-        name: metadata["name"],
-        description: metadata["description"],
-        encodingType: "application/vnd.geo+json",
-        location: {
-          type: "Point",
-          coordinates: [metadata["properties"]["Longitude"].to_f, metadata["properties"]["Latitude"].to_f]
-        }
-      })
-
-      # Upload entity and parse response
-      location.upload_to(thing.link)
-
-      # Cache URL
-      metadata['Location@iot.navigationLink'] = location.link
-      save_station_metadata(station, metadata)
-
-      # SENSOR entities
-      metadata['datastreams'].each do |stream|
-        # Create Sensor entities
-        sensor = Sensor.new({
-          name: "Station #{station} #{stream['name']} Sensor",
-          description: "Environment Canada Station #{station} #{stream['name']} Sensor",
-          # This encoding type is a lie, because there are only two types in
-          # the spec and none apply here. Implementations are strict about those
-          # two types, so we have to pretend.
-          # More discussion on specification that could change this:
-          # https://github.com/opengeospatial/sensorthings/issues/39
-          encodingType: 'application/pdf',
-          metadata: metadata['procedure']
-        })
-
-        # Upload entity and parse response
-        sensor.upload_to(destination)
-
-        # Cache URL and ID
-        stream['Sensor@iot.navigationLink'] = sensor.link
-        stream['Sensor@iot.id'] = sensor.id
-      end
-
-      save_station_metadata(station, metadata)
-
-      # OBSERVED PROPERTY entities
-      metadata['datastreams'].each do |stream|
-        # Create Observed Property entities
-        # TODO: Use mapping to improve these entities
-        observed_property = ObservedProperty.new({
-          name: stream['name'],
-          definition: "http://example.org/#{stream['name']}",
-          description: stream['name']
-        })
-
-        # Upload entity and parse response
-        observed_property.upload_to(destination)
-
-        # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
-        stream['ObservedProperty@iot.id'] = observed_property.id
-      end
-
-      save_station_metadata(station, metadata)
-
-      # DATASTREAM entities
-      metadata['datastreams'].each do |stream|
-        # Create Datastream entities
-        # TODO: Use mapping to improve these entities
-        datastream = Datastream.new({
-          name: "Station #{station} #{stream['name']}",
-          description: "Environment Canada Station #{station} #{stream['name']}",
-          # TODO: Use mapping to improve unit of measurement
-          unitOfMeasurement: {
-            name: stream['uom'],
-            symbol: '',
-            definition: ''
-          },
-          # TODO: Use more specific observation types, if possible
-          observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
-          Sensor: {
-            "@iot.id" => stream['Sensor@iot.id']
-          },
-          ObservedProperty: {
-            "@iot.id" => stream['ObservedProperty@iot.id']
-          }
-        })
-
-        # Upload entity and parse response
-        datastream.upload_to(thing.link)
-
-        # Cache URL
-        stream['Datastream@iot.navigationLink'] = datastream.link
-        stream['Datastream@iot.id'] = datastream.id
-      end
-
-      save_station_metadata(station, metadata)
-    end
-
     # Cache the raw body data to a file for re-use
     def save_station_list(body)
       IO.write(@station_list_path, body, 0)
-    end
-
-    def save_station_metadata(id, metadata)
-      metadata_path = "#{@cache_path}/#{CACHE_DIRECTORY}/metadata/#{id}.json"
-      IO.write(metadata_path, JSON.pretty_generate(metadata))
     end
   end
 end
