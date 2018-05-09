@@ -7,7 +7,7 @@ def get_station_metadata(source, station_id, cache)
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
-    station.load_metadata
+    station.download_metadata
     station.save_metadata
   else
     puts "Support for source not implemented"
@@ -18,7 +18,9 @@ def put_station_metadata(source, station_id, cache, destination)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    provider.put_station_metadata(station_id, destination)
+    station = provider.get_station(station_id)
+    station.get_metadata
+    station.put_metadata(destination)
   else
     puts "Support for source not implemented"
   end
