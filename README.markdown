@@ -89,7 +89,7 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations --source environment_canada --station XCM --cache /datastore/weather
 ```
 
-In this example, observations for the Environment Canada station `XCM` (Cambridge Bay) are downloaded to a local cache in the `/datastore/weather/environment_canada/XCM/YYYY/MM/DD/HHMMSS.xml` file. The year/month/day and hour/minute/second are parsed from the observation file provided by the data source.
+In this example, observations for the Environment Canada station `XCM` (Cambridge Bay) are downloaded to a local cache in the `/datastore/weather/environment_canada/XCM/YYYY/MM/DD/HHMMSS+0000.xml` file. The year/month/day and hour/minute/second/time zone offset are parsed from the observation file provided by the data source.
 
 If a file already exists with the same name, it is **overwritten**.
 

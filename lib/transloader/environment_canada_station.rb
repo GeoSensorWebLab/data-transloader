@@ -1,3 +1,5 @@
+require 'date'
+require 'fileutils'
 require 'json'
 require 'nokogiri'
 
@@ -19,6 +21,7 @@ module Transloader
       @properties = properties
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
+      @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -201,6 +204,22 @@ module Transloader
     # Save the Station metadata to the metadata cache file
     def save_metadata
       IO.write(@metadata_path, JSON.pretty_generate(@metadata))
+    end
+
+    # Save the SWOB-ML file to file cache
+    def save_observations
+      xml = observation_xml
+
+      # Parse date from SWOB-ML
+      timestamp = DateTime.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
+
+      # Create cache directory structure
+      date_path = timestamp.strftime('%Y/%m/%d')
+      time_path = timestamp.strftime('%H%M%S%z.xml')
+      FileUtils.mkdir_p("#{@observations_path}/#{date_path}")
+
+      # Dump XML to file
+      IO.write("#{@observations_path}/#{date_path}/#{time_path}", xml.to_s)
     end
   end
 end
