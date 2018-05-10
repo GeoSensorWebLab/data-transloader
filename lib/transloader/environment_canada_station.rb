@@ -201,6 +201,92 @@ module Transloader
       save_metadata
     end
 
+    # Upload station observations for `date` to the SensorThings API server at
+    # `destination`. If `date` is "latest", then the most recent SWOB-ML file
+    # is used.
+    def put_observations(destination, date)
+      puts "Uploading observations for #{date} to #{destination}"
+
+      # Check for metadata
+      if @metadata.empty?
+        raise "Error: station metadata not loaded"
+        exit 3
+      end
+
+      # Check for cached datastream URLs
+      @metadata['datastreams'].each do |stream|
+        if stream['Datastream@iot.navigationLink'].nil?
+          raise "Error: Datastream navigation URLs not cached"
+          exit 3
+        end
+      end
+
+      # Check for cached observations at date
+      if !Dir.exist?(@observations_path)
+        raise "Error: observation cache directory does not exist"
+        exit 3
+      end
+
+      if date == "latest"
+        begin
+          year_dir = Dir.entries(@observations_path).last
+          month_dir = Dir.entries(File.join(@observations_path, year_dir)).last
+          day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).last
+          filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).last
+        rescue
+          puts "Error: Could not locate latest observation cache file"
+          exit 3
+        end
+
+        file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
+      else
+        locate_date = DateTime.parse(date)
+        file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.xml'))
+
+        if !File.exist?(file_path)
+          raise "Error: Could not locate desired observation cache file: #{file_path}"
+          exit 3
+        end
+      end
+
+      puts "Uploading observations from #{file_path}"
+
+      xml = observation_xml
+      @metadata['datastreams'].each do |datastream|
+        datastream_url = datastream['Datastream@iot.navigationLink']
+        datastream_name = datastream['name']
+
+
+        if xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']", NAMESPACES).empty?
+          # The result is not in this SWOB-ML document, perhaps not reported
+          # during this reporting interval. In that case, no Observation is
+          # created.
+        else
+          # OBSERVATION entity
+          # Create Observation entity
+          # TODO: Coerce result type based on datastream observation type
+
+          result = xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']/@value", NAMESPACES).text
+
+          # SensorThings API does not like an empty string, instead "null" string
+          # should be used.
+          if result == ""
+            puts "Found null for #{datastream_name}"
+            result = "null"
+          end
+
+          observation = Observation.new({
+            phenomenonTime: xml.xpath('//om:samplingTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text,
+            result: result,
+            resultTime: xml.xpath('//om:resultTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text
+          })
+
+          # Upload entity and parse response
+          observation.upload_to(datastream_url)
+        end
+      end
+    end
+
     # Save the Station metadata to the metadata cache file
     def save_metadata
       IO.write(@metadata_path, JSON.pretty_generate(@metadata))
