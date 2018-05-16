@@ -102,8 +102,8 @@ A `Feature of Interest` entity will be created for the observation, based on the
 Once a `Feature of Interest` has been created or found, it is linked to a new `Observation` entity that contains the readings for the weather station observation. If an identical `Observation` already exists on the remote service, then no upload is done. If an `Observation` already exists under the same `Datastream` with the same timestamp but a different reading value, then the value is updated with a `PUT` request. If no `Observation` already exists, then a new one is created with a `POST` request.
 
 ```
-$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date 20180501T00:00:00Z
-$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date latest
+$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date 20180501T00:00:00Z --destination https://example.org/v1.0/
+$ transload put observations --source environment_canada --station XCM --cache /datastore/weather --date latest --destination https://example.org/v1.0/
 ```
 
 In the first example above, the observations for Environment Canada station `XCM` are read from the filesystem cache in `/datastore/weather/environment_canada/XCM/2018/05/01/000000.xml`.
