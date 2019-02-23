@@ -1,5 +1,7 @@
 require 'transloader/args'
 require 'transloader/entity'
+require 'transloader/data_garrison_provider'
+require 'transloader/data_garrison_station'
 require 'transloader/datastream'
 require 'transloader/location'
 require 'transloader/observation'
