@@ -39,6 +39,10 @@ Weather station sources with planned support:
 
 For detailed instructions, see [docs/ENVIRONMENT_CANADA.md](docs/ENVIRONMENT_CANADA.md).
 
+### Data Garrison
+
+For detailed instructions, see [docs/DATA_GARRISON.md](docs/DATA_GARRISON.md).
+
 ## Development Instructions
 
 This tool can be modified and extended by editing its source files. There are no special requirements for development after following the "Setup Instructions" section above.
