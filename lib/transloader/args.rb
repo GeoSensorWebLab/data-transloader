@@ -2,7 +2,8 @@ require 'date'
 
 module Transloader
   class Args
-    attr_reader :cache, :date, :destination, :object, :source, :station, :verb
+    attr_reader :cache, :date, :destination, :object, :source, :station, 
+                :user, :verb
 
     def initialize(args)
       if args.count == 0
@@ -45,6 +46,8 @@ module Transloader
         case arg
         when "--source"
           @source = args.shift
+        when "--user"
+          @user = args.shift
         when "--station"
           @station = args.shift
         when "--cache"
@@ -115,6 +118,7 @@ module Transloader
     def validate_source
       case @source
       when "environment_canada"
+      when "data_garrison"
         # okay
       else
         puts "Error: invalid source '#{@source}'"
@@ -134,6 +138,7 @@ module Transloader
     def print_help
       puts "Usage: transload <get|put> <metadata|observations> <arguments>"
       puts "--source SOURCE             Data source; allowed: 'environment_canada'"
+      puts "--user USER                 User account identifier for Data Garrison"
       puts "--station STATION           Station identifier"
       puts "--cache CACHE               Path for filesystem storage cache"
       puts "--date DATE                 ISO8601 date for 'put observations'. Also supports 'latest'"
