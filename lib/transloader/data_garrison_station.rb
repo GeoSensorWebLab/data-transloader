@@ -24,6 +24,11 @@ module Transloader
     def download_metadata
       html = station_metadata_html
 
+      if html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
+        puts "WARNING: Page is not HTML 4.01 Transitional, and may have been updated"
+        puts "since this tool was created. Parsing may fail, proceed with caution."
+      end
+
       unit_id = html.xpath('/html/body/table/tr/td/table/tr/td/font')[0].text.to_s
       unit_id = unit_id[/Unit (?<id>\d+)/, "id"]
 
