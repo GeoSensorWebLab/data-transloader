@@ -168,7 +168,8 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      # TODO
+      FileUtils.mkdir_p(File.dirname(@metadata_path))
+      IO.write(@metadata_path, JSON.pretty_generate(@metadata))
     end
 
     # Save the SWOB-ML file to file cache
