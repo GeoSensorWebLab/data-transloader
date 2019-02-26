@@ -3,6 +3,7 @@ require 'fileutils'
 require 'json'
 require 'nokogiri'
 require 'pry'
+require 'set'
 
 module Transloader
   class DataGarrisonStation
@@ -101,9 +102,13 @@ module Transloader
         end
       end
 
+      # Print warning if multiple sensors have the same ID
       sensor_ids = station_metadata.collect { |i| i[:id] }
       if sensor_ids.count != sensor_ids.uniq.count
-        puts "WARNING: Multiple sensors have the same ID."
+        # Use a Set to find which ones are duplicates
+        s = Set.new
+        list = sensor_ids.find_all { |e| !s.add?(e) }.join(", ")
+        puts "\nWARNING: Multiple sensors have the same ID: #{list}"
         puts "This must be manually corrected in the station metadata file."
       end
 
@@ -122,10 +127,15 @@ module Transloader
         end
       end
 
+      puts "\nWARNING: Latitude and Longitude unavailable from metadata."
+      puts "These values must be manually added to the station metadata file."
+
       # Convert to Hash
       @metadata = {
         name: "Data Garrison Station #{@id}",
         description: "Data Garrison Weather Station #{@id}",
+        latitude: nil,
+        longitude: nil,
         elevation: nil,
         updated_at: nil,
         datastreams: datastream_metadata,
@@ -134,8 +144,6 @@ module Transloader
         download_links: download_links,
         properties: @properties
       }
-
-      pp @metadata
     end
 
     # Load the metadata for a station.
