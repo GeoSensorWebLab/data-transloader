@@ -3,9 +3,9 @@ GEM
   specs:
     coderay (1.1.2)
     method_source (0.9.0)
-    mini_portile2 (2.3.0)
-    nokogiri (1.8.2)
-      mini_portile2 (~> 2.3.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.1)
+      mini_portile2 (~> 2.4.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -18,4 +18,4 @@ DEPENDENCIES
   pry
 
 BUNDLED WITH
-   1.16.0
+   1.17.2
