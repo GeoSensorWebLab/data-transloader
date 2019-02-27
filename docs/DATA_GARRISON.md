@@ -9,7 +9,11 @@ The following instructions are for setting up station data and uploading observa
 To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `Sensors`, `Observed Properties`, and `Datastreams` must be initialized using the weather station details before sensor data observations can be uploaded. The metadata can be downloaded using a command:
 
 ```
-$ transload get metadata --source data_garrison --user 300234063581640 --station 300234065673960 --cache /datastore/weather
+$ transload get metadata \
+    --source data_garrison \
+    --user 300234063581640 \
+    --station 300234065673960 \
+    --cache /datastore/weather
 ```
 
 This will download the sensor metadata from the Data Garrison source for the user with ID `300234063581640` and station with the identifier `300234065673960`, and store the metadata in a JSON file in the `/datastore/weather` directory.
@@ -19,6 +23,45 @@ The directory `/datastore/weather/data_garrison/metadata` will be created if it 
 A file will be created at `/datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
 
 Inside the `300234065673960.json` file the sensor metadata will be stored. Editing these values will affect the metadata that is stored in SensorThings API in the metadata upload step. This file also will store the URLs to the SensorThings API entities, which is used by a later step to upload Observations without first having to crawl the SensorThings API instance.
+
+**Please Note**
+
+For Data Garrison weather stations, you must manually edit the metadata cache file for any sensor naming errors and to add the latitude and longitude of the station. Add the `elevation` (in metres above mean sea level) is optional.
+
+### Step 2: Uploading Sensor Metadata to OGC SensorThings API
+
+After downloading the weather station metadata, it must be converted to OGC SensorThings API entities and uploaded to a service. According to the OGC SensorThings API specification, entities must be created for the following hierarchy.
+
+A `Thing` represents the station as a uniquely identifiable object. This `Thing` has a `Location`, corresponding to the geospatial position of the weather station (typically a Point).
+
+The weather station measures multiple phenomena, each assigned their own `Observed Property` entity (which can be re-used across the global SensorThings API namespace or a new entity created just for that weather station).
+
+Each phenomena is measured using a `Sensor`, which describes the physical device or procedure that records the phenomena.
+
+The phenomena `Observed Property` and `Sensor` are linked to a new `Datastream` under the shared `Thing` entity. The `Datastream` contains the metadata for the `Observations` as a whole set, such as the unit of measurement.
+
+Other entities such as the `Feature of Interest` and `Observation` are handled in a later step.
+
+To execute the upload, the tool has a put command:
+
+```
+$ transload put metadata \
+    --source data_garrison \
+    --user 300234063581640 \
+    --station 300234065673960 \
+    --cache /datastore/weather \
+    --destination https://example.org/v1.0/
+```
+
+In this case, the tool will upload the sensor metadata from the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640`, and look for the metadata in a JSON file in the `/datastore/weather/data_garrison` directory.
+
+An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
+
+If any of the uploads fail, the error will be logged to `STDERR`.
+
+If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `/datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`.
+
+The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
 WIP
 
@@ -116,3 +159,5 @@ When executing a `HEAD` request for the TSV file, the following headers are prov
 This is a more advanced method of retrieving Observation data than from the HTML on the station page. It requires more coding and is more complicated. It also provides the ability to download all historical data for a station.
 
 It might be possible to use the [`If-Range` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Range) or [`If-None-Match`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) to request the partial document, although I haven't tested it.
+
+Potential Issue: The only way to check if a new download file has been created (e.g. when the station is reset) is to re-download the metadata every time the observations are fetched. This is a small waste of bandwidth.
