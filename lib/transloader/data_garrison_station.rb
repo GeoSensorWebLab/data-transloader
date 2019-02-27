@@ -158,6 +158,7 @@ module Transloader
 
     # Upload metadata to SensorThings API
     def put_metadata(server_url)
+      puts "Uploading to STA WIP"
     end
 
     # Upload station observations for `date` to the SensorThings API server at

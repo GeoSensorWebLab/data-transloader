@@ -30,11 +30,16 @@ def get_station_observations(source, station_id, cache)
   end
 end
 
-def put_station_metadata(source, station_id, cache, destination)
+def put_station_metadata(source, user_id, station_id, cache, destination)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
+    station.get_metadata
+    station.put_metadata(destination)
+  when "data_garrison"
+    provider = Transloader::DataGarrisonProvider.new(cache)
+    station = provider.get_station(user_id, station_id)
     station.get_metadata
     station.put_metadata(destination)
   else
@@ -72,7 +77,7 @@ when :get
 when :put
   case args.object
   when :metadata
-    put_station_metadata(args.source, args.station, args.cache, args.destination)
+    put_station_metadata(args.source, args.user, args.station, args.cache, args.destination)
   when :observations
     put_station_observations(args.source, args.station, args.cache, args.destination, args.date)
   end
