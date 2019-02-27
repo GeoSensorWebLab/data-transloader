@@ -58,7 +58,7 @@ module Transloader
         @metadata = JSON.parse(IO.read(@metadata_path))
       else
         @metadata = download_metadata
-        save
+        save_metadata
       end
     end
 
