@@ -24,12 +24,7 @@ module Transloader
     # Download and extract metadata from HTML, use to build metadata 
     # needed for Sensor/Observed Property/Datastream
     def download_metadata
-      html = station_metadata_html
-
-      if html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
-        puts "WARNING: Page is not HTML 4.01 Transitional, and may have been updated"
-        puts "since this tool was created. Parsing may fail, proceed with caution."
-      end
+      html = station_data_html
 
       unit_id = html.xpath('/html/body/table/tr/td/table/tr/td/font')[0].text.to_s
       unit_id = unit_id[/Unit (?<id>\d+)/, "id"]
@@ -37,14 +32,6 @@ module Transloader
       if @id != unit_id
         puts "WARNING: id does not match unit id"
       end
-
-      # Parse the time from the "Latest Conditions" element
-      # e.g. 02/22/19 8:28 pm
-      # No time zone information is available, it is local time for the
-      # station.
-      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
-      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
-      phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P')
 
       # Parse number of sensors
       raw_sensors_list = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=last()]').text.to_s
@@ -131,14 +118,18 @@ module Transloader
       puts "\nWARNING: Latitude and Longitude unavailable from metadata."
       puts "These values must be manually added to the station metadata file."
 
+      puts "\nWARNING: Time zone offset not available from data source."
+      puts "The offset must be manually added to the station metadata file."
+
       # Convert to Hash
       @metadata = {
-        'name'           => "Data Garrison Station #{@id}",
-        'description'    => "Data Garrison Weather Station #{@id}",
-        'latitude'       => nil,
-        'longitude'      =>  nil,
-        'elevation'      =>  nil,
-        'updated_at'     =>  nil,
+        'name'            => "Data Garrison Station #{@id}",
+        'description'     => "Data Garrison Weather Station #{@id}",
+        'latitude'        => nil,
+        'longitude'       => nil,
+        'elevation'       => nil,
+        'timezone_offset' => nil,
+        'updated_at'      => nil,
         # example datastream item:
         # {
         #   "id": "Pressure",
@@ -149,7 +140,7 @@ module Transloader
         #   "Serial number": "3513109",
         #   "Sub and serial number": "3513109"
         # }
-        'datastreams'    =>  datastream_metadata,
+        'datastreams'     =>  datastream_metadata,
         # example transceiver metadata:
         # {
         #   "id": "transceiver",
@@ -163,7 +154,7 @@ module Transloader
         #   "Network": "Satellite",
         #   "Board revision": "0xA0"
         # }
-        'transceiver'    =>  transceiver_metadata,
+        'transceiver'     =>  transceiver_metadata,
         # example logger metadata:
         # {
         #   "id": "logger",
@@ -176,9 +167,9 @@ module Transloader
         #   "Data start address": "1105",
         #   "Logging power": "Yes"
         # }
-        'logger'         =>  logger_metadata,
-        'download_links' =>  download_links,
-        'properties'     =>  @properties
+        'logger'          =>  logger_metadata,
+        'download_links'  =>  download_links,
+        'properties'      =>  @properties
       }
     end
 
@@ -348,8 +339,17 @@ module Transloader
 
     # Return the HTML document object for the station. Will cache the
     # object.
-    def station_metadata_html
+    def station_data_html
+      # After testing, use this instead:
+      # @html ||= Nokogiri::HTML(open(@base_path))
       @html ||= Nokogiri::HTML(open("sample.html"))
+
+      if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
+        puts "WARNING: Page is not HTML 4.01 Transitional, and may have been updated"
+        puts "since this tool was created. Parsing may fail, proceed with caution."
+      end
+
+      @html
     end
   end
 end

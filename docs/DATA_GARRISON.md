@@ -26,7 +26,14 @@ Inside the `300234065673960.json` file the sensor metadata will be stored. Editi
 
 **Please Note**
 
-For Data Garrison weather stations, you must manually edit the metadata cache file for any sensor naming errors and to add the latitude and longitude of the station. Add the `elevation` (in metres above mean sea level) is optional.
+For Data Garrison weather stations, you must manually edit the metadata cache file for any sensor naming errors and to add the latitude and longitude of the station. Adding the `elevation` (in metres above mean sea level) is optional.
+
+The local timezone offset for the station must also be added, as it is not available on the station data page. Use ISO 8601 compatible time offsets for the time zone; e.g. `-07:00`, `+01:00`, `+03:00`, `Z`.
+
+* Add Latitude and Longitude
+* Edit any mis-named sensors
+* Add time zone offset
+* Optional: add elevation
 
 ### Step 2: Uploading Sensor Metadata to OGC SensorThings API
 
