@@ -70,6 +70,22 @@ If the uploads succeed, then the OGC SensorThings API will respond with a URL to
 
 The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
+### Step 3: Downloading Sensor Observations
+
+After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
+
+```
+$ transload get observations \
+    --source data_garrison \
+    --user 300234063581640 \
+    --station 300234065673960 \
+    --cache /datastore/weather
+```
+
+In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `/datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSS+0000.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
+
+If a file already exists with the same name, it is **overwritten**.
+
 WIP
 
 ## Data Model Mapping

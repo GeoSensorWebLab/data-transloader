@@ -19,11 +19,15 @@ def get_station_metadata(source, user_id, station_id, cache)
   end
 end
 
-def get_station_observations(source, station_id, cache)
+def get_station_observations(source, user_id, station_id, cache)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
+    station.save_observations
+  when "data_garrison"
+    provider = Transloader::DataGarrisonProvider.new(cache)
+    station = provider.get_station(user_id, station_id)
     station.save_observations
   else
     puts "Support for source not implemented"
@@ -47,7 +51,7 @@ def put_station_metadata(source, user_id, station_id, cache, destination)
   end
 end
 
-def put_station_observations(source, station_id, cache, destination, date)
+def put_station_observations(source, user_id, station_id, cache, destination, date)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -72,13 +76,13 @@ when :get
   when :metadata
     get_station_metadata(args.source, args.user, args.station, args.cache)
   when :observations
-    get_station_observations(args.source, args.station, args.cache)
+    get_station_observations(args.source, args.user, args.station, args.cache)
   end
 when :put
   case args.object
   when :metadata
     put_station_metadata(args.source, args.user, args.station, args.cache, args.destination)
   when :observations
-    put_station_observations(args.source, args.station, args.cache, args.destination, args.date)
+    put_station_observations(args.source, args.user, args.station, args.cache, args.destination, args.date)
   end
 end

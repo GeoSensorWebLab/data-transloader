@@ -318,9 +318,9 @@ module Transloader
       save_metadata
     end
 
-    # Upload station observations for `date` to the SensorThings API server at
-    # `destination`. If `date` is "latest", then the most recent SWOB-ML file
-    # is used.
+    # Upload station observations for `date` to the SensorThings API 
+    # server at `destination`. If `date` is "latest", then the most 
+    # recent cached observation file is used.
     def put_observations(destination, date)
     end
 
@@ -330,8 +330,26 @@ module Transloader
       IO.write(@metadata_path, JSON.pretty_generate(@metadata))
     end
 
-    # Save the SWOB-ML file to file cache
+    # Save the webpage observations to file cache
     def save_observations
+      get_metadata
+      html = station_data_html
+
+      # Parse the time from the "Latest Conditions" element
+      # e.g. 02/22/19 8:28 pm
+      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
+      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
+      # append the time zone from the metadata cache file
+      raw_phenomenon_time = raw_phenomenon_time + @metadata['timezone_offset']
+      phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+
+      # Create cache directory structure
+      date_path = phenomenon_time.strftime('%Y/%m/%d')
+      time_path = phenomenon_time.strftime('%H%M%S%z.html')
+      FileUtils.mkdir_p("#{@observations_path}/#{date_path}")
+
+      # Dump HTML to file
+      IO.write("#{@observations_path}/#{date_path}/#{time_path}", html.to_s)
     end
 
     # For parsing functionality specific to Data Garrison
