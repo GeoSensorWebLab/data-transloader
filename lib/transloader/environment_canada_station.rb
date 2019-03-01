@@ -18,7 +18,9 @@ module Transloader
     def initialize(id, provider, properties)
       @id = id
       @provider = provider
-      @properties = properties
+      @properties = properties.merge({
+        "provider" => "Environment Canada"
+      })
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
