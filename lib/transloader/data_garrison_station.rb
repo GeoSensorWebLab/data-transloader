@@ -2,6 +2,7 @@ require 'date'
 require 'fileutils'
 require 'json'
 require 'nokogiri'
+require 'open-uri'
 require 'pry'
 require 'set'
 require 'time'
@@ -485,9 +486,7 @@ module Transloader
     # Return the HTML document object for the station. Will cache the
     # object.
     def station_data_html
-      # After testing, use this instead:
-      # @html ||= Nokogiri::HTML(open(@base_path))
-      @html ||= Nokogiri::HTML(open("sample.html"))
+      @html ||= Nokogiri::HTML(open(@base_path))
 
       if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
         puts "WARNING: Page is not HTML 4.01 Transitional, and may have been updated"
