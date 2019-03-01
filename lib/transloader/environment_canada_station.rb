@@ -229,10 +229,10 @@ module Transloader
 
       if date == "latest"
         begin
-          year_dir = Dir.entries(@observations_path).last
-          month_dir = Dir.entries(File.join(@observations_path, year_dir)).last
-          day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).last
-          filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).last
+          year_dir = Dir.entries(@observations_path).sort.last
+          month_dir = Dir.entries(File.join(@observations_path, year_dir)).sort.last
+          day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
+          filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
           puts "Error: Could not locate latest observation cache file"
           exit 3
