@@ -25,12 +25,12 @@ This tool is meant to be scriptable using [cron][], a scheduling daemon, to auto
 
 Currently supported weather station sources:
 
+* Data Garrison
 * [Environment Canada][MSC]
 
 Weather station sources with planned support:
 
 * Campbell Scientific
-* Data Garrison
 
 [cron]: https://en.wikipedia.org/wiki/Cron
 [MSC]: http://dd.weather.gc.ca/about_dd_apropos.txt
