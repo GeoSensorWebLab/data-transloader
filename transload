@@ -56,9 +56,14 @@ def put_station_observations(source, user_id, station_id, cache, destination, da
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
+    # CHECK: Is this overwriting metadata?
     station.get_metadata
     station.save_metadata
     station.put_metadata(destination)
+    station.put_observations(destination, date)
+  when "data_garrison"
+    provider = Transloader::DataGarrisonProvider.new(cache)
+    station = provider.get_station(user_id, station_id)
     station.put_observations(destination, date)
   else
     puts "Support for source not implemented"

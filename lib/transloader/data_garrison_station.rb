@@ -4,6 +4,7 @@ require 'json'
 require 'nokogiri'
 require 'pry'
 require 'set'
+require 'time'
 
 module Transloader
   class DataGarrisonStation
@@ -322,6 +323,132 @@ module Transloader
     # server at `destination`. If `date` is "latest", then the most 
     # recent cached observation file is used.
     def put_observations(destination, date)
+      get_metadata
+      puts "Uploading observations for #{date} to #{destination}"
+
+      # Check for cached datastream URLs
+      @metadata['datastreams'].each do |stream|
+        if stream['Datastream@iot.navigationLink'].nil?
+          raise "Error: Datastream navigation URLs not cached"
+          exit 3
+        end
+      end
+
+      # Check for cached observations at date
+      if !Dir.exist?(@observations_path)
+        raise "Error: observation cache directory does not exist"
+        exit 3
+      end
+
+      if date == "latest"
+        begin
+          year_dir  = Dir.entries(@observations_path).last
+          month_dir = Dir.entries(File.join(@observations_path, year_dir)).last
+          day_dir   = Dir.entries(File.join(@observations_path, year_dir, month_dir)).last
+          filename  = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).last
+        rescue
+          puts "Error: Could not locate latest observation cache file"
+          exit 3
+        end
+
+        file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
+      else
+        locate_date = DateTime.parse(date)
+        file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.html'))
+
+        if !File.exist?(file_path)
+          raise "Error: Could not locate desired observation cache file: #{file_path}"
+          exit 3
+        end
+      end
+
+      puts "Uploading observations from #{file_path}"
+      html = Nokogiri::HTML(open(file_path))
+
+      # Parse the time from the "Latest Conditions" element
+      # e.g. 02/22/19 8:28 pm
+      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
+      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
+      # append the time zone from the metadata cache file
+      raw_phenomenon_time = raw_phenomenon_time + @metadata['timezone_offset']
+      phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+
+      # Parse latest readings
+      readings = []
+      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
+        # Skip empty elements, "Latest Conditions" element, and "Station 
+        # Status" element. They all start with a blank line.
+        text = element.text
+        if !text.match?(/^\W$/)
+          # replace all non-breaking space characters
+          text.gsub!(/ /, ' ')
+
+          # Special case for parsing wind speed/gust/direction
+          if text.match?(/Wind Speed/)
+            text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
+              readings.push({
+                "id"     => "Wind Speed",
+                "result" => m[1].to_f,
+                "units"  => m[2]
+              }, {
+                "id"     => "Gust Speed",
+                "result" => m[3].to_f,
+                "units"  => m[4]
+              }, {
+                "id"     => "Wind Direction",
+                "result" => m[6].to_f,
+                "units"  => "deg"
+              })
+            end
+          else
+            # Only "Pressure", "Temperature", "RH", "Backup Batteries"
+            # are supported!
+            text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
+              readings.push({
+                "id"     => m[1],
+                "result" => m[2].to_f,
+                "units"  => m[3]
+              })
+            end
+          end
+        end
+      end
+
+      @metadata['datastreams'].each do |datastream|
+        datastream_url = datastream['Datastream@iot.navigationLink']
+        datastream_name = datastream['id']
+
+        # OBSERVATION entity
+        # Create Observation entity
+        # TODO: Coerce result type based on datastream observation type
+
+        reading = readings.find { |r| r["id"] == datastream_name }
+        result = reading["result"]
+
+        # SensorThings API does not like an empty string, instead "null"
+        # string should be used.
+        if result == ""
+          puts "INFO: Found null for #{datastream_name}"
+          result = "null"
+        end
+
+        # The time string is manually created here as a mis-match 
+        # between the client and server on the usage of fractional 
+        # seconds will cause existing server-side Observation entities 
+        # to not be re-used.
+        # By default, Ruby's ISO8601 function will not include 
+        # fractional seconds.
+        # Times are also coerced to UTC for the server.
+        time = phenomenon_time.to_time.utc.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+        observation = Observation.new({
+          phenomenonTime: time,
+          result: result,
+          resultTime: time
+        })
+
+        # Upload entity and parse response
+        observation.upload_to(datastream_url)
+      end
     end
 
     # Save the Station metadata to the metadata cache file
