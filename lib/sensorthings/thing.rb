@@ -1,28 +1,26 @@
 require 'json'
 require 'uri'
 
-require 'transloader/entity'
+require 'sensorthings/entity'
 
-module Transloader
-  # Sensor entity class.
-  class Sensor < Entity
+module SensorThings
+  # Thing entity class.
+  class Thing < Entity
 
-    attr_accessor :description, :encoding_type, :metadata, :name
+    attr_accessor :description, :name, :properties
 
     def initialize(attributes)
       super(attributes)
       @name = attributes[:name]
       @description = attributes[:description]
-      @encoding_type = attributes[:encodingType]
-      @metadata = attributes[:metadata]
+      @properties = attributes[:properties]
     end
 
     def to_json
       JSON.generate({
         name: @name,
         description: @description,
-        encodingType: @encoding_type,
-        metadata: @metadata
+        properties: @properties
       })
     end
 
@@ -32,13 +30,12 @@ module Transloader
       JSON.parse(self.to_json) == JSON.parse(JSON.generate({
         name: entity['name'],
         description: entity['description'],
-        encodingType: entity['encodingType'],
-        metadata: entity['metadata']
+        properties: entity['properties']
       }))
     end
 
     def upload_to(url)
-      upload_url = self.join_uris(url, "Sensors")
+      upload_url = self.join_uris(url, "Things")
 
       filter = "name eq '#{@name}' and description eq '#{@description}'"
       response = self.get(URI(upload_url + "?$filter=#{filter}"))
@@ -47,8 +44,7 @@ module Transloader
       # Look for matching existing entities. If no entities match, use POST to
       # create a new entity. If one or more entities match, then the first is
       # re-used. If the matching entity has the same name/description but
-      # different encodingType/metadata, then a PATCH request is used to
-      # synchronize.
+      # different properties, then a PATCH request is used to synchronize.
       if body["value"].length == 0
         self.post_to_path(upload_url)
       else
@@ -57,7 +53,7 @@ module Transloader
         @id = existing_entity['@iot.id']
 
         if same_as?(existing_entity)
-          puts "Re-using existing Sensor entity."
+          puts "Re-using existing Thing entity."
         else
           self.patch_to_path(URI(@link))
         end

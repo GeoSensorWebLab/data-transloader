@@ -2,7 +2,7 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-module Transloader
+module SensorThings
   # Base class for SensorThings API entities. Do not instantiate directly,
   # instead use subclasses.
   class Entity

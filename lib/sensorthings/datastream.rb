@@ -1,9 +1,9 @@
 require 'json'
 require 'uri'
 
-require 'transloader/entity'
+require 'sensorthings/entity'
 
-module Transloader
+module SensorThings
   # Datastream entity class.
   class Datastream < Entity
 

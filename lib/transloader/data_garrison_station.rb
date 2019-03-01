@@ -195,7 +195,7 @@ module Transloader
     def put_metadata(server_url)
       # THING entity
       # Create Thing entity
-      thing = Thing.new({
+      thing = SensorThings::Thing.new({
         name:        @metadata['name'],
         description: @metadata['description'],
         properties:  {
@@ -224,7 +224,7 @@ module Transloader
       end
       
       # Create Location entity
-      location = Location.new({
+      location = SensorThings::Location.new({
         name:         @metadata['name'],
         description:  @metadata['description'],
         encodingType: 'application/vnd.geo+json',
@@ -244,7 +244,7 @@ module Transloader
       # SENSOR entities
       @metadata['datastreams'].each do |stream|
         # Create Sensor entities
-        sensor = Sensor.new({
+        sensor = SensorThings::Sensor.new({
           name:        "Station #{@id} #{stream['id']} Sensor",
           description: "Data Garrison Station #{@id} #{stream['id']} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -270,7 +270,7 @@ module Transloader
       @metadata['datastreams'].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
-        observed_property = ObservedProperty.new({
+        observed_property = SensorThings::ObservedProperty.new({
           name:        stream['id'],
           definition:  "http://example.org/#{stream['id']}",
           description: stream['id']
@@ -290,7 +290,7 @@ module Transloader
       @metadata['datastreams'].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
-        datastream = Datastream.new({
+        datastream = SensorThings::Datastream.new({
           name:        "Station #{@id} #{stream['id']}",
           description: "Data Garrison Station #{@id} #{stream['id']}",
           # TODO: Use mapping to improve unit of measurement
@@ -441,7 +441,7 @@ module Transloader
         # fractional seconds.
         # Times are also coerced to UTC for the server.
         time = phenomenon_time.to_time.utc.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
-        observation = Observation.new({
+        observation = SensorThings::Observation.new({
           phenomenonTime: time,
           result: result,
           resultTime: time

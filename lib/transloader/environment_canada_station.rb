@@ -92,7 +92,7 @@ module Transloader
     def put_metadata(server_url)
       # THING entity
       # Create Thing entity
-      thing = Thing.new({
+      thing = SensorThings::Thing.new({
         name:        @metadata['name'],
         description: @metadata['description'],
         properties:  @metadata['properties']
@@ -107,7 +107,7 @@ module Transloader
 
       # LOCATION entity
       # Create Location entity
-      location = Location.new({
+      location = SensorThings::Location.new({
         name:         @metadata['name'],
         description:  @metadata['description'],
         encodingType: 'application/vnd.geo+json',
@@ -127,7 +127,7 @@ module Transloader
       # SENSOR entities
       @metadata['datastreams'].each do |stream|
         # Create Sensor entities
-        sensor = Sensor.new({
+        sensor = SensorThings::Sensor.new({
           name:        "Station #{@id} #{stream['name']} Sensor",
           description: "Environment Canada Station #{@id} #{stream['name']} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -153,7 +153,7 @@ module Transloader
       @metadata['datastreams'].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
-        observed_property = ObservedProperty.new({
+        observed_property = SensorThings::ObservedProperty.new({
           name:        stream['name'],
           definition:  "http://example.org/#{stream['name']}",
           description: stream['name']
@@ -173,7 +173,7 @@ module Transloader
       @metadata['datastreams'].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
-        datastream = Datastream.new({
+        datastream = SensorThings::Datastream.new({
           name:        "Station #{@id} #{stream['name']}",
           description: "Environment Canada Station #{@id} #{stream['name']}",
           # TODO: Use mapping to improve unit of measurement
@@ -277,7 +277,7 @@ module Transloader
             result = "null"
           end
 
-          observation = Observation.new({
+          observation = SensorThings::Observation.new({
             phenomenonTime: xml.xpath('//om:samplingTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text,
             result: result,
             resultTime: xml.xpath('//om:resultTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text

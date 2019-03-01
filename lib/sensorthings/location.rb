@@ -1,26 +1,28 @@
 require 'json'
 require 'uri'
 
-require 'transloader/entity'
+require 'sensorthings/entity'
 
-module Transloader
-  # Thing entity class.
-  class Thing < Entity
+module SensorThings
+  # Location entity class.
+  class Location < Entity
 
-    attr_accessor :description, :name, :properties
+    attr_accessor :description, :encoding_type, :location, :name
 
     def initialize(attributes)
       super(attributes)
       @name = attributes[:name]
       @description = attributes[:description]
-      @properties = attributes[:properties]
+      @encoding_type = attributes[:encodingType]
+      @location = attributes[:location]
     end
 
     def to_json
       JSON.generate({
         name: @name,
         description: @description,
-        properties: @properties
+        encodingType: @encoding_type,
+        location: @location
       })
     end
 
@@ -30,21 +32,22 @@ module Transloader
       JSON.parse(self.to_json) == JSON.parse(JSON.generate({
         name: entity['name'],
         description: entity['description'],
-        properties: entity['properties']
+        encodingType: entity['encodingType'],
+        location: entity['location']
       }))
     end
 
     def upload_to(url)
-      upload_url = self.join_uris(url, "Things")
+      upload_url = self.join_uris(url, "Locations")
 
       filter = "name eq '#{@name}' and description eq '#{@description}'"
       response = self.get(URI(upload_url + "?$filter=#{filter}"))
       body = JSON.parse(response.body)
 
       # Look for matching existing entities. If no entities match, use POST to
-      # create a new entity. If one or more entities match, then the first is
-      # re-used. If the matching entity has the same name/description but
-      # different properties, then a PATCH request is used to synchronize.
+      # create a new entity. If one or more entities match **exactly**, then the
+      # first result is re-used. If entities match name/description but not the
+      # location or encoding type, then a POST is used to create a new Location.
       if body["value"].length == 0
         self.post_to_path(upload_url)
       else
@@ -53,9 +56,9 @@ module Transloader
         @id = existing_entity['@iot.id']
 
         if same_as?(existing_entity)
-          puts "Re-using existing Thing entity."
+          puts "Re-using existing Location entity."
         else
-          self.patch_to_path(URI(@link))
+          self.post_to_path(upload_url)
         end
       end
     end
