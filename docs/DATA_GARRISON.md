@@ -82,7 +82,9 @@ $ transload get observations \
     --cache /datastore/weather
 ```
 
-In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `/datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSS+0000.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
+In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `/datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSSZ.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
+
+The filename will use the **UTC** version of the date, not the local time for the station. This should make it easier to specify a custom date in the next step without having to deal with timezones.
 
 If a file already exists with the same name, it is **overwritten**.
 
@@ -111,7 +113,7 @@ $ transload put observations \
     --destination https://example.org/v1.0/
 ```
 
-In the first example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache in `/datastore/weather/data_garrison/300234063581640/300234065673960/2018/05/01/000000.xml`.
+In the first example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache in `/datastore/weather/data_garrison/300234063581640/300234065673960/2018/05/01/000000Z.html`.
 
 In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
 

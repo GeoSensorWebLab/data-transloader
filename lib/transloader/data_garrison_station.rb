@@ -343,10 +343,10 @@ module Transloader
 
       if date == "latest"
         begin
-          year_dir  = Dir.entries(@observations_path).last
-          month_dir = Dir.entries(File.join(@observations_path, year_dir)).last
-          day_dir   = Dir.entries(File.join(@observations_path, year_dir, month_dir)).last
-          filename  = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).last
+          year_dir  = Dir.entries(@observations_path).sort.last
+          month_dir = Dir.entries(File.join(@observations_path, year_dir)).sort.last
+          day_dir   = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
+          filename  = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
           puts "Error: Could not locate latest observation cache file"
           exit 3
@@ -355,7 +355,7 @@ module Transloader
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
       else
         locate_date = DateTime.parse(date)
-        file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.html'))
+        file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%SZ.html'))
 
         if !File.exist?(file_path)
           raise "Error: Could not locate desired observation cache file: #{file_path}"
@@ -470,10 +470,11 @@ module Transloader
       # append the time zone from the metadata cache file
       raw_phenomenon_time = raw_phenomenon_time + @metadata['timezone_offset']
       phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+      utc_time = phenomenon_time.to_time.utc
 
       # Create cache directory structure
-      date_path = phenomenon_time.strftime('%Y/%m/%d')
-      time_path = phenomenon_time.strftime('%H%M%S%z.html')
+      date_path = utc_time.strftime('%Y/%m/%d')
+      time_path = utc_time.strftime('%H%M%SZ.html')
       FileUtils.mkdir_p("#{@observations_path}/#{date_path}")
 
       # Dump HTML to file
