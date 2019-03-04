@@ -2,7 +2,9 @@
 require 'pry'
 require 'transloader'
 
-def get_station_metadata(source, user_id, station_id, cache)
+# TODO: Clean up excessive arguments in methods
+
+def get_station_metadata(source, user_id, station_id, data_urls, cache)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -12,6 +14,11 @@ def get_station_metadata(source, user_id, station_id, cache)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
     station = provider.get_station(user_id, station_id)
+    station.download_metadata
+    station.save_metadata
+  when "campbell_scientific"
+    provider = Transloader::CampbellScientificProvider.new(cache)
+    station = provider.get_station(station_id, data_urls)
     station.download_metadata
     station.save_metadata
   else
@@ -79,7 +86,7 @@ case args.verb
 when :get
   case args.object
   when :metadata
-    get_station_metadata(args.source, args.user, args.station, args.cache)
+    get_station_metadata(args.source, args.user, args.station, args.data_urls, args.cache)
   when :observations
     get_station_observations(args.source, args.user, args.station, args.cache)
   end

@@ -2,10 +2,12 @@ require 'date'
 
 module Transloader
   class Args
-    attr_reader :cache, :date, :destination, :object, :source, :station, 
-                :user, :verb
+    attr_reader :cache, :data_urls, :date, :destination, :object, 
+                :source, :station, :user, :verb
 
     def initialize(args)
+      @data_urls = []
+      
       if args.count == 0
         puts "ERROR: Missing arguments"
         print_help
@@ -50,6 +52,8 @@ module Transloader
           @user = args.shift
         when "--station"
           @station = args.shift
+        when "--dataurl"
+          @data_urls.push(args.shift)
         when "--cache"
           @cache = args.shift
         when "--date"
@@ -119,6 +123,7 @@ module Transloader
       case @source
       when "environment_canada"
       when "data_garrison"
+      when "campbell_scientific"
         # okay
       else
         puts "Error: invalid source '#{@source}'"
@@ -140,6 +145,8 @@ module Transloader
       puts "--source SOURCE             Data source; allowed: 'environment_canada'"
       puts "--user USER                 User account identifier for Data Garrison"
       puts "--station STATION           Station identifier"
+      puts "--dataurl DATA-URL          Campbell Scientific data file URL"
+      puts "                            (May be specified multiple times)"
       puts "--cache CACHE               Path for filesystem storage cache"
       puts "--date DATE                 ISO8601 date for 'put observations'. Also supports 'latest'"
       puts "--help                      Print this help message"
