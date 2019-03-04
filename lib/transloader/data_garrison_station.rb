@@ -35,17 +35,6 @@ module Transloader
         puts "WARNING: id does not match unit id"
       end
 
-      # Parse number of sensors
-      raw_sensors_list = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=last()]').text.to_s
-      raw_sensors_list = raw_sensors_list[/(\d+ sensors(\W+\w+)+)/]
-
-      sensor_count = raw_sensors_list[/(\d+) sensors/, 1].to_i
-      sensors = {}
-      sensor_types = raw_sensors_list[/\d+ sensors(.+)/, 1].scan(/\w+/) do |matched|
-        property = matched.strip
-        sensors[property] = {}
-      end
-
       # Parse download links
       # These aren't used yet, but are cached for future use
       # e.g. https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
