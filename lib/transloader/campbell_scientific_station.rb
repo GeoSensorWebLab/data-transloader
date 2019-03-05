@@ -122,8 +122,8 @@ module Transloader
     end
 
     # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download and
-    # save to a cache file.
+    # If the station data is already cached, use that. If not, download
+    # and save to a cache file.
     def get_metadata
       if File.exist?(@metadata_path)
         @metadata = JSON.parse(IO.read(@metadata_path))
@@ -139,6 +139,130 @@ module Transloader
 
     # Upload metadata to SensorThings API
     def put_metadata(server_url)
+      # THING entity
+      # Create Thing entity
+      thing = SensorThings::Thing.new({
+        name:        @metadata['name'],
+        description: @metadata['description'],
+        properties:  {
+          provider:              'Campbell Scientific',
+          station_id:            @id,
+          station_model_name:    @metadata['properties']['station_model_name'],
+          station_serial_number: @metadata['properties']['station_serial_number'],
+          station_program:       @metadata['properties']['station_program']
+        }
+      })
+
+      # Upload entity and parse response
+      thing.upload_to(server_url)
+
+      # Cache URL
+      @metadata['Thing@iot.navigationLink'] = thing.link
+      save_metadata
+
+      # LOCATION entity
+      # Check if latitude or longitude are blank
+      if @metadata['latitude'].nil? || @metadata['longitude'].nil?
+        puts "ERROR: Station latitude or longitude is nil!"
+        puts "Location entity cannot be created. Exiting."
+        exit(1)
+      end
+      
+      # Create Location entity
+      location = SensorThings::Location.new({
+        name:         @metadata['name'],
+        description:  @metadata['description'],
+        encodingType: 'application/vnd.geo+json',
+        location: {
+          type:        'Point',
+          coordinates: [@metadata['longitude'].to_f, @metadata['latitude'].to_f]
+        }
+      })
+
+      # Upload entity and parse response
+      location.upload_to(thing.link)
+
+      # Cache URL
+      @metadata['Location@iot.navigationLink'] = location.link
+      save_metadata
+
+      # SENSOR entities
+      @metadata['datastreams'].each do |stream|
+        # Create Sensor entities
+        sensor = SensorThings::Sensor.new({
+          name:        "Campbell Scientific Station #{@id} #{stream['name']} Sensor",
+          description: "Campbell Scientific Station #{@id} #{stream['name']} Sensor",
+          # This encoding type is a lie, because there are only two types in
+          # the spec and none apply here. Implementations are strict about those
+          # two types, so we have to pretend.
+          # More discussion on specification that could change this:
+          # https://github.com/opengeospatial/sensorthings/issues/39
+          encodingType: 'application/pdf',
+          metadata:     @metadata['procedure'] || ""
+        })
+
+        # Upload entity and parse response
+        sensor.upload_to(server_url)
+
+        # Cache URL and ID
+        stream['Sensor@iot.navigationLink'] = sensor.link
+        stream['Sensor@iot.id'] = sensor.id
+      end
+
+      save_metadata
+
+      # OBSERVED PROPERTY entities
+      @metadata['datastreams'].each do |stream|
+        # Create Observed Property entities
+        # TODO: Use mapping to improve these entities
+        observed_property = SensorThings::ObservedProperty.new({
+          name:        stream['name'],
+          definition:  "http://example.org/#{stream['name']}",
+          description: stream['name']
+        })
+
+        # Upload entity and parse response
+        observed_property.upload_to(server_url)
+
+        # Cache URL
+        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
+        stream['ObservedProperty@iot.id'] = observed_property.id
+      end
+
+      save_metadata
+
+      # DATASTREAM entities
+      @metadata['datastreams'].each do |stream|
+        # Create Datastream entities
+        # TODO: Use mapping to improve these entities
+        datastream = SensorThings::Datastream.new({
+          name:        "Campbell Scientific Station #{@id} #{stream['name']}",
+          description: "Campbell Scientific Station #{@id} #{stream['name']}",
+          # TODO: Use mapping to improve unit of measurement
+          unitOfMeasurement: {
+            name:       stream['units'] || "",
+            symbol:     stream['units'] || "",
+            definition: ''
+          },
+          # TODO: Use more specific observation types, if possible
+          observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
+          Sensor: {
+            '@iot.id' => stream['Sensor@iot.id']
+          },
+          ObservedProperty: {
+            '@iot.id' => stream['ObservedProperty@iot.id']
+          }
+        })
+
+        # Upload entity and parse response
+        datastream.upload_to(thing.link)
+
+        # Cache URL
+        stream['Datastream@iot.navigationLink'] = datastream.link
+        stream['Datastream@iot.id'] = datastream.id
+      end
+
+      save_metadata
     end
 
     # Upload station observations for `date` to the SensorThings API 
