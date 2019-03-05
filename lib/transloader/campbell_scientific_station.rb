@@ -1,4 +1,6 @@
 require 'csv'
+require 'net/http'
+require 'uri'
 
 module Transloader
   class CampbellScientificStation
@@ -32,20 +34,31 @@ module Transloader
 
       data_urls.each do |data_url|
         # Download CSV
-        # TODO: Use real file download here
-        filedata = open("CBAY.csv")
+        # TODO: Extract HTTP work to its own class
+        uri = URI(data_url)
+        request = Net::HTTP::Get.new(uri)
+        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+          http.request(request)
+        end
+
+        filedata = response.body
         data = CSV.parse(filedata)
         
         # Store CSV file metadata
-        # TODO: Use net/http instead of ::File
+        # 
+        # Cannot use "Content-Length" here as the request has been
+        # encoded by gzip, which is enabled by default for Ruby 
+        # net/http.
+        last_modified = Time.strptime(response["Last-Modified"], "%a, %d %b %Y %H:%M:%S %Z")
         data_files.push({
-          filename: File.basename("CBAY.csv"),
+          filename: File.basename(data_url),
           url: data_url,
-          last_modified: File.mtime("CBAY.csv").strftime("%FT%H:%M:%S.%L%z"),
-          last_length: File.size("CBAY.csv")
+          last_modified: last_modified.strftime("%FT%H:%M:%S.%L%z"),
+          last_length: filedata.length
         })
 
         # Parse CSV headers for station metadata
+        # 
         # Row 1:
         # 1. File Type
         # 2. Station Name
@@ -65,6 +78,7 @@ module Transloader
         @properties[:station_program]     = data[0][5]
 
         # Parse CSV column headers for datastreams, units
+        # 
         # Row 2:
         # 1. Timestamp
         # 2+ (Observed Property)
