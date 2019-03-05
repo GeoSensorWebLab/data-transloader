@@ -73,9 +73,9 @@ module Transloader
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
         # different between data files.
-        @properties[:station_model_name]  = data[0][2]
-        @properties[:station_serial_name] = data[0][3]
-        @properties[:station_program]     = data[0][5]
+        @properties[:station_model_name]    = data[0][2]
+        @properties[:station_serial_number] = data[0][3]
+        @properties[:station_program]       = data[0][5]
 
         # Parse CSV column headers for datastreams, units
         # 
