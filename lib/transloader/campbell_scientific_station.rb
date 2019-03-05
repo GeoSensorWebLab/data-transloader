@@ -102,6 +102,9 @@ module Transloader
       puts "\nWARNING: Time zone offset not available from data source."
       puts "The offset must be manually added to the station metadata file."
 
+      puts "\nWARNING: Sensor metadata PDF or SensorML not available from data source."
+      puts "The URL may be manually added to the station metadata file under the \"procedure\" key."
+
       # Convert to Hash
       @metadata = {
         name:            "Campbell Scientific Station #{@id}",
@@ -111,6 +114,7 @@ module Transloader
         elevation:       nil,
         timezone_offset: nil,
         updated_at:      Time.now,
+        procedure:       nil,
         datastreams:     datastreams,
         data_files:      data_files,
         properties:      @properties
