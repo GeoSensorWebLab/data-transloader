@@ -96,17 +96,24 @@ module Transloader
         end
       end
 
+      puts "\nWARNING: Latitude and Longitude unavailable from metadata."
+      puts "These values must be manually added to the station metadata file."
+
+      puts "\nWARNING: Time zone offset not available from data source."
+      puts "The offset must be manually added to the station metadata file."
+
       # Convert to Hash
       @metadata = {
-        name:        "Campbell Scientific Station #{@id}",
-        description: "Campbell Scientific Weather Station #{@id}",
-        latitude:    nil,
-        longitude:   nil,
-        elevation:   nil,
-        updated_at:  Time.now,
-        datastreams: datastreams,
-        data_files:  data_files,
-        properties:  @properties
+        name:            "Campbell Scientific Station #{@id}",
+        description:     "Campbell Scientific Weather Station #{@id}",
+        latitude:        nil,
+        longitude:       nil,
+        elevation:       nil,
+        timezone_offset: nil,
+        updated_at:      Time.now,
+        datastreams:     datastreams,
+        data_files:      data_files,
+        properties:      @properties
       }
     end
 
