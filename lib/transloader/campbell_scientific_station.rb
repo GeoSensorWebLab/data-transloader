@@ -1,3 +1,5 @@
+require 'csv'
+
 module Transloader
   class CampbellScientificStation
 
@@ -16,8 +18,82 @@ module Transloader
     # Download and extract metadata from HTML, use to build metadata 
     # needed for Sensor/Observed Property/Datastream
     def download_metadata
+      # Check for data files
+      data_urls = @properties[:data_urls]
+
+      if data_urls.empty?
+        puts "ERROR: No data URLs specified."
+        puts "Data URLs are required to download station metadata. Exiting."
+        exit 1
+      end
+
+      data_files = []
+      datastreams = []
+
+      data_urls.each do |data_url|
+        # Download CSV
+        # TODO: Use real file download here
+        filedata = open("CBAY.csv")
+        data = CSV.parse(filedata)
+        
+        # Store CSV file metadata
+        # TODO: Use net/http instead of ::File
+        data_files.push({
+          filename: File.basename("CBAY.csv"),
+          url: data_url,
+          last_modified: File.mtime("CBAY.csv").strftime("%FT%H:%M:%S.%L%z"),
+          last_length: File.size("CBAY.csv")
+        })
+
+        # Parse CSV headers for station metadata
+        # Row 1:
+        # 1. File Type
+        # 2. Station Name
+        # 3. Model Name
+        # 4. Serial Number
+        # 5. Logger OS Version
+        # 6. Logger Program
+        # 7. Logger Program Signature
+        # 8. Table Name
+        # 
+        # Note: It is possible that different files may have different
+        # station metadata values. We are assuming that all data files
+        # are from the same station/location and that the values are not
+        # different between data files.
+        @properties[:station_model_name]  = data[0][2]
+        @properties[:station_serial_name] = data[0][3]
+        @properties[:station_program]     = data[0][5]
+
+        # Parse CSV column headers for datastreams, units
+        # Row 2:
+        # 1. Timestamp
+        # 2+ (Observed Property)
+        # Row 3:
+        # Unit or Data Type
+        # Row 4:
+        # Observation Type (peak value, average value)
+        # (WVc is Wind Vector Cell, probably)
+        data[1].slice(1..-1).each_with_index do |col, index|
+          datastreams.push({
+            name: col,
+            units: data[2][1+index],
+            type: data[3][1+index]
+          })
+        end
+      end
+
       # Convert to Hash
-      @metadata = {}
+      @metadata = {
+        name:        "Campbell Scientific Station #{@id}",
+        description: "Campbell Scientific Weather Station #{@id}",
+        latitude:    nil,
+        longitude:   nil,
+        elevation:   nil,
+        updated_at:  Time.now,
+        datastreams: datastreams,
+        data_files:  data_files,
+        properties:  @properties
+      }
     end
 
     # Load the metadata for a station.
