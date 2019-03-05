@@ -94,4 +94,31 @@ If the uploads succeed, then the OGC SensorThings API will respond with a URL to
 
 The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
+### Step 3: Downloading Sensor Observations
+
+After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
+
+```
+$ transload get observations \
+    --source campbell_scientific \
+    --station 606830 \
+    --cache /datastore/weather
+```
+
+In this example, the Campbell Scientific weather station with the ID `606830` will have its observations downloaded into the `/datastore/weather/campbell_scientific/606830` directory.
+
+For each data file defined in the station metadata cache file, a subdirectory is created using the filename. When the observation rows are parsed from the source data file, they are adjusted into UTC timestamps and separated by day into their own cache files.
+
+A sample observation cache file directory: `/datastore/weather/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/03/05.csv`
+
+Observations are separated into files by day to avoid one very-large observations file. Additionally, if the source data file is reset or truncated then the local observation cache files are unaffected (as opposed to storing the original source data file on disk).
+
+When observations are parsed into cache files, the latest parsed observation from the station has its date timestamp stored in the station metadata cache file for debugging. The byte offset of the downloaded source data file is also stored and used with [HTTP Byte Ranges](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) to avoid downloading the entire source data file.
+
+HTTP requests to download the source data files will have gzip encoding *disabled*, as that header would disable the usage of the 'Range' header.
+
+The filename will use the **UTC** version of the date, not the local time for the station. This should make it easier to specify a custom date in the next step without having to deal with timezones.
+
+If an observation cache file already exists with the same name, it is re-opened and merged with the newer observations. Newer observations with the same timestamp will replace older observations in the cache file.
+
 WIP
