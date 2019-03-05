@@ -60,4 +60,38 @@ The local timezone offset for the station must also be added, as it is not avail
 * Add time zone offset
 * Optional: add elevation
 
+### Step 2: Uploading Sensor Metadata to OGC SensorThings API
+
+After downloading the weather station metadata, it must be converted to OGC SensorThings API entities and uploaded to a service. According to the OGC SensorThings API specification, entities must be created for the following hierarchy.
+
+A `Thing` represents the station as a uniquely identifiable object. This `Thing` has a `Location`, corresponding to the geospatial position of the weather station (typically a Point).
+
+The weather station measures multiple phenomena, each assigned their own `Observed Property` entity (which can be re-used across the global SensorThings API namespace or a new entity created just for that weather station).
+
+Each phenomena is measured using a `Sensor`, which describes the physical device or procedure that records the phenomena.
+
+The phenomena `Observed Property` and `Sensor` are linked to a new `Datastream` under the shared `Thing` entity. The `Datastream` contains the metadata for the `Observations` as a whole set, such as the unit of measurement.
+
+Other entities such as the `Feature of Interest` and `Observation` are handled in a later step.
+
+To execute the upload, the tool has a put command:
+
+```
+$ transload put metadata \
+    --source campbell_scientific \
+    --station 606830 \
+    --cache /datastore/weather \
+    --destination https://example.org/v1.0/
+```
+
+In this case, the tool will upload the sensor metadata from the Campbell Scientific weather station with the ID `606830`, and look for the metadata in a JSON file in the `/datastore/weather/campbell_scientific` directory.
+
+An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
+
+If any of the uploads fail, the error will be logged to `STDERR`.
+
+If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `/datastore/weather/campbell_scientific/metadata/606830.json`.
+
+The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
+
 WIP
