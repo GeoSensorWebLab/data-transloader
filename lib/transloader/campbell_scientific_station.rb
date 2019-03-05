@@ -51,10 +51,10 @@ module Transloader
         # net/http.
         last_modified = Time.strptime(response["Last-Modified"], "%a, %d %b %Y %H:%M:%S %Z")
         data_files.push({
-          filename: File.basename(data_url),
-          url: data_url,
-          last_modified: last_modified.strftime("%FT%H:%M:%S.%L%z"),
-          last_length: filedata.length
+          filename:       File.basename(data_url),
+          url:            data_url,
+          last_modified:  last_modified.strftime("%FT%H:%M:%S.%L%z"),
+          initial_length: filedata.length
         })
 
         # Parse CSV headers for station metadata
