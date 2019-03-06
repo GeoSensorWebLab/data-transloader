@@ -49,11 +49,11 @@ module Transloader
         # Cannot use "Content-Length" here as the request has been
         # encoded by gzip, which is enabled by default for Ruby 
         # net/http.
-        last_modified = Time.strptime(response["Last-Modified"], "%a, %d %b %Y %H:%M:%S %Z")
+        last_modified = parse_last_modified(response["Last-Modified"])
         data_files.push({
           filename:       File.basename(data_url),
           url:            data_url,
-          last_modified:  last_modified.strftime("%FT%H:%M:%S.%L%z"),
+          last_modified:  to_iso8601(last_modified),
           initial_length: filedata.length
         })
 
@@ -134,7 +134,94 @@ module Transloader
     end
 
     # Connect to data provider and download Observations
+    # Return an array of observation rows:
+    # [
+    #   ["2019-03-05T17:00:00.000Z", {
+    #     name: "TEMPERATURE_Avg",
+    #     reading: 5.479
+    #   }, {
+    #     name: "WIND_SPEED",
+    #     reading: 12.02
+    #   }],
+    #   ["2019-03-05T18:00:00.000Z", {
+    #   ...
+    #   }]
+    # ]
     def get_observations
+      get_metadata
+      data          = []
+      last_modified = nil
+      new_length    = nil
+      observations  = []
+
+      # Iterate over each data file
+      @metadata["data_files"].each do |data_file|
+        redownload = true
+
+        # Check if file has already been downloaded, and if so use HTTP
+        # Range header to only download the newest part of the file
+        if data_file["last_length"]
+          # Download part of file; do not use gzip compression
+          redownload = false
+
+          # TODO: Check if remote file is smaller than expected
+          # redownload = true
+        end
+          
+        if redownload
+          # Download entire file; can use gzip compression
+          uri = URI(data_file["url"])
+          request = Net::HTTP::Get.new(uri)
+          response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+            http.request(request)
+          end
+
+          filedata      = response.body
+          last_modified = parse_last_modified(response["Last-Modified"])
+          new_length    = filedata.length
+          data          = CSV.parse(filedata)
+          # Parse column headers for observed properties
+          # (Skip first column with timestamp)
+          column_headers = data[1].slice(1..-1)
+
+          # Store column names in station metadata cache file, as 
+          # partial requests later will not be able to know the column
+          # headers.
+          data_file["headers"] = column_headers
+          save_metadata
+
+          # Omit the file header rows from the next step, as the next
+          # step may run from a partial file that doesn't know any
+          # headers.
+          data.slice!(0..3)
+        end
+
+        pp data[0]
+
+        # Update "last_length", "last_modified"
+        data_file["last_modified"] = to_iso8601(last_modified)
+        save_metadata
+
+        # Parse observations from CSV
+        data.each do |row|
+          # Transform dates into ISO8601 in UTC.
+          # This will make it simpler to group them by day and to simplify
+          # timezones for multiple stations.
+          timestamp = parse_toa5_timestamp(row[0], @metadata["timezone_offset"])
+          utc_time = to_iso8601(timestamp)
+          observations.push([utc_time, 
+            row[1..-1].map.with_index { |x, i|
+              {
+                name: data_file["headers"][i],
+                # Adjust null handler here
+                reading: x == "NAN" ? "null" : x.to_f
+              }
+            }
+          ])
+        end
+      end
+      
+      observations
     end
 
     # Upload metadata to SensorThings API
@@ -279,9 +366,36 @@ module Transloader
 
     # Save the observations to file cache
     def save_observations
+      observations = get_observations
+
+      # Group observations by date
+      # 
+      # Save observations as CSV file
+      # 
+      # If CSV file already exists, open it, parse it, merge
+      # observations, then save CSV file
+      # 
+      # Update station metadata cache file
     end
 
     # For parsing functionality specific to this data provider
     private
+
+    # Convert Time class to ISO8601 string with fractional seconds
+    def to_iso8601(time)
+      time.strftime("%FT%T.%L%z")
+    end
+
+    # Convert Last-Modified header String to Time class.
+    # Assumes nginx date format: "%a, %d %b %Y %H:%M:%S %Z"
+    def parse_last_modified(time)
+      Time.strptime(time, "%a, %d %b %Y %T %Z")
+    end
+
+    # Convert a TOA5 timestamp String to a Time class.
+    # An ISO8601 time zone offset (e.g. "-07:00") is required.
+    def parse_toa5_timestamp(time, zone_offset)
+      Time.strptime(time + "#{zone_offset}", "%F %T%z")
+    end
   end
 end
