@@ -133,7 +133,9 @@ module Transloader
       end
     end
 
-    # Connect to data provider and download Observations
+    # Connect to data provider and download Observations for a specific
+    # data_file entry.
+    # 
     # Return an array of observation rows:
     # [
     #   ["2019-03-05T17:00:00.000Z", {
@@ -147,78 +149,77 @@ module Transloader
     #   ...
     #   }]
     # ]
-    def get_observations
-      get_metadata
+    # TODO: convert to private method?
+    def get_observations(data_file)
       data          = []
       last_modified = nil
       new_length    = nil
       observations  = []
 
-      # Iterate over each data file
-      @metadata["data_files"].each do |data_file|
-        redownload = true
+      # Should the full remote file be downloaded, or should a partial
+      # download be used instead?
+      redownload = true
 
-        # Check if file has already been downloaded, and if so use HTTP
-        # Range header to only download the newest part of the file
-        if data_file["last_length"]
-          # Download part of file; do not use gzip compression
-          redownload = false
+      # Check if file has already been downloaded, and if so use HTTP
+      # Range header to only download the newest part of the file
+      if data_file["last_length"]
+        # Download part of file; do not use gzip compression
+        redownload = false
 
-          # TODO: Check if remote file is smaller than expected
-          # redownload = true
-        end
-          
-        if redownload
-          # Download entire file; can use gzip compression
-          uri = URI(data_file["url"])
-          request = Net::HTTP::Get.new(uri)
-          response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-            http.request(request)
-          end
-
-          filedata      = response.body
-          last_modified = parse_last_modified(response["Last-Modified"])
-          new_length    = filedata.length
-          data          = CSV.parse(filedata)
-          # Parse column headers for observed properties
-          # (Skip first column with timestamp)
-          column_headers = data[1].slice(1..-1)
-
-          # Store column names in station metadata cache file, as 
-          # partial requests later will not be able to know the column
-          # headers.
-          data_file["headers"] = column_headers
-          save_metadata
-
-          # Omit the file header rows from the next step, as the next
-          # step may run from a partial file that doesn't know any
-          # headers.
-          data.slice!(0..3)
+        # TODO: Check if remote file is smaller than expected
+        # redownload = true
+      end
+        
+      if redownload
+        # Download entire file; can use gzip compression
+        uri = URI(data_file["url"])
+        request = Net::HTTP::Get.new(uri)
+        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+          http.request(request)
         end
 
-        pp data[0]
+        filedata      = response.body
+        last_modified = parse_last_modified(response["Last-Modified"])
+        new_length    = filedata.length
+        data          = CSV.parse(filedata)
+        # Parse column headers for observed properties
+        # (Skip first column with timestamp)
+        column_headers = data[1].slice(1..-1)
 
-        # Update "last_length", "last_modified"
-        data_file["last_modified"] = to_iso8601(last_modified)
+        # Store column names in station metadata cache file, as 
+        # partial requests later will not be able to know the column
+        # headers.
+        data_file["headers"] = column_headers
         save_metadata
 
-        # Parse observations from CSV
-        data.each do |row|
-          # Transform dates into ISO8601 in UTC.
-          # This will make it simpler to group them by day and to simplify
-          # timezones for multiple stations.
-          timestamp = parse_toa5_timestamp(row[0], @metadata["timezone_offset"])
-          utc_time = to_iso8601(timestamp)
-          observations.push([utc_time, 
-            row[1..-1].map.with_index { |x, i|
-              {
-                name: data_file["headers"][i],
-                # Adjust null handler here
-                reading: x == "NAN" ? "null" : x.to_f
-              }
+        # Omit the file header rows from the next step, as the next
+        # step may run from a partial file that doesn't know any
+        # headers.
+        data.slice!(0..3)
+      end
+
+      # Update station metadata cache
+      # TODO: Update "last_length"
+      # TODO: Does this actually update the file?
+      data_file["last_modified"] = to_iso8601(last_modified)
+      save_metadata
+
+      # Parse observations from CSV
+      data.each do |row|
+        # Transform dates into ISO8601 in UTC.
+        # This will make it simpler to group them by day and to simplify
+        # timezones for multiple stations.
+        timestamp = parse_toa5_timestamp(row[0], @metadata["timezone_offset"])
+        utc_time = to_iso8601(timestamp)
+        observations.push([utc_time, 
+          row[1..-1].map.with_index { |x, i|
+            {
+              name: data_file["headers"][i],
+              # Adjust null handler here
+              reading: x == "NAN" ? "null" : x.to_f
             }
-          ])
-        end
+          }
+        ])
       end
       
       observations
@@ -365,17 +366,59 @@ module Transloader
     end
 
     # Save the observations to file cache
+    # TODO: data file handling must happen here, not in get_observations!
     def save_observations
-      observations = get_observations
+      get_metadata
 
-      # Group observations by date
-      # 
-      # Save observations as CSV file
-      # 
-      # If CSV file already exists, open it, parse it, merge
-      # observations, then save CSV file
-      # 
-      # Update station metadata cache file
+      @metadata["data_files"].each do |data_file|
+        data_filename = data_file["filename"]
+        all_observations = get_observations(data_file)
+
+        # Group observations by date
+        observations_by_day = all_observations.group_by do |set|
+          # Split the ISO8601 string to just the date
+          # Example key: "2019-03-05T17:00:00.000Z"
+          set[0].split("T")[0]
+        end
+
+        observations_by_day.each do |date, observations|
+          # Save observations as CSV file
+          
+          year, month, day = date.split("-")
+          obs_dir = "#{@observations_path}/#{data_filename}/#{year}/#{month}"
+          obs_filename = "#{obs_dir}/#{day}.csv"
+          FileUtils.mkdir_p(obs_dir)
+
+          # If the observations file doesn't exist, convert the
+          # observations to CSV and dump to the file.
+          # If the file DOES exist, then it needs to be read and the
+          # observations from file merged with the new observations.
+          if File.exist?(obs_filename)
+            # TODO: open file, read values, merge and sort observations
+            # array
+          end
+
+          CSV.open(obs_filename, "wb") do |csv|
+            # Add header row
+            csv << ["timestamp"].concat(data_file["headers"])
+
+            # take observations and make an array of readings for the 
+            # CSV file.
+            # Example observations item:
+            # ["2018-08-05T15:00:00.000-0700", [{
+            #   name: "", reading: ""
+            #  }, {...}]]
+            observations.each do |set|
+              csv << set[1].collect { |i| i[:reading] }
+            end
+          end
+          
+        end
+        
+        # Update station metadata cache file with observation date range
+
+      end
+
     end
 
     # For parsing functionality specific to this data provider
