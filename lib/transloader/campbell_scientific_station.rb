@@ -340,20 +340,23 @@ module Transloader
           
         end
 
-        # Update station metadata cache file with observation date range
-        oldest_in_set         = all_observations[0][0]
-        newest_in_set         = all_observations[-1][0]
-        data_file["parsed"] ||= {}
+        # Update station metadata cache file with observation date range.
+        # Ignore if there are no observations.
+        if all_observations[0]
+          oldest_in_set         = all_observations[0][0]
+          newest_in_set         = all_observations[-1][0]
+          data_file["parsed"] ||= {}
 
-        if data_file["parsed"]["oldest"].nil? || data_file["parsed"]["oldest"] > oldest_in_set
-          data_file["parsed"]["oldest"] = oldest_in_set
+          if data_file["parsed"]["oldest"].nil? || data_file["parsed"]["oldest"] > oldest_in_set
+            data_file["parsed"]["oldest"] = oldest_in_set
+          end
+
+          if data_file["parsed"]["newest"].nil? || data_file["parsed"]["newest"] < newest_in_set
+            data_file["parsed"]["newest"] = newest_in_set
+          end
+
+          save_metadata
         end
-
-        if data_file["parsed"]["newest"].nil? || data_file["parsed"]["newest"] < newest_in_set
-          data_file["parsed"]["newest"] = newest_in_set
-        end
-
-        save_metadata
       end
     end
 
@@ -409,11 +412,55 @@ module Transloader
         # Download part of file; do not use gzip compression
         redownload = false
 
-        # TODO: Check if remote file is smaller than expected
-        # redownload = true
+        # Check if content-length is smaller than expected 
+        # (last_length). If it is smaller, that means the file was
+        # probably truncated and the file should be re-downloaded 
+        # instead.
+        uri = URI(data_file["url"])
+        request = Net::HTTP::Head.new(uri)
+        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+          http.request(request)
+        end
+
+        last_modified = parse_last_modified(response["Last-Modified"])
+        new_length    = response["Content-Length"].to_i
+
+        if response["Content-Length"].to_i < data_file["last_length"]
+          puts "Remote data file length is shorter than expected."
+          redownload = true
+        else
+          # Do a partial GET
+          request = Net::HTTP::Get.new(uri)
+          request['Accept-Encoding'] = ''
+          request['Range'] = "bytes=#{data_file["last_length"]}-"
+          response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+            http.request(request)
+          end
+
+          # 416 Requested Range Not Satisfiable
+          if response.code == "416"
+            puts "No new data."
+          elsif response.code == "206"
+            puts "Downloaded partial data."
+            filedata      = response.body
+            last_modified = parse_last_modified(response["Last-Modified"])
+            new_length    = data_file["last_length"] + filedata.length
+            begin
+              data = CSV.parse(filedata)
+            rescue CSV::MalformedCSVError => e
+              puts "Error: Could not parse partial response data."
+              puts e
+              redownload = true
+            end
+          else
+            # Other codes are probably errors
+            puts "Error downloading partial data."
+          end
+        end
       end
         
       if redownload
+        puts "Downloading entire data file."
         # Download entire file; can use gzip compression
         uri = URI(data_file["url"])
         request = Net::HTTP::Get.new(uri)
@@ -441,9 +488,10 @@ module Transloader
         data.slice!(0..3)
       end
 
-      # Update station metadata cache
-      # TODO: Update "last_length"
+      # Update station metadata cache with what the server says is the
+      # latest file update time and the latest file length in bytes
       data_file["last_modified"] = to_iso8601(last_modified)
+      data_file["last_length"]   = new_length
       save_metadata
 
       # Parse observations from CSV
