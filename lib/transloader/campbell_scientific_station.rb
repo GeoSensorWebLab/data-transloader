@@ -372,18 +372,19 @@ module Transloader
 
       @metadata["data_files"].each do |data_file|
         data_filename = data_file["filename"]
-        all_observations = get_observations(data_file)
+        all_observations = get_observations(data_file).sort { |a,b| a[0] <=> b[0] }
 
-        # Group observations by date
+        # Group observations by date. This converts the array from
+        # [ [A, {B}, {C}], ... ] to { A': [A, {B}, {C} ], ...}.
+        # 
+        # Split the ISO8601 string to just the date
+        # Example key: "2019-03-05T17:00:00.000Z"
         observations_by_day = all_observations.group_by do |set|
-          # Split the ISO8601 string to just the date
-          # Example key: "2019-03-05T17:00:00.000Z"
           set[0].split("T")[0]
         end
 
         observations_by_day.each do |date, observations|
           # Save observations as CSV file
-          
           year, month, day = date.split("-")
           obs_dir = "#{@observations_path}/#{data_filename}/#{year}/#{month}"
           obs_filename = "#{obs_dir}/#{day}.csv"
@@ -394,8 +395,25 @@ module Transloader
           # If the file DOES exist, then it needs to be read and the
           # observations from file merged with the new observations.
           if File.exist?(obs_filename)
-            # TODO: open file, read values, merge and sort observations
-            # array
+            old_observations = CSV.read(obs_filename, { headers: true })
+            headers = old_observations.headers[1..-1]
+
+            # Convert from row object into observations array format:
+            # ["date", [{reading}, {reading}, ...]]
+            converted_observations = old_observations.map do |row|
+              [row["timestamp"]].concat([row[1..-1].map.with_index { |reading, i|
+                # Parse non-null to float values
+                r = (reading == "null" ? "null" : reading.to_f)
+                { name: headers[i], reading: r }
+              }])
+            end
+
+            # Merge, then sort by timestamp, then remove duplicates
+            observations = observations.concat(converted_observations).sort { |a,b|
+              a[0] <=> b[0]
+            }.uniq { |obs|
+              obs[0]
+            }
           end
 
           CSV.open(obs_filename, "wb") do |csv|
@@ -409,16 +427,27 @@ module Transloader
             #   name: "", reading: ""
             #  }, {...}]]
             observations.each do |set|
-              csv << set[1].collect { |i| i[:reading] }
+              csv << [set[0]].concat(set[1].map { |i| i[:reading] })
             end
           end
           
         end
-        
+
         # Update station metadata cache file with observation date range
+        oldest_in_set         = all_observations[0][0]
+        newest_in_set         = all_observations[-1][0]
+        data_file["parsed"] ||= {}
 
+        if data_file["parsed"]["oldest"].nil? || data_file["parsed"]["oldest"] > oldest_in_set
+          data_file["parsed"]["oldest"] = oldest_in_set
+        end
+
+        if data_file["parsed"]["newest"].nil? || data_file["parsed"]["newest"] < newest_in_set
+          data_file["parsed"]["newest"] = newest_in_set
+        end
+
+        save_metadata
       end
-
     end
 
     # For parsing functionality specific to this data provider
