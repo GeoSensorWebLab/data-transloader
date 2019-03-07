@@ -1,5 +1,6 @@
 require 'csv'
 require 'net/http'
+require 'time'
 require 'uri'
 
 module Transloader
@@ -262,9 +263,112 @@ module Transloader
     end
 
     # Upload station observations for `date` to the SensorThings API 
-    # server at `destination`. If `date` is "latest", then the most 
-    # recent cached observation file is used.
+    # server at `destination`. If `date` is "latest", then observations
+    # from the most recently uploaded observation (by phenomenon time) 
+    # up to the most recently parsed observation (by phenomenon time)
+    # are uploaded.
     def put_observations(destination, date)
+      get_metadata
+
+      # Create hash map of observed properties to datastream URLs.
+      # This is used to determine where Observation entities are 
+      # uploaded.
+      datastream_hash = {}
+      @metadata["datastreams"].each do |datastream|
+        datastream_hash[datastream["name"]] = datastream
+      end
+
+      # Iterate over data files to parse observations in date range
+      @metadata["data_files"].each do |data_file|
+        data_filename = data_file["filename"]
+        # specify the start and end dates (ISO8601 strings) to upload
+        # nil is used for unbounded
+        date_range = [data_file["parsed"]["oldest"], data_file["parsed"]["newest"]]
+
+        if date != "latest"
+          date_range = [date, date]
+        else
+          # Use cached newest-uploaded-timestamp if it is available
+          newest_uploaded_timestamp = data_file["newest_uploaded_timestamp"]
+
+          # If timestamp isn't available, upload all observations
+          if !newest_uploaded_timestamp.nil?
+            date_range = [newest_uploaded_timestamp, data_file["parsed"]["newest"]]
+          end
+        end
+
+        # Load observations in date range
+        start_timestamp = Time.iso8601(date_range[0])
+        end_timestamp   = Time.iso8601(date_range[1])
+
+        observations = []
+        timestamp = start_timestamp
+        while timestamp <= end_timestamp
+          # Load data from file for timestamp
+          obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
+          obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
+          rows = CSV.read(obs_filename, { headers: true })
+          # headers (excluding timestamp)
+          headers = rows.headers[1..-1]
+
+          # convert to format:
+          # [
+          #   ["2018-08-05T15:00:00.000-0700", {
+          #     name: "TEMPERATURE_Avg",
+          #     reading: 5.479
+          #   }, { ... }],
+          #   [...]
+          # ]
+          converted_rows = rows.map do |row|
+            [row["timestamp"], row[1..-1].map.with_index { |cell, i|
+              {
+                name: headers[i],
+                reading: cell
+              }
+            }]
+          end
+
+          observations.concat(converted_rows)
+
+          timestamp += 86400
+        end
+
+        # filter observations in time range
+        observations.select! do |row|
+          row_timestamp = Time.iso8601(row[0])
+          (row_timestamp >= start_timestamp && row_timestamp <= end_timestamp)
+        end
+
+        
+        observations.each do |row|
+          # Convert from ISO8601 string to ISO8601 string in UTC
+          row_timestamp = to_iso8601(Time.iso8601(row[0]).utc)
+
+          row[1].each do |obs|
+            # Create Observation entity
+            new_observation = SensorThings::Observation.new({
+              phenomenonTime: row_timestamp,
+              result: obs[:reading],
+              resultTime: row_timestamp
+            })
+
+            datastream_url = datastream_hash[obs[:name]]["Datastream@iot.navigationLink"]
+
+            # Upload to SensorThings API
+            new_observation.upload_to(datastream_url)
+          end
+        end
+
+        # Update metadata cache file with latest uploaded timestamp
+        newest_in_set = to_iso8601(Time.iso8601(observations.last[0]))
+
+        if data_file["newest_uploaded_timestamp"].nil? || data_file["newest_uploaded_timestamp"] < newest_in_set
+          data_file["newest_uploaded_timestamp"] = newest_in_set
+        end
+
+        save_metadata
+
+      end
     end
 
     # Save the Station metadata to the metadata cache file
@@ -365,7 +469,7 @@ module Transloader
 
     # Convert Time class to ISO8601 string with fractional seconds
     def to_iso8601(time)
-      time.strftime("%FT%T.%L%z")
+      time.utc.strftime("%FT%T.%LZ")
     end
 
     # Convert Last-Modified header String to Time class.
@@ -378,6 +482,14 @@ module Transloader
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
       Time.strptime(time + "#{zone_offset}", "%F %T%z")
+    end
+
+    # Parse an observation reading from the data source, converting a
+    # string to a float or if null (i.e. "NAN") then use STA compatible
+    # "null" string.
+    # "NAN" usage here is specific to Campbell Scientific loggers.
+    def parse_reading(reading)
+      reading == "NAN" ? "null" : reading.to_f
     end
 
     # Connect to data provider and download Observations for a specific
@@ -505,8 +617,7 @@ module Transloader
           row[1..-1].map.with_index { |x, i|
             {
               name: data_file["headers"][i],
-              # Adjust null handler here
-              reading: x == "NAN" ? "null" : x.to_f
+              reading: parse_reading(x)
             }
           }
         ])
