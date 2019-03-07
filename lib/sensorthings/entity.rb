@@ -37,6 +37,8 @@ module SensorThings
       puts ''
 
       response = Net::HTTP.start(url.hostname, url.port) do |http|
+        http.open_timeout = 1800
+        http.read_timeout = 1800
         http.request(request)
       end
 
@@ -67,6 +69,8 @@ module SensorThings
       puts ''
 
       response = Net::HTTP.start(url.hostname, url.port) do |http|
+        http.open_timeout = 1800
+        http.read_timeout = 1800
         http.request(request)
       end
 
@@ -100,6 +104,8 @@ module SensorThings
       puts ''
 
       response = Net::HTTP.start(url.hostname, url.port) do |http|
+        http.open_timeout = 1800
+        http.read_timeout = 1800
         http.request(request)
       end
 
