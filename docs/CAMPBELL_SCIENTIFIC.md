@@ -121,4 +121,95 @@ The filename will use the **UTC** version of the date, not the local time for th
 
 If an observation cache file already exists with the same name, it is re-opened and merged with the newer observations. Newer observations with the same timestamp will replace older observations in the cache file.
 
-WIP
+### Step 4: Uploading Sensor Observations to OGC SensorThings API
+
+Once the original observations have been downloaded to disk, they can be converted to OGC SensorThings API entities and uploaded to a compatible service.
+
+A new `Observation` entity is created that contains the readings for the weather station observation. If an identical `Observation` already exists on the remote service, then no upload is done. If an `Observation` already exists under the same `Datastream` with the same timestamp but a different reading value, then the value is updated with a `PUT` request. If no `Observation` already exists, then a new one is created with a `POST` request.
+
+The `FeatureOfInterest` for the `Observation` will be automatically generated on the server based on the linked `Location`.
+
+```
+$ transload put observations \
+    --source campbell_scientific \
+    --station 606830 \
+    --cache /datastore/weather \
+    --date 20180501T00:00:00Z \
+    --destination https://example.org/v1.0/
+```
+
+In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache in `/datastore/weather/campbell_scientific/606830/*/2018/05/01.csv`. This is done for all the data files defined for the station in the station metadata cache file. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
+
+```
+$ transload put observations \
+    --source campbell_scientific \
+    --station 606830 \
+    --cache /datastore/weather \
+    --date latest \
+    --destination https://example.org/v1.0/
+```
+
+In the second example, the newest observations will be automatically determined by reading the station metadata cache file. For each data file, the most-recently-uploaded observation timestamp is kept and used to determine which observations should be uploaded.
+
+The second example is recommended usage, as it automatically uses the cache to upload only new observations.
+
+## Data Model Mapping
+
+Here is how the metadata and data from Campbell Scientific are mapped to SensorThings API entities.
+
+* Station Details (to `Thing` properties)
+    * Station ID
+    * Station Model Name
+    * Station Serial Number
+    * Station Program Name
+
+The above items will be stored as metadata under the `properties` attribute for the `Thing` entity. 
+
+* Observed Property CSV columns (to Sensor, Datastream, Observed Property, Unit of Measurement)
+    * Name (e.g. "TEMPERATURE_Avg") to Observed Property, Sensor Name, Datastream Name
+    * Units to UoM
+    * (Not used) Observation type to Datastream Observation type (e.g. average value vs peak value)
+
+There is no latitude/longitude or location information, nor is there any timezone information. These must be manually added to the metadata cache file. A timezone is necessary as the data files use timestamps *without* timezones or timezone offsets.
+
+### SensorThings API Entities
+
+* `Thing`
+    * Name (from station ID, or customized in cached file)
+    * Description (longer form of Name)
+    * Properties (JSON object with station details)
+* `Location`
+    * Name (from station ID, or customized in cached file)
+    * Description (longer form of Name)
+    * encodingType (`application/vnd.geo+json`)
+    * location (GeoJSON, uses lat/lon from metadata cache file)
+* `Datastream`
+    * Name (from station ID and observed property)
+    * Description (longer form of Name)
+    * unitOfMeasurement (from units, will probably need lookup table)
+    * observationType (OM_Observation)
+    * observedArea (Not used)
+    * phenomenonTime (Not used)
+    * resultTime (Not used)
+* `Sensor`
+    * Name (from station ID and observed property)
+    * Description (longer form of Name)
+    * encodingType (`application/pdf` due to limitation)
+    * metadata (link to metadata page)
+* `ObservedProperty`
+    * Name (from metadata)
+    * Description (longer form of Name)
+    * Definition (link to example.org for now, later can link to dictionary site)
+* `Observation`
+    * phenomenonTime (from "Latest Conditions" time, timezone must be manually added to metadata cached file)
+    * result (from latest value in sidebar)
+    * resultTime (Not used)
+    * resultQuality (Not used)
+    * valudTime (Not used)
+    * parameters (Not used)
+* `FeatureOfInterest`
+    * Name (same as Location)
+    * Description (longer form of Name)
+    * encodingType (`application/vnd.geo+json`)
+    * feature (GeoJSON, uses lat/lon from metadata cache file)
+
