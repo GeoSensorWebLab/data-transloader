@@ -25,8 +25,6 @@ http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat
 
 Note that if the name of the data file changes, the station metadata cache file must be updated or else the data transloader will not find new observations.
 
-TODO: The tool will support loading *multiple* data files, allowing you to import historical observations.
-
 ### Step 1: Downloading Sensor Metadata
 
 To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `Sensors`, `Observed Properties`, and `Datastreams` must be initialized using the weather station details before sensor data observations can be uploaded. The metadata can be downloaded using a command:
