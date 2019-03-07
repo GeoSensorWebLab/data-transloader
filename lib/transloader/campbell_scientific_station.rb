@@ -114,7 +114,7 @@ module Transloader
         longitude:       nil,
         elevation:       nil,
         timezone_offset: nil,
-        updated_at:      Time.now,
+        updated_at:      Time.now.utc,
         procedure:       nil,
         datastreams:     datastreams,
         data_files:      data_files,
@@ -360,7 +360,7 @@ module Transloader
         end
 
         # Update metadata cache file with latest uploaded timestamp
-        newest_in_set = to_iso8601(Time.iso8601(observations.last[0]))
+        newest_in_set = to_utc_iso8601(observations.last[0])
 
         if data_file["newest_uploaded_timestamp"].nil? || data_file["newest_uploaded_timestamp"] < newest_in_set
           data_file["newest_uploaded_timestamp"] = newest_in_set
@@ -467,6 +467,11 @@ module Transloader
     # For parsing functionality specific to this data provider
     private
 
+    # Convert an ISO8601 string to an ISO8601 string in UTC
+    def to_utc_iso8601(iso8601)
+      to_iso8601(Time.iso8601(iso8601))
+    end
+
     # Convert Time class to ISO8601 string with fractional seconds
     def to_iso8601(time)
       time.utc.strftime("%FT%T.%LZ")
@@ -481,7 +486,7 @@ module Transloader
     # Convert a TOA5 timestamp String to a Time class.
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
-      Time.strptime(time + "#{zone_offset}", "%F %T%z")
+      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
     end
 
     # Parse an observation reading from the data source, converting a
