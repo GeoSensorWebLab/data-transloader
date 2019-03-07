@@ -27,9 +27,6 @@ Currently supported weather station sources:
 
 * Data Garrison
 * [Environment Canada][MSC]
-
-Weather station sources with planned support:
-
 * Campbell Scientific
 
 [cron]: https://en.wikipedia.org/wiki/Cron
@@ -42,6 +39,10 @@ For detailed instructions, see [docs/ENVIRONMENT_CANADA.md](docs/ENVIRONMENT_CAN
 ### Data Garrison
 
 For detailed instructions, see [docs/DATA_GARRISON.md](docs/DATA_GARRISON.md).
+
+### Campbell Scientific
+
+For detailed instructions, see [docs/CAMPBELL_SCIENTIFIC.md](docs/CAMPBELL_SCIENTIFIC.md).
 
 ## Development Instructions
 
