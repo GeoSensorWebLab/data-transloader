@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby -w -Ilib
-require 'pry'
 require 'transloader'
 
 # TODO: Clean up excessive arguments in methods

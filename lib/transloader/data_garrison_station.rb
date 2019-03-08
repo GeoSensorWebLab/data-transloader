@@ -3,7 +3,6 @@ require 'fileutils'
 require 'json'
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 require 'set'
 require 'time'
 
