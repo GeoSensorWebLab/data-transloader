@@ -476,6 +476,7 @@ module Transloader
     # Return the HTML document object for the station. Will cache the
     # object.
     def station_data_html
+      # TODO: Add HTTP handling
       @html ||= Nokogiri::HTML(open(@base_path))
 
       if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
