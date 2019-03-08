@@ -20,18 +20,6 @@ module Transloader
       @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
     end
 
-    # Download the station list from Environment Canada and return the body string
-    def download_station_list
-      response = Net::HTTP.get_response(URI(METADATA_URL))
-
-      raise "Error downloading station list" if response.code != '200'
-
-      # Data is encoded as ISO-8859-1 but has no encoding headers, so encoding
-      # must be manually applied. I then convert to UTF-8 for re-use later.
-      body = response.body.force_encoding(Encoding::ISO_8859_1)
-      body = body.encode(Encoding::UTF_8)
-    end
-
     # Create a new Station object based on the station ID, and
     # automatically load its metadata from data source or file
     def load_station(station_id)
@@ -54,8 +42,22 @@ module Transloader
 
     private
 
-    # Download list of stations from Environment Canada. If cache file exists,
-    # re-use that instead.
+    # Download the station list from Environment Canada and return the 
+    # body string
+    def download_station_list
+      response = Net::HTTP.get_response(URI(METADATA_URL))
+
+      raise "Error downloading station list" if response.code != '200'
+
+      # Data is encoded as ISO-8859-1 but has no encoding headers, so 
+      # encoding must be manually applied. I then convert to UTF-8 for 
+      # re-use later.
+      body = response.body.force_encoding(Encoding::ISO_8859_1)
+      body = body.encode(Encoding::UTF_8)
+    end
+
+    # Download list of stations from Environment Canada. If cache file 
+    # exists, re-use that instead.
     def get_stations_list
       if File.exist?(@station_list_path)
         body = IO.read(@station_list_path)
