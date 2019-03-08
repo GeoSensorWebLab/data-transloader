@@ -17,7 +17,7 @@ module Transloader
 
     # Create a new Station object based on the station ID, and
     # automatically load its metadata from data source or file
-    def get_station(station_id, data_urls = [])
+    def get_station(station_id:, data_urls: [])
       stn = CampbellScientificStation.new(station_id, self, {
         data_urls: data_urls
       })
@@ -27,7 +27,7 @@ module Transloader
 
     # Create a new Station object based on the station ID.
     # Does not load any metadata.
-    def new_station(station_id, data_urls = [])
+    def new_station(station_id:, data_urls: [])
       CampbellScientificStation.new(station_id, self, {
         data_urls: data_urls
       })

@@ -20,7 +20,7 @@ module Transloader
 
     # Create a new Station object based on the station ID, and
     # automatically load its metadata from data source or file
-    def get_station(user_id, station_id)
+    def get_station(user_id:, station_id:)
       stn = DataGarrisonStation.new(station_id, self, { user_id: user_id })
       stn.get_metadata
       stn
@@ -28,7 +28,7 @@ module Transloader
 
     # Create a new Station object based on the station ID.
     # Does not load any metadata.
-    def new_station(user_id, station_id)
+    def new_station(user_id:, station_id:)
       DataGarrisonStation.new(station_id, self, { user_id: user_id })
     end
   end

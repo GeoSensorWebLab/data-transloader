@@ -5,15 +5,15 @@ def get_station_metadata(source:, user_id:, station_id:, data_urls:, cache:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id)
+    station = provider.get_station(station_id: station_id)
     station.save_metadata
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id, station_id)
+    station = provider.get_station(user_id: user_id, station_id: station_id)
     station.save_metadata
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id, data_urls)
+    station = provider.get_station(station_id: station_id, data_urls: data_urls)
     station.save_metadata
   else
     $stderr.puts "ERROR: Support for source not implemented"
@@ -25,15 +25,15 @@ def get_station_observations(source:, user_id:, station_id:, cache:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id)
+    station = provider.get_station(station_id: station_id)
     station.save_observations
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id, station_id)
+    station = provider.get_station(user_id: user_id, station_id: station_id)
     station.save_observations
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id, [])
+    station = provider.get_station(station_id: station_id)
     station.save_observations
   else
     $stderr.puts "ERROR: Support for source not implemented"
@@ -45,15 +45,15 @@ def put_station_metadata(source:, user_id:, station_id:, cache:, destination:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id)
+    station = provider.get_station(station_id: station_id)
     station.upload_metadata(destination)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id, station_id)
+    station = provider.get_station(user_id: user_id, station_id: station_id)
     station.upload_metadata(destination)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id, [])
+    station = provider.get_station(station_id: station_id)
     station.upload_metadata(destination)
   else
     $stderr.puts "ERROR: Support for source not implemented"
@@ -65,17 +65,17 @@ def put_station_observations(source:, user_id:, station_id:, cache:, destination
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id)
+    station = provider.get_station(station_id: station_id)
     station.save_metadata
     station.upload_metadata(destination)
     station.upload_observations(destination, date)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id, station_id)
+    station = provider.get_station(user_id: user_id, station_id: station_id)
     station.upload_observations(destination, date)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id, [])
+    station = provider.get_station(station_id: station_id)
     station.upload_observations(destination, date)
   else
     $stderr.puts "ERROR: Support for source not implemented"
