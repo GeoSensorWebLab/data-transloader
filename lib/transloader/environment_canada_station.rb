@@ -89,7 +89,7 @@ module Transloader
     end
 
     # Upload metadata to SensorThings API
-    def put_metadata(server_url)
+    def upload_metadata(server_url)
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
@@ -206,7 +206,7 @@ module Transloader
     # Upload station observations for `date` to the SensorThings API server at
     # `destination`. If `date` is "latest", then the most recent SWOB-ML file
     # is used.
-    def put_observations(destination, date)
+    def upload_observations(destination, date)
       puts "Uploading observations for #{date} to #{destination}"
 
       # Check for metadata

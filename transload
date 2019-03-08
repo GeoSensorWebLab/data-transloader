@@ -51,19 +51,18 @@ def put_station_metadata(source, user_id, station_id, cache, destination)
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
     station.get_metadata
-    station.put_metadata(destination)
+    station.upload_metadata(destination)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
     station = provider.get_station(user_id, station_id)
     station.get_metadata
-    station.put_metadata(destination)
+    station.upload_metadata(destination)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
     station = provider.get_station(station_id, [])
     # TODO: Rename "get" to "load" for file-loading operations
     station.get_metadata
-    # TODO: Rename "put" to "upload" for network operations
-    station.put_metadata(destination)
+    station.upload_metadata(destination)
   else
     puts "Support for source not implemented"
   end
@@ -77,16 +76,16 @@ def put_station_observations(source, user_id, station_id, cache, destination, da
     # CHECK: Is this overwriting metadata?
     station.get_metadata
     station.save_metadata
-    station.put_metadata(destination)
-    station.put_observations(destination, date)
+    station.upload_metadata(destination)
+    station.upload_observations(destination, date)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
     station = provider.get_station(user_id, station_id)
-    station.put_observations(destination, date)
+    station.upload_observations(destination, date)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
     station = provider.get_station(station_id, [])
-    station.put_observations(destination, date)
+    station.upload_observations(destination, date)
   else
     puts "Support for source not implemented"
   end

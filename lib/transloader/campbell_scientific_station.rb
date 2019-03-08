@@ -135,7 +135,7 @@ module Transloader
     end
 
     # Upload metadata to SensorThings API
-    def put_metadata(server_url)
+    def upload_metadata(server_url)
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
@@ -267,7 +267,7 @@ module Transloader
     # from the most recently uploaded observation (by phenomenon time) 
     # up to the most recently parsed observation (by phenomenon time)
     # are uploaded.
-    def put_observations(destination, date)
+    def upload_observations(destination, date)
       get_metadata
 
       # Create hash map of observed properties to datastream URLs.
