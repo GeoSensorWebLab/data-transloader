@@ -20,6 +20,15 @@ module Transloader
       @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
     end
 
+    # Create a new Station object based on the station ID, and
+    # automatically download its metadata
+    def create_station(station_id)
+      station_row = get_station_row(station_id)
+      stn = EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
+      stn.download_metadata
+      stn
+    end
+
     # Download the station list from Environment Canada and return the body string
     def download_station_list
       response = Net::HTTP.get_response(URI(METADATA_URL))
@@ -33,16 +42,15 @@ module Transloader
     end
 
     def get_station(station_id)
-      stations = get_stations_list
-
-      station_row = stations.detect do |row|
-        row["#IATA"] == station_id
-      end
-
-      raise "Station not found in list" if station_row.nil?
-
+      station_row = get_station_row(station_id)
       EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
     end
+
+    def stations
+      @stations ||= get_stations_list
+    end
+
+    private
 
     # Download list of stations from Environment Canada. If cache file exists,
     # re-use that instead.
@@ -57,9 +65,16 @@ module Transloader
       CSV.parse(body, headers: :first_row)
     end
 
+    def get_station_row(station_id)
+      station_row = stations.detect { |row| row["#IATA"] == station_id }
+      raise "Station not found in list" if station_row.nil?
+      station_row
+    end
+
     # Cache the raw body data to a file for re-use
     def save_station_list(body)
       IO.write(@station_list_path, body, 0)
     end
+
   end
 end
