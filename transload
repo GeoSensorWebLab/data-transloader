@@ -16,7 +16,6 @@ def get_station_metadata(source, user_id, station_id, data_urls, cache)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
     station = provider.get_station(station_id, data_urls)
-    station.download_metadata
     station.save_metadata
   else
     puts "Support for source not implemented"
@@ -47,7 +46,6 @@ def put_station_metadata(source, user_id, station_id, cache, destination)
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
     station = provider.get_station(station_id)
-    station.get_metadata
     station.upload_metadata(destination)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(cache)
@@ -56,8 +54,6 @@ def put_station_metadata(source, user_id, station_id, cache, destination)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(cache)
     station = provider.get_station(station_id, [])
-    # TODO: Rename "get" to "load" for file-loading operations
-    station.get_metadata
     station.upload_metadata(destination)
   else
     puts "Support for source not implemented"
