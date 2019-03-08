@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby -w -Ilib
 require 'transloader'
 
-# TODO: Clean up excessive arguments in methods
-
-def get_station_metadata(source, user_id, station_id, data_urls, cache)
+def get_station_metadata(source:, user_id:, station_id:, data_urls:, cache:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -18,11 +16,12 @@ def get_station_metadata(source, user_id, station_id, data_urls, cache)
     station = provider.get_station(station_id, data_urls)
     station.save_metadata
   else
-    puts "Support for source not implemented"
+    $stderr.puts "ERROR: Support for source not implemented"
+    exit 1
   end
 end
 
-def get_station_observations(source, user_id, station_id, cache)
+def get_station_observations(source:, user_id:, station_id:, cache:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -37,11 +36,12 @@ def get_station_observations(source, user_id, station_id, cache)
     station = provider.get_station(station_id, [])
     station.save_observations
   else
-    puts "Support for source not implemented"
+    $stderr.puts "ERROR: Support for source not implemented"
+    exit 1
   end
 end
 
-def put_station_metadata(source, user_id, station_id, cache, destination)
+def put_station_metadata(source:, user_id:, station_id:, cache:, destination:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -56,11 +56,12 @@ def put_station_metadata(source, user_id, station_id, cache, destination)
     station = provider.get_station(station_id, [])
     station.upload_metadata(destination)
   else
-    puts "Support for source not implemented"
+    $stderr.puts "ERROR: Support for source not implemented"
+    exit 1
   end
 end
 
-def put_station_observations(source, user_id, station_id, cache, destination, date)
+def put_station_observations(source:, user_id:, station_id:, cache:, destination:, date:)
   case source
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(cache)
@@ -77,7 +78,8 @@ def put_station_observations(source, user_id, station_id, cache, destination, da
     station = provider.get_station(station_id, [])
     station.upload_observations(destination, date)
   else
-    puts "Support for source not implemented"
+    $stderr.puts "ERROR: Support for source not implemented"
+    exit 1
   end
 end
 
@@ -90,15 +92,39 @@ case args.verb
 when :get
   case args.object
   when :metadata
-    get_station_metadata(args.source, args.user, args.station, args.data_urls, args.cache)
+    get_station_metadata(
+      source:     args.source,
+      user_id:    args.user,
+      station_id: args.station,
+      data_urls:  args.data_urls,
+      cache:      args.cache
+    )
   when :observations
-    get_station_observations(args.source, args.user, args.station, args.cache)
+    get_station_observations(
+      source:     args.source,
+      user_id:    args.user,
+      station_id: args.station,
+      cache:      args.cache
+     )
   end
 when :put
   case args.object
   when :metadata
-    put_station_metadata(args.source, args.user, args.station, args.cache, args.destination)
+    put_station_metadata(
+      source:      args.source,
+      user_id:     args.user,
+      station_id:  args.station,
+      cache:       args.cache,
+      destination: args.destination
+    )
   when :observations
-    put_station_observations(args.source, args.user, args.station, args.cache, args.destination, args.date)
+    put_station_observations(
+      source:      args.source,
+      user_id:     args.user,
+      station_id:  args.station,
+      cache:       args.cache,
+      destination: args.destination,
+      date:        args.date
+    )
   end
 end
