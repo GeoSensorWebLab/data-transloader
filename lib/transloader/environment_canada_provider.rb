@@ -20,15 +20,6 @@ module Transloader
       @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
     end
 
-    # Create a new Station object based on the station ID, and
-    # automatically download its metadata
-    def create_station(station_id)
-      station_row = get_station_row(station_id)
-      stn = EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
-      stn.download_metadata
-      stn
-    end
-
     # Download the station list from Environment Canada and return the body string
     def download_station_list
       response = Net::HTTP.get_response(URI(METADATA_URL))
@@ -41,7 +32,18 @@ module Transloader
       body = body.encode(Encoding::UTF_8)
     end
 
-    def get_station(station_id)
+    # Create a new Station object based on the station ID, and
+    # automatically load its metadata from data source or file
+    def load_station(station_id)
+      station_row = get_station_row(station_id)
+      stn = EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
+      stn.get_metadata
+      stn
+    end
+
+    # Create a new Station object based on the station ID.
+    # Does not load any metadata.
+    def new_station(station_id)
       station_row = get_station_row(station_id)
       EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
     end
