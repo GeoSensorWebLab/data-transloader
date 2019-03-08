@@ -22,7 +22,7 @@ module Transloader
 
     # Create a new Station object based on the station ID, and
     # automatically load its metadata from data source or file
-    def load_station(station_id)
+    def get_station(station_id)
       station_row = get_station_row(station_id)
       stn = EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
       stn.get_metadata

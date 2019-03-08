@@ -18,11 +18,18 @@ module Transloader
       FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}/metadata")
     end
 
-    # With a User ID and a Station ID, create a new station object
+    # Create a new Station object based on the station ID, and
+    # automatically load its metadata from data source or file
     def get_station(user_id, station_id)
-      DataGarrisonStation.new(station_id, self, {
-        user_id: user_id
-      })
+      stn = DataGarrisonStation.new(station_id, self, { user_id: user_id })
+      stn.get_metadata
+      stn
+    end
+
+    # Create a new Station object based on the station ID.
+    # Does not load any metadata.
+    def new_station(user_id, station_id)
+      DataGarrisonStation.new(station_id, self, { user_id: user_id })
     end
   end
 end
