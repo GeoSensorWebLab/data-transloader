@@ -1,0 +1,22 @@
+STA Observed Property,Definition
+Air Temperature (Average),
+Barometric Pressure (Average),http://dbpedia.org/page/Atmospheric_pressure
+Battery Voltage (Average),http://dbpedia.org/page/Voltage
+Carbon Dioxide Closed-Path (Average),
+Carbon Dioxide Mole Ratio (Average),
+Carbon Dioxide Open-Path (Average),
+Incoming Longwave Radiation (Average),http://dbpedia.org/page/Solar_irradiance
+Incoming Shortwave Radiation (Average),http://dbpedia.org/page/Solar_irradiance
+Moisture Flux Convergence (Average),http://dbpedia.org/page/Moisture_advection
+Outgoing Longwave Radiation (Average),http://dbpedia.org/page/Solar_irradiance
+Outgoing Shortwave Radiation (Average),http://dbpedia.org/page/Solar_irradiance
+Relative Humidity (Average),http://dbpedia.org/page/Relative_humidity
+Water Vapour Closed-Path (Average),
+Water Vapour Mole Ratio (Average),
+Water Vapour Open-Path (Average),
+Wind Direction,http://dbpedia.org/page/Wind_direction
+Wind Gust Speed (Maximum),http://dbpedia.org/page/Wind
+Wind Speed,http://dbpedia.org/page/Wind_speed
+Wind x-component (Average),http://dbpedia.org/page/Wind
+Wind y-component (Average),http://dbpedia.org/page/Wind
+Wind z-component (Average),http://dbpedia.org/page/Wind
