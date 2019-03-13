@@ -1,0 +1,15 @@
+{
+  "id": "pres_tend_amt_pst3hrs",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "hPa",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

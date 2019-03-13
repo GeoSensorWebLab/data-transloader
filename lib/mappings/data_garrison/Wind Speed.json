@@ -1,0 +1,15 @@
+{
+  "id": "Wind Speed",
+  "DataProvider": "data_garrison",
+  "SourceUnits": "km/h",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

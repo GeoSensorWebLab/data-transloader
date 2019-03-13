@@ -1,0 +1,15 @@
+{
+  "id": "LupCo_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "W/m^2",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

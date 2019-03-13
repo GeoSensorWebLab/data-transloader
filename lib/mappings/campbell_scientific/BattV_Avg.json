@@ -1,0 +1,15 @@
+{
+  "id": "BattV_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "Volts",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

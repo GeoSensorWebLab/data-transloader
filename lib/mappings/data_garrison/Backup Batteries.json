@@ -1,0 +1,15 @@
+{
+  "id": "Backup Batteries",
+  "DataProvider": "data_garrison",
+  "SourceUnits": "V",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

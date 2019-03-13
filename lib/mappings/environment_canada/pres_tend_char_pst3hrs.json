@@ -1,0 +1,15 @@
+{
+  "id": "pres_tend_char_pst3hrs",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "code",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

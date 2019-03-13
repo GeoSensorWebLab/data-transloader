@@ -1,0 +1,15 @@
+{
+  "id": "RH_B_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

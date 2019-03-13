@@ -1,0 +1,15 @@
+{
+  "id": "avg_globl_solr_radn_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "W/m2",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

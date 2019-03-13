@@ -1,0 +1,15 @@
+{
+  "id": "altmetr_setng",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "inHg",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

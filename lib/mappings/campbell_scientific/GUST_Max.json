@@ -1,0 +1,15 @@
+{
+  "id": "GUST_Max",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "km/hr",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

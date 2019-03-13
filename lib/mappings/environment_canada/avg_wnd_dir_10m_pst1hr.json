@@ -1,0 +1,15 @@
+{
+  "id": "avg_wnd_dir_10m_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

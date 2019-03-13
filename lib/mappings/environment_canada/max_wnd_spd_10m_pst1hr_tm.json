@@ -1,0 +1,15 @@
+{
+  "id": "max_wnd_spd_10m_pst1hr_tm",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "km/h",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

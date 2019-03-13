@@ -1,0 +1,15 @@
+{
+  "id": "min_rel_hum_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "%",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

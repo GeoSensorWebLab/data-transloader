@@ -1,0 +1,15 @@
+{
+  "id": "data_avail",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "%",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

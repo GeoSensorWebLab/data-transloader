@@ -1,0 +1,15 @@
+{
+  "id": "rel_hum",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "%",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

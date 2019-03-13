@@ -1,0 +1,15 @@
+{
+  "id": "pcpn_amt_pst3hrs",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "mm",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

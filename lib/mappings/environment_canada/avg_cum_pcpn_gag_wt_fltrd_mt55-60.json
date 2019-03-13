@@ -1,0 +1,15 @@
+{
+  "id": "avg_cum_pcpn_gag_wt_fltrd_mt55-60",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "mm",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

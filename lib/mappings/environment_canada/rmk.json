@@ -1,0 +1,15 @@
+{
+  "id": "rmk",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "unitless",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

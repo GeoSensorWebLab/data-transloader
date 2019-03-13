@@ -1,0 +1,15 @@
+{
+  "id": "wnd_dir_10m_mt50-60_max_spd",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

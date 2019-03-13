@@ -1,0 +1,15 @@
+{
+  "id": "vert_vis",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "m",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

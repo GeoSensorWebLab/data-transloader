@@ -1,0 +1,15 @@
+{
+  "id": "hdr_suply_volt",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "V",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

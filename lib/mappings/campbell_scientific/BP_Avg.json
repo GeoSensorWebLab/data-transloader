@@ -1,0 +1,15 @@
+{
+  "id": "BP_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "kPa",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

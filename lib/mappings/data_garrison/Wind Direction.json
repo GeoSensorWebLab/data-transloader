@@ -1,0 +1,15 @@
+{
+  "id": "Wind Direction",
+  "DataProvider": "data_garrison",
+  "SourceUnits": "deg",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

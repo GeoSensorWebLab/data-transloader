@@ -1,0 +1,15 @@
+{
+  "id": "hdr_oscil_drft",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "Hz",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

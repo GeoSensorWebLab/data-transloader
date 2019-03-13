@@ -1,0 +1,15 @@
+{
+  "id": "min_air_temp_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚C",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

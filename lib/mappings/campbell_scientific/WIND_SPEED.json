@@ -1,0 +1,15 @@
+{
+  "id": "WIND_SPEED",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

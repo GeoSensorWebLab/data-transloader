@@ -1,0 +1,15 @@
+{
+  "id": "max_batry_volt_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "V",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "avg_wnd_spd_pcpn_gag_mt50-60",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "km/h",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

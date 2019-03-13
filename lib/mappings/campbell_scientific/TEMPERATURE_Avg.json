@@ -1,0 +1,15 @@
+{
+  "id": "TEMPERATURE_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "Deg C",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

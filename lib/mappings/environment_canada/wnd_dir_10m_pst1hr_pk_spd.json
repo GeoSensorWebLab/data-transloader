@@ -1,0 +1,15 @@
+{
+  "id": "wnd_dir_10m_pst1hr_pk_spd",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

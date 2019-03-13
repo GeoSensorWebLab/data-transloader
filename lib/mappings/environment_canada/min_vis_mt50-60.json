@@ -1,0 +1,15 @@
+{
+  "id": "min_vis_mt50-60",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "km",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

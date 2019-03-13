@@ -1,0 +1,15 @@
+{
+  "id": "cld_bas_hgt_2",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "m",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "Pressure",
+  "DataProvider": "data_garrison",
+  "SourceUnits": "mbar",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

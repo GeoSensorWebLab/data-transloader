@@ -1,0 +1,15 @@
+{
+  "id": "pcpn_snc_last_syno_hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "mm",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

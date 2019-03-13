@@ -1,0 +1,15 @@
+{
+  "id": "RH",
+  "DataProvider": "data_garrison",
+  "SourceUnits": "%",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

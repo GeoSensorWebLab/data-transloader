@@ -1,0 +1,15 @@
+{
+  "id": "logr_panl_temp",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚C",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

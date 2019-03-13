@@ -1,0 +1,15 @@
+{
+  "id": "mslp",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "hPa",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "tot_globl_solr_radn_pst1hr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "kJ/m2",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

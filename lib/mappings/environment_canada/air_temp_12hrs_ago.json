@@ -1,0 +1,15 @@
+{
+  "id": "air_temp_12hrs_ago",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "˚C",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "prsnt_wx_1",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "code",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "WIND_DIRECTION",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "Deg",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "xh2o_cp_Avg",
+  "DataProvider": "campbell_scientific",
+  "SourceUnits": "",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

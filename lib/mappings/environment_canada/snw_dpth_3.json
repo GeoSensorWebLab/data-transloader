@@ -1,0 +1,15 @@
+{
+  "id": "snw_dpth_3",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "cm",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

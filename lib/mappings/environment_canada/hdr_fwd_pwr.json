@@ -1,0 +1,15 @@
+{
+  "id": "hdr_fwd_pwr",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "W",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}

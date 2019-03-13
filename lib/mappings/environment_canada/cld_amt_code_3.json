@@ -1,0 +1,15 @@
+{
+  "id": "cld_amt_code_3",
+  "DataProvider": "environment_canada",
+  "SourceUnits": "code",
+  "UnitOfMeasurement": {
+    "name": "",
+    "symbol": "",
+    "definition": ""
+  },
+  "ObservedProperty": {
+    "name": "",
+    "definition": "",
+    "description": ""
+  }
+}
