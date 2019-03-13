@@ -3,9 +3,9 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "deg",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "degree",
+    "symbol": "°",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000185"
   },
   "ObservedProperty": {
     "name": "",

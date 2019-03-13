@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "inHg",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "inches of mercury",
+    "symbol": "inHg",
+    "definition": "http://mmisw.org/ont/mmi/udunits2-common/_691857c1"
   },
   "ObservedProperty": {
     "name": "",

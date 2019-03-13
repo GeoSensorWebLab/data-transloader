@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "hPa",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "hectoPascal",
+    "symbol": "hPa",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000110"
   },
   "ObservedProperty": {
     "name": "",

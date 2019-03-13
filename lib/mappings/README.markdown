@@ -73,8 +73,11 @@ A URI with a definition of the Observed Property.
 
 A short, human-readable description of the Observed Property. Should be clear enough to differentiate from other Observed Properties that may have similar names.
 
-
 [STA]: http://docs.opengeospatial.org/is/15-078r6/15-078r6.html
+
+## Unknowns
+
+If a mapping for a Unit of Measurement or Observed Property cannot be found or made, then leaving the entity blank will have the data transloader automatically generate an entity based on the station and source property name.
 
 ## Definition Ontologies
 

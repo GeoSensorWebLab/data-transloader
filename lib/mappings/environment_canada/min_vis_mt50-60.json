@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "km",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "kilometer",
+    "symbol": "km",
+    "definition": "http://mmisw.org/ont/testing/semm/Kilometer"
   },
   "ObservedProperty": {
     "name": "",

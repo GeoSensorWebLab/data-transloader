@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "mm",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "millimeter",
+    "symbol": "mm",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000016"
   },
   "ObservedProperty": {
     "name": "",

@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "cm",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "centimeter",
+    "symbol": "cm",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000015"
   },
   "ObservedProperty": {
     "name": "",

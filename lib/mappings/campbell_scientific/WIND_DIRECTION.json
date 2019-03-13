@@ -3,9 +3,9 @@
   "DataProvider": "campbell_scientific",
   "SourceUnits": "Deg",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "degree",
+    "symbol": "°",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000185"
   },
   "ObservedProperty": {
     "name": "",

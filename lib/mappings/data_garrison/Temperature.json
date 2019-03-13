@@ -3,9 +3,9 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "*C",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "degree Celsius",
+    "symbol": "℃",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000027"
   },
   "ObservedProperty": {
     "name": "",

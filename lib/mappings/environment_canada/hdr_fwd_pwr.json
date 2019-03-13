@@ -3,9 +3,9 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "W",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "watt",
+    "symbol": "W",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000114"
   },
   "ObservedProperty": {
     "name": "",

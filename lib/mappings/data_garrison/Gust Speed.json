@@ -3,13 +3,13 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "km/h",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "kilometer per hour",
+    "symbol": "km/h",
+    "definition": "http://purl.obolibrary.org/obo/UO_0010008"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Wind speed of gust",
+    "definition": "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust",
+    "description": "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed."
   }
 }

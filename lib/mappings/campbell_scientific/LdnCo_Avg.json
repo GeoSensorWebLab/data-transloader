@@ -3,9 +3,9 @@
   "DataProvider": "campbell_scientific",
   "SourceUnits": "W/m^2",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "watt per square meter",
+    "symbol": "W/m^2",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000155"
   },
   "ObservedProperty": {
     "name": "",

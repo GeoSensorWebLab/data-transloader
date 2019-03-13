@@ -3,9 +3,9 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "km/h",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "kilometer per hour",
+    "symbol": "km/h",
+    "definition": "http://purl.obolibrary.org/obo/UO_0010008"
   },
   "ObservedProperty": {
     "name": "",

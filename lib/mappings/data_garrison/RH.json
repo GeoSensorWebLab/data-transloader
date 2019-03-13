@@ -3,9 +3,9 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "%",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "percent",
+    "symbol": "%",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000187"
   },
   "ObservedProperty": {
     "name": "",

@@ -3,13 +3,13 @@
   "DataProvider": "data_garrison",
   "SourceUnits": "V",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
-    "definition": ""
+    "name": "Volt",
+    "symbol": "V",
+    "definition": "http://purl.obolibrary.org/obo/UO_0000218"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Battery Voltage",
+    "definition": "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage",
+    "description": "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."
   }
 }
