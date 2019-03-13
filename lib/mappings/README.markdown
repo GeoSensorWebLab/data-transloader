@@ -89,10 +89,23 @@ For units and properties I recommend using an ontology as the source, as that pr
 * [udunits2-common](http://mmisw.org/ont/mmi/udunits2-common)
 * [BioPortal Units of Measurement Ontology](https://bioportal.bioontology.org/ontologies/UO/?p=summary)
 
-
 ## Footnotes
 
 <a name="uniqueness">1</a>: *Environment Canada has multiple sub-providers with the same source property name, but they appear to refer to the same observed property.*
+
+## `generate_mapping.rb`
+
+A small Ruby script to automate generating skeleton JSON files. Simple example:
+
+```terminal
+$ ruby generate_mapping.rb "BattV_Avg" "Volts" "campbell_scientific" > "campbell_scientific/BattV_Avg.json"
+```
+
+Or it can be automated from a CSV source or similar:
+
+```terminal
+$ ruby -r csv -e "CSV.read('../../docs/mappings/campbell_scientific.csv', headers: true).each {|row| %x[ruby generate_mapping.rb \"#{row[0]}\" \"#{row[1]}\" campbell_scientific > \"campbell_scientific/#{row[0]}.json\"] }"
+```
 
 ## Future Work
 
