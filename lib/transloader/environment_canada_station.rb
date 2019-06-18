@@ -43,7 +43,7 @@ module Transloader
       # Convert to Hash
       @metadata = {
         name: "Environment Canada Station #{@id}",
-        description: "Environment Canada Weather Station #{@properties["EN name"]}",
+        description: "Environment Canada Weather Station #{@properties["Name"]}",
         elevation: xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
         updated_at: Time.now,
         datastreams: datastreams,
