@@ -67,15 +67,15 @@ module Transloader
     # Connect to Environment Canada and download SWOB-ML
     def get_observations
       case @properties['AUTO/MAN']
-      when "Auto", "Manned/Auto"
+      when "AUTO", "Auto", "Manned/Auto"
         type = "AUTO"
-      when "Manned"
+      when "MAN", "Manned"
         type = "MAN"
       else
         raise "Error: unknown station type"
       end
 
-      swobml_url = URI.join(OBSERVATIONS_URL, "C#{@id}-#{type}-swob.xml")
+      swobml_url = URI.join(OBSERVATIONS_URL, "#{@id}-#{type}-swob.xml")
       response = Net::HTTP.get_response(swobml_url)
 
       raise "Error downloading station observation data" if response.code != '200'
