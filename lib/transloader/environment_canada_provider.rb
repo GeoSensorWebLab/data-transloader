@@ -66,7 +66,9 @@ module Transloader
         save_station_list(body)
       end
 
-      CSV.parse(body, headers: :first_row)
+      parsed_stations = CSV.parse(body, headers: :first_row)
+      validate_stations(parsed_stations)
+      parsed_stations
     end
 
     def get_station_row(station_id)
@@ -80,5 +82,13 @@ module Transloader
       IO.write(@station_list_path, body, 0)
     end
 
+    # Validate the format of the stations.
+    # If they have changed, then the code will probably fail to update
+    # and a warning should be emitted.
+    def validate_stations(stations)
+      if stations.headers.join(",") != "IATA_ID,Name,WMO_ID,MSC_ID,Latitude,Longitude,Elevation(m),Data_Provider,Dataset/Network,AUTO/MAN,Province/Territory"
+        puts "WARNING: Environment Canada stations source file headers have changed. Parsing may fail."
+      end
+    end
   end
 end
