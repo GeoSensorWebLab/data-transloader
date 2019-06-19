@@ -59,7 +59,7 @@ module SensorThings
 
     def patch_to_path(url)
       request = Net::HTTP::Patch.new(url)
-      response = send_request(request)
+      response = send_request(url, request)
 
       if response.class != Net::HTTPOK && response.class != Net::HTTPNoContent
         raise "Error: Could not PATCH entity. #{url}\n #{response.body}\n #{request.body}"
@@ -69,7 +69,7 @@ module SensorThings
 
     def post_to_path(url)
       request = Net::HTTP::Post.new(url)
-      response = send_request(request)
+      response = send_request(url, request)
 
       if response.class != Net::HTTPCreated
         raise "Error: Could not POST entity. #{url}\n #{response.body}\n #{request.body}"
@@ -82,7 +82,7 @@ module SensorThings
 
     def put_to_path(url)
       request = Net::HTTP::Put.new(url)
-      response = send_request(request)
+      response = send_request(url, request)
 
       if response.class != Net::HTTPCreated
         raise "Error: Could not PUT entity. #{url}\n #{response.body}\n #{request.body}"
@@ -95,7 +95,7 @@ module SensorThings
 
     # PATCH/POST/PUT all use the same behaviour for sending data, so it
     # can be re-used in this method.
-    def send_request(request)
+    def send_request(url, request)
       request.body = self.to_json
       request.content_type = 'application/json'
 
