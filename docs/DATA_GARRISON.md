@@ -105,7 +105,7 @@ $ transload put observations \
     --date 20180501T00:00:00Z \
     --destination https://example.org/v1.0/
 $ transload put observations \
-    --source environment_canada \
+    --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
     --cache /datastore/weather \
