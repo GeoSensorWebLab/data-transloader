@@ -52,7 +52,10 @@ module SensorThings
       }))
     end
 
-    def upload_to(url)
+    # skip_matching_upload: if true, then don't re-use existing entities.
+    # This is necessary for some STA implementations that do not support
+    # deep merge.
+    def upload_to(url, skip_matching_upload = false)
       upload_url = self.join_uris(url, "Datastreams")
 
       filter = "name eq '#{@name}' and description eq '#{@description}'"
@@ -64,7 +67,7 @@ module SensorThings
       # re-used. If the matching entity has the same name/description but
       # different encodingType/metadata, then a PATCH request is used to
       # synchronize.
-      if body["value"].length == 0
+      if body["value"].length == 0 || skip_matching_upload
         self.post_to_path(upload_url)
       else
         existing_entity = body["value"].first
