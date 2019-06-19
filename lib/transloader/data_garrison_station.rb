@@ -19,7 +19,7 @@ module Transloader
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/metadata/#{@user_id}/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/#{@user_id}/#{@id}"
-      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php"
+      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
     end
 
     # Download and extract metadata from HTML, use to build metadata 
