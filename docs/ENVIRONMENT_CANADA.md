@@ -44,7 +44,7 @@ $ transload put metadata \
     --source environment_canada \
     --station CXCM \
     --cache datastore/weather \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
 In this case, the tool will upload the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and look for the metadata in a JSON file in the `datastore/weather/environment_canada` directory.
@@ -86,13 +86,13 @@ $ transload put observations \
     --station CXCM \
     --cache datastore/weather \
     --date 20180501T00:00:00Z \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 $ transload put observations \
     --source environment_canada \
     --station CXCM \
     --cache datastore/weather \
     --date latest \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
 In the first example above, the observations for Environment Canada station `CXCM` are read from the filesystem cache in `datastore/weather/environment_canada/CXCM/2018/05/01/000000.xml`.

@@ -13,14 +13,14 @@ $ transload get metadata \
     --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
-    --cache /datastore/weather
+    --cache datastore/weather
 ```
 
-This will download the sensor metadata from the Data Garrison source for the user with ID `300234063581640` and station with the identifier `300234065673960`, and store the metadata in a JSON file in the `/datastore/weather` directory.
+This will download the sensor metadata from the Data Garrison source for the user with ID `300234063581640` and station with the identifier `300234065673960`, and store the metadata in a JSON file in the `datastore/weather` directory.
 
-The directory `/datastore/weather/data_garrison/metadata` will be created if it does not already exist.
+The directory `datastore/weather/data_garrison/metadata` will be created if it does not already exist.
 
-A file will be created at `/datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
+A file will be created at `datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
 
 Inside the `300234065673960.json` file the sensor metadata will be stored. Editing these values will affect the metadata that is stored in SensorThings API in the metadata upload step. This file also will store the URLs to the SensorThings API entities, which is used by a later step to upload Observations without first having to crawl the SensorThings API instance.
 
@@ -56,17 +56,17 @@ $ transload put metadata \
     --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
-    --cache /datastore/weather \
-    --destination https://example.org/v1.0/
+    --cache datastore/weather \
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In this case, the tool will upload the sensor metadata from the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640`, and look for the metadata in a JSON file in the `/datastore/weather/data_garrison` directory.
+In this case, the tool will upload the sensor metadata from the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640`, and look for the metadata in a JSON file in the `datastore/weather/data_garrison` directory.
 
 An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
 
 If any of the uploads fail, the error will be logged to `STDERR`.
 
-If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `/datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`.
+If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`.
 
 The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
@@ -79,10 +79,10 @@ $ transload get observations \
     --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
-    --cache /datastore/weather
+    --cache datastore/weather
 ```
 
-In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `/datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSSZ.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
+In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSSZ.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
 
 The filename will use the **UTC** version of the date, not the local time for the station. This should make it easier to specify a custom date in the next step without having to deal with timezones.
 
@@ -101,19 +101,19 @@ $ transload put observations \
     --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
-    --cache /datastore/weather \
+    --cache datastore/weather \
     --date 20180501T00:00:00Z \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 $ transload put observations \
     --source data_garrison \
     --user 300234063581640 \
     --station 300234065673960 \
-    --cache /datastore/weather \
+    --cache datastore/weather \
     --date latest \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the first example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache in `/datastore/weather/data_garrison/300234063581640/300234065673960/2018/05/01/000000Z.html`.
+In the first example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache in `datastore/weather/data_garrison/300234063581640/300234065673960/2018/05/01/000000Z.html`.
 
 In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
 
