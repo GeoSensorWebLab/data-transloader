@@ -298,7 +298,7 @@ module Transloader
         })
 
         # Upload entity and parse response
-        datastream.upload_to(thing.link, true)
+        datastream.upload_to(thing.link, false)
 
         # Cache URL
         stream['Datastream@iot.navigationLink'] = datastream.link

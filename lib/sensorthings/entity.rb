@@ -76,8 +76,10 @@ module SensorThings
         exit 2
       end
 
-      @link = response['Location']
-      @id = JSON.parse(response.body)['@iot.id']
+      entity = JSON.parse(response.body)
+
+      @link = entity['@iot.selfLink']
+      @id = entity['@iot.id']
     end
 
     def put_to_path(url)
