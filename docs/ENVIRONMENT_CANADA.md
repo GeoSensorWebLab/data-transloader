@@ -9,14 +9,17 @@ The following instructions are for setting up station data and uploading observa
 To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `Sensors`, `Observed Properties`, and `Datastreams` must be initialized using the weather station details before sensor data observations can be uploaded. The metadata can be downloaded using a command:
 
 ```
-$ transload get metadata --source environment_canada --station CXCM --cache /datastore/weather
+$ transload get metadata \
+    --source environment_canada \
+    --station CXCM \
+    --cache datastore/weather
 ```
 
-This will download the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and store the metadata in a JSON file in the `/datastore/weather` directory.
+This will download the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and store the metadata in a JSON file in the `datastore/weather` directory.
 
-The directory `/datastore/weather/environment_canada/metadata` will be created if it does not already exist.
+The directory `datastore/weather/environment_canada/metadata` will be created if it does not already exist.
 
-A file will be created at `/datastore/weather/environment_canada/metadata/CXCM.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
+A file will be created at `datastore/weather/environment_canada/metadata/CXCM.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
 
 Inside the `CXCM.json` file the sensor metadata will be stored. Editing these values will affect the metadata that is stored in SensorThings API in the metadata upload step. This file also will store the URLs to the SensorThings API entities, which is used by a later step to upload Observations without first having to crawl the SensorThings API instance.
 
@@ -37,16 +40,20 @@ Other entities such as the `Feature of Interest` and `Observation` are handled i
 To execute the upload, the tool has a put command:
 
 ```
-$ transload put metadata --source environment_canada --station CXCM --cache /datastore/weather --destination https://example.org/v1.0/
+$ transload put metadata \
+    --source environment_canada \
+    --station CXCM \
+    --cache datastore/weather \
+    --destination https://example.org/v1.0/
 ```
 
-In this case, the tool will upload the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and look for the metadata in a JSON file in the `/datastore/weather/environment_canada` directory.
+In this case, the tool will upload the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and look for the metadata in a JSON file in the `datastore/weather/environment_canada` directory.
 
 An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
 
 If any of the uploads fail, the error will be logged to `STDERR`.
 
-If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `/datastore/weather/environment_canada/metadata/CXCM.json`.
+If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `datastore/weather/environment_canada/metadata/CXCM.json`.
 
 The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
@@ -55,10 +62,13 @@ The tool will try to do a search for existing similar entities on the remote OGC
 After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
 
 ```
-$ transload get observations --source environment_canada --station CXCM --cache /datastore/weather
+$ transload get observations \
+    --source environment_canada \
+    --station CXCM \
+    --cache datastore/weather
 ```
 
-In this example, observations for the Environment Canada station `CXCM` (Cambridge Bay) are downloaded to a local cache in the `/datastore/weather/environment_canada/CXCM/YYYY/MM/DD/HHMMSS+0000.xml` file. The year/month/day and hour/minute/second/time zone offset are parsed from the observation file provided by the data source.
+In this example, observations for the Environment Canada station `CXCM` (Cambridge Bay) are downloaded to a local cache in the `datastore/weather/environment_canada/CXCM/YYYY/MM/DD/HHMMSS+0000.xml` file. The year/month/day and hour/minute/second/time zone offset are parsed from the observation file provided by the data source.
 
 If a file already exists with the same name, it is **overwritten**.
 
@@ -71,11 +81,21 @@ A `Feature of Interest` entity will be created for the observation, based on the
 Once a `Feature of Interest` has been created or found, it is linked to a new `Observation` entity that contains the readings for the weather station observation. If an identical `Observation` already exists on the remote service, then no upload is done. If an `Observation` already exists under the same `Datastream` with the same timestamp but a different reading value, then the value is updated with a `PUT` request. If no `Observation` already exists, then a new one is created with a `POST` request.
 
 ```
-$ transload put observations --source environment_canada --station CXCM --cache /datastore/weather --date 20180501T00:00:00Z --destination https://example.org/v1.0/
-$ transload put observations --source environment_canada --station CXCM --cache /datastore/weather --date latest --destination https://example.org/v1.0/
+$ transload put observations \
+    --source environment_canada \
+    --station CXCM \
+    --cache datastore/weather \
+    --date 20180501T00:00:00Z \
+    --destination https://example.org/v1.0/
+$ transload put observations \
+    --source environment_canada \
+    --station CXCM \
+    --cache datastore/weather \
+    --date latest \
+    --destination https://example.org/v1.0/
 ```
 
-In the first example above, the observations for Environment Canada station `CXCM` are read from the filesystem cache in `/datastore/weather/environment_canada/CXCM/2018/05/01/000000.xml`.
+In the first example above, the observations for Environment Canada station `CXCM` are read from the filesystem cache in `datastore/weather/environment_canada/CXCM/2018/05/01/000000.xml`.
 
 In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
 
