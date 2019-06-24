@@ -34,14 +34,14 @@ $ transload get metadata \
     --source campbell_scientific \
     --station 606830 \
     --dataurl "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat" \
-    --cache /datastore/weather
+    --cache datastore/weather
 ```
 
-This will download the sensor metadata from the Campbell Scientific source for the station with the ID `606830`, monitor the given data URL for observation updates, and store the metadata in a JSON file in the `/datastore/weather` directory.
+This will download the sensor metadata from the Campbell Scientific source for the station with the ID `606830`, monitor the given data URL for observation updates, and store the metadata in a JSON file in the `datastore/weather` directory.
 
-The directory `/datastore/weather/campbell_scientific/metadata` will be created if it does not already exist.
+The directory `datastore/weather/campbell_scientific/metadata` will be created if it does not already exist.
 
-A file will be created at `/datastore/weather/campbell_scientific/metadata/606830.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
+A file will be created at `datastore/weather/campbell_scientific/metadata/606830.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
 
 **Note:** You may specify *additional* data files to monitor by using multiple `--dataurl` arguments in the command. At least one data URL must be specified.
 
@@ -78,17 +78,17 @@ To execute the upload, the tool has a put command:
 $ transload put metadata \
     --source campbell_scientific \
     --station 606830 \
-    --cache /datastore/weather \
-    --destination https://example.org/v1.0/
+    --cache datastore/weather \
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In this case, the tool will upload the sensor metadata from the Campbell Scientific weather station with the ID `606830`, and look for the metadata in a JSON file in the `/datastore/weather/campbell_scientific` directory.
+In this case, the tool will upload the sensor metadata from the Campbell Scientific weather station with the ID `606830`, and look for the metadata in a JSON file in the `datastore/weather/campbell_scientific` directory.
 
 An OGC SensorThings API server is expected to have a root resource available at `https://example.org/v1.0/`. (HTTP URLs are also supported.)
 
 If any of the uploads fail, the error will be logged to `STDERR`.
 
-If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `/datastore/weather/campbell_scientific/metadata/606830.json`.
+If the uploads succeed, then the OGC SensorThings API will respond with a URL to the newly created (or updated) resource. These URLs are stored in the station metadata file, in this case `datastore/weather/campbell_scientific/metadata/606830.json`.
 
 The tool will try to do a search for existing similar entities on the remote OGC SensorThings API service. If the entity already exists and is identical, then the URL is saved and no `POST` or `PUT` request is made. If the entity exists but is not identical, then a `PUT` request is used to update the resource. If the entity does not exist, then a `POST` request is used to create a new entity.
 
@@ -100,14 +100,14 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations \
     --source campbell_scientific \
     --station 606830 \
-    --cache /datastore/weather
+    --cache datastore/weather
 ```
 
-In this example, the Campbell Scientific weather station with the ID `606830` will have its observations downloaded into the `/datastore/weather/campbell_scientific/606830` directory.
+In this example, the Campbell Scientific weather station with the ID `606830` will have its observations downloaded into the `datastore/weather/campbell_scientific/606830` directory.
 
 For each data file defined in the station metadata cache file, a subdirectory is created using the filename. When the observation rows are parsed from the source data file, they are adjusted into UTC timestamps and separated by day into their own cache files.
 
-A sample observation cache file directory: `/datastore/weather/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/03/05.csv`
+A sample observation cache file directory: `datastore/weather/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/03/05.csv`
 
 Observations are separated into files by day to avoid one very-large observations file. Additionally, if the source data file is reset or truncated then the local observation cache files are unaffected (as opposed to storing the original source data file on disk).
 
@@ -131,20 +131,20 @@ The `FeatureOfInterest` for the `Observation` will be automatically generated on
 $ transload put observations \
     --source campbell_scientific \
     --station 606830 \
-    --cache /datastore/weather \
+    --cache datastore/weather \
     --date 20180501T00:00:00Z \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache in `/datastore/weather/campbell_scientific/606830/*/2018/05/01.csv`. This is done for all the data files defined for the station in the station metadata cache file. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
+In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache in `datastore/weather/campbell_scientific/606830/*/2018/05/01.csv`. This is done for all the data files defined for the station in the station metadata cache file. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
 
 ```
 $ transload put observations \
     --source campbell_scientific \
     --station 606830 \
-    --cache /datastore/weather \
+    --cache datastore/weather \
     --date latest \
-    --destination https://example.org/v1.0/
+    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
 In the second example, the newest observations will be automatically determined by reading the station metadata cache file. For each data file, the most-recently-uploaded observation timestamp is kept and used to determine which observations should be uploaded. If no such value is found in the cache file, then **all** observations will be uploaded.
