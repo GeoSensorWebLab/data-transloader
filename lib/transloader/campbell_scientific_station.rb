@@ -195,7 +195,7 @@ module Transloader
           # More discussion on specification that could change this:
           # https://github.com/opengeospatial/sensorthings/issues/39
           encodingType: 'application/pdf',
-          metadata:     @metadata['procedure'] || ""
+          metadata:     @metadata['procedure'] || "http://example.org/unknown"
         })
 
         # Upload entity and parse response
