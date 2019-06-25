@@ -98,7 +98,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 
-  config.before(:suite) do
+  config.before(:each) do
     FileUtils.rm_rf("tmp")
     FileUtils.mkdir_p("tmp/cache")
   end
