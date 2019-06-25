@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'fileutils'
+require 'vcr'
+require 'webmock'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -101,5 +103,11 @@ RSpec.configure do |config|
   config.before(:each) do
     FileUtils.rm_rf("tmp")
     FileUtils.mkdir_p("tmp/cache")
+  end
+
+  VCR.configure do |c|
+    c.cassette_library_dir = "spec/vcr"
+    c.hook_into :webmock
+    c.configure_rspec_metadata!
   end
 end

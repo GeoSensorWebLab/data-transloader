@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - dd.weather.gc.ca
+  response:
+    status:
+      code: 400
+      message: NOT FOUND
+    headers:
+      Date:
+      - Tue, 25 Jun 2019 20:14:03 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Tue, 25 Jun 2019 14:08:19 GMT
+      Content-Length:
+      - '0'
+      X-Ua-Compatible:
+      - IE=Edge
+      Connection:
+      - close
+    http_version: 
+  recorded_at: Tue, 25 Jun 2019 20:14:00 GMT
+recorded_with: VCR 5.0.0
