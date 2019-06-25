@@ -23,6 +23,8 @@ This tool should be runnable on Linux, MacOS, and Windows.
 
 This tool is meant to be scriptable using [cron][], a scheduling daemon, to automate imports on a schedule. This is done by passing in command line arguments to the tool that handle the sensor metadata and observation download/upload.
 
+The tool is separated into downloading/uploading metadata and downloading/uploading observation data. This is because metadata is not often updated from the source, and the metadata *may* need manual correction by the data transloader user. The observation data is constantly updated, so it needs to be efficient and avoid checking/creating entities for metadata every time it is run.
+
 Currently supported weather station sources:
 
 * Data Garrison
