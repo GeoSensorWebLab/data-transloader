@@ -13,7 +13,7 @@ module Transloader
     }
     OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml/latest/"
 
-    attr_accessor :id, :properties, :provider
+    attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(id, provider, properties)
       @id = id
