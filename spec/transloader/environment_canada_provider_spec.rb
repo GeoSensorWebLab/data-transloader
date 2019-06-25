@@ -7,8 +7,13 @@ CACHE_DIR = "tmp/cache"
 
 RSpec.describe Transloader::EnvironmentCanadaProvider do
 
+  before(:each) do
+    FileUtils.rm_rf("tmp")
+    FileUtils.mkdir_p("tmp/cache")
+  end
+
   it "auto-creates a cache directory" do
-    provider = Transloader::EnvironmentCanadaProvider.new(CACHE_DIR)
+    Transloader::EnvironmentCanadaProvider.new(CACHE_DIR)
     expect(Dir.exist?("#{CACHE_DIR}/environment_canada/metadata")).to be true
   end
 
@@ -44,6 +49,15 @@ RSpec.describe Transloader::EnvironmentCanadaProvider do
       expect {
         provider.stations
       }.to raise_error("Error downloading station list")
+    end
+  end
+
+  it "does not make an HTTP request if data is already cached" do
+    VCR.use_cassette("environment_canada_stations") do
+      provider = Transloader::EnvironmentCanadaProvider.new(CACHE_DIR)
+      provider.stations
+      provider.stations
+      expect(WebMock).to have_requested(:get, Transloader::EnvironmentCanadaProvider::METADATA_URL).times(1)
     end
   end
 end
