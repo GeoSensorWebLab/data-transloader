@@ -15,13 +15,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'fileutils'
 require 'pry'
-require 'semantic_logger'
 require 'vcr'
 require 'webmock/rspec'
-
-# This should hide the most verbose stuff from mixing with the RSpec output.
-SemanticLogger.default_level = :warn
-SemanticLogger.add_appender(io: STDOUT, formatter: :color)
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
