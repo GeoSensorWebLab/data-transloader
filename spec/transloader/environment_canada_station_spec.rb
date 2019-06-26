@@ -5,15 +5,10 @@ require 'vcr'
 
 RSpec.describe Transloader::EnvironmentCanadaStation do
 
-  def reset_cache
-    FileUtils.rm_rf($cache_dir)
-    FileUtils.mkdir_p($cache_dir)
-  end
-
   # Get Metadata
   context "Downloading Metadata" do
     before(:each) do
-      reset_cache
+      reset_cache($cache_dir)
 
       # Use instance variables to avoid scope issues with VCR
       @provider = nil
@@ -48,7 +43,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache
+      reset_cache($cache_dir)
       @provider = nil
       @station = nil
 

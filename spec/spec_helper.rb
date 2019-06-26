@@ -111,3 +111,8 @@ RSpec.configure do |config|
     c.configure_rspec_metadata!
   end
 end
+
+def reset_cache(cache_dir)
+  FileUtils.rm_rf(cache_dir)
+  FileUtils.mkdir_p(cache_dir)
+end
