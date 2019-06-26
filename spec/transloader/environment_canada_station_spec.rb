@@ -102,8 +102,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "creates Datastream entities and caches the URLs" do
-      pending
-      fail
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams]).at_least_once
+        expect(@station.metadata[:datastreams][0][:"Datastream@iot.navigationLink"]).to_not be_empty
+      end
     end
 
     it "maps the source observation type to O&M observation types on Datastreams" do
