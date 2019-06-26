@@ -5,6 +5,8 @@ require 'nokogiri'
 
 module Transloader
   class EnvironmentCanadaStation
+    include SemanticLogger::Loggable
+
     NAMESPACES = {
       'gml' => 'http://www.opengis.net/gml',
       'om' => 'http://www.opengis.net/om/1.0',
@@ -72,13 +74,17 @@ module Transloader
       when "MAN", "Manned"
         type = "MAN"
       else
-        raise "Error: unknown station type"
+        logger.fatal "Error: unknown station type"
+        raise
       end
 
       swobml_url = URI.join(OBSERVATIONS_URL, "#{@id}-#{type}-swob.xml")
       response = Net::HTTP.get_response(swobml_url)
 
-      raise "Error downloading station observation data" if response.code != '200'
+      if response.code != '200'
+        logger.fatal "Error downloading station observation data"
+        raise
+      end
       response.body
     end
 
@@ -207,26 +213,26 @@ module Transloader
     # `destination`. If `date` is "latest", then the most recent SWOB-ML file
     # is used.
     def upload_observations(destination, date)
-      puts "Uploading observations for #{date} to #{destination}"
+      logger.info "Uploading observations for #{date} to #{destination}"
 
       # Check for metadata
       if @metadata.empty?
-        raise "Error: station metadata not loaded"
-        exit 3
+        logger.fatal "station metadata not loaded"
+        raise
       end
 
       # Check for cached datastream URLs
       @metadata[:datastreams].each do |stream|
         if stream[:'Datastream@iot.navigationLink'].nil?
-          raise "Error: Datastream navigation URLs not cached"
-          exit 3
+          logger.fatal "Datastream navigation URLs not cached"
+          raise
         end
       end
 
       # Check for cached observations at date
       if !Dir.exist?(@observations_path)
-        raise "Error: observation cache directory does not exist"
-        exit 3
+        logger.fatal "observation cache directory does not exist"
+        raise
       end
 
       if date == "latest"
@@ -236,8 +242,8 @@ module Transloader
           day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
           filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
-          puts "Error: Could not locate latest observation cache file"
-          exit 3
+          logger.fatal "Could not locate latest observation cache file"
+          raise
         end
 
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
@@ -246,12 +252,12 @@ module Transloader
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.xml'))
 
         if !File.exist?(file_path)
-          raise "Error: Could not locate desired observation cache file: #{file_path}"
-          exit 3
+          logger.fatal "Could not locate desired observation cache file: #{file_path}"
+          raise
         end
       end
 
-      puts "Uploading observations from #{file_path}"
+      logger.info "Uploading observations from #{file_path}"
 
       xml = observation_xml
       @metadata[:datastreams].each do |datastream|
@@ -273,7 +279,7 @@ module Transloader
           # SensorThings API does not like an empty string, instead "null" string
           # should be used.
           if result == ""
-            puts "Found null for #{datastream_name}"
+            logger.info "Found null for #{datastream_name}"
             result = "null"
           end
 

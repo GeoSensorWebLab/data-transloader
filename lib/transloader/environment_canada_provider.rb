@@ -7,6 +7,8 @@ require 'transloader/environment_canada_station'
 
 module Transloader
   class EnvironmentCanadaProvider
+    include SemanticLogger::Loggable
+
     CACHE_DIRECTORY = "environment_canada"
     METADATA_URL = "http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
 
@@ -73,7 +75,10 @@ module Transloader
 
     def get_station_row(station_id)
       station_row = stations.detect { |row| row["IATA_ID"] == station_id }
-      raise "Station not found in list" if station_row.nil?
+      if station_row.nil?
+        logger.fatal "Station \"#{station_id}\" not found in list"
+        raise
+      end
       station_row
     end
 
@@ -87,7 +92,7 @@ module Transloader
     # and a warning should be emitted.
     def validate_stations(stations)
       if stations.headers.join(",") != "IATA_ID,Name,WMO_ID,MSC_ID,Latitude,Longitude,Elevation(m),Data_Provider,Dataset/Network,AUTO/MAN,Province/Territory"
-        puts "WARNING: Environment Canada stations source file headers have changed. Parsing may fail."
+        logger.warn "Environment Canada stations source file headers have changed. Parsing may fail."
       end
     end
   end

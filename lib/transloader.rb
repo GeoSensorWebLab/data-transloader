@@ -1,3 +1,5 @@
+require 'semantic_logger'
+
 require 'sensorthings'
 require 'transloader/args'
 require 'transloader/campbell_scientific_provider'

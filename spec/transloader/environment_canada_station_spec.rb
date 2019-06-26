@@ -37,7 +37,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
         expect {
           @provider.get_station(station_id: "CXCM")
-        }.to raise_error("Error downloading station observation data")
+        }.to raise_error(RuntimeError)
       end
     end
   end
