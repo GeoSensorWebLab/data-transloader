@@ -10,7 +10,7 @@ module Transloader
   class DataGarrisonStation
     include SemanticLogger::Loggable
 
-    attr_accessor :id, :properties, :provider
+    attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(id, provider, properties)
       @id = id
