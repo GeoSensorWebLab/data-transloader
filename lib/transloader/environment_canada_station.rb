@@ -74,7 +74,7 @@ module Transloader
       when "MAN", "Manned"
         type = "MAN"
       else
-        logger.fatal "Error: unknown station type"
+        logger.error "Error: unknown station type"
         raise
       end
 
@@ -82,7 +82,7 @@ module Transloader
       response = Net::HTTP.get_response(swobml_url)
 
       if response.code != '200'
-        logger.fatal "Error downloading station observation data"
+        logger.error "Error downloading station observation data"
         raise
       end
       response.body
@@ -217,21 +217,21 @@ module Transloader
 
       # Check for metadata
       if @metadata.empty?
-        logger.fatal "station metadata not loaded"
+        logger.error "station metadata not loaded"
         raise
       end
 
       # Check for cached datastream URLs
       @metadata[:datastreams].each do |stream|
         if stream[:'Datastream@iot.navigationLink'].nil?
-          logger.fatal "Datastream navigation URLs not cached"
+          logger.error "Datastream navigation URLs not cached"
           raise
         end
       end
 
       # Check for cached observations at date
       if !Dir.exist?(@observations_path)
-        logger.fatal "observation cache directory does not exist"
+        logger.error "observation cache directory does not exist"
         raise
       end
 
@@ -242,7 +242,7 @@ module Transloader
           day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
           filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
-          logger.fatal "Could not locate latest observation cache file"
+          logger.error "Could not locate latest observation cache file"
           raise
         end
 
@@ -252,7 +252,7 @@ module Transloader
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.xml'))
 
         if !File.exist?(file_path)
-          logger.fatal "Could not locate desired observation cache file: #{file_path}"
+          logger.error "Could not locate desired observation cache file: #{file_path}"
           raise
         end
       end

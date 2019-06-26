@@ -76,7 +76,7 @@ module Transloader
     def get_station_row(station_id)
       station_row = stations.detect { |row| row["IATA_ID"] == station_id }
       if station_row.nil?
-        logger.fatal "Station \"#{station_id}\" not found in list"
+        logger.error "Station \"#{station_id}\" not found in list"
         raise
       end
       station_row
