@@ -6,6 +6,8 @@ module SensorThings
   # Base class for SensorThings API entities. Do not instantiate directly,
   # instead use subclasses.
   class Entity
+    include SemanticLogger::Loggable
+
     # These accessors are inherited by subclasses.
     attr_accessor :attributes, :id, :link
 
@@ -33,8 +35,8 @@ module SensorThings
       request = Net::HTTP::Get.new(url)
 
       # Log output of request
-      puts "#{request.method} #{request.uri}"
-      puts ''
+      logger.debug "#{request.method} #{request.uri}"
+      logger.debug ''
 
       response = Net::HTTP.start(url.hostname, url.port) do |http|
         http.open_timeout = 1800
@@ -47,12 +49,12 @@ module SensorThings
       response.body = response.body.force_encoding('UTF-8')
 
       # Log output of response
-      puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
+      logger.debug "HTTP/#{response.http_version} #{response.message} #{response.code}"
       response.each do |header, value|
-        puts "#{header}: #{value}"
+        logger.debug "#{header}: #{value}"
       end
-      puts response.body
-      puts ''
+      logger.debug response.body
+      logger.debug ''
 
       response
     end
@@ -102,10 +104,10 @@ module SensorThings
       request.content_type = 'application/json'
 
       # Log output of request
-      puts "#{request.method} #{request.uri}"
-      puts "Content-Type: #{request.content_type}"
-      puts self.to_json
-      puts ''
+      logger.debug "#{request.method} #{request.uri}"
+      logger.debug "Content-Type: #{request.content_type}"
+      logger.debug self.to_json
+      logger.debug ''
 
       response = Net::HTTP.start(url.hostname, url.port) do |http|
         http.open_timeout = 1800
@@ -118,12 +120,12 @@ module SensorThings
       response.body = response.body.force_encoding('UTF-8')
 
       # Log output of response
-      puts "HTTP/#{response.http_version} #{response.message} #{response.code}"
+      logger.debug "HTTP/#{response.http_version} #{response.message} #{response.code}"
       response.each do |header, value|
-        puts "#{header}: #{value}"
+        logger.debug "#{header}: #{value}"
       end
-      puts response.body
-      puts ''
+      logger.debug response.body
+      logger.debug ''
 
       response
     end

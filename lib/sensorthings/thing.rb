@@ -53,7 +53,7 @@ module SensorThings
         @id = existing_entity['@iot.id']
 
         if same_as?(existing_entity)
-          puts "Re-using existing Thing entity."
+          logger.info "Re-using existing Thing entity."
         else
           self.patch_to_path(URI(@link))
         end

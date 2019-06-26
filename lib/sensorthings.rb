@@ -1,3 +1,5 @@
+require 'semantic_logger'
+
 require 'sensorthings/entity'
 require 'sensorthings/datastream'
 require 'sensorthings/location'
