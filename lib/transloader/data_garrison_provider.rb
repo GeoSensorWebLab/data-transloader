@@ -1,7 +1,4 @@
-require 'csv'
 require 'fileutils'
-require 'net/http'
-require 'uri'
 
 require 'transloader/data_garrison_station'
 
