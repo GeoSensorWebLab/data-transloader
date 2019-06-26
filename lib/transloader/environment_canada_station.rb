@@ -19,7 +19,7 @@ module Transloader
       @id = id
       @provider = provider
       @properties = properties.merge({
-        "provider" => "Environment Canada"
+        provider: "Environment Canada"
       })
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
@@ -57,7 +57,7 @@ module Transloader
     # save to a cache file.
     def get_metadata
       if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path))
+        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
       else
         @metadata = download_metadata
         save_metadata
@@ -93,27 +93,27 @@ module Transloader
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
-        name:        @metadata['name'],
-        description: @metadata['description'],
-        properties:  @metadata['properties']
+        name:        @metadata[:name],
+        description: @metadata[:description],
+        properties:  @metadata[:properties]
       })
 
       # Upload entity and parse response
       thing.upload_to(server_url)
 
       # Cache URL
-      @metadata['Thing@iot.navigationLink'] = thing.link
+      @metadata[:'Thing@iot.navigationLink'] = thing.link
       save_metadata
 
       # LOCATION entity
       # Create Location entity
       location = SensorThings::Location.new({
-        name:         @metadata['name'],
-        description:  @metadata['description'],
+        name:         @metadata[:name],
+        description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
         location: {
           type:        'Point',
-          coordinates: [@metadata['properties']['Longitude'].to_f, @metadata['properties']['Latitude'].to_f]
+          coordinates: [@metadata[:properties][:Longitude].to_f, @metadata[:properties][:Latitude].to_f]
         }
       })
 
@@ -121,74 +121,74 @@ module Transloader
       location.upload_to(thing.link)
 
       # Cache URL
-      @metadata['Location@iot.navigationLink'] = location.link
+      @metadata[:'Location@iot.navigationLink'] = location.link
       save_metadata
 
       # SENSOR entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Sensor entities
         sensor = SensorThings::Sensor.new({
-          name:        "Station #{@id} #{stream['name']} Sensor",
-          description: "Environment Canada Station #{@id} #{stream['name']} Sensor",
+          name:        "Station #{@id} #{stream[:name]} Sensor",
+          description: "Environment Canada Station #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
           # More discussion on specification that could change this:
           # https://github.com/opengeospatial/sensorthings/issues/39
           encodingType: 'application/pdf',
-          metadata:     @metadata['procedure']
+          metadata:     @metadata[:procedure]
         })
 
         # Upload entity and parse response
         sensor.upload_to(server_url)
 
         # Cache URL and ID
-        stream['Sensor@iot.navigationLink'] = sensor.link
-        stream['Sensor@iot.id'] = sensor.id
+        stream[:'Sensor@iot.navigationLink'] = sensor.link
+        stream[:'Sensor@iot.id'] = sensor.id
       end
 
       save_metadata
 
       # OBSERVED PROPERTY entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
         observed_property = SensorThings::ObservedProperty.new({
-          name:        stream['name'],
-          definition:  "http://example.org/#{stream['name']}",
-          description: stream['name']
+          name:        stream[:name],
+          definition:  "http://example.org/#{stream[:name]}",
+          description: stream[:name]
         })
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
 
         # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
-        stream['ObservedProperty@iot.id'] = observed_property.id
+        stream[:'ObservedProperty@iot.navigationLink'] = observed_property.link
+        stream[:'ObservedProperty@iot.id'] = observed_property.id
       end
 
       save_metadata
 
       # DATASTREAM entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
         datastream = SensorThings::Datastream.new({
-          name:        "Station #{@id} #{stream['name']}",
-          description: "Environment Canada Station #{@id} #{stream['name']}",
+          name:        "Station #{@id} #{stream[:name]}",
+          description: "Environment Canada Station #{@id} #{stream[:name]}",
           # TODO: Use mapping to improve unit of measurement
           unitOfMeasurement: {
-            name:       stream['uom'],
+            name:       stream[:uom],
             symbol:     '',
             definition: ''
           },
           # TODO: Use more specific observation types, if possible
           observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
           Sensor: {
-            '@iot.id' => stream['Sensor@iot.id']
+            '@iot.id' => stream[:'Sensor@iot.id']
           },
           ObservedProperty: {
-            '@iot.id' => stream['ObservedProperty@iot.id']
+            '@iot.id' => stream[:'ObservedProperty@iot.id']
           }
         })
 
@@ -196,8 +196,8 @@ module Transloader
         datastream.upload_to(thing.link)
 
         # Cache URL
-        stream['Datastream@iot.navigationLink'] = datastream.link
-        stream['Datastream@iot.id'] = datastream.id
+        stream[:'Datastream@iot.navigationLink'] = datastream.link
+        stream[:'Datastream@iot.id'] = datastream.id
       end
 
       save_metadata
@@ -216,8 +216,8 @@ module Transloader
       end
 
       # Check for cached datastream URLs
-      @metadata['datastreams'].each do |stream|
-        if stream['Datastream@iot.navigationLink'].nil?
+      @metadata[:datastreams].each do |stream|
+        if stream[:'Datastream@iot.navigationLink'].nil?
           raise "Error: Datastream navigation URLs not cached"
           exit 3
         end
@@ -254,9 +254,9 @@ module Transloader
       puts "Uploading observations from #{file_path}"
 
       xml = observation_xml
-      @metadata['datastreams'].each do |datastream|
-        datastream_url = datastream['Datastream@iot.navigationLink']
-        datastream_name = datastream['name']
+      @metadata[:datastreams].each do |datastream|
+        datastream_url = datastream[:'Datastream@iot.navigationLink']
+        datastream_name = datastream[:name]
 
 
         if xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']", NAMESPACES).empty?
