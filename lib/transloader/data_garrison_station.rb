@@ -8,6 +8,7 @@ require 'time'
 
 module Transloader
   class DataGarrisonStation
+    include SemanticLogger::Loggable
 
     attr_accessor :id, :properties, :provider
 
@@ -31,7 +32,7 @@ module Transloader
       unit_id = unit_id[/Unit (?<id>\d+)/, "id"]
 
       if @id != unit_id
-        puts "WARNING: id does not match unit id"
+        logger.warn "id does not match unit id"
       end
 
       # Parse download links
@@ -86,8 +87,8 @@ module Transloader
         # Use a Set to find which ones are duplicates
         s = Set.new
         list = sensor_ids.find_all { |e| !s.add?(e) }.join(", ")
-        puts "\nWARNING: Multiple sensors have the same ID: #{list}"
-        puts "This must be manually corrected in the station metadata file."
+        logger.warn "WARNING: Multiple sensors have the same ID: #{list}"
+        logger.warn "This must be manually corrected in the station metadata file."
       end
 
       transceiver_metadata = {}
@@ -105,11 +106,11 @@ module Transloader
         end
       end
 
-      puts "\nWARNING: Latitude and Longitude unavailable from metadata."
-      puts "These values must be manually added to the station metadata file."
+      logger.warn "WARNING: Latitude and Longitude unavailable from metadata."
+      logger.warn "These values must be manually added to the station metadata file."
 
-      puts "\nWARNING: Time zone offset not available from data source."
-      puts "The offset must be manually added to the station metadata file."
+      logger.warn "WARNING: Time zone offset not available from data source."
+      logger.warn "The offset must be manually added to the station metadata file."
 
       # Convert to Hash
       @metadata = {
@@ -206,8 +207,10 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata['latitude'].nil? || @metadata['longitude'].nil?
-        puts "ERROR: Station latitude or longitude is nil!"
-        puts "Location entity cannot be created. Exiting."
+        logger.error <<-EOH
+        Station latitude or longitude is nil!
+        Location entity cannot be created. Exiting.
+        EOH
         exit(1)
       end
       
@@ -313,20 +316,20 @@ module Transloader
     # recent cached observation file is used.
     def upload_observations(destination, date)
       get_metadata
-      puts "Uploading observations for #{date} to #{destination}"
+      logger.info "Uploading observations for #{date} to #{destination}"
 
       # Check for cached datastream URLs
       @metadata['datastreams'].each do |stream|
         if stream['Datastream@iot.navigationLink'].nil?
-          raise "Error: Datastream navigation URLs not cached"
-          exit 3
+          logger.error "Datastream navigation URLs not cached"
+          raise
         end
       end
 
       # Check for cached observations at date
       if !Dir.exist?(@observations_path)
-        raise "Error: observation cache directory does not exist"
-        exit 3
+        logger.error "observation cache directory does not exist"
+        raise
       end
 
       if date == "latest"
@@ -336,8 +339,8 @@ module Transloader
           day_dir   = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
           filename  = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
-          puts "Error: Could not locate latest observation cache file"
-          exit 3
+          logger.error "Could not locate latest observation cache file"
+          raise
         end
 
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
@@ -346,12 +349,12 @@ module Transloader
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%SZ.html'))
 
         if !File.exist?(file_path)
-          raise "Error: Could not locate desired observation cache file: #{file_path}"
-          exit 3
+          logger.error "Could not locate desired observation cache file: #{file_path}"
+          raise
         end
       end
 
-      puts "Uploading observations from #{file_path}"
+      logger.info "Uploading observations from #{file_path}"
       html = Nokogiri::HTML(open(file_path))
 
       # Parse the time from the "Latest Conditions" element
@@ -417,7 +420,7 @@ module Transloader
         # SensorThings API does not like an empty string, instead "null"
         # string should be used.
         if result == ""
-          puts "INFO: Found null for #{datastream_name}"
+          logger.info "Found null for #{datastream_name}"
           result = "null"
         end
 
@@ -479,8 +482,10 @@ module Transloader
       @html ||= Nokogiri::HTML(open(@base_path))
 
       if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
-        puts "WARNING: Page is not HTML 4.01 Transitional, and may have been updated"
-        puts "since this tool was created. Parsing may fail, proceed with caution."
+        logger.warn <<-EOH
+        Page is not HTML 4.01 Transitional, and may have been updated
+        since this tool was created. Parsing may fail, proceed with caution.
+        EOH
       end
 
       @html
