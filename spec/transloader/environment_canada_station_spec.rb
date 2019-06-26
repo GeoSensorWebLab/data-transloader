@@ -162,6 +162,48 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   ##################
   
   context "Uploading Observations" do
-    # TODO
+    # pre-create the station for this context block
+    before(:each) do
+      reset_cache($cache_dir)
+      @provider = nil
+      @station = nil
+      @sensorthings_url = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/"
+
+      VCR.use_cassette("environment_canada/stations") do
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @station = @provider.get_station(station_id: "CXCM")
+        @station.save_metadata
+      end
+
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+
+      @station.save_observations
+    end
+
+    it "uploads the latest observations" do
+      VCR.use_cassette("environment_canada/observations_upload") do
+        @station.upload_observations(@sensorthings_url, "latest")
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
+
+    it "uploads observations for a single timestamp" do
+      VCR.use_cassette("environment_canada/observations_upload") do
+        @station.upload_observations(@sensorthings_url, "20190625T20:00:00Z")
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
+
+    it "raises an error of the timestamp has no data cached" do
+      expect {
+        @station.upload_observations(@sensorthings_url, "20000625T20:00:00Z")
+      }.to raise_error(RuntimeError)
+    end
   end
 end

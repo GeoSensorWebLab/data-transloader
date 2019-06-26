@@ -1,0 +1,4563 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673281)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:29 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:20 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673281)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"100","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:29 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673281)/Observations(2673334)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673334,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673334)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"100","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673334)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673334)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:20 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673282)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:29 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:20 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673282)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"13.01","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:29 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673282)/Observations(2673335)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673335,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673335)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"13.01","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673335)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673335)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673283)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673283)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"12.95","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673283)/Observations(2673336)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673336,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673336)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"12.95","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673336)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673336)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673284)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673284)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673284)/Observations(2673337)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673337,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673337)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673337)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673337)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673285)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673285)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673285)/Observations(2673338)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673338,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673338)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673338)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673338)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673286)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673286)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673286)/Observations(2673339)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673339,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673339)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673339)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673339)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673287)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:30 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673287)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673287)/Observations(2673340)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673340,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673340)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"MSNG","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673340)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673340)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673288)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673288)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"13.9","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673288)/Observations(2673341)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673341,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673341)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"13.9","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673341)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673341)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673289)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673289)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.6","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673289)/Observations(2673342)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673342,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673342)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.6","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673342)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673342)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673290)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673290)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"70","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '461'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673290)/Observations(2673343)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673343,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673343)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"70","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673343)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673343)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673291)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673291)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.6","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673291)/Observations(2673344)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673344,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673344)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.6","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673344)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673344)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673292)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:31 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673292)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673292)/Observations(2673345)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673345,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673345)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673345)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673345)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673293)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673293)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"72","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '461'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673293)/Observations(2673346)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673346,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673346)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"72","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673346)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673346)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673294)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673294)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673294)/Observations(2673347)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673347,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673347)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"9.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673347)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673347)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673295)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673295)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"66","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '461'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673295)/Observations(2673348)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673348,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673348)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"66","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673348)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673348)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673296)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673296)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"28.5","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673296)/Observations(2673349)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673349,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673349)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"28.5","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673349)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673349)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673297)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:32 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673297)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"132","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673297)/Observations(2673350)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673350,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673350)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"132","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673350)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673350)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673298)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673298)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"28.2","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673298)/Observations(2673351)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673351,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673351)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"28.2","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673351)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673351)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673299)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673299)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"131","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673299)/Observations(2673352)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673352,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673352)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"131","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673352)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673352)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673300)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:33 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673300)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.2","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673300)/Observations(2673353)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673353,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673353)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.2","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673353)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673353)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673301)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673301)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1906","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673301)/Observations(2673354)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673354,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673354)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1906","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673354)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673354)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673302)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673302)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"129","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673302)/Observations(2673355)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673355,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673355)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"129","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673355)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673355)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673303)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673303)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673303)/Observations(2673356)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673356,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673356)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673356)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673356)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673304)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673304)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"130","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673304)/Observations(2673357)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673357,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673357)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"130","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673357)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673357)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673305)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673305)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"29.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673305)/Observations(2673358)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673358,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673358)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"29.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673358)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673358)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673306)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673306)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"131","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673306)/Observations(2673359)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673359,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673359)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"131","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673359)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673359)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673307)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673307)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"23.6","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673307)/Observations(2673360)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673360,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673360)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"23.6","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673360)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673360)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673308)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673308)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1012.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:35 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '465'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673308)/Observations(2673361)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673361,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673361)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1012.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673361)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673361)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673309)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673309)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"329.3","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673309)/Observations(2673362)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673362,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673362)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"329.3","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673362)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673362)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673310)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673310)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673310)/Observations(2673363)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673363,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673363)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673363)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673363)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673311)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673311)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '460'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673311)/Observations(2673364)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673364,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673364)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673364)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673364)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673312)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:36 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673312)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673312)/Observations(2673365)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673365,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673365)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673365)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673365)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673313)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673313)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"2389.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '465'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673313)/Observations(2673366)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673366,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673366)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"2389.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673366)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673366)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673314)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673314)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673314)/Observations(2673367)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673367,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673367)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673367)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673367)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673315)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673315)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673315)/Observations(2673368)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673368,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673368)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673368)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673368)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673316)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673316)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673316)/Observations(2673369)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673369,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673369)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673369)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673369)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673317)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673317)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673317)/Observations(2673370)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673370,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673370)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673370)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673370)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673318)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673318)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"5.7","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673318)/Observations(2673371)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673371,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673371)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"5.7","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673371)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673371)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673319)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673319)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673319)/Observations(2673372)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673372,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673372)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"0.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673372)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673372)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673320)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673320)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673320)/Observations(2673373)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673373,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673373)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"10.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673373)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673373)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673321)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673321)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.2","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673321)/Observations(2673374)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673374,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673374)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"34.2","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673374)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673374)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673322)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673322)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"129","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673322)/Observations(2673375)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673375,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673375)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"129","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673375)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673375)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673323)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673323)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"2019-06-25T19:06:00.000Z","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '483'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673323)/Observations(2673376)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673376,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673376)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"2019-06-25T19:06:00.000Z","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673376)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673376)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673324)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673324)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"6","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '460'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673324)/Observations(2673377)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673377,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673377)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"6","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673377)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673377)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673325)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673325)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"3.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673325)/Observations(2673378)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673378,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673378)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"3.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673378)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673378)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673326)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673326)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"-0.6","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '463'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673326)/Observations(2673379)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673379,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673379)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"-0.6","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673379)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673379)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673327)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673327)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"PK WND 1318
+        1906Z","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '476'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673327)/Observations(2673380)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673380,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673380)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"PK
+        WND 1318 1906Z","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673380)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673380)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673328)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673328)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1014.5","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '465'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673328)/Observations(2673381)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673381,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673381)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"1014.5","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673381)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673381)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673329)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673329)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"4.4","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673329)/Observations(2673382)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673382,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673382)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"4.4","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673382)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673382)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673330)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673330)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"7.0","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '462'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673330)/Observations(2673383)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673383,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673383)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"7.0","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673383)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673383)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673331)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673331)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"329.3","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673331)/Observations(2673384)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673384,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673384)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"329.3","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673384)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673384)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673332)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673332)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"339.5","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673332)/Observations(2673385)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673385,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673385)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"339.5","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673385)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673385)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: get
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673333)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '27'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+    body:
+      encoding: UTF-8
+      string: '{"@iot.count":0,"value":[]}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+- request:
+    method: post
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673333)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-25T20:00:00.000Z","result":"340.1","resultTime":"2019-06-25T20:06:02.188Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - scratchpad.sensorup.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 26 Jun 2019 03:02:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - POST, PUT, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '3600'
+      Location:
+      - http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673333)/Observations(2673386)
+    body:
+      encoding: UTF-8
+      string: '{"@iot.id":2673386,"@iot.selfLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673386)","phenomenonTime":"2019-06-25T20:00:00.000Z","result":"340.1","resultTime":"2019-06-25T20:06:02.188Z","Datastream@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673386)/Datastream","FeatureOfInterest@iot.navigationLink":"http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Observations(2673386)/FeatureOfInterest"}'
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
+recorded_with: VCR 5.0.0

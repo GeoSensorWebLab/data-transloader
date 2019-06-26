@@ -264,7 +264,6 @@ module Transloader
         datastream_url = datastream[:'Datastream@iot.navigationLink']
         datastream_name = datastream[:name]
 
-
         if xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']", NAMESPACES).empty?
           # The result is not in this SWOB-ML document, perhaps not reported
           # during this reporting interval. In that case, no Observation is
