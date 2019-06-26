@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'fileutils'
+require 'pry'
 require 'vcr'
 require 'webmock/rspec'
 
@@ -99,6 +100,10 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  config.before(:suite) do
+    $cache_dir = "tmp/cache"
+  end
 
   VCR.configure do |c|
     c.cassette_library_dir = "spec/vcr"

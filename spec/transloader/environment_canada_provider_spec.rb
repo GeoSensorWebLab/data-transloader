@@ -3,9 +3,8 @@ require 'transloader'
 require 'rspec'
 require 'vcr'
 
-CACHE_DIR = "tmp/cache"
-
 RSpec.describe Transloader::EnvironmentCanadaProvider do
+  CACHE_DIR = "tmp/cache"
 
   before(:each) do
     FileUtils.rm_rf("tmp")
