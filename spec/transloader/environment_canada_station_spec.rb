@@ -16,7 +16,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "downloads the station metadata when saving the metadata" do
-      VCR.use_cassette("environment_canada_stations") do
+      VCR.use_cassette("environment_canada/stations") do
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be false
 
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
@@ -30,7 +30,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "raises an error if metadata source file cannot be downloaded" do
-      VCR.use_cassette("environment_canada_observations_not_found") do
+      VCR.use_cassette("environment_canada/observations_not_found") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
         expect {
           @provider.get_station(station_id: "CXCM")
@@ -47,7 +47,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       @provider = nil
       @station = nil
 
-      VCR.use_cassette("environment_canada_stations") do
+      VCR.use_cassette("environment_canada/stations") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
