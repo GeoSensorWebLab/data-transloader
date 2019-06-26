@@ -65,12 +65,20 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, "#{@sensorthings_url}Things").once
+        expect(WebMock).to have_requested(:post, 
+          "#{@sensorthings_url}Things").once
         expect(@station.metadata[:"Thing@iot.navigationLink"]).to_not be_empty
       end
     end
 
     it "creates a Location entity and caches the entity URL" do
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Locations]).once
+        expect(@station.metadata[:"Location@iot.navigationLink"]).to_not be_empty
+      end
     end
 
     it "creates Sensor entities and caches the URLs" do
