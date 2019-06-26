@@ -82,21 +82,43 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "creates Sensor entities and caches the URLs" do
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Sensors]).at_least_once
+        expect(@station.metadata[:datastreams][0][:"Sensor@iot.navigationLink"]).to_not be_empty
+      end
     end
 
     it "creates Observed Property entities and caches the URLs" do
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}ObservedProperties]).at_least_once
+        expect(@station.metadata[:datastreams][0][:"ObservedProperty@iot.navigationLink"]).to_not be_empty
+      end
     end
 
     it "maps the source observed properties to standard observed properties" do
+      pending
+      fail
     end
 
     it "creates Datastream entities and caches the URLs" do
+      pending
+      fail
     end
 
     it "maps the source observation type to O&M observation types on Datastreams" do
+      pending
+      fail
     end
 
     it "maps the source observation type to standard UOMs on Datastreams" do
+      pending
+      fail
     end
   end
 
