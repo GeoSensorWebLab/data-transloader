@@ -211,7 +211,7 @@ module Transloader
         Station latitude or longitude is nil!
         Location entity cannot be created. Exiting.
         EOH
-        exit(1)
+        raise
       end
       
       # Create Location entity
