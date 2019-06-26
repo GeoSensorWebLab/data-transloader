@@ -1,0 +1,202 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/index.php?details=7&sens_details=127
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 26 Jun 2019 17:08:25 GMT
+      Server:
+      - Apache
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Last-Modified:
+      - Wed, 26 Jun 2019 17:08:25 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - post-check=0, pre-check=0
+      Set-Cookie:
+      - PHPSESSID=r3sm2139bfpa22v0fk0vlfj1o4; path=/
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html>\n<head>\n\n<script
+        language=\"javascript\" src=\"../../../wctp/js/protoplasm.js\">\n</script>
+        \n\n<script language=\"javascript\"> // transform() calls can be chained together
+        \nProtoplasm.use('datepicker') \n.transform('input.datepicker') \n.transform('.datetimepicker',
+        { timePicker: true, timePickerAdjacent: true, use24hrs: true })\n.transform('input.datepicker_es',
+        { 'locale': 'es_AR' }); \n</script>\n\n\n<!-- Global site tag (gtag.js) -
+        Google Analytics -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-55239819-1\"></script>\n<script>\n
+        \ window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n
+        \ gtag('js', new Date());\n\n  gtag('config', 'UA-55239819-1');\n</script>\n\n<title>\n\n\tDataGarrison
+        Satellite Weather Station User Area: Control Panel Page\n</title>\n<meta name=\"DataGarrison
+        Weather Station $this_page\" content=\"DataGarrison's weather station $this_page
+        user page.  Users access live environmental sensor data and reconfigure their
+        remote stations here.\">\n<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\">\n\n\n\n\n\n\n\n\n\n\n\n\t<script>\n\t\tvar
+        cal_start = '01-01-1970';\n\t\tvar cal_end = '01-01-1970';\n\t</script>\n\n\n<STYLE
+        type=\"text/css\">\n\na:link { \n\tcolor: #440000;\n\t}\na:visited { \n\tcolor:
+        #440000;\n\t}\na:hover { \n\tcolor: #BB0000;\n\n\ttext-decoration: none;\n\t}\na:active
+        { \n\tcolor: #333333;\n\t}\n\n\n<!--\nA { text-decoration:none }\n-->\n\n</STYLE>\n\n</head>\n\n<body>\n\n<table
+        style=\"border-collapse: collapse;\" width=\"1000\" border=\"0\" align=\"center\"
+        cellpadding=\"0\" cellspacing=\"0\">\n<tr><td>\n\t\n<table border=\"0\" width=\"0\"
+        align=\"left\" cellpadding=\"0\" cellspacing=\"0\">\n<tr><td valign=\"top\"
+        align=\"right\"><img valign='top' border=\"0\" src=\"\n\n../../images/user_area.gif\n\n\"></td>\n\n\n<td
+        width='780' valign='center' align='left' bgcolor=#bebdbd\n><font size='4'
+        face='arial'>\n\t  Unit 300234065673960</font></td>\n</tr>\n\n<tr><td valign=\"top\"
+        \n\nbgcolor=#bebdbd\n>\n\n<img src='../../images/under_user_area.gif'>\n\n</td>\n<td
+        width='550' valign='center' align='right' align='right' \n\nbgcolor=#bebdbd\n>\n\n<font
+        face='arial' size='2'>\n\n\t<a href='https://DataGarrison.com'>DataGarrison</a>&nbsp;&nbsp;
+        \t  \n\t \n\t \n\t \t <a href=\"../sites.php\">Remote Sites</a>&nbsp;&nbsp;
+        \n\t \t \n\t\n\t <b><a href=\"index.php\">Control Panel</a></b>&nbsp;&nbsp;\n\n\t\n\t
+        <a href=\"plots.php\">Plotting</a></b>&nbsp;&nbsp;\n\t \t <a href=\"../../../login/logout.php?pag_id=300234065673960\">Log
+        out</a>&nbsp;&nbsp;\n\t \n\n\t  \n\t  </font>\n\n</td>\n</tr>\n</table>\n\n</tr></td>\n\n\n\n<tr><td>\n\t
+        \ \n\t<table  height=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n
+        \   <tr> \n      <td width=\"150\" height=\"500\" valign=\"top\" \n\t  \n\t
+        \ bgcolor=#bebdbd\n>\n\t  <!--<td width=\"140\" height=\"500\" valign=\"top\"
+        bgcolor=\"#cac9c9\"> -->\n\t  \n        <table width=\"100%\" height=\"148\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n\t\t<td>\n\n\r\n<TR><TD><font
+        size='2' face='arial'>\r\n\t\r\n&nbsp;<b>Latest Conditions</b><br>&nbsp; 06/26/19
+        8:43 am\t\r\n\t\r\n\t</font></TD></TR>\r\n\r\n\t<TR><TD>&nbsp;</TD></TR>\r\n\r\n<TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Pressure</b><br>&nbsp;1016.150 mbar</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Temperature</b><br>&nbsp;4.610 <sup>o</sup>C</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>RH</b><br>&nbsp;96.700 %</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Backup Batteries</b><br>&nbsp;13.954 V</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Wind</b><br>&nbsp;Speed: 19.646 km/h<br>&nbsp;Gust:
+        28.065 km/h<br>&nbsp;Direction: NW (324<sup>o</sup>)<br>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>\r\n<br>&nbsp;<HR NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'>\r\n\r\n\r\n<P>&nbsp;<b>Station
+        Status</b><br>&nbsp;Trans: every 120 min.<br>&nbsp;Logging: every 15.0 min.<P>&nbsp;<b>Next
+        Update</b><br>&nbsp;\t<script language=\"JavaScript\">\r\n\r\n\r\n\tvar now
+        = new Date();\r\n\tvar j = now.getTime();\r\n\tj = j + 2200000;\r\n// document.write(now);\r\n\tvar
+        now2 = new Date(j);\r\n\r\n/*\r\n*/\r\nvar hour = now2.getHours();\r\nvar
+        am_pm = \"PM\";\r\n\r\nif (hour < 12)\r\n{\r\n\tam_pm = \"AM\";\r\n}\t\r\n\r\nif
+        (hour < 10)\r\n{\r\n\thour = \"0\" + hour;\r\n}\r\n\r\nhour %= 12;\r\n\r\nif
+        (hour == 0)\r\n{\r\n\thour = 12;\r\n}\r\n\r\nvar minutes = now2.getMinutes();\r\nif
+        (minutes < 10)\r\n{\r\n\tminutes = \"0\" + minutes;\r\n}\r\n\r\n\r\nvar month
+        = now2.getMonth() + 1;\r\nif (month < 10)\r\n{\r\n\tmonth = \"0\" + month;\r\n}\r\n\r\nvar
+        day = now2.getDate();\r\nif (day < 10)\r\n{\r\n\tday = \"0\" + day;\r\n}\r\n\r\nvar
+        this_year = now2.getFullYear();\r\n\r\nvar count_down = month + \"/\" + day
+        + \"/\" + this_year + \" \" + hour + \":\" + minutes + \" \" + am_pm;\r\n//
+        document.write(count_down);\r\n\r\n\tTargetDate = count_down; //\"\";\r\n\tBackColor
+        = \"\";\r\n\tForeColor = \"\";\r\n\tCountActive = true;\r\n\tCountStepper
+        = -1;\r\n\tLeadingZero = true;\r\n\tDisplayFormat = \"%%H%% Hr %%M%% Min %%S%%
+        Sec\";\r\n\tFinishMessage = \"Any time now\";\r\n\t</script>\r\n\t<script
+        language=\"JavaScript\" src=\"https://datagarrison.com/javascript/countdown.js\"></script>\r\n\t<P>&nbsp;<b>7
+        sensors</b><br>&nbsp;Pressure<br>&nbsp;Wind Speed<br>&nbsp;Gust Speed<br>&nbsp;Wind
+        Direction<br>&nbsp;Temperature<br>&nbsp;RH<br>&nbsp;Backup Batteries&nbsp;<HR
+        NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'>&nbsp;<b><a href='index.php'><img
+        src='../../images/button_plotting.gif' alt='Download' border=0></a></b>\r\n\r\n<br><br>\r\n</font></TD></tr>\r\n\r\n</TR>\r\n\r\n\n\n\n\t</TD>\n\n
+        \   </table>\n        <p>&nbsp;</p>\n        <p>&nbsp;</p>\n        \n</td>\n\n\n<td
+        width=\"649\" valign=\"top\" bgcolor=\"#FFFFFF\"> \n        <div align=\"right\"></div>\n
+        \       <div align=\"center\"> \n\t\t          <table width=\"649\" border=\"0\"
+        align=\"left\" cellpadding=\"0\" cellspacing=\"3\">\n            <tr> \n              <td
+        width=\"636\" bgcolor=\"#FFFFFF\" valign=\"top\">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<H3><FONT
+        FACE=\"Arial\">Download data</font></H3>\n\n<tr><td><TABLE WIDTH='100%' align=left><TR><TD><FONT
+        FACE='Arial'><b>Description</b></TD><TD><FONT FACE='Arial'><b>Start</b> (local
+        time)</TD><TD><FONT FACE='Arial'><b>End</b> (local time)</TD><TD></TD></TR><TR><TD
+        BGCOLOR='#dddddd'><FONT FACE='Arial'><A HREF='download.php?data_launch=1&data_start=1517999051&data_end=1518165853&data_desc=MYC&utc=0'
+        ><u>MYC</u></A></TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'>02/07/18 10:24
+        am </TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'> 02/09/18 8:44 am</TD><TD></TD></TR><TR><TD
+        BGCOLOR='#bebdbd'><FONT FACE='Arial'><A HREF='download.php?data_launch=2&data_start=1521555835&data_end=1521626037&data_desc=Test
+        Launch&utc=0' ><u>Test Launch</u></A></TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'>03/20/18
+        2:23 pm </TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'> 03/21/18 9:53 am</TD><TD></TD></TR><TR><TD
+        BGCOLOR='#dddddd'><FONT FACE='Arial'><A HREF='download.php?data_launch=3&data_start=1532883851&data_end=1534070054&data_desc=Test
+        Launch&utc=0' ><u>Test Launch</u></A></TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'>07/29/18
+        5:04 pm </TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'> 08/12/18 10:34 am</TD><TD></TD></TR><TR><TD
+        BGCOLOR='#bebdbd'><FONT FACE='Arial'><A HREF='download.php?data_launch=4&data_start=1534071487&data_end=1561538590&data_desc=Test
+        Launch&utc=0' ><u>Test Launch</u></A></TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'>08/12/18
+        10:58 am </TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'> 06/26/19 8:43 am</TD><TD></TD></TR>\n</TABLE></td></tr>\n\n<tr><td>\n\n&nbsp;<HR
+        NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'><P><FONT FACE='Arial'><H3>Status</H3>&nbsp;&nbsp;<a
+        href = 'index.php?utc=0&cmd=&sens_details=127&details=6#status'>-Transceiver</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID:
+        300234065673960<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: active<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Power
+        level: 100 %<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transmission interval:
+        every 120 minutes<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode: standby unless
+        power falls below 75 %<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low power alarm:
+        triggers if power falls below 30 %<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sensor
+        alarm(s): on<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Network: Satellite<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Board
+        revision: 0xA0<br>\n&nbsp;&nbsp;<a href = 'index.php?utc=0&cmd=&sens_details=127&details=5#status'>-Logger</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20301990<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logging start: 08/12/18
+        10:58 am local time<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logging interval:
+        every 15.00 minutes<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sampling interval:
+        off<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch description: Test Launch<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-BPA-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data start address:
+        1105<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logging power: Yes<br>\n&nbsp;&nbsp;<a
+        href = 'index.php?utc=0&cmd=&sens_details=127&details=3#status'>-Sensors</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href = 'index.php?utc=0&cmd=&details=7&sens_details=126#status'>-Pressure</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        mbar<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        12 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-BPA-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        660.000 to 1069.400mbar<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20290325<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 20290325<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=125#status'>-Wind Speed</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        km/h<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        8 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-WCE-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        0.000 to 49.699km/h<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20293262<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 202932621<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=123#status'>-Gust Speed</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        km/h<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        8 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-WCE-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        0.000 to 49.699km/h<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20293262<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 202932622<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=119#status'>-Wind Direction</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        deg<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        8 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-WCE-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        0.000 to 358.000deg<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20293262<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 202932623<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=111#status'>-Temperature</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        *C<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        12 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-THB-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        -40.000 to 85.000*C<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20305795<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 203057951<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=95#status'>-RH</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        %<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        10 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-THB-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        0.000 to 100.000%<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20305795<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 203057952<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=63#status'>-RH</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Units:
+        V<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolution:
+        8 bit<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Part
+        number: S-THB-XXXX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range:
+        0 to 253V<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serial
+        number: 20301990<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub
+        and serial number: 203057952<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href
+        = 'index.php?utc=0&cmd=&details=7&sens_details=255#status'>+</a><br>\n\n\n<a
+        name=\"status\"><P>&nbsp;</P></a>\n\n\n</TABLE></td></tr>\n\n            </tr>\n
+        \         </table>\n\n\n<tr>\n\t<td ><table border=\"0\" width='896' cellpadding=\"0\"
+        cellspacing=\"0\"><tr>\n\t<td \n\n\tbgcolor=#cac9c9 \n align='left' valign='top'
+        height='16'><img valign='top' border=\"0\" src=\"\n\t\n\t../../images/footer_swoosh.gif\n\n\">\n\t</td>\n\t<td
+        \n\t\n\tbgcolor=#cac9c9\n\t align='right' height='16'><font size=1 face=\"Verdana,
+        Arial, Helvetica, sans-serif\">\n\t \n\n&copy; 2004-2019 Upward Innovations
+        Inc. &nbsp;&nbsp;</font></td></tr>\n\t</table></td></tr>\n\t\n</table>\n\n</body>\n</html>\n\n\n\n"
+    http_version: 
+  recorded_at: Wed, 26 Jun 2019 17:08:25 GMT
+recorded_with: VCR 5.0.0
