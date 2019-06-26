@@ -5,7 +5,10 @@ require 'vcr'
 
 RSpec.describe Transloader::EnvironmentCanadaStation do
 
+  ##############
   # Get Metadata
+  ##############
+  
   context "Downloading Metadata" do
     before(:each) do
       reset_cache($cache_dir)
@@ -39,7 +42,10 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
   end
 
+  ##############
   # Put Metadata
+  ##############
+  
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
@@ -122,12 +128,39 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
   end
 
+  ##################
   # Get Observations
+  ##################
+  
   context "Downloading Observations" do
-    # TODO
+    # pre-create the station for this context block
+    before(:each) do
+      reset_cache($cache_dir)
+      @provider = nil
+      @station = nil
+      @sensorthings_url = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/"
+
+      VCR.use_cassette("environment_canada/stations") do
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @station = @provider.get_station(station_id: "CXCM")
+        @station.save_metadata
+      end
+
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+    end
+
+    it "creates a dated directory for the observations data cache" do
+      @station.save_observations
+      expect(File.exist?("#{$cache_dir}/environment_canada/CXCM/2019/06/25/200000+0000.xml")).to be true
+    end
   end
 
+  ##################
   # Put Observations
+  ##################
+  
   context "Uploading Observations" do
     # TODO
   end
