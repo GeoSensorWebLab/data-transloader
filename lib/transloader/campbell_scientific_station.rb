@@ -5,6 +5,7 @@ require 'uri'
 
 module Transloader
   class CampbellScientificStation
+    include SemanticLogger::Loggable
 
     attr_accessor :id, :properties, :provider
 
@@ -25,9 +26,8 @@ module Transloader
       data_urls = @properties[:data_urls]
 
       if data_urls.empty?
-        puts "ERROR: No data URLs specified."
-        puts "Data URLs are required to download station metadata. Exiting."
-        exit 1
+        logger.error "No data URLs specified. Data URLs are required to download station metadata."
+        raise
       end
 
       data_files = []
@@ -97,14 +97,14 @@ module Transloader
         end
       end
 
-      puts "\nWARNING: Latitude and Longitude unavailable from metadata."
-      puts "These values must be manually added to the station metadata file."
+      logger.warn "Latitude and Longitude unavailable from metadata."
+      logger.warn "These values must be manually added to the station metadata file."
 
-      puts "\nWARNING: Time zone offset not available from data source."
-      puts "The offset must be manually added to the station metadata file."
+      logger.warn "Time zone offset not available from data source."
+      logger.warn "The offset must be manually added to the station metadata file."
 
-      puts "\nWARNING: Sensor metadata PDF or SensorML not available from data source."
-      puts "The URL may be manually added to the station metadata file under the \"procedure\" key."
+      logger.warn "Sensor metadata PDF or SensorML not available from data source."
+      logger.warn "The URL may be manually added to the station metadata file under the \"procedure\" key."
 
       # Convert to Hash
       @metadata = {
@@ -160,9 +160,8 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata['latitude'].nil? || @metadata['longitude'].nil?
-        puts "ERROR: Station latitude or longitude is nil!"
-        puts "Location entity cannot be created. Exiting."
-        exit(1)
+        logger.error "Station latitude or longitude is nil! Location entity cannot be created."
+        raise
       end
       
       # Create Location entity
@@ -543,7 +542,7 @@ module Transloader
         new_length    = response["Content-Length"].to_i
 
         if response["Content-Length"].to_i < data_file["last_length"]
-          puts "Remote data file length is shorter than expected."
+          logger.info "Remote data file length is shorter than expected."
           redownload = true
         else
           # Do a partial GET
@@ -556,28 +555,27 @@ module Transloader
 
           # 416 Requested Range Not Satisfiable
           if response.code == "416"
-            puts "No new data."
+            logger.info "No new data."
           elsif response.code == "206"
-            puts "Downloaded partial data."
+            logger.info "Downloaded partial data."
             filedata      = response.body
             last_modified = parse_last_modified(response["Last-Modified"])
             new_length    = data_file["last_length"] + filedata.length
             begin
               data = CSV.parse(filedata)
             rescue CSV::MalformedCSVError => e
-              puts "Error: Could not parse partial response data."
-              puts e
+              logger.error "Could not parse partial response data.", e
               redownload = true
             end
           else
             # Other codes are probably errors
-            puts "Error downloading partial data."
+            logger.error "Error downloading partial data."
           end
         end
       end
         
       if redownload
-        puts "Downloading entire data file."
+        logger.info "Downloading entire data file."
         # Download entire file; can use gzip compression
         uri = URI(data_file["url"])
         request = Net::HTTP::Get.new(uri)
