@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dataservices.campbellsci.ca/sbd/606830/data/null.dat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - dataservices.campbellsci.ca
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Date:
+      - Tue, 02 Jul 2019 20:25:59 GMT
+      Server:
+      - nginx/1.15.10
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Content-Length:
+      - '304'
+      Location:
+      - http://dataservices.campbellsci.ca/404.html
+      X-Server-Cache:
+      - 'true'
+      X-Proxy-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        <html><head>
+        <title>302 Found</title>
+        </head><body>
+        <h1>Found</h1>
+        <p>The document has moved <a href="http://dataservices.campbellsci.ca/404.html">here</a>.</p>
+        <hr>
+        <address>Apache Server at dataservices.campbellsci.ca Port 80</address>
+        </body></html>
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 20:25:59 GMT
+recorded_with: VCR 5.0.0

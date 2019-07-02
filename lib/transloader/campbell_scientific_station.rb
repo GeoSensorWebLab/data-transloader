@@ -26,8 +26,7 @@ module Transloader
       data_urls = @properties[:data_urls]
 
       if data_urls.empty?
-        logger.error "No data URLs specified. Data URLs are required to download station metadata."
-        raise
+        raise "No data URLs specified. Data URLs are required to download station metadata."
       end
 
       data_files = []
@@ -40,6 +39,12 @@ module Transloader
         request = Net::HTTP::Get.new(uri)
         response = Net::HTTP.start(uri.hostname, uri.port) do |http|
           http.request(request)
+        end
+
+        # Incorrect URLs triggers a 302 Found that redirects to the 404 
+        # page, we need to catch that here.
+        if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
+          raise OpenURI::HTTPError.new("Not Found", response)
         end
 
         filedata = response.body
@@ -160,8 +165,7 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata['latitude'].nil? || @metadata['longitude'].nil?
-        logger.error "Station latitude or longitude is nil! Location entity cannot be created."
-        raise
+        raise "Station latitude or longitude is nil! Location entity cannot be created."
       end
       
       # Create Location entity
