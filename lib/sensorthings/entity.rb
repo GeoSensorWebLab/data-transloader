@@ -38,7 +38,8 @@ module SensorThings
       logger.debug "#{request.method} #{request.uri}"
       logger.debug ''
 
-      response = Net::HTTP.start(url.hostname, url.port) do |http|
+      uri = URI(url)
+      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
         http.open_timeout = 1800
         http.read_timeout = 1800
         http.request(request)
@@ -75,10 +76,23 @@ module SensorThings
 
       if response.class != Net::HTTPCreated
         raise "Error: Could not POST entity. #{url}\n #{response.body}\n #{request.body}"
-        exit 2
       end
 
-      entity = JSON.parse(response.body)
+      entity = nil
+
+      # Some STA implementations return an empty body, others return the
+      # entity. If the response body is nil, then we need to fetch the 
+      # entity to get its true self link and id.
+      if response.body.empty?
+        if response['Location'].empty?
+          raise "Cannot retrieve entity details without body or Location"
+        end
+
+        response = get(response['Location'])
+        entity = JSON.parse(response.body)
+      else
+        entity = JSON.parse(response.body)
+      end
 
       @link = entity['@iot.selfLink']
       @id = entity['@iot.id']
@@ -109,7 +123,8 @@ module SensorThings
       logger.debug self.to_json
       logger.debug ''
 
-      response = Net::HTTP.start(url.hostname, url.port) do |http|
+      uri = URI(url)
+      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
         http.open_timeout = 1800
         http.read_timeout = 1800
         http.request(request)
