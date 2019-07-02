@@ -1,0 +1,822 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":1016.15,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '452'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 1016.15,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)/FeatureOfInterest",
+          "@iot.id" : 1,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":19.646,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '451'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 19.646,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)/FeatureOfInterest",
+          "@iot.id" : 2,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":28.065,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '451'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 28.065,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)/FeatureOfInterest",
+          "@iot.id" : 3,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":324.0,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '450'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 324.0,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)/FeatureOfInterest",
+          "@iot.id" : 4,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":4.61,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '449'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 4.61,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)/FeatureOfInterest",
+          "@iot.id" : 5,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":96.7,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '449'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 96.7,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)/FeatureOfInterest",
+          "@iot.id" : 6,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/Observations?$filter=phenomenonTime%20eq%202019-06-26T14:43:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-26T14:43:00.000Z","result":13.954,"resultTime":"2019-06-26T14:43:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '451'
+      Date:
+      - Tue, 02 Jul 2019 19:45:15 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-26T14:43:00.000Z",
+          "resultTime" : "2019-06-26T14:43:00.000Z",
+          "result" : 13.954,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)/FeatureOfInterest",
+          "@iot.id" : 7,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jul 2019 19:45:15 GMT
+recorded_with: VCR 5.0.0
