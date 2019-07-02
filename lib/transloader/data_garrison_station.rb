@@ -114,13 +114,13 @@ module Transloader
 
       # Convert to Hash
       @metadata = {
-        'name'            => "Data Garrison Station #{@id}",
-        'description'     => "Data Garrison Weather Station #{@id}",
-        'latitude'        => nil,
-        'longitude'       => nil,
-        'elevation'       => nil,
-        'timezone_offset' => nil,
-        'updated_at'      => nil,
+        name: "Data Garrison Station #{@id}",
+        description: "Data Garrison Weather Station #{@id}",
+        latitude: nil,
+        longitude: nil,
+        elevation: nil,
+        timezone_offset: nil,
+        updated_at: nil,
         # example datastream item:
         # {
         #   "id": "Pressure",
@@ -131,7 +131,7 @@ module Transloader
         #   "Serial number": "3513109",
         #   "Sub and serial number": "3513109"
         # }
-        'datastreams'     =>  datastream_metadata,
+        datastreams:  datastream_metadata,
         # example transceiver metadata:
         # {
         #   "id": "transceiver",
@@ -145,7 +145,7 @@ module Transloader
         #   "Network": "Satellite",
         #   "Board revision": "0xA0"
         # }
-        'transceiver'     =>  transceiver_metadata,
+        transceiver:  transceiver_metadata,
         # example logger metadata:
         # {
         #   "id": "logger",
@@ -158,9 +158,9 @@ module Transloader
         #   "Data start address": "1105",
         #   "Logging power": "Yes"
         # }
-        'logger'          =>  logger_metadata,
-        'download_links'  =>  download_links,
-        'properties'      =>  @properties
+        logger:  logger_metadata,
+        download_links:  download_links,
+        properties:  @properties
       }
     end
 
@@ -169,7 +169,7 @@ module Transloader
     # save to a cache file.
     def get_metadata
       if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path))
+        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
       else
         @metadata = download_metadata
         save_metadata
@@ -185,14 +185,14 @@ module Transloader
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
-        name:        @metadata['name'],
-        description: @metadata['description'],
+        name:        @metadata[:name],
+        description: @metadata[:description],
         properties:  {
-          logger:      @metadata['logger'],
+          logger:      @metadata[:logger],
           provider:    "Data Garrison",
           station_id:  @id,
           station_url: @base_path,
-          transceiver: @metadata['transceiver'],
+          transceiver: @metadata[:transceiver],
           user_id:     @user_id
         }
       })
@@ -201,12 +201,12 @@ module Transloader
       thing.upload_to(server_url)
 
       # Cache URL
-      @metadata['Thing@iot.navigationLink'] = thing.link
+      @metadata[:"Thing@iot.navigationLink"] = thing.link
       save_metadata
 
       # LOCATION entity
       # Check if latitude or longitude are blank
-      if @metadata['latitude'].nil? || @metadata['longitude'].nil?
+      if @metadata[:latitude].nil? || @metadata[:longitude].nil?
         logger.error <<-EOH
         Station latitude or longitude is nil!
         Location entity cannot be created. Exiting.
@@ -216,12 +216,12 @@ module Transloader
       
       # Create Location entity
       location = SensorThings::Location.new({
-        name:         @metadata['name'],
-        description:  @metadata['description'],
+        name:         @metadata[:name],
+        description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
         location: {
           type:        'Point',
-          coordinates: [@metadata['longitude'].to_f, @metadata['latitude'].to_f]
+          coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
         }
       })
 
@@ -229,15 +229,15 @@ module Transloader
       location.upload_to(thing.link)
 
       # Cache URL
-      @metadata['Location@iot.navigationLink'] = location.link
+      @metadata[:"Location@iot.navigationLink"] = location.link
       save_metadata
 
       # SENSOR entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Sensor entities
         sensor = SensorThings::Sensor.new({
-          name:        "Station #{@id} #{stream['id']} Sensor",
-          description: "Data Garrison Station #{@id} #{stream['id']} Sensor",
+          name:        "Station #{@id} #{stream[:id]} Sensor",
+          description: "Data Garrison Station #{@id} #{stream[:id]} Sensor",
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
@@ -251,52 +251,52 @@ module Transloader
         sensor.upload_to(server_url)
 
         # Cache URL and ID
-        stream['Sensor@iot.navigationLink'] = sensor.link
-        stream['Sensor@iot.id'] = sensor.id
+        stream[:"Sensor@iot.navigationLink"] = sensor.link
+        stream[:"Sensor@iot.id"] = sensor.id
       end
 
       save_metadata
 
       # OBSERVED PROPERTY entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
         observed_property = SensorThings::ObservedProperty.new({
-          name:        stream['id'],
-          definition:  "http://example.org/#{stream['id']}",
-          description: stream['id']
+          name:        stream[:id],
+          definition:  "http://example.org/#{stream[:id]}",
+          description: stream[:id]
         })
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
 
         # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
-        stream['ObservedProperty@iot.id'] = observed_property.id
+        stream[:"ObservedProperty@iot.navigationLink"] = observed_property.link
+        stream[:"ObservedProperty@iot.id"] = observed_property.id
       end
 
       save_metadata
 
       # DATASTREAM entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
         datastream = SensorThings::Datastream.new({
-          name:        "Station #{@id} #{stream['id']}",
-          description: "Data Garrison Station #{@id} #{stream['id']}",
+          name:        "Station #{@id} #{stream[:id]}",
+          description: "Data Garrison Station #{@id} #{stream[:id]}",
           # TODO: Use mapping to improve unit of measurement
           unitOfMeasurement: {
-            name:       stream['Units'] || "",
-            symbol:     stream['Units'] || "",
+            name:       stream[:Units] || "",
+            symbol:     stream[:Units] || "",
             definition: ''
           },
           # TODO: Use more specific observation types, if possible
           observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
           Sensor: {
-            '@iot.id' => stream['Sensor@iot.id']
+            "@iot.id": stream[:"Sensor@iot.id"]
           },
           ObservedProperty: {
-            '@iot.id' => stream['ObservedProperty@iot.id']
+            "@iot.id": stream[:"ObservedProperty@iot.id"]
           }
         })
 
@@ -304,8 +304,8 @@ module Transloader
         datastream.upload_to(thing.link, false)
 
         # Cache URL
-        stream['Datastream@iot.navigationLink'] = datastream.link
-        stream['Datastream@iot.id'] = datastream.id
+        stream[:"Datastream@iot.navigationLink"] = datastream.link
+        stream[:"Datastream@iot.id"] = datastream.id
       end
 
       save_metadata
@@ -319,8 +319,8 @@ module Transloader
       logger.info "Uploading observations for #{date} to #{destination}"
 
       # Check for cached datastream URLs
-      @metadata['datastreams'].each do |stream|
-        if stream['Datastream@iot.navigationLink'].nil?
+      @metadata[:datastreams].each do |stream|
+        if stream[:"Datastream@iot.navigationLink"].nil?
           logger.error "Datastream navigation URLs not cached"
           raise
         end
@@ -362,7 +362,7 @@ module Transloader
       raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
       raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
       # append the time zone from the metadata cache file
-      raw_phenomenon_time = raw_phenomenon_time + @metadata['timezone_offset']
+      raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
       phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
 
       # Parse latest readings
@@ -406,9 +406,9 @@ module Transloader
         end
       end
 
-      @metadata['datastreams'].each do |datastream|
-        datastream_url = datastream['Datastream@iot.navigationLink']
-        datastream_name = datastream['id']
+      @metadata[:datastreams].each do |datastream|
+        datastream_url = datastream[:"Datastream@iot.navigationLink"]
+        datastream_name = datastream[:id]
 
         # OBSERVATION entity
         # Create Observation entity
@@ -459,7 +459,7 @@ module Transloader
       raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
       raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
       # append the time zone from the metadata cache file
-      raw_phenomenon_time = raw_phenomenon_time + @metadata['timezone_offset']
+      raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
       phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
       utc_time = phenomenon_time.to_time.utc
 
