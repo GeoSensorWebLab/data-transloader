@@ -207,11 +207,10 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata[:latitude].nil? || @metadata[:longitude].nil?
-        logger.error <<-EOH
+        raise <<-EOH
         Station latitude or longitude is nil!
         Location entity cannot be created. Exiting.
         EOH
-        raise
       end
       
       # Create Location entity
@@ -321,15 +320,13 @@ module Transloader
       # Check for cached datastream URLs
       @metadata[:datastreams].each do |stream|
         if stream[:"Datastream@iot.navigationLink"].nil?
-          logger.error "Datastream navigation URLs not cached"
-          raise
+          raise "Datastream navigation URLs not cached"
         end
       end
 
       # Check for cached observations at date
       if !Dir.exist?(@observations_path)
-        logger.error "observation cache directory does not exist"
-        raise
+        raise "observation cache directory does not exist"
       end
 
       if date == "latest"
@@ -339,8 +336,7 @@ module Transloader
           day_dir   = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
           filename  = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
         rescue
-          logger.error "Could not locate latest observation cache file"
-          raise
+          raise "Could not locate latest observation cache file"
         end
 
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
@@ -349,8 +345,7 @@ module Transloader
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%SZ.html'))
 
         if !File.exist?(file_path)
-          logger.error "Could not locate desired observation cache file: #{file_path}"
-          raise
+          raise "Could not locate desired observation cache file: #{file_path}"
         end
       end
 
