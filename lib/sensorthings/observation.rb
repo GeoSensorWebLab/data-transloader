@@ -37,7 +37,7 @@ module SensorThings
     def upload_to(url)
       upload_url = self.join_uris(url, "Observations")
 
-      filter = "phenomenonTime eq '#{@phenomenon_time}'"
+      filter = "phenomenonTime eq #{@phenomenon_time}"
       response = self.get(URI(upload_url + "?$filter=#{filter}"))
       body = JSON.parse(response.body)
 
