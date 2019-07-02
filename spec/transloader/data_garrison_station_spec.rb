@@ -248,14 +248,14 @@ RSpec.describe Transloader::DataGarrisonStation do
       end
     end
 
-    # it "uploads observations for a single timestamp" do
-    #   VCR.use_cassette("data_garrison/observations_upload") do
-    #     @station.upload_observations(@sensorthings_url, "20190625T20:00:00Z")
+    it "uploads observations for a single timestamp" do
+      VCR.use_cassette("data_garrison/observations_upload") do
+        @station.upload_observations(@sensorthings_url, "20190626T14:43:00Z")
 
-    #     expect(WebMock).to have_requested(:post, 
-    #       %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-    #   end
-    # end
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
 
     # it "raises an error of the timestamp has no data cached" do
     #   expect {
