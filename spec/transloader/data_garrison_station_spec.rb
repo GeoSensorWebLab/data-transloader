@@ -166,4 +166,42 @@ RSpec.describe Transloader::DataGarrisonStation do
       fail
     end
   end
+
+  ##################
+  # Get Observations
+  ##################
+  
+  context "Downloading Observations" do
+    # pre-create the station for this context block
+    before(:each) do
+      reset_cache($cache_dir)
+      @provider = nil
+      @station = nil
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
+
+      VCR.use_cassette("data_garrison/station") do
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @station = @provider.get_station(
+          user_id: "300234063581640",
+          station_id: "300234065673960"
+        )
+        # These values must be fixed before uploading to STA.
+        @station.metadata[:latitude] = 69.158
+        @station.metadata[:longitude] = -107.0403
+        @station.metadata[:timezone_offset] = "-06:00"
+        # Fix for error in source data
+        @station.metadata[:datastreams].last[:id] = "Battery Voltage"
+        @station.save_metadata
+      end
+
+      VCR.use_cassette("data_garrison/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+    end
+
+    it "creates a dated directory for the observations data cache" do
+      @station.save_observations
+      expect(File.exist?("#{$cache_dir}/data_garrison/300234063581640/300234065673960/2019/06/26/144300Z.html")).to be true
+    end
+  end
 end
