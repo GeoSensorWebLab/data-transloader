@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673281)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673281)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -88,7 +88,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:20 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673282)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673282)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -174,7 +174,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673283)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673283)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -260,7 +260,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673284)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673284)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -346,7 +346,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673285)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673285)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -432,7 +432,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673286)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673286)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -518,7 +518,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:21 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673287)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673287)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -604,7 +604,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673288)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673288)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -690,7 +690,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673289)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673289)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -776,7 +776,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673290)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673290)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -862,7 +862,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673291)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673291)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -948,7 +948,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:22 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673292)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673292)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1034,7 +1034,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673293)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673293)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1120,7 +1120,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673294)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673294)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1206,7 +1206,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673295)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673295)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1292,7 +1292,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673296)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673296)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1378,7 +1378,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:23 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673297)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673297)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1464,7 +1464,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673298)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673298)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1550,7 +1550,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673299)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673299)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1636,7 +1636,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:24 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673300)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673300)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1722,7 +1722,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673301)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673301)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1808,7 +1808,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673302)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673302)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1894,7 +1894,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673303)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673303)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1980,7 +1980,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:25 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673304)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673304)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2066,7 +2066,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673305)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673305)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2152,7 +2152,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673306)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673306)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2238,7 +2238,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673307)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673307)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2324,7 +2324,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:26 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673308)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673308)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2410,7 +2410,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673309)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673309)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2496,7 +2496,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673310)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673310)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2582,7 +2582,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673311)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673311)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2668,7 +2668,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:27 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673312)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673312)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2754,7 +2754,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673313)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673313)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2840,7 +2840,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673314)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673314)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2926,7 +2926,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673315)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673315)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3012,7 +3012,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673316)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673316)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3098,7 +3098,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:28 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673317)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673317)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3184,7 +3184,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673318)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673318)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3270,7 +3270,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673319)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673319)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3356,7 +3356,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673320)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673320)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3442,7 +3442,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673321)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673321)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3528,7 +3528,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:29 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673322)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673322)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3614,7 +3614,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673323)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673323)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3700,7 +3700,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673324)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673324)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3786,7 +3786,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673325)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673325)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3872,7 +3872,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:30 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673326)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673326)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -3958,7 +3958,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673327)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673327)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4046,7 +4046,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673328)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673328)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4132,7 +4132,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673329)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673329)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4218,7 +4218,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:31 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673330)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673330)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4304,7 +4304,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673331)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673331)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4390,7 +4390,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673332)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673332)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -4476,7 +4476,7 @@ http_interactions:
   recorded_at: Wed, 26 Jun 2019 03:16:32 GMT
 - request:
     method: get
-    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673333)/Observations?$filter=phenomenonTime%20eq%20%272019-06-25T20:00:00.000Z%27
+    uri: http://scratchpad.sensorup.com/OGCSensorThings/v1.0/Datastreams(2673333)/Observations?$filter=phenomenonTime%20eq%202019-06-25T20:00:00.000Z
     body:
       encoding: US-ASCII
       string: ''
