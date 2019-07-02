@@ -41,6 +41,10 @@ module SensorThings
       response = self.get(URI(upload_url + "?$filter=#{filter}"))
       body = JSON.parse(response.body)
 
+      if response.class != Net::HTTPOK
+        raise "Error: Could not GET entities. #{url}\n #{response.body}\n #{filter}"
+      end
+
       # Look for matching existing entities. If no entities match, use POST to
       # create a new entity. If one or more entities match, then the first is
       # re-used. If the matching entity has the same phenomenonTime but
