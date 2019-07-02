@@ -257,10 +257,10 @@ RSpec.describe Transloader::DataGarrisonStation do
       end
     end
 
-    # it "raises an error of the timestamp has no data cached" do
-    #   expect {
-    #     @station.upload_observations(@sensorthings_url, "20000625T20:00:00Z")
-    #   }.to raise_error(RuntimeError)
-    # end
+    it "raises an error of the timestamp has no data cached" do
+      expect {
+        @station.upload_observations(@sensorthings_url, "20000625T20:00:00Z")
+      }.to raise_error(RuntimeError)
+    end
   end
 end
