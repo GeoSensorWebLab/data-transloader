@@ -7,7 +7,7 @@ module Transloader
   class CampbellScientificStation
     include SemanticLogger::Loggable
 
-    attr_accessor :id, :properties, :provider
+    attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(id, provider, properties)
       @id = id
