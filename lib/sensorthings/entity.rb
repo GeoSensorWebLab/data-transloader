@@ -66,7 +66,6 @@ module SensorThings
 
       if response.class != Net::HTTPOK && response.class != Net::HTTPNoContent
         raise "Error: Could not PATCH entity. #{url}\n #{response.body}\n #{request.body}"
-        exit 2
       end
     end
 
@@ -104,7 +103,6 @@ module SensorThings
 
       if response.class != Net::HTTPCreated
         raise "Error: Could not PUT entity. #{url}\n #{response.body}\n #{request.body}"
-        exit 2
       end
 
       @link = response['Location']
