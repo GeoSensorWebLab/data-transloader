@@ -85,7 +85,7 @@ $ transload put observations \
     --source environment_canada \
     --station CXCM \
     --cache datastore/weather \
-    --date 20180501T00:00:00Z \
+    --date 2018-05-01T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 $ transload put observations \
     --source environment_canada \

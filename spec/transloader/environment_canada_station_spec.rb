@@ -193,7 +193,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "uploads observations for a single timestamp" do
       VCR.use_cassette("environment_canada/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "20190625T20:00:00Z")
+        @station.upload_observations(@sensorthings_url, "2019-06-25T20:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
@@ -202,7 +202,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "raises an error of the timestamp has no data cached" do
       expect {
-        @station.upload_observations(@sensorthings_url, "20000625T20:00:00Z")
+        @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
       }.to raise_error(RuntimeError)
     end
   end
