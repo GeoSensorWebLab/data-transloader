@@ -202,4 +202,63 @@ RSpec.describe Transloader::CampbellScientificStation do
       expect(File.exist?("#{$cache_dir}/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/07/03.csv")).to be true
     end
   end
+
+  ##################
+  # Put Observations
+  ##################
+  
+  context "Uploading Observations" do
+    # pre-create the station for this context block
+    before(:each) do
+      reset_cache($cache_dir)
+      @provider = nil
+      @station = nil
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
+
+      VCR.use_cassette("campbell_scientific/station") do
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+        )
+        # These values must be fixed before uploading to STA.
+        @station.metadata[:latitude] = 68.983639
+        @station.metadata[:longitude] = -105.835833
+        @station.metadata[:timezone_offset] = "-06:00"
+        @station.save_metadata
+      end
+
+      VCR.use_cassette("campbell_scientific/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+
+      VCR.use_cassette("campbell_scientific/observations_download") do
+        @station.save_observations
+      end
+    end
+
+    it "uploads the latest observations" do
+      VCR.use_cassette("campbell_scientific/observation_latest_upload") do
+        @station.upload_observations(@sensorthings_url, "latest")
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
+
+    it "uploads observations for a single timestamp" do
+      VCR.use_cassette("campbell_scientific/observation_upload") do
+        @station.upload_observations(@sensorthings_url, "2019-07-02T14:00:00Z")
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
+
+    it "raises an error of the timestamp has no data cached" do
+      expect {
+        @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
+      }.to raise_error(RuntimeError)
+    end
+  end
 end
