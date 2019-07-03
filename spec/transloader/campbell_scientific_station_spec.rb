@@ -164,4 +164,42 @@ RSpec.describe Transloader::CampbellScientificStation do
       fail
     end
   end
+
+  ##################
+  # Get Observations
+  ##################
+  
+  context "Downloading Observations" do
+    # pre-create the station for this context block
+    before(:each) do
+      reset_cache($cache_dir)
+      @provider = nil
+      @station = nil
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
+
+      VCR.use_cassette("campbell_scientific/station") do
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+        )
+        # These values must be fixed before uploading to STA.
+        @station.metadata[:latitude] = 68.983639
+        @station.metadata[:longitude] = -105.835833
+        @station.metadata[:timezone_offset] = "-06:00"
+        @station.save_metadata
+      end
+
+      VCR.use_cassette("campbell_scientific/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+    end
+
+    it "creates a dated directory for the observations data cache" do
+      VCR.use_cassette("campbell_scientific/observations_download") do
+        @station.save_observations
+      end
+      expect(File.exist?("#{$cache_dir}/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/07/03.csv")).to be true
+    end
+  end
 end
