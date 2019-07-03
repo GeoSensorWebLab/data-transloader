@@ -147,9 +147,11 @@ $ transload put observations \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the second example, the newest observations will be automatically determined by reading the station metadata cache file. For each data file, the most-recently-uploaded observation timestamp is kept and used to determine which observations should be uploaded. If no such value is found in the cache file, then **all** observations will be uploaded.
+In the second example, the newest observations will be automatically determined by reading the station metadata cache file. For each data file, the most-recently-uploaded observation timestamp is kept and used to determine which observations should be uploaded. If no such value is found in the cache file, then only the latest downloaded observation will be uploaded.
 
 The second example is recommended usage, as it automatically uses the cache to upload only new observations.
+
+TODO: Update this with an option for uploading all observations since last known, or in time range.
 
 ## Data Model Mapping
 

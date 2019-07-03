@@ -294,9 +294,9 @@ module Transloader
           # Use cached newest-uploaded-timestamp if it is available
           newest_uploaded_timestamp = data_file[:newest_uploaded_timestamp]
 
-          # If timestamp isn't available, upload all observations
+          # If timestamp isn't available, upload last observation row
           if !newest_uploaded_timestamp.nil?
-            date_range = [newest_uploaded_timestamp, data_file[:parsed][:newest]]
+            date_range = [data_file[:parsed][:newest], data_file[:parsed][:newest]]
           end
         end
 
@@ -323,7 +323,7 @@ module Transloader
           #   [...]
           # ]
           converted_rows = rows.map do |row|
-            [row[:timestamp], row[1..-1].map.with_index { |cell, i|
+            [row["timestamp"], row[1..-1].map.with_index { |cell, i|
               {
                 name: headers[i],
                 reading: cell
@@ -415,7 +415,7 @@ module Transloader
             # Convert from row object into observations array format:
             # ["date", [{reading}, {reading}, ...]]
             converted_observations = old_observations.map do |row|
-              [row[:timestamp]].concat([row[1..-1].map.with_index { |reading, i|
+              [row["timestamp"]].concat([row[1..-1].map.with_index { |reading, i|
                 # Parse non-null to float values
                 r = (reading == "null" ? "null" : reading.to_f)
                 { name: headers[i], reading: r }
