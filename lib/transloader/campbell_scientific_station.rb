@@ -291,13 +291,7 @@ module Transloader
         if date != "latest"
           date_range = [date, date]
         else
-          # Use cached newest-uploaded-timestamp if it is available
-          newest_uploaded_timestamp = data_file[:newest_uploaded_timestamp]
-
-          # If timestamp isn't available, upload last observation row
-          if !newest_uploaded_timestamp.nil?
-            date_range = [data_file[:parsed][:newest], data_file[:parsed][:newest]]
-          end
+          date_range = [data_file[:parsed][:newest], data_file[:parsed][:newest]]
         end
 
         # Load observations in date range
@@ -310,6 +304,11 @@ module Transloader
           # Load data from file for timestamp
           obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
           obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
+
+          if !File.exist?(obs_filename)
+            raise "File for timestamp '#{timestamp}' does not exist"
+          end
+
           rows = CSV.read(obs_filename, { headers: true })
           # headers (excluding timestamp)
           headers = rows.headers[1..-1]
@@ -341,7 +340,6 @@ module Transloader
           row_timestamp = Time.iso8601(row[0])
           (row_timestamp >= start_timestamp && row_timestamp <= end_timestamp)
         end
-
         
         observations.each do |row|
           # Convert from ISO8601 string to ISO8601 string in UTC
@@ -475,18 +473,17 @@ module Transloader
       to_iso8601(Time.iso8601(iso8601))
     end
 
-    # Convert Time class to ISO8601 string with fractional seconds
+    # Convert Time object to ISO8601 string with fractional seconds
     def to_iso8601(time)
       time.utc.strftime("%FT%T.%LZ")
     end
 
-    # Convert Last-Modified header String to Time class.
-    # Assumes nginx date format: "%a, %d %b %Y %H:%M:%S %Z"
+    # Convert Last-Modified header String to Time object.
     def parse_last_modified(time)
-      Time.strptime(time, "%a, %d %b %Y %T %Z")
+      Time.httpdate(time)
     end
 
-    # Convert a TOA5 timestamp String to a Time class.
+    # Convert a TOA5 timestamp String to a Time object.
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
       Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
