@@ -132,7 +132,7 @@ module Transloader
     # and save to a cache file.
     def get_metadata
       if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path))
+        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
       else
         @metadata = download_metadata
         save_metadata
@@ -144,14 +144,14 @@ module Transloader
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
-        name:        @metadata['name'],
-        description: @metadata['description'],
+        name:        @metadata[:name],
+        description: @metadata[:description],
         properties:  {
           provider:              'Campbell Scientific',
           station_id:            @id,
-          station_model_name:    @metadata['properties']['station_model_name'],
-          station_serial_number: @metadata['properties']['station_serial_number'],
-          station_program:       @metadata['properties']['station_program']
+          station_model_name:    @metadata[:properties][:station_model_name],
+          station_serial_number: @metadata[:properties][:station_serial_number],
+          station_program:       @metadata[:properties][:station_program]
         }
       })
 
@@ -159,23 +159,23 @@ module Transloader
       thing.upload_to(server_url)
 
       # Cache URL
-      @metadata['Thing@iot.navigationLink'] = thing.link
+      @metadata[:"Thing@iot.navigationLink"] = thing.link
       save_metadata
 
       # LOCATION entity
       # Check if latitude or longitude are blank
-      if @metadata['latitude'].nil? || @metadata['longitude'].nil?
+      if @metadata[:latitude].nil? || @metadata[:longitude].nil?
         raise "Station latitude or longitude is nil! Location entity cannot be created."
       end
       
       # Create Location entity
       location = SensorThings::Location.new({
-        name:         @metadata['name'],
-        description:  @metadata['description'],
+        name:         @metadata[:name],
+        description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
         location: {
           type:        'Point',
-          coordinates: [@metadata['longitude'].to_f, @metadata['latitude'].to_f]
+          coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
         }
       })
 
@@ -183,74 +183,74 @@ module Transloader
       location.upload_to(thing.link)
 
       # Cache URL
-      @metadata['Location@iot.navigationLink'] = location.link
+      @metadata[:"Location@iot.navigationLink"] = location.link
       save_metadata
 
       # SENSOR entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Sensor entities
         sensor = SensorThings::Sensor.new({
-          name:        "Campbell Scientific Station #{@id} #{stream['name']} Sensor",
-          description: "Campbell Scientific Station #{@id} #{stream['name']} Sensor",
+          name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
+          description: "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
           # More discussion on specification that could change this:
           # https://github.com/opengeospatial/sensorthings/issues/39
           encodingType: 'application/pdf',
-          metadata:     @metadata['procedure'] || "http://example.org/unknown"
+          metadata:     @metadata[:procedure] || "http://example.org/unknown"
         })
 
         # Upload entity and parse response
         sensor.upload_to(server_url)
 
         # Cache URL and ID
-        stream['Sensor@iot.navigationLink'] = sensor.link
-        stream['Sensor@iot.id'] = sensor.id
+        stream[:"Sensor@iot.navigationLink"] = sensor.link
+        stream[:"Sensor@iot.id"] = sensor.id
       end
 
       save_metadata
 
       # OBSERVED PROPERTY entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Observed Property entities
         # TODO: Use mapping to improve these entities
         observed_property = SensorThings::ObservedProperty.new({
-          name:        stream['name'],
-          definition:  "http://example.org/#{stream['name']}",
-          description: stream['name']
+          name:        stream[:name],
+          definition:  "http://example.org/#{stream[:name]}",
+          description: stream[:name]
         })
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
 
         # Cache URL
-        stream['ObservedProperty@iot.navigationLink'] = observed_property.link
-        stream['ObservedProperty@iot.id'] = observed_property.id
+        stream[:"ObservedProperty@iot.navigationLink"] = observed_property.link
+        stream[:"ObservedProperty@iot.id"] = observed_property.id
       end
 
       save_metadata
 
       # DATASTREAM entities
-      @metadata['datastreams'].each do |stream|
+      @metadata[:datastreams].each do |stream|
         # Create Datastream entities
         # TODO: Use mapping to improve these entities
         datastream = SensorThings::Datastream.new({
-          name:        "Campbell Scientific Station #{@id} #{stream['name']}",
-          description: "Campbell Scientific Station #{@id} #{stream['name']}",
+          name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
+          description: "Campbell Scientific Station #{@id} #{stream[:name]}",
           # TODO: Use mapping to improve unit of measurement
           unitOfMeasurement: {
-            name:       stream['units'] || "",
-            symbol:     stream['units'] || "",
+            name:       stream[:units] || "",
+            symbol:     stream[:units] || "",
             definition: ''
           },
           # TODO: Use more specific observation types, if possible
           observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
           Sensor: {
-            '@iot.id' => stream['Sensor@iot.id']
+            '@iot.id' => stream[:"Sensor@iot.id"]
           },
           ObservedProperty: {
-            '@iot.id' => stream['ObservedProperty@iot.id']
+            '@iot.id' => stream[:"ObservedProperty@iot.id"]
           }
         })
 
@@ -258,8 +258,8 @@ module Transloader
         datastream.upload_to(thing.link)
 
         # Cache URL
-        stream['Datastream@iot.navigationLink'] = datastream.link
-        stream['Datastream@iot.id'] = datastream.id
+        stream[:"Datastream@iot.navigationLink"] = datastream.link
+        stream[:"Datastream@iot.id"] = datastream.id
       end
 
       save_metadata
@@ -277,26 +277,26 @@ module Transloader
       # This is used to determine where Observation entities are 
       # uploaded.
       datastream_hash = {}
-      @metadata["datastreams"].each do |datastream|
-        datastream_hash[datastream["name"]] = datastream
+      @metadata[:datastreams].each do |datastream|
+        datastream_hash[datastream[:name]] = datastream
       end
 
       # Iterate over data files to parse observations in date range
-      @metadata["data_files"].each do |data_file|
-        data_filename = data_file["filename"]
+      @metadata[:data_files].each do |data_file|
+        data_filename = data_file[:filename]
         # specify the start and end dates (ISO8601 strings) to upload
         # nil is used for unbounded
-        date_range = [data_file["parsed"]["oldest"], data_file["parsed"]["newest"]]
+        date_range = [data_file[:parsed][:oldest], data_file[:parsed][:newest]]
 
         if date != "latest"
           date_range = [date, date]
         else
           # Use cached newest-uploaded-timestamp if it is available
-          newest_uploaded_timestamp = data_file["newest_uploaded_timestamp"]
+          newest_uploaded_timestamp = data_file[:newest_uploaded_timestamp]
 
           # If timestamp isn't available, upload all observations
           if !newest_uploaded_timestamp.nil?
-            date_range = [newest_uploaded_timestamp, data_file["parsed"]["newest"]]
+            date_range = [newest_uploaded_timestamp, data_file[:parsed][:newest]]
           end
         end
 
@@ -323,7 +323,7 @@ module Transloader
           #   [...]
           # ]
           converted_rows = rows.map do |row|
-            [row["timestamp"], row[1..-1].map.with_index { |cell, i|
+            [row[:timestamp], row[1..-1].map.with_index { |cell, i|
               {
                 name: headers[i],
                 reading: cell
@@ -355,7 +355,7 @@ module Transloader
               resultTime: row_timestamp
             })
 
-            datastream_url = datastream_hash[obs[:name]]["Datastream@iot.navigationLink"]
+            datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
 
             # Upload to SensorThings API
             new_observation.upload_to(datastream_url)
@@ -365,8 +365,8 @@ module Transloader
         # Update metadata cache file with latest uploaded timestamp
         newest_in_set = to_utc_iso8601(observations.last[0])
 
-        if data_file["newest_uploaded_timestamp"].nil? || data_file["newest_uploaded_timestamp"] < newest_in_set
-          data_file["newest_uploaded_timestamp"] = newest_in_set
+        if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
+          data_file[:newest_uploaded_timestamp] = newest_in_set
         end
 
         save_metadata
@@ -384,8 +384,8 @@ module Transloader
     def save_observations
       get_metadata
 
-      @metadata["data_files"].each do |data_file|
-        data_filename = data_file["filename"]
+      @metadata[:data_files].each do |data_file|
+        data_filename = data_file[:filename]
         all_observations = download_observations(data_file).sort { |a,b| a[0] <=> b[0] }
 
         # Group observations by date. This converts the array from
@@ -415,7 +415,7 @@ module Transloader
             # Convert from row object into observations array format:
             # ["date", [{reading}, {reading}, ...]]
             converted_observations = old_observations.map do |row|
-              [row["timestamp"]].concat([row[1..-1].map.with_index { |reading, i|
+              [row[:timestamp]].concat([row[1..-1].map.with_index { |reading, i|
                 # Parse non-null to float values
                 r = (reading == "null" ? "null" : reading.to_f)
                 { name: headers[i], reading: r }
@@ -432,7 +432,7 @@ module Transloader
 
           CSV.open(obs_filename, "wb") do |csv|
             # Add header row
-            csv << ["timestamp"].concat(data_file["headers"])
+            csv << [:timestamp].concat(data_file[:headers])
 
             # take observations and make an array of readings for the 
             # CSV file.
@@ -452,14 +452,14 @@ module Transloader
         if all_observations[0]
           oldest_in_set         = all_observations[0][0]
           newest_in_set         = all_observations[-1][0]
-          data_file["parsed"] ||= {}
+          data_file[:parsed] ||= {}
 
-          if data_file["parsed"]["oldest"].nil? || data_file["parsed"]["oldest"] > oldest_in_set
-            data_file["parsed"]["oldest"] = oldest_in_set
+          if data_file[:parsed][:oldest].nil? || data_file[:parsed][:oldest] > oldest_in_set
+            data_file[:parsed][:oldest] = oldest_in_set
           end
 
-          if data_file["parsed"]["newest"].nil? || data_file["parsed"]["newest"] < newest_in_set
-            data_file["parsed"]["newest"] = newest_in_set
+          if data_file[:parsed][:newest].nil? || data_file[:parsed][:newest] < newest_in_set
+            data_file[:parsed][:newest] = newest_in_set
           end
 
           save_metadata
@@ -528,7 +528,7 @@ module Transloader
 
       # Check if file has already been downloaded, and if so use HTTP
       # Range header to only download the newest part of the file
-      if data_file["last_length"]
+      if data_file[:last_length]
         # Download part of file; do not use gzip compression
         redownload = false
 
@@ -536,7 +536,7 @@ module Transloader
         # (last_length). If it is smaller, that means the file was
         # probably truncated and the file should be re-downloaded 
         # instead.
-        uri = URI(data_file["url"])
+        uri = URI(data_file[:url])
         request = Net::HTTP::Head.new(uri)
         response = Net::HTTP.start(uri.hostname, uri.port) do |http|
           http.request(request)
@@ -545,14 +545,14 @@ module Transloader
         last_modified = parse_last_modified(response["Last-Modified"])
         new_length    = response["Content-Length"].to_i
 
-        if response["Content-Length"].to_i < data_file["last_length"]
+        if response["Content-Length"].to_i < data_file[:last_length]
           logger.info "Remote data file length is shorter than expected."
           redownload = true
         else
           # Do a partial GET
           request = Net::HTTP::Get.new(uri)
           request['Accept-Encoding'] = ''
-          request['Range'] = "bytes=#{data_file["last_length"]}-"
+          request['Range'] = "bytes=#{data_file[:last_length]}-"
           response = Net::HTTP.start(uri.hostname, uri.port) do |http|
             http.request(request)
           end
@@ -564,7 +564,7 @@ module Transloader
             logger.info "Downloaded partial data."
             filedata      = response.body
             last_modified = parse_last_modified(response["Last-Modified"])
-            new_length    = data_file["last_length"] + filedata.length
+            new_length    = data_file[:last_length] + filedata.length
             begin
               data = CSV.parse(filedata)
             rescue CSV::MalformedCSVError => e
@@ -581,7 +581,7 @@ module Transloader
       if redownload
         logger.info "Downloading entire data file."
         # Download entire file; can use gzip compression
-        uri = URI(data_file["url"])
+        uri = URI(data_file[:url])
         request = Net::HTTP::Get.new(uri)
         response = Net::HTTP.start(uri.hostname, uri.port) do |http|
           http.request(request)
@@ -598,7 +598,7 @@ module Transloader
         # Store column names in station metadata cache file, as 
         # partial requests later will not be able to know the column
         # headers.
-        data_file["headers"] = column_headers
+        data_file[:headers] = column_headers
         save_metadata
 
         # Omit the file header rows from the next step, as the next
@@ -609,8 +609,8 @@ module Transloader
 
       # Update station metadata cache with what the server says is the
       # latest file update time and the latest file length in bytes
-      data_file["last_modified"] = to_iso8601(last_modified)
-      data_file["last_length"]   = new_length
+      data_file[:last_modified] = to_iso8601(last_modified)
+      data_file[:last_length]   = new_length
       save_metadata
 
       # Parse observations from CSV
@@ -618,12 +618,12 @@ module Transloader
         # Transform dates into ISO8601 in UTC.
         # This will make it simpler to group them by day and to simplify
         # timezones for multiple stations.
-        timestamp = parse_toa5_timestamp(row[0], @metadata["timezone_offset"])
+        timestamp = parse_toa5_timestamp(row[0], @metadata[:timezone_offset])
         utc_time = to_iso8601(timestamp)
         observations.push([utc_time, 
           row[1..-1].map.with_index { |x, i|
             {
-              name: data_file["headers"][i],
+              name: data_file[:headers][i],
               reading: parse_reading(x)
             }
           }
