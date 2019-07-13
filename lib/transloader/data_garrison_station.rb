@@ -2,7 +2,6 @@ require 'date'
 require 'fileutils'
 require 'json'
 require 'nokogiri'
-require 'open-uri'
 require 'set'
 require 'time'
 
@@ -454,6 +453,10 @@ module Transloader
       raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
       raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
       # append the time zone from the metadata cache file
+      if raw_phenomenon_time.nil?
+        logger.error "Could not parse observation time"
+        raise "Could not parse observation time"
+      end
       raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
       phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
       utc_time = phenomenon_time.to_time.utc
@@ -470,11 +473,18 @@ module Transloader
     # For parsing functionality specific to Data Garrison
     private
 
+    # Use the HTTP wrapper to fetch the base path and return the 
+    # response body.
+    def get_base_path_body
+      response = Transloader::HTTP.get(uri: @base_path)
+      response.body
+    end
+
     # Return the HTML document object for the station. Will cache the
     # object.
     def station_data_html
-      # TODO: Add HTTP handling
-      @html ||= Nokogiri::HTML(open(@base_path))
+      # TODO: Add HTTP error handling
+      @html ||= Nokogiri::HTML(get_base_path_body)
 
       if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
         logger.warn <<-EOH
