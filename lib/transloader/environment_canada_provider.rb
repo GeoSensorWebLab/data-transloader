@@ -1,7 +1,5 @@
 require 'csv'
 require 'fileutils'
-require 'net/http'
-require 'uri'
 
 require 'transloader/environment_canada_station'
 
@@ -47,7 +45,7 @@ module Transloader
     # Download the station list from Environment Canada and return the 
     # body string
     def download_station_list
-      response = Net::HTTP.get_response(URI(METADATA_URL))
+      response = Transloader::HTTP.get(uri: METADATA_URL)
 
       raise "Error downloading station list" if response.code != '200'
 

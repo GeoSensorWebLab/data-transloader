@@ -79,7 +79,7 @@ module Transloader
       end
 
       swobml_url = URI.join(OBSERVATIONS_URL, "#{@id}-#{type}-swob.xml")
-      response = Net::HTTP.get_response(swobml_url)
+      response = Transloader::HTTP.get(uri: swobml_url)
 
       if response.code != '200'
         logger.error "Error downloading station observation data"
