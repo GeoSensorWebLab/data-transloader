@@ -1,7 +1,5 @@
 require 'csv'
-require 'net/http'
 require 'time'
-require 'uri'
 
 module Transloader
   class CampbellScientificStation
@@ -34,17 +32,12 @@ module Transloader
 
       data_urls.each do |data_url|
         # Download CSV
-        # TODO: Extract HTTP work to its own class
-        uri = URI(data_url)
-        request = Net::HTTP::Get.new(uri)
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.request(request)
-        end
+        response = Transloader::HTTP.get(uri: data_url)
 
         # Incorrect URLs triggers a 302 Found that redirects to the 404 
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
-          raise OpenURI::HTTPError.new("Not Found", response)
+          raise "Not Found: " + response
         end
 
         filedata = response.body
@@ -533,11 +526,7 @@ module Transloader
         # (last_length). If it is smaller, that means the file was
         # probably truncated and the file should be re-downloaded 
         # instead.
-        uri = URI(data_file[:url])
-        request = Net::HTTP::Head.new(uri)
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.request(request)
-        end
+        response = Transloader::HTTP.head(uri: data_file[:url])
 
         last_modified = parse_last_modified(response["Last-Modified"])
         new_length    = response["Content-Length"].to_i
@@ -547,12 +536,13 @@ module Transloader
           redownload = true
         else
           # Do a partial GET
-          request = Net::HTTP::Get.new(uri)
-          request['Accept-Encoding'] = ''
-          request['Range'] = "bytes=#{data_file[:last_length]}-"
-          response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-            http.request(request)
-          end
+          response = Transloader::HTTP.get({
+            uri: data_file[:url],
+            headers: {
+              'Accept-Encoding' => '',
+              'Range' => "bytes=#{data_file[:last_length]}-"
+            }
+          })
 
           # 416 Requested Range Not Satisfiable
           if response.code == "416"
@@ -578,11 +568,7 @@ module Transloader
       if redownload
         logger.info "Downloading entire data file."
         # Download entire file; can use gzip compression
-        uri = URI(data_file[:url])
-        request = Net::HTTP::Get.new(uri)
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.request(request)
-        end
+        response = Transloader::HTTP.get(uri: data_file[:url])
 
         filedata      = response.body
         last_modified = parse_last_modified(response["Last-Modified"])
