@@ -1,5 +1,4 @@
 require 'json'
-require 'uri'
 
 require 'sensorthings/entity'
 
@@ -38,7 +37,7 @@ module SensorThings
       upload_url = self.join_uris(url, "Observations")
 
       filter = "phenomenonTime eq #{@phenomenon_time}"
-      response = self.get(URI(upload_url + "?$filter=#{filter}"))
+      response = self.get(upload_url + "?$filter=#{filter}")
       body = JSON.parse(response.body)
 
       if response.class != Net::HTTPOK
@@ -60,7 +59,7 @@ module SensorThings
         if same_as?(existing_entity)
           logger.info "Re-using existing Observation entity."
         else
-          self.patch_to_path(URI(@link))
+          self.patch_to_path(@link)
         end
       end
     end

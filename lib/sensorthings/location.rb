@@ -1,5 +1,4 @@
 require 'json'
-require 'uri'
 
 require 'sensorthings/entity'
 
@@ -41,7 +40,7 @@ module SensorThings
       upload_url = self.join_uris(url, "Locations")
 
       filter = "name eq '#{@name}' and description eq '#{@description}'"
-      response = self.get(URI(upload_url + "?$filter=#{filter}"))
+      response = self.get(upload_url + "?$filter=#{filter}")
       body = JSON.parse(response.body)
 
       # Look for matching existing entities. If no entities match, use POST to

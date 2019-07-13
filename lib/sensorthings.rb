@@ -8,6 +8,7 @@ require 'sensorthings/observed_property'
 require 'sensorthings/sensor'
 require 'sensorthings/thing'
 require 'sensorthings/version'
+require 'transloader/http'
 
 module SensorThings
 end

@@ -32,49 +32,29 @@ module SensorThings
     end
 
     def get(url)
-      request = Net::HTTP::Get.new(url)
+      response = Transloader::HTTP.get({
+        uri: url,
+        open_timeout: 1800,
+        read_timeout: 1800
+      })
 
-      # Log output of request
-      logger.debug "#{request.method} #{request.uri}"
-      logger.debug ''
-
-      uri = URI(url)
-      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-        http.open_timeout = 1800
-        http.read_timeout = 1800
-        http.request(request)
-      end
-
-      # Force encoding on response body
-      # See https://bugs.ruby-lang.org/issues/2567
-      response.body = response.body.force_encoding('UTF-8')
-
-      # Log output of response
-      logger.debug "HTTP/#{response.http_version} #{response.message} #{response.code}"
-      response.each do |header, value|
-        logger.debug "#{header}: #{value}"
-      end
-      logger.debug response.body
-      logger.debug ''
-
+      response.body = fix_encoding(response.body)
       response
     end
 
     def patch_to_path(url)
-      request = Net::HTTP::Patch.new(url)
-      response = send_request(url, request)
+      response = send_request(url, :PATCH)
 
-      if response.class != Net::HTTPOK && response.class != Net::HTTPNoContent
-        raise "Error: Could not PATCH entity. #{url}\n #{response.body}\n #{request.body}"
+      if response.code != "200" && response.code != "204"
+        raise "Error: Could not PATCH entity. #{url}\n #{response.body}"
       end
     end
 
     def post_to_path(url)
-      request = Net::HTTP::Post.new(url)
-      response = send_request(url, request)
+      response = send_request(url, :POST)
 
-      if response.class != Net::HTTPCreated
-        raise "Error: Could not POST entity. #{url}\n #{response.body}\n #{request.body}"
+      if response.code != "201"
+        raise "Error: Could not POST entity. #{url}\n #{response.code} #{response.body}"
       end
 
       entity = nil
@@ -98,11 +78,10 @@ module SensorThings
     end
 
     def put_to_path(url)
-      request = Net::HTTP::Put.new(url)
-      response = send_request(url, request)
+      response = send_request(url, :PUT)
 
-      if response.class != Net::HTTPCreated
-        raise "Error: Could not PUT entity. #{url}\n #{response.body}\n #{request.body}"
+      if response.code != "201"
+        raise "Error: Could not PUT entity. #{url}\n #{response.body}"
       end
 
       @link = response['Location']
@@ -111,36 +90,36 @@ module SensorThings
 
     # PATCH/POST/PUT all use the same behaviour for sending data, so it
     # can be re-used in this method.
-    def send_request(url, request)
-      request.body = self.to_json
-      request.content_type = 'application/json'
+    def send_request(url, method_name)
+      options = {
+        body: self.to_json,
+        headers: {
+          "Content-Type" => "application/json"
+        },
+        uri: url
+      }
 
-      # Log output of request
-      logger.debug "#{request.method} #{request.uri}"
-      logger.debug "Content-Type: #{request.content_type}"
-      logger.debug self.to_json
-      logger.debug ''
-
-      uri = URI(url)
-      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-        http.open_timeout = 1800
-        http.read_timeout = 1800
-        http.request(request)
+      response = case method_name
+        when :PATCH
+          Transloader::HTTP.patch(options)
+        when :POST
+          Transloader::HTTP.post(options)
+        when :PUT
+          Transloader::HTTP.put(options)
+        else
+          raise "Unknown HTTP method: #{method_name}"
       end
 
-      # Force encoding on response body
-      # See https://bugs.ruby-lang.org/issues/2567
-      response.body = response.body.force_encoding('UTF-8')
-
-      # Log output of response
-      logger.debug "HTTP/#{response.http_version} #{response.message} #{response.code}"
-      response.each do |header, value|
-        logger.debug "#{header}: #{value}"
-      end
-      logger.debug response.body
-      logger.debug ''
-
+      response.body = fix_encoding(response.body)
       response
+    end
+
+    private
+
+    # Force encoding on response body
+    # See https://bugs.ruby-lang.org/issues/2567
+    def fix_encoding(body)
+      body.force_encoding('UTF-8')
     end
   end
 end
