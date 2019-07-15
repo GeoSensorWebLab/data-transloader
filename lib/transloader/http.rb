@@ -1,3 +1,4 @@
+require 'deep_merge'
 require 'net/http'
 require 'uri'
 
@@ -74,10 +75,12 @@ module Transloader
       def default_options(options)
         {
           body: nil,
-          headers: {},
+          headers: {
+            "User-Agent": "GeoSensorWebLab/data-transloader/#{Transloader.version}"
+          },
           open_timeout: 30,
           read_timeout: 30
-        }.merge(options)
+        }.deep_merge(options)
       end
 
       def log_response(response)
@@ -100,6 +103,7 @@ module Transloader
 
         # Log output of request
         logger.debug "#{request.method} #{request.uri}"
+        logger.debug request.to_hash.inspect
         logger.debug ''
 
         response = Net::HTTP.start(options[:uri].hostname, options[:uri].port, {
