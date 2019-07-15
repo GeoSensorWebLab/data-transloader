@@ -40,7 +40,7 @@ module SensorThings
       response = self.get(upload_url + "?$filter=#{filter}")
       body = JSON.parse(response.body)
 
-      if response.class != Net::HTTPOK
+      if response.code != "200"
         raise "Error: Could not GET entities. #{url}\n #{response.body}\n #{filter}"
       end
 
