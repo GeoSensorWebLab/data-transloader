@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "http"
 gem "nokogiri"
 gem "pry"
 gem "rspec"
