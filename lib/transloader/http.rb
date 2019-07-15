@@ -16,25 +16,9 @@ module Transloader
       #  headers: Hash of HTTP headers to send with request
       def get(options = {})
         options = default_options(options)
-
-        uri = URI(options[:uri])
-        request = Net::HTTP::Get.new(uri)
-
-        options[:headers].each do |header, value|
-          request[header.to_s] = value
-        end
-
-        # Log output of request
-        logger.debug "#{request.method} #{request.uri}"
-        logger.debug ''
-
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.open_timeout = options[:open_timeout]
-          http.read_timeout = options[:read_timeout]
-          http.request(request)
-        end
-        log_response(response)
-        response
+        options[:uri] = URI(options[:uri])
+        request = Net::HTTP::Get.new(options[:uri])
+        send_request(request, options)
       end
 
       # For HEAD requests.
@@ -43,100 +27,45 @@ module Transloader
       #  headers: Hash of HTTP headers to send with request
       def head(options = {})
         options = default_options(options)
-
-        uri = URI(options[:uri])
-        request = Net::HTTP::Head.new(uri)
-
-        options[:headers].each do |header, value|
-          request[header.to_s] = value
-        end
-
-        # Log output of request
-        logger.debug "#{request.method} #{request.uri}"
-        logger.debug ''
-
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.open_timeout = options[:open_timeout]
-          http.read_timeout = options[:read_timeout]
-          http.request(request)
-        end
-        log_response(response)
-        response
+        options[:uri] = URI(options[:uri])
+        request = Net::HTTP::Head.new(options[:uri])
+        send_request(request, options)
       end
 
+      # For PATCH requests.
+      # options:
+      #  body: Request body to send to server
+      #  uri: URL to get
+      #  headers: Hash of HTTP headers to send with request
       def patch(options = {})
         options = default_options(options)
-
-        uri = URI(options[:uri])
-        request = Net::HTTP::Patch.new(uri)
-
-        options[:headers].each do |header, value|
-          request[header.to_s] = value
-        end
-
-        request.body = options[:body]
-
-        # Log output of request
-        logger.debug "#{request.method} #{request.uri}"
-        logger.debug ''
-
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.open_timeout = options[:open_timeout]
-          http.read_timeout = options[:read_timeout]
-          http.request(request)
-        end
-        log_response(response)
-        response
+        options[:uri] = URI(options[:uri])
+        request = Net::HTTP::Patch.new(options[:uri])
+        send_request(request, options)
       end
 
+      # For POST requests.
+      # options:
+      #  body: Request body to send to server
+      #  uri: URL to get
+      #  headers: Hash of HTTP headers to send with request
       def post(options = {})
         options = default_options(options)
-
-        uri = URI(options[:uri])
-        request = Net::HTTP::Post.new(uri)
-
-        options[:headers].each do |header, value|
-          request[header.to_s] = value
-        end
-
-        request.body = options[:body]
-
-        # Log output of request
-        logger.debug "#{request.method} #{request.uri}"
-        logger.debug ''
-
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.open_timeout = options[:open_timeout]
-          http.read_timeout = options[:read_timeout]
-          http.request(request)
-        end
-        log_response(response)
-        response
+        options[:uri] = URI(options[:uri])
+        request = Net::HTTP::Post.new(options[:uri])
+        send_request(request, options)
       end
 
+      # For PUT requests.
+      # options:
+      #  body: Request body to send to server
+      #  uri: URL to get
+      #  headers: Hash of HTTP headers to send with request
       def put(options = {})
         options = default_options(options)
-
-        uri = URI(options[:uri])
-        request = Net::HTTP::Put.new(uri)
-
-        options[:headers].each do |header, value|
-          request[header.to_s] = value
-        end
-
-        request.body = options[:body]
-
-        # Log output of request
-        logger.debug "#{request.method} #{request.uri}"
-        logger.debug ''
-
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.open_timeout = options[:open_timeout]
-          http.read_timeout = options[:read_timeout]
-          http.request(request)
-        end
-        log_response(response)
-        response
+        options[:uri] = URI(options[:uri])
+        request = Net::HTTP::Put.new(options[:uri])
+        send_request(request, options)
       end
 
       private
@@ -145,6 +74,7 @@ module Transloader
       # the API will overwrite the default options.
       def default_options(options)
         {
+          body: nil,
           headers: {},
           open_timeout: 30,
           read_timeout: 30
@@ -158,6 +88,29 @@ module Transloader
         end
         logger.debug response.body
         logger.debug ''
+      end
+
+      # Most of the requests have the same methods, so we can re-use 
+      # them here.
+      def send_request(request, options)
+        options[:headers].each do |header, value|
+          request[header.to_s] = value
+        end
+
+        request.body = options[:body]
+
+        # Log output of request
+        logger.debug "#{request.method} #{request.uri}"
+        logger.debug ''
+
+        response = Net::HTTP.start(options[:uri].hostname, options[:uri].port) do |http|
+          http.open_timeout = options[:open_timeout]
+          http.read_timeout = options[:read_timeout]
+          http.request(request)
+        end
+        log_response(response)
+        response
+
       end
     end
   end
