@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "deep_merge"
 gem "nokogiri"
 gem "pry"
 gem "rspec"
