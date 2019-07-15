@@ -103,7 +103,9 @@ module Transloader
         logger.debug "#{request.method} #{request.uri}"
         logger.debug ''
 
-        response = Net::HTTP.start(options[:uri].hostname, options[:uri].port) do |http|
+        response = Net::HTTP.start(options[:uri].hostname, options[:uri].port, {
+          use_ssl: (options[:uri].scheme == "https")
+        }) do |http|
           http.open_timeout = options[:open_timeout]
           http.read_timeout = options[:read_timeout]
           http.request(request)
