@@ -46,7 +46,7 @@ RSpec.describe Transloader::CampbellScientificStation do
             station_id: "606830",
             data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/null.dat"]
           )
-        }.to raise_error(OpenURI::HTTPError)
+        }.to raise_error(RuntimeError, /Not Found/)
       end
     end
 

@@ -37,7 +37,7 @@ module Transloader
         # Incorrect URLs triggers a 302 Found that redirects to the 404 
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
-          raise "Not Found: " + response
+          raise "Not Found: #{data_url}"
         end
 
         filedata = response.body
