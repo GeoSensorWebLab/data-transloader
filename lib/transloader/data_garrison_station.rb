@@ -477,6 +477,11 @@ module Transloader
     # response body.
     def get_base_path_body
       response = Transloader::HTTP.get(uri: @base_path)
+
+      if response.code != "200"
+        raise "Could not download station data"
+      end
+
       response.body
     end
 

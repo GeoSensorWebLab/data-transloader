@@ -46,7 +46,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             user_id: "300234063581640",
             station_id: "300234065673960"
           )
-        }.to raise_error(OpenURI::HTTPError)
+        }.to raise_error(RuntimeError, "Could not download station data")
       end
     end
 
