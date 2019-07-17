@@ -2,17 +2,17 @@ require 'uri'
 
 module Transloader
   class CommandLineOptions
-    attr_reader :cache, :data_urls, :date_interval, :destination,
+    attr_reader :cache, :data_urls, :date, :destination,
                 :provider, :station_id, :user_id
     # Set default values
     def initialize
-      @cache         = nil
-      @data_url      = []
-      @date_interval = nil
-      @destination   = nil
-      @provider      = nil
-      @station_id    = nil
-      @user_id       = nil
+      @cache       = nil
+      @data_url    = []
+      @date        = nil
+      @destination = nil
+      @provider    = nil
+      @station_id  = nil
+      @user_id     = nil
     end
 
     def define_options(parser)
@@ -82,7 +82,7 @@ module Transloader
     def date_interval_option(parser)
       parser.on("--date [DATE INTERVAL]",
         "ISO8601 date interval for observation upload.") do |value|
-        @date_interval = value
+        @date = value
         
         begin
           Transloader::TimeInterval.new(value)

@@ -141,7 +141,7 @@ module Transloader
 
     # Options validation for "put observations" command
     def validate_put_observations(options)
-      require_options(options, [:provider, :station_id, :cache, :date_interval, :destination])
+      require_options(options, [:provider, :station_id, :cache, :date, :destination])
 
       case options.provider
       when "data_garrison"
