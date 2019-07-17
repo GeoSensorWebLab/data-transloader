@@ -1,9 +1,11 @@
 module Transloader
   class CommandLineOptions
+    attr_reader :cache, :data_urls, :date_interval, :destination,
+                :provider, :station_id, :user_id
     # Set default values
     def initialize
       @cache         = nil
-      @data_urls     = []
+      @data_url      = []
       @date_interval = nil
       @destination   = nil
       @provider      = nil
@@ -31,9 +33,9 @@ module Transloader
       
       # Parse Data URLs.
       # Specifying multiple times will add each item to an array.
-      parser.on("--data-url [URL]", 
+      parser.on("--data_url [URL]", 
         "Data URL to monitor for observations.") do |value|
-        @data_urls.push(value)
+        @data_url.push(value)
         # TODO: Validate URL
       end
 
@@ -60,13 +62,13 @@ module Transloader
       end
 
       # Parse Station ID
-      parser.on("--station-id ID",
+      parser.on("--station_id ID",
         "Station ID (string or number) for ETL.") do |value|
         @station_id = value
       end
 
       # Parse User ID
-      parser.on("--user-id [ID]",
+      parser.on("--user_id [ID]",
         "User ID (string or number) for ETL.") do |value|
         @user_id = value
       end

@@ -77,11 +77,44 @@ module Transloader
       end
     end
 
+    # Check that the `options` object has non-null and non-empty values
+    # for attributes in `required_list` array.
+    def require_options(options, required_list)
+      required_list.each do |attribute|
+        value = options.instance_variable_get("@#{attribute.to_s}")
+        if value.nil?
+          puts "ERROR: Missing option: #{attribute.to_s}"
+          puts @parser
+          exit 1
+        end
+        if value.is_a?(Array) && value.empty?
+          puts "ERROR: Missing option: #{attribute.to_s}"
+          puts @parser
+          exit 1
+        end
+      end
+    end
+
     # Validate that the required options are available for the verb and
     # noun. Exits if options are invalid, otherwise returns an array 
     # of [verb, noun, options].
     def validate(verb, noun, options)
+      if verb == :get && noun == :metadata
+        validate_get_metadata(options)
+      end
+
       [verb, noun, options]
+    end
+
+    def validate_get_metadata(options)
+      require_options(options, [:provider, :station_id, :cache])
+
+      case options.provider
+      when "campbell_scientific"
+        require_options(options, [:data_url])
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
     end
   end
 end
