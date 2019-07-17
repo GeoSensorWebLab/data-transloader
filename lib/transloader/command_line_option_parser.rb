@@ -98,11 +98,16 @@ module Transloader
         validate_get_metadata(options)
       elsif verb == :put && noun == :metadata
         validate_put_metadata(options)
+      elsif verb == :get && noun == :observations
+        validate_get_observations(options)
+      elsif verb == :put && noun == :observations
+        validate_put_observations(options)
       end
 
       [verb, noun, options]
     end
 
+    # Options validation for "get metadata" command
     def validate_get_metadata(options)
       require_options(options, [:provider, :station_id, :cache])
 
@@ -114,8 +119,29 @@ module Transloader
       end
     end
 
+    # Options validation for "get observations" command
+    def validate_get_observations(options)
+      require_options(options, [:provider, :station_id, :cache])
+
+      case options.provider
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
+    end
+
+    # Options validation for "put metadata" command
     def validate_put_metadata(options)
       require_options(options, [:provider, :station_id, :cache, :destination])
+
+      case options.provider
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
+    end
+
+    # Options validation for "put observations" command
+    def validate_put_observations(options)
+      require_options(options, [:provider, :station_id, :cache, :date_interval, :destination])
 
       case options.provider
       when "data_garrison"
