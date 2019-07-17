@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby -Ilib
+require 'transloader'
+
+# Parse Args
+parser = Transloader::CommandLineOptionParser.new
+args = parser.parse(ARGV)
+pp args
+
