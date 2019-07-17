@@ -80,8 +80,9 @@ end
 parser = Transloader::CommandLineOptionParser.new
 args = parser.parse(ARGV)
 
-verb = args.verb
-noun = args.noun
+verb = args[0]
+noun = args[1]
+options = args[2]
 
 # Determine action
 if verb == :get && noun == :metadata
