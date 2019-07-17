@@ -82,12 +82,7 @@ module Transloader
     def require_options(options, required_list)
       required_list.each do |attribute|
         value = options.instance_variable_get("@#{attribute.to_s}")
-        if value.nil?
-          puts "ERROR: Missing option: #{attribute.to_s}"
-          puts @parser
-          exit 1
-        end
-        if value.is_a?(Array) && value.empty?
+        if value.nil? || (value.is_a?(Array) && value.empty?)
           puts "ERROR: Missing option: #{attribute.to_s}"
           puts @parser
           exit 1
@@ -101,6 +96,8 @@ module Transloader
     def validate(verb, noun, options)
       if verb == :get && noun == :metadata
         validate_get_metadata(options)
+      elsif verb == :put && noun == :metadata
+        validate_put_metadata(options)
       end
 
       [verb, noun, options]
@@ -112,6 +109,15 @@ module Transloader
       case options.provider
       when "campbell_scientific"
         require_options(options, [:data_url])
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
+    end
+
+    def validate_put_metadata(options)
+      require_options(options, [:provider, :station_id, :cache, :destination])
+
+      case options.provider
       when "data_garrison"
         require_options(options, [:user_id])
       end
