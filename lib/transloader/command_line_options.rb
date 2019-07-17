@@ -1,3 +1,5 @@
+require 'uri'
+
 module Transloader
   class CommandLineOptions
     attr_reader :cache, :data_urls, :date_interval, :destination,
@@ -52,7 +54,12 @@ module Transloader
       parser.on("--cache [PATH]",
         "Path to data and metadata cache directory.") do |value|
         @cache = value
-        # TODO: Validate path
+        
+        if !Dir.exist?(value)
+          puts %Q[ERROR: Directory "#{value}" does not exist.]
+          puts parser
+          exit 1
+        end
       end
     end
 
@@ -62,7 +69,12 @@ module Transloader
       parser.on("--data_url [URL]", 
         "Data URL to monitor for observations.") do |value|
         @data_url.push(value)
-        # TODO: Validate URL
+        
+        if !(value =~ /\A#{URI::regexp(["http", "https"])}\z/)
+          puts %Q[ERROR: Data URL "#{value}" is not a valid URL.]
+          puts parser
+          exit 1
+        end
       end
     end
 
@@ -80,7 +92,12 @@ module Transloader
       parser.on("--destination [URL]",
         "SensorThings API Service base URL.") do |value|
         @destination = value
-        # TODO: Validate URL
+        
+        if !(value =~ /\A#{URI::regexp(["http", "https"])}\z/)
+          puts %Q[ERROR: Destination URL "#{value}" is not a valid URL.]
+          puts parser
+          exit 1
+        end
       end
     end
 
