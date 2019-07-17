@@ -349,7 +349,11 @@ module Transloader
       end
 
       logger.info "Uploading observations from #{file_path}"
-      html = Nokogiri::HTML(open(file_path))
+      upload_observations_from_file(file_path)
+    end
+
+    def upload_observations_from_file(file)
+      html = Nokogiri::HTML(open(file))
 
       # Parse the time from the "Latest Conditions" element
       # e.g. 02/22/19 8:28 pm
@@ -434,6 +438,66 @@ module Transloader
 
         # Upload entity and parse response
         observation.upload_to(datastream_url)
+      end
+    end
+
+    # Collect all the observation files in the date interval, and upload
+    # them.
+    # (Kind of wish I had a database here.)
+    def upload_observations_in_interval(destination, interval)
+      time_interval = Transloader::TimeInterval.new(interval)
+      start_time = time_interval.start.utc
+      end_time = time_interval.end.utc
+
+      matching_years = Dir.entries(@observations_path).reduce([]) do |memo, year_dir|
+        if year_dir.to_i >= start_time.year && year_dir.to_i <= end_time.year
+          memo.push("#{@observations_path}/#{year_dir}")
+        end
+        memo
+      end
+
+      matching_months = matching_years.collect do |year_dir|
+        Dir.entries(year_dir).reduce([]) do |memo, month_dir|
+          if month_dir.to_i >= start_time.month && month_dir.to_i <= end_time.month
+            memo.push("#{year_dir}/#{month_dir}")
+          end
+          memo
+        end
+      end.flatten
+
+      matching_days = matching_months.collect do |month_dir|
+        Dir.entries(month_dir).reduce([]) do |memo, day_dir|
+          if day_dir.to_i >= start_time.day && day_dir.to_i <= end_time.day
+            memo.push("#{month_dir}/#{day_dir}")
+          end
+          memo
+        end
+      end.flatten
+
+      day_files = matching_days.collect do |day_dir|
+        Dir.entries(day_dir).collect do |file|
+          "#{day_dir}/#{file}"
+        end
+      end.flatten
+
+      # Filter files in time interval
+      output = day_files.reduce([]) do |memo, file|
+        if !(file.end_with?("/.") || file.end_with?("/.."))
+          parts = file.split("/")
+          year = parts[-4]
+          month = parts[-3]
+          day = parts[-2]
+          time = parts[-1].split(".")[0]
+          timestamp = Time.parse("#{year}#{month}#{day}T#{time}").utc
+          if (timestamp >= start_time && timestamp <= end_time)
+            memo.push(file)
+          end
+        end
+        memo
+      end
+
+      output.each do |file|
+        upload_observations_from_file(file)
       end
     end
 
