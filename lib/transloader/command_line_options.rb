@@ -83,7 +83,14 @@ module Transloader
       parser.on("--date [DATE INTERVAL]",
         "ISO8601 date interval for observation upload.") do |value|
         @date_interval = value
-        # TODO: Validate date interval
+        
+        begin
+          Transloader::TimeInterval.new(value)
+        rescue
+          puts %Q[ERROR: Date Interval "#{value}" is not a valid ISO8601 <start>/<end> time interval.]
+          puts parser
+          exit 1
+        end
       end
     end
 
@@ -107,7 +114,12 @@ module Transloader
       parser.on("--provider [PROVIDER]",
         "Data provider to use: environment_canada, data_garrison, campbell_scientific.") do |value|
         @provider = value
-        # TODO: Validate provider
+        
+        if !["environment_canada", "data_garrison", "campbell_scientific"].include?(value)
+          puts %Q[ERROR: Provider "#{value}" is not a valid provider.]
+          puts parser
+          exit 1
+        end
       end
     end
 
