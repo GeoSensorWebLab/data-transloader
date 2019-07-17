@@ -25,54 +25,13 @@ module Transloader
       parser.separator ""
       parser.separator "Specific options:"
 
-      # Parse Cache Directory Path
-      parser.on("--cache [PATH]",
-        "Path to data and metadata cache directory.") do |value|
-        @cache = value
-        # TODO: Validate path
-      end
-      
-      # Parse Data URLs.
-      # Specifying multiple times will add each item to an array.
-      parser.on("--data_url [URL]", 
-        "Data URL to monitor for observations.") do |value|
-        @data_url.push(value)
-        # TODO: Validate URL
-      end
-
-      # Parse ISO8601 Date Interval
-      parser.on("--date [DATE INTERVAL]",
-        "ISO8601 date interval for observation upload.") do |value|
-        @date_interval = value
-        # TODO: Validate date interval
-      end
-
-      # Parse SensorThings API Destination URL
-      parser.on("--destination [URL]",
-        "SensorThings API Service base URL.") do |value|
-        @destination = value
-        # TODO: Validate URL
-      end
-
-      # Parser Data Provider.
-      # Determines which Provider and Station classes are used.
-      parser.on("--provider [PROVIDER]",
-        "Data provider to use: environment_canada, data_garrison, campbell_scientific.") do |value|
-        @provider = value
-        # TODO: Validate provider
-      end
-
-      # Parse Station ID
-      parser.on("--station_id [ID]",
-        "Station ID (string or number) for ETL.") do |value|
-        @station_id = value
-      end
-
-      # Parse User ID
-      parser.on("--user_id [ID]",
-        "User ID (string or number) for ETL.") do |value|
-        @user_id = value
-      end
+      cache_directory_option(parser)
+      data_url_option(parser)
+      date_interval_option(parser)
+      destination_option(parser)
+      provider_option(parser)
+      station_id_option(parser)      
+      user_id_option(parser)
 
       parser.separator ""
       parser.separator "Common options:"
@@ -85,6 +44,69 @@ module Transloader
       parser.on_tail("-V", "--version", "Show version") do
         puts Transloader.version
         exit
+      end
+    end
+
+    # Parse Cache Directory Path
+    def cache_directory_option(parser)
+      parser.on("--cache [PATH]",
+        "Path to data and metadata cache directory.") do |value|
+        @cache = value
+        # TODO: Validate path
+      end
+    end
+
+    # Parse Data URLs.
+    # Specifying multiple times will add each item to an array.
+    def data_url_option(parser)
+      parser.on("--data_url [URL]", 
+        "Data URL to monitor for observations.") do |value|
+        @data_url.push(value)
+        # TODO: Validate URL
+      end
+    end
+
+    # Parse ISO8601 Date Interval
+    def date_interval_option(parser)
+      parser.on("--date [DATE INTERVAL]",
+        "ISO8601 date interval for observation upload.") do |value|
+        @date_interval = value
+        # TODO: Validate date interval
+      end
+    end
+
+    # Parse SensorThings API Destination URL
+    def destination_option(parser)
+      parser.on("--destination [URL]",
+        "SensorThings API Service base URL.") do |value|
+        @destination = value
+        # TODO: Validate URL
+      end
+    end
+
+    # Parser Data Provider.
+    # Determines which Provider and Station classes are used.
+    def provider_option(parser)
+      parser.on("--provider [PROVIDER]",
+        "Data provider to use: environment_canada, data_garrison, campbell_scientific.") do |value|
+        @provider = value
+        # TODO: Validate provider
+      end
+    end
+
+    # Parse Station ID
+    def station_id_option(parser)
+      parser.on("--station_id [ID]",
+        "Station ID (string or number) for ETL.") do |value|
+        @station_id = value
+      end
+    end
+
+    # Parse User ID
+    def user_id_option(parser)
+      parser.on("--user_id [ID]",
+        "User ID (string or number) for ETL.") do |value|
+        @user_id = value
       end
     end
   end
