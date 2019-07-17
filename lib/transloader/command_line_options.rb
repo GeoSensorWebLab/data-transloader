@@ -15,6 +15,7 @@ module Transloader
 
     def define_options(parser)
       parser.banner = "Usage: transloader <verb> <noun> [options]"
+      parser.separator "See Data Transloader DOCUMENTATION for detailed usage instructions."
       parser.separator ""
       parser.separator "Available subcommands:"
       parser.separator "transload get metadata [options]"
@@ -25,7 +26,7 @@ module Transloader
       parser.separator "Specific options:"
 
       # Parse Cache Directory Path
-      parser.on("--cache PATH",
+      parser.on("--cache [PATH]",
         "Path to data and metadata cache directory.") do |value|
         @cache = value
         # TODO: Validate path
@@ -55,14 +56,14 @@ module Transloader
 
       # Parser Data Provider.
       # Determines which Provider and Station classes are used.
-      parser.on("--provider PROVIDER",
+      parser.on("--provider [PROVIDER]",
         "Data provider to use: environment_canada, data_garrison, campbell_scientific.") do |value|
         @provider = value
         # TODO: Validate provider
       end
 
       # Parse Station ID
-      parser.on("--station_id ID",
+      parser.on("--station_id [ID]",
         "Station ID (string or number) for ETL.") do |value|
         @station_id = value
       end
