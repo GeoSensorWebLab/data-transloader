@@ -10,9 +10,9 @@ To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `S
 
 ```
 $ transload get metadata \
-    --source data_garrison \
-    --user 300234063581640 \
-    --station 300234065673960 \
+    --provider data_garrison \
+    --user_id 300234063581640 \
+    --station_id 300234065673960 \
     --cache datastore/weather
 ```
 
@@ -53,9 +53,9 @@ To execute the upload, the tool has a put command:
 
 ```
 $ transload put metadata \
-    --source data_garrison \
-    --user 300234063581640 \
-    --station 300234065673960 \
+    --provider data_garrison \
+    --user_id 300234063581640 \
+    --station_id 300234065673960 \
     --cache datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
@@ -76,9 +76,9 @@ After the base entities have been created in the OGC SensorThings API service, t
 
 ```
 $ transload get observations \
-    --source data_garrison \
-    --user 300234063581640 \
-    --station 300234065673960 \
+    --provider data_garrison \
+    --user_id 300234063581640 \
+    --station_id 300234065673960 \
     --cache datastore/weather
 ```
 
@@ -98,24 +98,15 @@ Once a `Feature of Interest` has been created or found, it is linked to a new `O
 
 ```
 $ transload put observations \
-    --source data_garrison \
-    --user 300234063581640 \
-    --station 300234065673960 \
+    --provider data_garrison \
+    --user_id 300234063581640 \
+    --station_id 300234065673960 \
     --cache datastore/weather \
-    --date 2018-05-01T00:00:00Z \
-    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
-$ transload put observations \
-    --source data_garrison \
-    --user 300234063581640 \
-    --station 300234065673960 \
-    --cache datastore/weather \
-    --date latest \
+    --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the first example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache in `datastore/weather/data_garrison/300234063581640/300234065673960/2018/05/01/000000Z.html`.
-
-In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
+In the example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache. Only cached files with dates that fall into the time interval will be uploaded.
 
 ## Data Model Mapping
 

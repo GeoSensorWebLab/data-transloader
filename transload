@@ -1,130 +1,96 @@
-#!/usr/bin/env ruby -w -Ilib
+#!/usr/bin/env ruby -Ilib
 require 'transloader'
 
-def get_station_metadata(source:, user_id:, station_id:, data_urls:, cache:)
-  case source
+def get_metadata(options)
+  case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
     station.save_metadata
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id: user_id, station_id: station_id)
+    provider = Transloader::DataGarrisonProvider.new(options.cache)
+    station = provider.get_station(user_id: options.user_id, 
+                                   station_id: options.station_id)
     station.save_metadata
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id: station_id, data_urls: data_urls)
+    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id, 
+                                   data_urls: options.data_urls)
     station.save_metadata
-  else
-    $stderr.puts "ERROR: Support for source not implemented"
-    exit 1
   end
 end
 
-def get_station_observations(source:, user_id:, station_id:, cache:)
-  case source
+def put_metadata(options)
+  case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
-    station.save_observations
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
+    station.upload_metadata(options.destination)
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id: user_id, station_id: station_id)
-    station.save_observations
+    provider = Transloader::DataGarrisonProvider.new(options.cache)
+    station = provider.get_station(user_id: options.user_id,
+                                   station_id: options.station_id)
+    station.upload_metadata(options.destination)
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
-    station.save_observations
-  else
-    $stderr.puts "ERROR: Support for source not implemented"
-    exit 1
+    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
+    station.upload_metadata(options.destination)
   end
 end
 
-def put_station_metadata(source:, user_id:, station_id:, cache:, destination:)
-  case source
+def get_observations(options)
+  case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
-    station.upload_metadata(destination)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
+    station.save_observations
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id: user_id, station_id: station_id)
-    station.upload_metadata(destination)
+    provider = Transloader::DataGarrisonProvider.new(options.cache)
+    station = provider.get_station(user_id: options.user_id,
+                                   station_id: options.station_id)
+    station.save_observations
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
-    station.upload_metadata(destination)
-  else
-    $stderr.puts "ERROR: Support for source not implemented"
-    exit 1
+    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
+    station.save_observations
   end
 end
 
-def put_station_observations(source:, user_id:, station_id:, cache:, destination:, date:)
-  case source
+def put_observations(options)
+  case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
     station.save_metadata
-    station.upload_metadata(destination)
-    station.upload_observations(destination, date)
+    station.upload_metadata(options.destination)
+    station.upload_observations_in_interval(options.destination, options.date)
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(cache)
-    station = provider.get_station(user_id: user_id, station_id: station_id)
-    station.upload_observations(destination, date)
+    provider = Transloader::DataGarrisonProvider.new(options.cache)
+    station = provider.get_station(user_id: options.user_id,
+                                   station_id: options.station_id)
+    station.upload_observations_in_interval(options.destination, options.date)
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(cache)
-    station = provider.get_station(station_id: station_id)
-    station.upload_observations(destination, date)
-  else
-    $stderr.puts "ERROR: Support for source not implemented"
-    exit 1
+    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    station = provider.get_station(station_id: options.station_id)
+    station.upload_observations_in_interval(options.destination, options.date)
   end
 end
 
 # Parse Args
-args = Transloader::Args.new(ARGV)
+parser = Transloader::CommandLineOptionParser.new
+args = parser.parse(ARGV)
+
+verb = args[0]
+noun = args[1]
+options = args[2]
 
 # Determine action
-
-case args.verb
-when :get
-  case args.object
-  when :metadata
-    get_station_metadata(
-      source:     args.source,
-      user_id:    args.user,
-      station_id: args.station,
-      data_urls:  args.data_urls,
-      cache:      args.cache
-    )
-  when :observations
-    get_station_observations(
-      source:     args.source,
-      user_id:    args.user,
-      station_id: args.station,
-      cache:      args.cache
-     )
-  end
-when :put
-  case args.object
-  when :metadata
-    put_station_metadata(
-      source:      args.source,
-      user_id:     args.user,
-      station_id:  args.station,
-      cache:       args.cache,
-      destination: args.destination
-    )
-  when :observations
-    put_station_observations(
-      source:      args.source,
-      user_id:     args.user,
-      station_id:  args.station,
-      cache:       args.cache,
-      destination: args.destination,
-      date:        args.date
-    )
-  end
+if verb == :get && noun == :metadata
+  get_metadata(options)
+elsif verb == :put && noun == :metadata
+  put_metadata(options)
+elsif verb == :get && noun == :observations
+  get_observations(options)
+elsif verb == :put && noun == :observations
+  put_observations(options)
 end

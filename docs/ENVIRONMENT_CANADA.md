@@ -10,8 +10,8 @@ To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `S
 
 ```
 $ transload get metadata \
-    --source environment_canada \
-    --station CXCM \
+    --provider environment_canada \
+    --station_id CXCM \
     --cache datastore/weather
 ```
 
@@ -41,8 +41,8 @@ To execute the upload, the tool has a put command:
 
 ```
 $ transload put metadata \
-    --source environment_canada \
-    --station CXCM \
+    --provider environment_canada \
+    --station_id CXCM \
     --cache datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
@@ -63,8 +63,8 @@ After the base entities have been created in the OGC SensorThings API service, t
 
 ```
 $ transload get observations \
-    --source environment_canada \
-    --station CXCM \
+    --provider environment_canada \
+    --station_id CXCM \
     --cache datastore/weather
 ```
 
@@ -82,21 +82,13 @@ Once a `Feature of Interest` has been created or found, it is linked to a new `O
 
 ```
 $ transload put observations \
-    --source environment_canada \
-    --station CXCM \
+    --provider environment_canada \
+    --station_id CXCM \
     --cache datastore/weather \
-    --date 2018-05-01T00:00:00Z \
-    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
-$ transload put observations \
-    --source environment_canada \
-    --station CXCM \
-    --cache datastore/weather \
-    --date latest \
+    --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the first example above, the observations for Environment Canada station `CXCM` are read from the filesystem cache in `datastore/weather/environment_canada/CXCM/2018/05/01/000000.xml`.
-
-In the second example, the newest observations will be automatically determined by walking the directory structure for the "newest" observation file, determined by sorting the directory/file names.
+In the example above, the observations for Environment Canada station `CXCM` are read from the filesystem cache from `datastore/weather/environment_canada/CXCM/2018/05/01/*.xml` and `datastore/weather/environment_canada/CXCM/2018/05/02/*.xml`, for timestamps that fall in the date interval given in the command.
 
 Safety Tip: It is possible to create multiple OGC SensorThings API `Observation` entities for the same timestamp, which can confuse clients who don't expect that.

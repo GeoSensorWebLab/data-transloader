@@ -31,9 +31,9 @@ To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `S
 
 ```
 $ transload get metadata \
-    --source campbell_scientific \
-    --station 606830 \
-    --dataurl "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat" \
+    --provider campbell_scientific \
+    --station_id 606830 \
+    --data_url "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat" \
     --cache datastore/weather
 ```
 
@@ -43,7 +43,7 @@ The directory `datastore/weather/campbell_scientific/metadata` will be created i
 
 A file will be created at `datastore/weather/campbell_scientific/metadata/606830.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
 
-**Note:** You may specify *additional* data files to monitor by using multiple `--dataurl` arguments in the command. At least one data URL must be specified.
+**Note:** You may specify *additional* data files to monitor by using multiple `--data_url` arguments in the command. At least one data URL must be specified.
 
 Inside the `606830.json` file the sensor metadata will be stored. Editing these values will affect the metadata that is stored in SensorThings API in the metadata upload step. This file also will store the URLs to the SensorThings API entities, which is used by a later step to upload Observations without first having to crawl the SensorThings API instance.
 
@@ -76,8 +76,8 @@ To execute the upload, the tool has a put command:
 
 ```
 $ transload put metadata \
-    --source campbell_scientific \
-    --station 606830 \
+    --provider campbell_scientific \
+    --station_id 606830 \
     --cache datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
@@ -98,8 +98,8 @@ After the base entities have been created in the OGC SensorThings API service, t
 
 ```
 $ transload get observations \
-    --source campbell_scientific \
-    --station 606830 \
+    --provider campbell_scientific \
+    --station_id 606830 \
     --cache datastore/weather
 ```
 
@@ -129,29 +129,14 @@ The `FeatureOfInterest` for the `Observation` will be automatically generated on
 
 ```
 $ transload put observations \
-    --source campbell_scientific \
-    --station 606830 \
+    --provider campbell_scientific \
+    --station_id 606830 \
     --cache datastore/weather \
-    --date 2018-05-01T00:00:00Z \
+    --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
-In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache in `datastore/weather/campbell_scientific/606830/*/2018/05/01.csv`. This is done for all the data files defined for the station in the station metadata cache file. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
-
-```
-$ transload put observations \
-    --source campbell_scientific \
-    --station 606830 \
-    --cache datastore/weather \
-    --date latest \
-    --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
-```
-
-In the second example, the newest observations will be automatically determined by reading the station metadata cache file. For each data file, the most-recently-uploaded observation timestamp is kept and used to determine which observations should be uploaded. If no such value is found in the cache file, then only the latest downloaded observation will be uploaded.
-
-The second example is recommended usage, as it automatically uses the cache to upload only new observations.
-
-TODO: Update this with an option for uploading all observations since last known, or in time range.
+In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache. All observations in the time interval specificied will be uploaded. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
 
 ## Data Model Mapping
 

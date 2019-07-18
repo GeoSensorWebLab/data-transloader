@@ -4,7 +4,7 @@ set -e
 # This is a very simple bash script for testing the command line
 # interface with a local SensorThings API server.
 
-SCRIPT=transload2
+SCRIPT=transload
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 INTERVAL="2019-07-17T00:00:00Z/2019-07-18T00:00:00Z"
 
