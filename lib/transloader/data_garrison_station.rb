@@ -1,4 +1,3 @@
-require 'date'
 require 'fileutils'
 require 'json'
 require 'nokogiri'
@@ -340,7 +339,7 @@ module Transloader
 
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
       else
-        locate_date = DateTime.parse(date)
+        locate_date = Time.parse(date)
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%SZ.html'))
 
         if !File.exist?(file_path)
@@ -361,7 +360,7 @@ module Transloader
       raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
       # append the time zone from the metadata cache file
       raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
-      phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+      phenomenon_time = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
 
       # Parse latest readings
       readings = []
@@ -522,7 +521,7 @@ module Transloader
         raise "Could not parse observation time"
       end
       raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
-      phenomenon_time = DateTime.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+      phenomenon_time = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
       utc_time = phenomenon_time.to_time.utc
 
       # Create cache directory structure

@@ -1,7 +1,7 @@
-require 'date'
 require 'fileutils'
 require 'json'
 require 'nokogiri'
+require 'time'
 
 module Transloader
   class EnvironmentCanadaStation
@@ -248,7 +248,7 @@ module Transloader
 
         file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
       else
-        locate_date = DateTime.parse(date)
+        locate_date = Time.parse(date)
         file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.xml'))
 
         if !File.exist?(file_path)
@@ -369,7 +369,7 @@ module Transloader
       xml = observation_xml
 
       # Parse date from SWOB-ML
-      timestamp = DateTime.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
+      timestamp = Time.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
 
       # Create cache directory structure
       date_path = timestamp.strftime('%Y/%m/%d')
