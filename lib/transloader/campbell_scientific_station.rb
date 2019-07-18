@@ -365,6 +365,101 @@ module Transloader
       end
     end
 
+    # Collect all the observation files in the date interval, and upload
+    # them.
+    # (Kind of wish I had a database here.)
+    def upload_observations_in_interval(destination, interval)
+      get_metadata
+
+      # Create hash map of observed properties to datastream URLs.
+      # This is used to determine where Observation entities are 
+      # uploaded.
+      datastream_hash = {}
+      @metadata[:datastreams].each do |datastream|
+        datastream_hash[datastream[:name]] = datastream
+      end
+
+      # Iterate over data files to parse observations in date range
+      @metadata[:data_files].each do |data_file|
+        data_filename = data_file[:filename]
+        time_interval = Transloader::TimeInterval.new(interval)
+
+        # Load observations in date range
+        start_timestamp = time_interval.start
+        end_timestamp   = time_interval.end
+
+        observations = []
+        timestamp = start_timestamp
+        while timestamp <= end_timestamp
+          # Load data from file for timestamp
+          obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
+          obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
+
+          if File.exist?(obs_filename)
+            rows = CSV.read(obs_filename, { headers: true })
+            # headers (excluding timestamp)
+            headers = rows.headers[1..-1]
+
+            # convert to format:
+            # [
+            #   ["2018-08-05T15:00:00.000-0700", {
+            #     name: "TEMPERATURE_Avg",
+            #     reading: 5.479
+            #   }, { ... }],
+            #   [...]
+            # ]
+            converted_rows = rows.map do |row|
+              [row["timestamp"], row[1..-1].map.with_index { |cell, i|
+                {
+                  name: headers[i],
+                  reading: cell
+                }
+              }]
+            end
+
+            observations.concat(converted_rows)
+          end
+
+          timestamp += 86400
+        end
+
+        # filter observations in time range
+        observations.select! do |row|
+          row_timestamp = Time.iso8601(row[0])
+          (row_timestamp >= start_timestamp && row_timestamp <= end_timestamp)
+        end
+        
+        observations.each do |row|
+          # Convert from ISO8601 string to ISO8601 string in UTC
+          row_timestamp = to_iso8601(Time.iso8601(row[0]).utc)
+
+          row[1].each do |obs|
+            # Create Observation entity
+            new_observation = SensorThings::Observation.new({
+              phenomenonTime: row_timestamp,
+              result: obs[:reading],
+              resultTime: row_timestamp
+            })
+
+            datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
+
+            # Upload to SensorThings API
+            new_observation.upload_to(datastream_url)
+          end
+        end
+
+        # Update metadata cache file with latest uploaded timestamp
+        newest_in_set = to_utc_iso8601(observations.last[0])
+
+        if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
+          data_file[:newest_uploaded_timestamp] = newest_in_set
+        end
+
+        save_metadata
+
+      end
+    end
+
     # Save the Station metadata to the metadata cache file
     def save_metadata
       FileUtils.mkdir_p(File.dirname(@metadata_path))
