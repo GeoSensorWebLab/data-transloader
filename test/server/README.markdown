@@ -14,7 +14,7 @@ You can "reset" the STA to a blank slate by logging in to the VM and restarting 
 $ vagrant ssh
 vm$ cd FROST
 vm$ docker-compose down
-vm$ docker system prune
+vm$ docker volume prune
 vm$ docker-compose up -d
 ```
 
