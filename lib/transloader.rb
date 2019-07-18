@@ -1,7 +1,6 @@
 require 'semantic_logger'
 
 require 'sensorthings'
-require 'transloader/args'
 require 'transloader/campbell_scientific_provider'
 require 'transloader/campbell_scientific_station'
 require 'transloader/command_line_option_parser'
