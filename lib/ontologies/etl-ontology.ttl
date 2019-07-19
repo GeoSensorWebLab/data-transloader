@@ -95,21 +95,11 @@ skos:Concept rdf:type owl:Class .
 #    Individuals
 #################################################################
 
-###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Backup_Batteries
-etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
-                                                    etl-ontology:SourceProperty ;
-                                           etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
-                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
-
-
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Battery_Voltage
 etl-ontology:Property:Battery_Voltage rdf:type owl:NamedIndividual ,
-                                               etl-ontology:ObservedProperty ;
-                                      etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                                      etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
-                                      etl-ontology:name "Battery Voltage"^^xsd:string ;
-                                      skos:exactMatch "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"@en .
-
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                         etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string .
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:Volt
 etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
@@ -117,6 +107,126 @@ etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
                        etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000218"^^xsd:anyURI ;
                        etl-ontology:name "Volt"^^xsd:string ;
                        etl-ontology:symbol "V"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Backup_Batteries
+etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_speed_of_gust
+etl-ontology:Property:Wind_speed_of_gust rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
+                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:kilometer_per_hour
+etl-ontology:Unit:kilometer_per_hour rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0010008"^^xsd:anyURI ;
+                       etl-ontology:name "kilometer per hour"^^xsd:string ;
+                       etl-ontology:symbol "km/h"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Gust_Speed
+etl-ontology:DataGarrison:Gust_Speed rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_speed_of_gust ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Air_Pressure
+etl-ontology:Property:Air_Pressure rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure"^^xsd:anyURI ;
+                                         etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:millibar
+etl-ontology:Unit:millibar rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://mmisw.org/ont/drdc/parameter/_052"^^xsd:anyURI ;
+                       etl-ontology:name "millibar"^^xsd:string ;
+                       etl-ontology:symbol "mbar"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Pressure
+etl-ontology:DataGarrison:Pressure rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Air_Pressure ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:millibar .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Relative_Humidity
+etl-ontology:Property:Relative_Humidity rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/relative_humidity"^^xsd:anyURI ;
+                                         etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:percent
+etl-ontology:Unit:percent rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000187"^^xsd:anyURI ;
+                       etl-ontology:name "percent"^^xsd:string ;
+                       etl-ontology:symbol "%"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:RH
+etl-ontology:DataGarrison:RH rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Relative_Humidity ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:percent .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Air_Temperature
+etl-ontology:Property:Air_Temperature rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
+                                         etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:degree_Celsius
+etl-ontology:Unit:degree_Celsius rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000027"^^xsd:anyURI ;
+                       etl-ontology:name "degree Celsius"^^xsd:string ;
+                       etl-ontology:symbol "℃"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Temperature
+etl-ontology:DataGarrison:Temperature rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Air_Temperature ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_From_Direction
+etl-ontology:Property:Wind_From_Direction rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
+                                         etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:degree
+etl-ontology:Unit:degree rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000185"^^xsd:anyURI ;
+                       etl-ontology:name "degree"^^xsd:string ;
+                       etl-ontology:symbol "°"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Wind_Direction
+etl-ontology:DataGarrison:Wind_Direction rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_From_Direction ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Speed
+etl-ontology:Property:Wind_Speed rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:kilometer_per_hour
+etl-ontology:Unit:kilometer_per_hour rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0010008"^^xsd:anyURI ;
+                       etl-ontology:name "kilometer per hour"^^xsd:string ;
+                       etl-ontology:symbol "km/h"^^xsd:string .
+
+###  http://gswlab.ca/ontologies/etl-ontology#:Wind_Speed
+etl-ontology:DataGarrison:Wind_Speed rdf:type owl:NamedIndividual ,
+                                              etl-ontology:SourceProperty ;
+                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_Speed ;
+                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
