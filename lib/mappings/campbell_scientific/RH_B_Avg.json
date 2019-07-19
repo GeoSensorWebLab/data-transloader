@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000187"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Relative Humidity",
+    "definition": "http://mmisw.org/ont/cf/parameter/relative_humidity",
+    "description": "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."
   }
 }

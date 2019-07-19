@@ -22,7 +22,7 @@ This ontology is provided as open data under a Creative Commons Attribution 4.0 
 
 ## Editing the Ontology
 
-The ontology is encoded in the [RDF Turtle format][Turtle]. I recommend using an editing application such as [Protégé][Protege] to avoid making typos or errors when editing the ontology.
+The ontology is encoded in the [RDF Turtle format][Turtle]. I recommend using an editing application such as [Protégé][Protege] to avoid making typos or errors when editing the ontology. When pasting in new data to the TTL file, open the file in Protege and re-save it to reformat it.
 
 [Protege]: https://protege.stanford.edu
 [Turtle]: https://en.wikipedia.org/wiki/Turtle_(syntax)
