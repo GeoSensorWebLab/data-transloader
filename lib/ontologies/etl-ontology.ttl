@@ -1,0 +1,122 @@
+@prefix : <http://gswlab.ca/ontologies/etl-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix etl-ontology: <http://gswlab.ca/ontologies/etl-ontology#> .
+@base <http://gswlab.ca/ontologies/etl-ontology> .
+
+<http://gswlab.ca/ontologies/etl-ontology> rdf:type owl:Ontology ;
+                                            owl:versionIRI <http://gswlab.ca/ontologies/etl-ontology/1.0.0> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://gswlab.ca/ontologies/etl-ontology#observedProperty
+etl-ontology:observedProperty rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+skos:exactMatch rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://gswlab.ca/ontologies/etl-ontology#matchesObservedProperty
+etl-ontology:matchesObservedProperty rdf:type owl:ObjectProperty .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#matchesUnitOfMeasurement
+etl-ontology:matchesUnitOfMeasurement rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://gswlab.ca/ontologies/etl-ontology#definition
+etl-ontology:definition rdf:type owl:DatatypeProperty ;
+                        rdfs:domain etl-ontology:ObservedProperty ,
+                                    etl-ontology:UnitOfMeasurement ;
+                        rdfs:range xsd:anyURI .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#description
+etl-ontology:description rdf:type owl:DatatypeProperty ;
+                         rdfs:domain etl-ontology:ObservedProperty ;
+                         rdfs:range xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#name
+etl-ontology:name rdf:type owl:DatatypeProperty ;
+                  rdfs:domain etl-ontology:ObservedProperty ,
+                              etl-ontology:UnitOfMeasurement ;
+                  rdfs:range xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#symbol
+etl-ontology:symbol rdf:type owl:DatatypeProperty ;
+                    rdfs:domain etl-ontology:UnitOfMeasurement ;
+                    rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://gswlab.ca/ontologies/etl-ontology#ObservedProperty
+etl-ontology:ObservedProperty rdf:type owl:Class ;
+                              rdfs:subClassOf skos:Concept ;
+                              rdfs:comment "Canonical Observed Properties to be used in SensorThings API. Source Properties must map to an Observed Property."@en .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#SourceProperty
+etl-ontology:SourceProperty rdf:type owl:Class ;
+                            rdfs:subClassOf skos:Concept ;
+                            rdfs:comment "Properties as defined by their data provider. May include sensor, location, or other information in addition to the Observed Property and Unit of Measurement."@en .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#UnitOfMeasurement
+etl-ontology:UnitOfMeasurement rdf:type owl:Class ;
+                               rdfs:subClassOf skos:Concept ;
+                               rdfs:comment "Canonical Units of Measurement to be used in SensorThings API. Source Properties must map to a Unit of Measurement."@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://gswlab.ca/ontologies/etl-ontology#Battery_Voltage
+etl-ontology:Battery_Voltage rdf:type owl:NamedIndividual ,
+                                      etl-ontology:ObservedProperty ;
+                             etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                             etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                             etl-ontology:name "Battery Voltage"^^xsd:string ;
+                             skos:exactMatch "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"@en .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Backup_Batteries
+etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
+                                                    etl-ontology:SourceProperty ;
+                                           etl-ontology:matchesObservedProperty etl-ontology:Battery_Voltage ;
+                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:Volt
+etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
+                                etl-ontology:UnitOfMeasurement ;
+                       etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000218"^^xsd:anyURI ;
+                       etl-ontology:name "Volt"^^xsd:string ;
+                       etl-ontology:symbol "V"^^xsd:string .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
