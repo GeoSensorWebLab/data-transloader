@@ -12,7 +12,7 @@ The source data provider `Data Garrison` provides observations for a sensor with
 
 The Individual `DataGarrison:Pressure` has Object Properties `matchesObservedProperty` and `matchesUnitOfMeasurement` (not part of any predefined vocabulary). `matchesObservedProperty` links to an RDF Individual for the Observed Property, and `matchesUnitOfMeasurement` links to an RDF Individual for the Unit of Measurement. Both of these Individuals are in this Ontology.
 
-The Observed Property Individual matched is the namespace-less `Air_Pressure`. This Individual can be referenced by properties from multiple data providers (or even the same data provider). It has data properties for the SensorThings API entity properties: `name`, `definition`, and `description`. It also MAY have an `skos:exactMatch` to link to an external ontology.
+The Observed Property Individual matched is in the `Property` as `Air_Pressure`. This Individual can be referenced by properties from multiple data providers (or even the same data provider). It has data properties for the SensorThings API entity properties: `name`, `definition`, and `description`. It also MAY have an `skos:exactMatch` to link to an external ontology.
 
 The Unit of Measurement Individual matched is in the `Unit` namespace as `Unit:Millibar`. Units may have different prefixes but refer to the same "Unit" — this currently isn't normalized in the ontology. It also has data properties to match the SensorThings API entity: `name`, `symbol`, `definition`.
 

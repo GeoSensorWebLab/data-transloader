@@ -95,20 +95,20 @@ skos:Concept rdf:type owl:Class .
 #    Individuals
 #################################################################
 
-###  http://gswlab.ca/ontologies/etl-ontology#Battery_Voltage
-etl-ontology:Battery_Voltage rdf:type owl:NamedIndividual ,
-                                      etl-ontology:ObservedProperty ;
-                             etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                             etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
-                             etl-ontology:name "Battery Voltage"^^xsd:string ;
-                             skos:exactMatch "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"@en .
-
-
 ###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Backup_Batteries
 etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
                                                     etl-ontology:SourceProperty ;
-                                           etl-ontology:matchesObservedProperty etl-ontology:Battery_Voltage ;
+                                           etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Battery_Voltage
+etl-ontology:Property:Battery_Voltage rdf:type owl:NamedIndividual ,
+                                               etl-ontology:ObservedProperty ;
+                                      etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                      etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                      etl-ontology:name "Battery Voltage"^^xsd:string ;
+                                      skos:exactMatch "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"@en .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:Volt
