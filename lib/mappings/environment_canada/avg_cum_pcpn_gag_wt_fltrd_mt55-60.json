@@ -8,7 +8,7 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000016"
   },
   "ObservedProperty": {
-    "name": "5-minute cumulative precipitation gauge weight (filtered) for minutes 55 to 60 (indexed)",
+    "name": "5-minute cumulative precipitation gauge filtered weight for minutes 55 to 60",
     "definition": "http://mmisw.org/ont/ioos/parameter/precipitation_amount",
     "description": "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."
   }

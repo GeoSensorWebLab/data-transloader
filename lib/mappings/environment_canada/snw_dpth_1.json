@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000015"
   },
   "ObservedProperty": {
-    "name": "5 minute average snow depth #1",
+    "name": "5 minute average snow depth 1",
     "definition": "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth",
-    "description": "5 minute average snow depth #1"
+    "description": "5 minute average snow depth 1"
   }
 }

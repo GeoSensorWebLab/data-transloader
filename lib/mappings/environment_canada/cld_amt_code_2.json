@@ -8,7 +8,7 @@
     "definition": "http://dd.weather.gc.ca/observations/doc/"
   },
   "ObservedProperty": {
-    "name": "Cloud cover/amount (non-cumulative) layer 2",
+    "name": "Non-cumulative cloud cover or amount layer 2",
     "definition": "http://dd.weather.gc.ca/observations/doc/",
     "description": "Layer 2 cloud amount."
   }
