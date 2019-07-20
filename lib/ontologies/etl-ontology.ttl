@@ -59,6 +59,13 @@ etl-ontology:name rdf:type owl:DatatypeProperty ;
                   rdfs:range xsd:string .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#observationType
+etl-ontology:observationType rdf:type owl:DatatypeProperty ;
+                             rdfs:domain etl-ontology:UnitOfMeasurement ;
+                             rdfs:range xsd:anyURI ;
+                             rdfs:comment "Observations & Measurements 2.0 class for this Unit of Measurement."@en .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#symbol
 etl-ontology:symbol rdf:type owl:DatatypeProperty ;
                     rdfs:domain etl-ontology:UnitOfMeasurement ;
@@ -1283,6 +1290,7 @@ etl-ontology:Unit:Remark rdf:type owl:NamedIndividual ,
                                   etl-ontology:UnitOfMeasurement ;
                          etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                          etl-ontology:name "Remark"^^xsd:string ;
+                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation" ;
                          etl-ontology:symbol ""^^xsd:string .
 
 
@@ -1291,6 +1299,7 @@ etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
                                 etl-ontology:UnitOfMeasurement ;
                        etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000218"^^xsd:anyURI ;
                        etl-ontology:name "Volt"^^xsd:string ;
+                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                        etl-ontology:symbol "V"^^xsd:string .
 
 
@@ -1299,6 +1308,7 @@ etl-ontology:Unit:centimeter rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000015"^^xsd:anyURI ;
                              etl-ontology:name "centimeter"^^xsd:string ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                              etl-ontology:symbol "cm"^^xsd:string .
 
 
@@ -1307,6 +1317,7 @@ etl-ontology:Unit:degree rdf:type owl:NamedIndividual ,
                                   etl-ontology:UnitOfMeasurement ;
                          etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000185"^^xsd:anyURI ;
                          etl-ontology:name "degree"^^xsd:string ;
+                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                          etl-ontology:symbol "°"^^xsd:string .
 
 
@@ -1315,6 +1326,7 @@ etl-ontology:Unit:degree_Celsius rdf:type owl:NamedIndividual ,
                                           etl-ontology:UnitOfMeasurement ;
                                  etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000027"^^xsd:anyURI ;
                                  etl-ontology:name "degree Celsius"^^xsd:string ;
+                                 etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                  etl-ontology:symbol "℃"^^xsd:string .
 
 
@@ -1323,6 +1335,7 @@ etl-ontology:Unit:hectoPascal rdf:type owl:NamedIndividual ,
                                        etl-ontology:UnitOfMeasurement ;
                               etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000110"^^xsd:anyURI ;
                               etl-ontology:name "hectoPascal"^^xsd:string ;
+                              etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                               etl-ontology:symbol "hPa"^^xsd:string .
 
 
@@ -1331,6 +1344,7 @@ etl-ontology:Unit:hertz rdf:type owl:NamedIndividual ,
                                  etl-ontology:UnitOfMeasurement ;
                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000106"^^xsd:anyURI ;
                         etl-ontology:name "hertz"^^xsd:string ;
+                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                         etl-ontology:symbol "Hz"^^xsd:string .
 
 
@@ -1339,6 +1353,7 @@ etl-ontology:Unit:inches_of_mercury rdf:type owl:NamedIndividual ,
                                              etl-ontology:UnitOfMeasurement ;
                                     etl-ontology:definition "http://mmisw.org/ont/mmi/udunits2-common/_691857c1"^^xsd:anyURI ;
                                     etl-ontology:name "inches of mercury"^^xsd:string ;
+                                    etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                     etl-ontology:symbol "inHg"^^xsd:string .
 
 
@@ -1347,6 +1362,7 @@ etl-ontology:Unit:kiloJoule_per_square_meter rdf:type owl:NamedIndividual ,
                                                       etl-ontology:UnitOfMeasurement ;
                                              etl-ontology:definition ""^^xsd:anyURI ;
                                              etl-ontology:name "kiloJoule per square meter"^^xsd:string ;
+                                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                              etl-ontology:symbol "kJ/m^2"^^xsd:string .
 
 
@@ -1355,6 +1371,7 @@ etl-ontology:Unit:kiloPascal rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000110"^^xsd:anyURI ;
                              etl-ontology:name "kiloPascal"^^xsd:string ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                              etl-ontology:symbol "kPa"^^xsd:string .
 
 
@@ -1364,6 +1381,7 @@ etl-ontology:Unit:kilometer rdf:type owl:NamedIndividual ,
                             etl-ontology:definition "http://mmisw.org/ont/testing/semm/Kilometer"^^xsd:anyURI ,
                                                     "http://purl.obolibrary.org/obo/UO_0000008"^^xsd:anyURI ;
                             etl-ontology:name "kilometer"^^xsd:string ;
+                            etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                             etl-ontology:symbol "km"^^xsd:string .
 
 
@@ -1372,6 +1390,7 @@ etl-ontology:Unit:kilometer_per_hour rdf:type owl:NamedIndividual ,
                                               etl-ontology:UnitOfMeasurement ;
                                      etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0010008"^^xsd:anyURI ;
                                      etl-ontology:name "kilometer per hour" ;
+                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                      etl-ontology:symbol "km/h" .
 
 
@@ -1380,6 +1399,7 @@ etl-ontology:Unit:meter rdf:type owl:NamedIndividual ,
                                  etl-ontology:UnitOfMeasurement ;
                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000008"^^xsd:anyURI ;
                         etl-ontology:name "meter"^^xsd:string ;
+                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                         etl-ontology:symbol "m"^^xsd:string .
 
 
@@ -1388,6 +1408,7 @@ etl-ontology:Unit:micromol_per_mol rdf:type owl:NamedIndividual ,
                                             etl-ontology:UnitOfMeasurement ;
                                    etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000076"^^xsd:anyURI ;
                                    etl-ontology:name "micromol per mol"^^xsd:string ;
+                                   etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                    etl-ontology:symbol "µmol/mol"^^xsd:string .
 
 
@@ -1396,6 +1417,7 @@ etl-ontology:Unit:millibar rdf:type owl:NamedIndividual ,
                                     etl-ontology:UnitOfMeasurement ;
                            etl-ontology:definition "http://mmisw.org/ont/drdc/parameter/_052"^^xsd:anyURI ;
                            etl-ontology:name "millibar"^^xsd:string ;
+                           etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                            etl-ontology:symbol "mbar"^^xsd:string .
 
 
@@ -1404,6 +1426,7 @@ etl-ontology:Unit:millimeter rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000016"^^xsd:anyURI ;
                              etl-ontology:name "millimeter"^^xsd:string ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                              etl-ontology:symbol "mm"^^xsd:string .
 
 
@@ -1412,6 +1435,7 @@ etl-ontology:Unit:obscuring_phenomena rdf:type owl:NamedIndividual ,
                                                etl-ontology:UnitOfMeasurement ;
                                       etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                                       etl-ontology:name "obscuring_phenomena"^^xsd:string ;
+                                      etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
                                       etl-ontology:symbol ""^^xsd:string .
 
 
@@ -1420,6 +1444,7 @@ etl-ontology:Unit:percent rdf:type owl:NamedIndividual ,
                                    etl-ontology:UnitOfMeasurement ;
                           etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000187"^^xsd:anyURI ;
                           etl-ontology:name "percent"^^xsd:string ;
+                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                           etl-ontology:symbol "%"^^xsd:string .
 
 
@@ -1428,6 +1453,7 @@ etl-ontology:Unit:present_weather rdf:type owl:NamedIndividual ,
                                            etl-ontology:UnitOfMeasurement ;
                                   etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                                   etl-ontology:name "present_weather"^^xsd:string ;
+                                  etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
                                   etl-ontology:symbol ""^^xsd:string .
 
 
@@ -1436,6 +1462,7 @@ etl-ontology:Unit:tendency_characteristic rdf:type owl:NamedIndividual ,
                                                    etl-ontology:UnitOfMeasurement ;
                                           etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                                           etl-ontology:name "tendency_characteristic"^^xsd:string ;
+                                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
                                           etl-ontology:symbol ""^^xsd:string .
 
 
@@ -1444,6 +1471,7 @@ etl-ontology:Unit:total_cloud_amount rdf:type owl:NamedIndividual ,
                                               etl-ontology:UnitOfMeasurement ;
                                      etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                                      etl-ontology:name "total_cloud_amount"^^xsd:string ;
+                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
                                      etl-ontology:symbol ""^^xsd:string .
 
 
@@ -1452,6 +1480,7 @@ etl-ontology:Unit:watt rdf:type owl:NamedIndividual ,
                                 etl-ontology:UnitOfMeasurement ;
                        etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000114"^^xsd:anyURI ;
                        etl-ontology:name "watt"^^xsd:string ;
+                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                        etl-ontology:symbol "W"^^xsd:string .
 
 
@@ -1460,6 +1489,7 @@ etl-ontology:Unit:watt_per_square_meter rdf:type owl:NamedIndividual ,
                                                  etl-ontology:UnitOfMeasurement ;
                                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000155"^^xsd:anyURI ;
                                         etl-ontology:name "watt per square meter"^^xsd:string ;
+                                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
                                         etl-ontology:symbol "W/m^2"^^xsd:string .
 
 
