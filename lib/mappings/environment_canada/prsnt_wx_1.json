@@ -3,13 +3,13 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "code",
   "UnitOfMeasurement": {
-    "name": "",
+    "name": "present_weather",
     "symbol": "",
-    "definition": ""
+    "definition": "http://dd.weather.gc.ca/observations/doc/"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Present Weather",
+    "definition": "http://mmisw.org/ont/ioos/passive_acoustic_metadata/Weather_condition",
+    "description": "Present weather conditions, usually a descriptive human-readable string."
   }
 }

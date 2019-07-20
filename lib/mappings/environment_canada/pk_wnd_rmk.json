@@ -3,13 +3,13 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "unitless",
   "UnitOfMeasurement": {
-    "name": "",
+    "name": "Remark",
     "symbol": "",
-    "definition": ""
+    "definition": "http://dd.weather.gc.ca/observations/doc/"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Derived peak wind remark",
+    "definition": "http://dd.weather.gc.ca/observations/doc/",
+    "description": "Derived peak wind remark"
   }
 }

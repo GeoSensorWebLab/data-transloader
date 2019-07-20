@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000185"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Wind direction associated with the past 10-minute maximum wind speed at 10m",
+    "definition": "http://mmisw.org/ont/cf/parameter/wind_from_direction",
+    "description": "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."
   }
 }

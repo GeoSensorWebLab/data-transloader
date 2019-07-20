@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000027"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Datalogger panel temperature",
+    "definition": "http://mmisw.org/ont/secoora/parameter/enclosed_temperature",
+    "description": "Inside temperature of an enclosure or housing for sensor, system electronics, or battery that is recorded to monitor sensor health and data reliability. Some instruments may cease to operate or may perform poorly outside of manufacturer recommended operating temperatures."
   }
 }

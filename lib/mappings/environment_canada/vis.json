@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000008"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Visibility",
+    "definition": "http://mmisw.org/ont/cf/parameter/visibility_in_air",
+    "description": "The visibility is the distance at which something can be seen."
   }
 }

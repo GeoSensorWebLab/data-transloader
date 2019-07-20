@@ -3,13 +3,13 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "code",
   "UnitOfMeasurement": {
-    "name": "",
+    "name": "total_cloud_amount",
     "symbol": "",
-    "definition": ""
+    "definition": "http://dd.weather.gc.ca/observations/doc/"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Cloud cover/amount (non-cumulative) layer 3",
+    "definition": "http://dd.weather.gc.ca/observations/doc/",
+    "description": "Layer 3 cloud amount."
   }
 }

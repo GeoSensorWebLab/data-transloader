@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000106"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "High Data Rate transmitter oscillator drift",
+    "definition": "http://dd.weather.gc.ca/observations/doc/",
+    "description": "High Data Rate transmitter oscillator drift"
   }
 }

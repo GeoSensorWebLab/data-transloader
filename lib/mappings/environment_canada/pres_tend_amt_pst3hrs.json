@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000110"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "3-hour pressurent tendency amount",
+    "definition": "http://mmisw.org/ont/cf/parameter/tendency_of_air_pressure",
+    "description": "\"tendency_of_X\" means derivative of X with respect to time. Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."
   }
 }

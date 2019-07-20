@@ -3,13 +3,13 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "code",
   "UnitOfMeasurement": {
-    "name": "",
+    "name": "obscuring_phenomena",
     "symbol": "",
-    "definition": ""
+    "definition": "http://dd.weather.gc.ca/observations/doc/"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Cloud type obscuring phenomena for layer 2",
+    "definition": "http://mmisw.org/ont/?iri=http://vocab.ndg.nerc.ac.uk/term/P021/54/CLTY",
+    "description": "Parameters that classify cloud cover into types such as cumulus and cirrus."
   }
 }

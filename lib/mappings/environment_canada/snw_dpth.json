@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000015"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Snow Depth",
+    "definition": "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth",
+    "description": "Snow Depth"
   }
 }

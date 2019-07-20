@@ -3,13 +3,13 @@
   "DataProvider": "environment_canada",
   "SourceUnits": "kJ/m2",
   "UnitOfMeasurement": {
-    "name": "",
-    "symbol": "",
+    "name": "kiloJoule per square meter",
+    "symbol": "kJ/m^2",
     "definition": ""
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Past 1-hour total global solar radiation",
+    "definition": "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation",
+    "description": "Past 1-hour total global solar radiation"
   }
 }

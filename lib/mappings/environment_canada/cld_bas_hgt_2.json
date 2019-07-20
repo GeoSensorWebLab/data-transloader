@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000008"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Cloud height for layer 2",
+    "definition": "http://mmisw.org/ont/cf/parameter/cloud_base_altitude",
+    "description": "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."
   }
 }

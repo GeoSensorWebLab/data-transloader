@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000016"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Rainfall since last synoptic hour",
+    "definition": "http://mmisw.org/ont/ioos/parameter/precipitation_amount",
+    "description": "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."
   }
 }

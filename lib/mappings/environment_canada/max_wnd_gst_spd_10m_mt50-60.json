@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0010008"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Past 10-minutes maximum 10m wind gust speed",
+    "definition": "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust",
+    "description": "A gust is a sudden brief period of high wind speed."
   }
 }

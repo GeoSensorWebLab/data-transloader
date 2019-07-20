@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000187"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Data Availability",
+    "definition": "http://dd.weather.gc.ca/observations/doc/",
+    "description": "Data availability"
   }
 }

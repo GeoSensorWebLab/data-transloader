@@ -8,8 +8,8 @@
     "definition": "http://mmisw.org/ont/testing/semm/Kilometer"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Maximum visibility over past 10 minutes",
+    "definition": "http://mmisw.org/ont/cf/parameter/visibility_in_air",
+    "description": "The visibility is the distance at which something can be seen."
   }
 }

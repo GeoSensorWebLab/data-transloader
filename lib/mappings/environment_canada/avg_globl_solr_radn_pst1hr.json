@@ -8,8 +8,8 @@
     "definition": "http://purl.obolibrary.org/obo/UO_0000155"
   },
   "ObservedProperty": {
-    "name": "",
-    "definition": "",
-    "description": ""
+    "name": "Past 1-hour global solar radiation",
+    "definition": "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation",
+    "description": "Past 1-hour global solar radiation"
   }
 }
