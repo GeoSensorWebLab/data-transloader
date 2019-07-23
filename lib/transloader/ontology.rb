@@ -11,9 +11,12 @@ module Transloader
 
     # RDF Entity Definition Aliases
     DEFS = {
-      definition:              RDF::URI("http://gswlab.ca/ontologies/etl-ontology#definition"),
-      description:             RDF::URI("http://gswlab.ca/ontologies/etl-ontology#description"),
-      matchesObservedProperty: RDF::URI("http://gswlab.ca/ontologies/etl-ontology#matchesObservedProperty")
+      definition:               RDF::URI("http://gswlab.ca/ontologies/etl-ontology#definition"),
+      description:              RDF::URI("http://gswlab.ca/ontologies/etl-ontology#description"),
+      matchesObservedProperty:  RDF::URI("http://gswlab.ca/ontologies/etl-ontology#matchesObservedProperty"),
+      matchesUnitOfMeasurement: RDF::URI("http://gswlab.ca/ontologies/etl-ontology#matchesUnitOfMeasurement"),
+      observationType:          RDF::URI("http://gswlab.ca/ontologies/etl-ontology#observationType"),
+      symbol:                   RDF::URI("http://gswlab.ca/ontologies/etl-ontology#symbol")
     }
     
     attr_reader :graph
@@ -41,8 +44,7 @@ module Transloader
     # given source property. If no matches are available, `nil` is 
     # returned.
     def observed_property(property)
-      uri = "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
-
+      uri       = "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
       solutions = getAllBySubject(RDF::URI(uri)).filter(predicate: DEFS[:matchesObservedProperty])
 
       if solutions.empty?
@@ -72,7 +74,23 @@ module Transloader
     end
 
     def unit_of_measurement(property)
-      # TODO
+      uri       = "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
+      solutions = getAllBySubject(RDF::URI(uri)).filter(predicate: DEFS[:matchesUnitOfMeasurement])
+
+      if solutions.empty?
+        nil
+      elsif solutions.count == 1
+        object_uri = solutions.first[:object]
+        individual = reduceSolutions(getAllBySubject(object_uri))
+        {
+          definition:  individual[DEFS[:definition]][0].humanize,
+          symbol:      individual[DEFS[:symbol]][0].humanize,
+          name:        individual[RDF::RDFS.label][0].humanize
+        }
+      else
+        # Only one should have been matched — probably an ontology issue
+        raise "Too many matching units of measurement"
+      end
     end
   end
 end
