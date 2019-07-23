@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby -Ilib
 require 'transloader'
 
+SemanticLogger.add_appender(io: $stdout, level: :warn)
+SemanticLogger.add_appender(io: $stderr, level: :error)
+
 def get_metadata(options)
   case options.provider
   when "environment_canada"
