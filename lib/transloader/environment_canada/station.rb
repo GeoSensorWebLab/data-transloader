@@ -26,6 +26,7 @@ module Transloader
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
+      @ontology = EnvironmentCanadaOntology.new
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -157,13 +158,20 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       @metadata[:datastreams].each do |stream|
-        # Create Observed Property entities
-        # TODO: Use mapping to improve these entities
-        observed_property = SensorThings::ObservedProperty.new({
-          name:        stream[:name],
-          definition:  "http://example.org/#{stream[:name]}",
-          description: stream[:name]
-        })
+        # Look up entity in ontology;
+        # if nil, then use default attributes
+        entity = @ontology.observed_property(stream[:name])
+
+        if entity.nil?
+          logger.warn "No Observed Property found in Ontology for #{stream[:name]}"
+          entity = {
+            name:        stream[:name],
+            definition:  "http://example.org/#{stream[:name]}",
+            description: stream[:name]
+          }
+        end
+
+        observed_property = SensorThings::ObservedProperty.new(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -177,19 +185,26 @@ module Transloader
 
       # DATASTREAM entities
       @metadata[:datastreams].each do |stream|
-        # Create Datastream entities
-        # TODO: Use mapping to improve these entities
-        datastream = SensorThings::Datastream.new({
-          name:        "Station #{@id} #{stream[:name]}",
-          description: "Environment Canada Station #{@id} #{stream[:name]}",
-          # TODO: Use mapping to improve unit of measurement
-          unitOfMeasurement: {
+        # Look up UOM, observationType in ontology;
+        # if nil, then use default attributes
+        uom = @ontology.unit_of_measurement(stream[:name])
+
+        if uom.nil?
+          logger.warn "No Unit of Measurement found in Ontology for #{stream[:name]} (#{stream[:uom]})"
+          uom = {
             name:       stream[:uom],
             symbol:     '',
             definition: ''
-          },
-          # TODO: Use more specific observation types, if possible
-          observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
+          }
+        end
+
+        observation_type = observation_type_for(stream[:name])
+
+        datastream = SensorThings::Datastream.new({
+          name:        "Station #{@id} #{stream[:name]}",
+          description: "Environment Canada Station #{@id} #{stream[:name]}",
+          unitOfMeasurement: uom,
+          observationType: observation_type,
           Sensor: {
             '@iot.id' => stream[:'Sensor@iot.id']
           },
@@ -276,9 +291,10 @@ module Transloader
         else
           # OBSERVATION entity
           # Create Observation entity
-          # TODO: Coerce result type based on datastream observation type
-
           result = xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']/@value", NAMESPACES).text
+
+          # Coerce result type based on datastream observation type
+          result = coerce_result(result, observation_type_for(datastream[:name]))
 
           # SensorThings API does not like an empty string, instead "null" string
           # should be used.
@@ -378,6 +394,24 @@ module Transloader
 
       # Dump XML to file
       IO.write("#{@observations_path}/#{date_path}/#{time_path}", xml.to_s)
+    end
+
+    def observation_type_for(property)
+      @ontology.observation_type(property) ||
+      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
+    end
+
+    # Use the observation_type to convert result to float, int, or 
+    # string.
+    def coerce_result(result, observation_type)
+      case observation_type
+      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
+        result.to_f
+      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation"
+        result.to_i
+      else # OM_Observation, any other type
+        result
+      end
     end
   end
 end
