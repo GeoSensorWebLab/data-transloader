@@ -18,8 +18,6 @@ module Transloader
       observationType:          RDF::URI("http://gswlab.ca/ontologies/etl-ontology#observationType"),
       symbol:                   RDF::URI("http://gswlab.ca/ontologies/etl-ontology#symbol")
     }
-    
-    attr_reader :graph
 
     # Create an Ontology instance.
     # 
@@ -29,29 +27,33 @@ module Transloader
       @graph = RDF::Graph.load(File.absolute_path(File.join(__FILE__, ONTOLOGY_PATH)), format: :ttl)
     end
 
-    # Return a solution set for all items matching the given subject.
-    def getAllBySubject(subject)
-      RDF::Query.execute(@graph) do
-        pattern [subject, :predicate, :object]
-      end
-    end
-
     def observation_type(property)
-      # TODO
+      solutions = get_uom_for(property)
+
+      if solutions.empty?
+        nil
+      elsif solutions.count == 1
+        object_uri = solutions.first[:object]
+        individual = reduce_solutions(get_all_by_subject(object_uri))
+        individual[DEFS[:observationType]][0].humanize
+      else
+        # Only one should have been matched — probably an ontology issue
+        raise "Too many matching units of measurement"
+      end
     end
 
     # Return a Hash representing the canonical ObservedProperty for a 
     # given source property. If no matches are available, `nil` is 
     # returned.
     def observed_property(property)
-      uri       = "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
-      solutions = getAllBySubject(RDF::URI(uri)).filter(predicate: DEFS[:matchesObservedProperty])
+      solutions = get_all_by_subject(RDF::URI(uri_for(property)))
+        .filter(predicate: DEFS[:matchesObservedProperty])
 
       if solutions.empty?
         nil
       elsif solutions.count == 1
         object_uri = solutions.first[:object]
-        individual = reduceSolutions(getAllBySubject(object_uri))
+        individual = reduce_solutions(get_all_by_subject(object_uri))
         {
           definition:  individual[DEFS[:definition]][0].humanize,
           description: individual[DEFS[:description]][0].humanize,
@@ -63,25 +65,14 @@ module Transloader
       end
     end
 
-    # Reduce the solutions array to a Hash with predicates as keys, and
-    # an array of objects as values.
-    def reduceSolutions(solutions)
-      solutions.reduce({}) do |memo, solution|
-        memo[solution[:predicate]] ||= []
-        memo[solution[:predicate]].push(solution[:object])
-        memo
-      end
-    end
-
     def unit_of_measurement(property)
-      uri       = "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
-      solutions = getAllBySubject(RDF::URI(uri)).filter(predicate: DEFS[:matchesUnitOfMeasurement])
+      solutions = get_uom_for(property)
 
       if solutions.empty?
         nil
       elsif solutions.count == 1
         object_uri = solutions.first[:object]
-        individual = reduceSolutions(getAllBySubject(object_uri))
+        individual = reduce_solutions(get_all_by_subject(object_uri))
         {
           definition:  individual[DEFS[:definition]][0].humanize,
           symbol:      individual[DEFS[:symbol]][0].humanize,
@@ -91,6 +82,34 @@ module Transloader
         # Only one should have been matched — probably an ontology issue
         raise "Too many matching units of measurement"
       end
+    end
+
+    private
+
+    # Return a solution set for all items matching the given subject.
+    def get_all_by_subject(subject)
+      RDF::Query.execute(@graph) do
+        pattern [subject, :predicate, :object]
+      end
+    end
+
+    def get_uom_for(property)
+      get_all_by_subject(RDF::URI(uri_for(property)))
+        .filter(predicate: DEFS[:matchesUnitOfMeasurement])
+    end
+
+    # Reduce the solutions array to a Hash with predicates as keys, and
+    # an array of objects as values.
+    def reduce_solutions(solutions)
+      solutions.reduce({}) do |memo, solution|
+        memo[solution[:predicate]] ||= []
+        memo[solution[:predicate]].push(solution[:object])
+        memo
+      end
+    end
+
+    def uri_for(property)
+      "http://gswlab.ca/ontologies/etl-ontology##{@provider}:#{property}"
     end
   end
 end
