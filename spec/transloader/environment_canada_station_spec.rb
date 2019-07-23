@@ -59,7 +59,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.save_metadata
       end
 
-      @sensorthings_url = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/"
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
     end
 
     it "creates a Thing entity and caches the entity URL" do
@@ -138,7 +138,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       reset_cache($cache_dir)
       @provider = nil
       @station = nil
-      @sensorthings_url = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/"
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
@@ -167,7 +167,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       reset_cache($cache_dir)
       @provider = nil
       @station = nil
-      @sensorthings_url = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/"
+      @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
