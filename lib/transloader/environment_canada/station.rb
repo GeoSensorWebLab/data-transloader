@@ -163,7 +163,7 @@ module Transloader
         entity = @ontology.observed_property(stream[:name])
 
         if entity.nil?
-          logger.warn "No Observed Property found in Ontology for #{stream[:name]}"
+          logger.warn "No Observed Property found in Ontology for EnvironmentCanada:#{stream[:name]}"
           entity = {
             name:        stream[:name],
             definition:  "http://example.org/#{stream[:name]}",
@@ -190,7 +190,7 @@ module Transloader
         uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for #{stream[:name]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for EnvironmentCanada:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:uom],
             symbol:     '',
