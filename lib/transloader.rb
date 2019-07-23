@@ -10,6 +10,7 @@ require 'transloader/data_garrison_station'
 require 'transloader/environment_canada_station'
 require 'transloader/environment_canada_provider'
 require 'transloader/http'
+require 'transloader/ontology'
 require 'transloader/time_interval'
 require 'transloader/version'
 
