@@ -103,8 +103,14 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "maps the source observed properties to standard observed properties" do
-      pending
-      fail
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        # Check that a label from the ontology is used
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}ObservedProperties])
+          .with(body: /Data Availability/).at_least_once
+      end
     end
 
     it "creates Datastream entities and caches the URLs" do
@@ -118,13 +124,25 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "maps the source observation type to O&M observation types on Datastreams" do
-      pending
-      fail
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        # Check that a non-default observation type is used
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .with(body: /OM_Measurement/).at_least_once
+      end
     end
 
     it "maps the source observation type to standard UOMs on Datastreams" do
-      pending
-      fail
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        # Check that a definition from the ontology is used
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .with(body: /UO_0000187/).at_least_once
+      end
     end
   end
 
