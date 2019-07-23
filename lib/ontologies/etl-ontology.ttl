@@ -24,11 +24,15 @@ skos:exactMatch rdf:type owl:AnnotationProperty .
 #################################################################
 
 ###  http://gswlab.ca/ontologies/etl-ontology#matchesObservedProperty
-etl-ontology:matchesObservedProperty rdf:type owl:ObjectProperty .
+etl-ontology:matchesObservedProperty rdf:type owl:ObjectProperty ;
+                                     rdfs:domain etl-ontology:SourceProperty ;
+                                     rdfs:range etl-ontology:ObservedProperty .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#matchesUnitOfMeasurement
-etl-ontology:matchesUnitOfMeasurement rdf:type owl:ObjectProperty .
+etl-ontology:matchesUnitOfMeasurement rdf:type owl:ObjectProperty ;
+                                      rdfs:domain etl-ontology:SourceProperty ;
+                                      rdfs:range etl-ontology:UnitOfMeasurement .
 
 
 #################################################################
@@ -303,53 +307,116 @@ etl-ontology:EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_mt55-60 rdf:type owl:Na
                                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:millimeter .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts
+etl-ontology:EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts rdf:type owl:NamedIndividual ,
+                                                                          etl-ontology:SourceProperty ;
+                                                                 etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60> ;
+                                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilogram_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_1
+etl-ontology:EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_1 rdf:type owl:NamedIndividual ,
+                                                                            etl-ontology:SourceProperty ;
+                                                                   etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60> ;
+                                                                   etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilogram_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_2
+etl-ontology:EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_2 rdf:type owl:NamedIndividual ,
+                                                                            etl-ontology:SourceProperty ;
+                                                                   etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60> ;
+                                                                   etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilogram_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_3
+etl-ontology:EnvironmentCanada:avg_cum_pcpn_gag_wt_fltrd_pst5mts_3 rdf:type owl:NamedIndividual ,
+                                                                            etl-ontology:SourceProperty ;
+                                                                   etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60> ;
+                                                                   etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilogram_per_square_meter .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_globl_solr_radn_pst1hr
 etl-ontology:EnvironmentCanada:avg_globl_solr_radn_pst1hr rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:SourceProperty ;
-                                                          etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_global_solar_radiation ;
+                                                          etl-ontology:matchesObservedProperty etl-ontology:Property:Global_solar_radiation_over_past_1_hour ;
                                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:watt_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_snw_dpth_pst5mts
+etl-ontology:EnvironmentCanada:avg_snw_dpth_pst5mts rdf:type owl:NamedIndividual ,
+                                                             etl-ontology:SourceProperty ;
+                                                    etl-ontology:matchesObservedProperty etl-ontology:Property:Average_snow_depth_over_past_5_minutes ;
+                                                    etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:centimeter .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_dir_10m_mt50-60
 etl-ontology:EnvironmentCanada:avg_wnd_dir_10m_mt50-60 rdf:type owl:NamedIndividual ,
                                                                 etl-ontology:SourceProperty ;
-                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Past_10-minutes_vectoral_average_10m_wind_direction ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Vectoral_average_10m_wind_direction_over_past_10_minutes ;
                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_dir_10m_mt58-60
 etl-ontology:EnvironmentCanada:avg_wnd_dir_10m_mt58-60 rdf:type owl:NamedIndividual ,
                                                                 etl-ontology:SourceProperty ;
-                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Past_2-minutes_vectoral_average_10m_wind_direction ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Vectoral_average_10m_wind_direction_over_past_2_minutes ;
                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_dir_10m_pst10mts
+etl-ontology:EnvironmentCanada:avg_wnd_dir_10m_pst10mts rdf:type owl:NamedIndividual ,
+                                                                 etl-ontology:SourceProperty ;
+                                                        etl-ontology:matchesObservedProperty etl-ontology:Property:Vectoral_average_10m_wind_direction_over_past_10_minutes ;
+                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_dir_10m_pst1hr
 etl-ontology:EnvironmentCanada:avg_wnd_dir_10m_pst1hr rdf:type owl:NamedIndividual ,
                                                                etl-ontology:SourceProperty ;
-                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_vector_average_10m_wind_direction ;
+                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Vector_average_10m_wind_direction_over_past_1_hour ;
                                                       etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_dir_10m_pst2mts
+etl-ontology:EnvironmentCanada:avg_wnd_dir_10m_pst2mts rdf:type owl:NamedIndividual ,
+                                                                etl-ontology:SourceProperty ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Average_wind_direction_at_10_meters_over_past_2_minutes ;
+                                                       etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_10m_mt50-60
 etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_mt50-60 rdf:type owl:NamedIndividual ,
                                                                 etl-ontology:SourceProperty ;
-                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Past_10-minutes_average_10m_wind_speed ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Average_10m_wind_speed_over_past_10_minutes ;
                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_10m_mt58-60
 etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_mt58-60 rdf:type owl:NamedIndividual ,
                                                                 etl-ontology:SourceProperty ;
-                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Past_2-minutes_average_10m_wind_speed ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Average_10m_wind_speed_over_past_2_minutes ;
                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_10m_pst10mts
+etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_pst10mts rdf:type owl:NamedIndividual ,
+                                                                 etl-ontology:SourceProperty ;
+                                                        etl-ontology:matchesObservedProperty etl-ontology:Property:Average_10m_wind_speed_over_past_10_minutes ;
+                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_10m_pst1hr
 etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_pst1hr rdf:type owl:NamedIndividual ,
                                                                etl-ontology:SourceProperty ;
-                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_average_10m_wind_speed ;
+                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Average_10m_wind_speed_over_past_1_hour ;
                                                       etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_10m_pst2mts
+etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_pst2mts rdf:type owl:NamedIndividual ,
+                                                                etl-ontology:SourceProperty ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Average_10m_wind_speed_over_past_2_minutes ;
+                                                       etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_pcpn_gag_mt50-60
@@ -357,6 +424,13 @@ etl-ontology:EnvironmentCanada:avg_wnd_spd_pcpn_gag_mt50-60 rdf:type owl:NamedIn
                                                                      etl-ontology:SourceProperty ;
                                                             etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge> ;
                                                             etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_pcpn_gag_pst10mts
+etl-ontology:EnvironmentCanada:avg_wnd_spd_pcpn_gag_pst10mts rdf:type owl:NamedIndividual ,
+                                                                      etl-ontology:SourceProperty ;
+                                                             etl-ontology:matchesObservedProperty etl-ontology:Property:Average_wind_speed_at_precipitation_gauge_over_past_10_minutes ;
+                                                             etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:cld_amt_code_1
@@ -502,7 +576,7 @@ etl-ontology:EnvironmentCanada:max_batry_volt_pst1hr rdf:type owl:NamedIndividua
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_pk_wnd_spd_10m_pst1hr
 etl-ontology:EnvironmentCanada:max_pk_wnd_spd_10m_pst1hr rdf:type owl:NamedIndividual ,
                                                                   etl-ontology:SourceProperty ;
-                                                         etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_maximum_10m_peak_wind_speed ;
+                                                         etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_10m_peak_wind_speed_over_past_1_hour ;
                                                          etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
@@ -523,29 +597,43 @@ etl-ontology:EnvironmentCanada:max_vis_mt50-60 rdf:type owl:NamedIndividual ,
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_gst_spd_10m_mt50-60
 etl-ontology:EnvironmentCanada:max_wnd_gst_spd_10m_mt50-60 rdf:type owl:NamedIndividual ,
                                                                     etl-ontology:SourceProperty ;
-                                                           etl-ontology:matchesObservedProperty etl-ontology:Property:Past_10-minutes_maximum_10m_wind_gust_speed ;
+                                                           etl-ontology:matchesObservedProperty etl-ontology:Property:maximum_10m_wind_gust_speed_over_past_10_minutes ;
                                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_spd_10m_mt50-60
 etl-ontology:EnvironmentCanada:max_wnd_spd_10m_mt50-60 rdf:type owl:NamedIndividual ,
                                                                 etl-ontology:SourceProperty ;
-                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Past_10-minutes_maximum_10m_wind_speed ;
+                                                       etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_10m_wind_speed_over_past_10_minutes ;
                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_spd_10m_pst10mts
+etl-ontology:EnvironmentCanada:max_wnd_spd_10m_pst10mts rdf:type owl:NamedIndividual ,
+                                                                 etl-ontology:SourceProperty ;
+                                                        etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_10m_wind_speed_over_past_10_minutes ;
+                                                        etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_spd_10m_pst1hr
 etl-ontology:EnvironmentCanada:max_wnd_spd_10m_pst1hr rdf:type owl:NamedIndividual ,
                                                                etl-ontology:SourceProperty ;
-                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_maximum_10m_wind_speed ;
+                                                      etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_10m_wind_speed_over_past_1_hour ;
                                                       etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_spd_10m_pst1hr_tm
 etl-ontology:EnvironmentCanada:max_wnd_spd_10m_pst1hr_tm rdf:type owl:NamedIndividual ,
                                                                   etl-ontology:SourceProperty ;
-                                                         etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_maximum_10m_wind_speed ;
+                                                         etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_10m_wind_speed_over_past_1_hour ;
                                                          etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_spd_pst1hr_tm
+etl-ontology:EnvironmentCanada:max_wnd_spd_pst1hr_tm rdf:type owl:NamedIndividual ,
+                                                              etl-ontology:SourceProperty ;
+                                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp ;
+                                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:timestamp_hour_minute .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:min_air_temp_pst1hr
@@ -675,7 +763,7 @@ etl-ontology:EnvironmentCanada:rmk rdf:type owl:NamedIndividual ,
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:rnfl_amt_pst1hr
 etl-ontology:EnvironmentCanada:rnfl_amt_pst1hr rdf:type owl:NamedIndividual ,
                                                         etl-ontology:SourceProperty ;
-                                               etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_rainfall_amount ;
+                                               etl-ontology:matchesObservedProperty etl-ontology:Property:Rainfall_amount_over_past_1_hour ;
                                                etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:millimeter .
 
 
@@ -724,7 +812,7 @@ etl-ontology:EnvironmentCanada:stn_pres rdf:type owl:NamedIndividual ,
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:tot_globl_solr_radn_pst1hr
 etl-ontology:EnvironmentCanada:tot_globl_solr_radn_pst1hr rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:SourceProperty ;
-                                                          etl-ontology:matchesObservedProperty etl-ontology:Property:Past_1-hour_total_global_solar_radiation ;
+                                                          etl-ontology:matchesObservedProperty etl-ontology:Property:Total_global_solar_radiation_over_past_1_hour ;
                                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kiloJoule_per_square_meter .
 
 
@@ -742,11 +830,25 @@ etl-ontology:EnvironmentCanada:vis rdf:type owl:NamedIndividual ,
                                    etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:wetblb_temp
+etl-ontology:EnvironmentCanada:wetblb_temp rdf:type owl:NamedIndividual ,
+                                                    etl-ontology:SourceProperty ;
+                                           etl-ontology:matchesObservedProperty etl-ontology:Property:Wet_bulb_temperature ;
+                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:wnd_dir_10m_mt50-60_max_spd
 etl-ontology:EnvironmentCanada:wnd_dir_10m_mt50-60_max_spd rdf:type owl:NamedIndividual ,
                                                                     etl-ontology:SourceProperty ;
                                                            etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_direction_associated_with_the_past_10-minute_maximum_wind_speed_at_10m ;
                                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:wnd_dir_10m_pst10mts_max_spd
+etl-ontology:EnvironmentCanada:wnd_dir_10m_pst10mts_max_spd rdf:type owl:NamedIndividual ,
+                                                                     etl-ontology:SourceProperty ;
+                                                            etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_direction_associated_with_the_past_10-minute_maximum_wind_speed_at_10m ;
+                                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:wnd_dir_10m_pst1hr_max_spd
@@ -787,12 +889,60 @@ etl-ontology:Property:Air_Temperature_12_hours_ago rdf:type owl:NamedIndividual 
                                                    rdfs:label "Air Temperature 12 hours ago" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_10m_wind_speed_over_past_10_minutes
+etl-ontology:Property:Average_10m_wind_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                           etl-ontology:ObservedProperty ;
+                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                  rdfs:label "Average 10 meter wind speed over past 10 minutes" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_10m_wind_speed_over_past_1_hour
+etl-ontology:Property:Average_10m_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                       etl-ontology:ObservedProperty ;
+                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                              rdfs:label "Average 10 meter wind speed over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_10m_wind_speed_over_past_2_minutes
+etl-ontology:Property:Average_10m_wind_speed_over_past_2_minutes rdf:type owl:NamedIndividual ,
+                                                                          etl-ontology:ObservedProperty ;
+                                                                 etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                 rdfs:label "Average 10 meter wind speed over past 2 minutes" .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_Air_Temperature_over_past_1_hour
 etl-ontology:Property:Average_Air_Temperature_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                         etl-ontology:ObservedProperty ;
                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
                                                                rdfs:label "Average air temperature over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_snow_depth_over_past_5_minutes
+etl-ontology:Property:Average_snow_depth_over_past_5_minutes rdf:type owl:NamedIndividual ,
+                                                                      etl-ontology:ObservedProperty ;
+                                                             etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
+                                                             etl-ontology:description "Average snow depth over past 5 minutes." ;
+                                                             rdfs:label "Average snow depth over past 5 minutes" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_wind_direction_at_10_meters_over_past_2_minutes
+etl-ontology:Property:Average_wind_direction_at_10_meters_over_past_2_minutes rdf:type owl:NamedIndividual ,
+                                                                                       etl-ontology:ObservedProperty ;
+                                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
+                                                                              etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming." ;
+                                                                              rdfs:label "Average wind direction at 10 meters over past 2 minutes" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_wind_speed_at_precipitation_gauge_over_past_10_minutes
+etl-ontology:Property:Average_wind_speed_at_precipitation_gauge_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                                              etl-ontology:ObservedProperty ;
+                                                                                     etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                                                     etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity." ;
+                                                                                     rdfs:label "Average wind speed at precipitation gauge over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Battery_Voltage
@@ -891,6 +1041,14 @@ etl-ontology:Property:Downwelling_shortwave_flux_in_air rdf:type owl:NamedIndivi
                                                         rdfs:label "Downwelling shortwave flux in air" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Global_solar_radiation_over_past_1_hour
+etl-ontology:Property:Global_solar_radiation_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                       etl-ontology:ObservedProperty ;
+                                                              etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
+                                                              etl-ontology:description "Past 1-hour global solar radiation"^^xsd:string ;
+                                                              rdfs:label "Global solar radiation over past 1 hour" .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Header_Supply_Voltage
 etl-ontology:Property:Header_Supply_Voltage rdf:type owl:NamedIndividual ,
                                                      etl-ontology:ObservedProperty ;
@@ -921,6 +1079,38 @@ etl-ontology:Property:High_Data_Rate_transmitter_reflected_power rdf:type owl:Na
                                                                  etl-ontology:definition "http://mmisw.org/ont/ioos/active_acoustic_metadata/data_processing_transceiver_power"^^xsd:anyURI ;
                                                                  etl-ontology:description "High Data Rate transmitter reflected power"^^xsd:string ;
                                                                  rdfs:label "High Data Rate Transmitter reflected power" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Max_wind_speed_past_1_hour_timestamp
+etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp rdf:type owl:NamedIndividual ,
+                                                                    etl-ontology:ObservedProperty ;
+                                                           etl-ontology:definition ""^^xsd:anyURI ;
+                                                           etl-ontology:description "Timestamp of maximum wind speed over past hour." ;
+                                                           rdfs:label "Timestamp of maximum wind speed over past hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_10m_peak_wind_speed_over_past_1_hour
+etl-ontology:Property:Maximum_10m_peak_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                            etl-ontology:ObservedProperty ;
+                                                                   etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                                   etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                   rdfs:label "Maximum 10 meter peak wind speed over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_10m_wind_speed_over_past_10_minutes
+etl-ontology:Property:Maximum_10m_wind_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                           etl-ontology:ObservedProperty ;
+                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                  rdfs:label "Maximum 10 meter wind speed over past 10 minutes" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_10m_wind_speed_over_past_1_hour
+etl-ontology:Property:Maximum_10m_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                       etl-ontology:ObservedProperty ;
+                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
+                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                              rdfs:label "Maximum 10 meter wind speed over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Air_Temperature_over_past_1_hour
@@ -1043,110 +1233,6 @@ etl-ontology:Property:Non-cumulative_cloud_cover_or_amount_layer_3 rdf:type owl:
                                                                    rdfs:label "Non-cumulative cloud cover/amount for layer 3" .
 
 
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_average_10m_wind_speed
-etl-ontology:Property:Past_1-hour_average_10m_wind_speed rdf:type owl:NamedIndividual ,
-                                                                  etl-ontology:ObservedProperty ;
-                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                         rdfs:label "Average 10 meter wind speed over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_global_solar_radiation
-etl-ontology:Property:Past_1-hour_global_solar_radiation rdf:type owl:NamedIndividual ,
-                                                                  etl-ontology:ObservedProperty ;
-                                                         etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
-                                                         etl-ontology:description "Past 1-hour global solar radiation"^^xsd:string ;
-                                                         rdfs:label "Global solar radiation over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_maximum_10m_peak_wind_speed
-etl-ontology:Property:Past_1-hour_maximum_10m_peak_wind_speed rdf:type owl:NamedIndividual ,
-                                                                       etl-ontology:ObservedProperty ;
-                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                              rdfs:label "Maximum 10 meter peak wind speed over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_maximum_10m_wind_speed
-etl-ontology:Property:Past_1-hour_maximum_10m_wind_speed rdf:type owl:NamedIndividual ,
-                                                                  etl-ontology:ObservedProperty ;
-                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                         rdfs:label "Maximum 10 meter wind speed over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_rainfall_amount
-etl-ontology:Property:Past_1-hour_rainfall_amount rdf:type owl:NamedIndividual ,
-                                                           etl-ontology:ObservedProperty ;
-                                                  etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                  etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
-                                                  rdfs:label "Rainfall amount over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_total_global_solar_radiation
-etl-ontology:Property:Past_1-hour_total_global_solar_radiation rdf:type owl:NamedIndividual ,
-                                                                        etl-ontology:ObservedProperty ;
-                                                               etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
-                                                               etl-ontology:description "Past 1-hour total global solar radiation"^^xsd:string ;
-                                                               rdfs:label "Total global solar radiation over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_vector_average_10m_wind_direction
-etl-ontology:Property:Past_1-hour_vector_average_10m_wind_direction rdf:type owl:NamedIndividual ,
-                                                                             etl-ontology:ObservedProperty ;
-                                                                    etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                    etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
-                                                                    rdfs:label "Vector average 10 meter wind direction over past 1 hour" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_average_10m_wind_speed
-etl-ontology:Property:Past_10-minutes_average_10m_wind_speed rdf:type owl:NamedIndividual ,
-                                                                      etl-ontology:ObservedProperty ;
-                                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                             rdfs:label "Average 10 meter wind speed over past 10 minutes" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_maximum_10m_wind_gust_speed
-etl-ontology:Property:Past_10-minutes_maximum_10m_wind_gust_speed rdf:type owl:NamedIndividual ,
-                                                                           etl-ontology:ObservedProperty ;
-                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
-                                                                  etl-ontology:description "A gust is a sudden brief period of high wind speed."^^xsd:string ;
-                                                                  rdfs:label "Maximum 10 meter wind gust speed over past 10 minutes" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_maximum_10m_wind_speed
-etl-ontology:Property:Past_10-minutes_maximum_10m_wind_speed rdf:type owl:NamedIndividual ,
-                                                                      etl-ontology:ObservedProperty ;
-                                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                             rdfs:label "Maximum 10 meter wind speed over past 10 minutes" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_vectoral_average_10m_wind_direction
-etl-ontology:Property:Past_10-minutes_vectoral_average_10m_wind_direction rdf:type owl:NamedIndividual ,
-                                                                                   etl-ontology:ObservedProperty ;
-                                                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                          etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
-                                                                          rdfs:label "Vectoral average 10 meter wind direction over past 10 minutes" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_2-minutes_average_10m_wind_speed
-etl-ontology:Property:Past_2-minutes_average_10m_wind_speed rdf:type owl:NamedIndividual ,
-                                                                     etl-ontology:ObservedProperty ;
-                                                            etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                            etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
-                                                            rdfs:label "Average 10 meter wind speed over past 2 minutes" .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_2-minutes_vectoral_average_10m_wind_direction
-etl-ontology:Property:Past_2-minutes_vectoral_average_10m_wind_direction rdf:type owl:NamedIndividual ,
-                                                                                  etl-ontology:ObservedProperty ;
-                                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                         etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
-                                                                         rdfs:label "Vectoral average 10 meter wind direction over past 2 minutes" .
-
-
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_over_past_1_hour
 etl-ontology:Property:Precipitation_Amount_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                      etl-ontology:ObservedProperty ;
@@ -1195,6 +1281,14 @@ etl-ontology:Property:Present_Weather rdf:type owl:NamedIndividual ,
                                       rdfs:label "Present Weather" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Rainfall_amount_over_past_1_hour
+etl-ontology:Property:Rainfall_amount_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                etl-ontology:ObservedProperty ;
+                                                       etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
+                                                       etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                       rdfs:label "Rainfall amount over past 1 hour" .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Rainfall_since_last_synoptic_hour
 etl-ontology:Property:Rainfall_since_last_synoptic_hour rdf:type owl:NamedIndividual ,
                                                                  etl-ontology:ObservedProperty ;
@@ -1227,6 +1321,38 @@ etl-ontology:Property:Station_Pressure rdf:type owl:NamedIndividual ,
                                        rdfs:label "Station Pressure" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Total_global_solar_radiation_over_past_1_hour
+etl-ontology:Property:Total_global_solar_radiation_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                             etl-ontology:ObservedProperty ;
+                                                                    etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
+                                                                    etl-ontology:description "Past 1-hour total global solar radiation"^^xsd:string ;
+                                                                    rdfs:label "Total global solar radiation over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Vector_average_10m_wind_direction_over_past_1_hour
+etl-ontology:Property:Vector_average_10m_wind_direction_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                                                  etl-ontology:ObservedProperty ;
+                                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
+                                                                         etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                         rdfs:label "Vector average 10 meter wind direction over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Vectoral_average_10m_wind_direction_over_past_10_minutes
+etl-ontology:Property:Vectoral_average_10m_wind_direction_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                                        etl-ontology:ObservedProperty ;
+                                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
+                                                                               etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                               rdfs:label "Vectoral average 10 meter wind direction over past 10 minutes" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Vectoral_average_10m_wind_direction_over_past_2_minutes
+etl-ontology:Property:Vectoral_average_10m_wind_direction_over_past_2_minutes rdf:type owl:NamedIndividual ,
+                                                                                       etl-ontology:ObservedProperty ;
+                                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
+                                                                              etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                              rdfs:label "Vectoral average 10 meter wind direction over past 2 minutes" .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Vertical_visibility
 etl-ontology:Property:Vertical_visibility rdf:type owl:NamedIndividual ,
                                                    etl-ontology:ObservedProperty ;
@@ -1241,6 +1367,14 @@ etl-ontology:Property:Visibility rdf:type owl:NamedIndividual ,
                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/visibility_in_air"^^xsd:anyURI ;
                                  etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string ;
                                  rdfs:label "Visibility" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wet_bulb_temperature
+etl-ontology:Property:Wet_bulb_temperature rdf:type owl:NamedIndividual ,
+                                                    etl-ontology:ObservedProperty ;
+                                           etl-ontology:definition "http://sweetontology.net/propTemperature/WetBulbTemperature"^^xsd:anyURI ;
+                                           etl-ontology:description "The wet-bulb temperature is the temperature read by a thermometer covered in water-soaked cloth over which air is passed."^^xsd:string ;
+                                           rdfs:label "Wet-bulb Temperature" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_From_Direction
@@ -1289,6 +1423,14 @@ etl-ontology:Property:Wind_speed_of_gust rdf:type owl:NamedIndividual ,
                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
                                          etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed." ;
                                          rdfs:label "Wind speed of gust" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:maximum_10m_wind_gust_speed_over_past_10_minutes
+etl-ontology:Property:maximum_10m_wind_gust_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                                etl-ontology:ObservedProperty ;
+                                                                       etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
+                                                                       etl-ontology:description "A gust is a sudden brief period of high wind speed."^^xsd:string ;
+                                                                       rdfs:label "Maximum 10 meter wind gust speed over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge
@@ -1351,7 +1493,7 @@ etl-ontology:Property:Wind_speed_of_gust rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:Remark rdf:type owl:NamedIndividual ,
                                   etl-ontology:UnitOfMeasurement ;
                          etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation" ;
+                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"^^xsd:anyURI ;
                          etl-ontology:symbol ""^^xsd:string ;
                          rdfs:label "Remark"^^xsd:string .
 
@@ -1360,7 +1502,7 @@ etl-ontology:Unit:Remark rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
                                 etl-ontology:UnitOfMeasurement ;
                        etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000218"^^xsd:anyURI ;
-                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                        etl-ontology:symbol "V"^^xsd:string ;
                        rdfs:label "Volt"^^xsd:string .
 
@@ -1369,7 +1511,7 @@ etl-ontology:Unit:Volt rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:centimeter rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000015"^^xsd:anyURI ;
-                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                              etl-ontology:symbol "cm"^^xsd:string ;
                              rdfs:label "centimeter"^^xsd:string .
 
@@ -1378,7 +1520,7 @@ etl-ontology:Unit:centimeter rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:degree rdf:type owl:NamedIndividual ,
                                   etl-ontology:UnitOfMeasurement ;
                          etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000185"^^xsd:anyURI ;
-                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                         etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                          etl-ontology:symbol "°"^^xsd:string ;
                          rdfs:label "degree"^^xsd:string .
 
@@ -1387,7 +1529,7 @@ etl-ontology:Unit:degree rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:degree_Celsius rdf:type owl:NamedIndividual ,
                                           etl-ontology:UnitOfMeasurement ;
                                  etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000027"^^xsd:anyURI ;
-                                 etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                 etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                  etl-ontology:symbol "℃"^^xsd:string ;
                                  rdfs:label "degree Celsius"^^xsd:string .
 
@@ -1396,7 +1538,7 @@ etl-ontology:Unit:degree_Celsius rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:hectoPascal rdf:type owl:NamedIndividual ,
                                        etl-ontology:UnitOfMeasurement ;
                               etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000110"^^xsd:anyURI ;
-                              etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                              etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                               etl-ontology:symbol "hPa"^^xsd:string ;
                               rdfs:label "hectoPascal"^^xsd:string .
 
@@ -1405,7 +1547,7 @@ etl-ontology:Unit:hectoPascal rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:hertz rdf:type owl:NamedIndividual ,
                                  etl-ontology:UnitOfMeasurement ;
                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000106"^^xsd:anyURI ;
-                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                         etl-ontology:symbol "Hz"^^xsd:string ;
                         rdfs:label "hertz"^^xsd:string .
 
@@ -1414,7 +1556,7 @@ etl-ontology:Unit:hertz rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:inches_of_mercury rdf:type owl:NamedIndividual ,
                                              etl-ontology:UnitOfMeasurement ;
                                     etl-ontology:definition "http://mmisw.org/ont/mmi/udunits2-common/_691857c1"^^xsd:anyURI ;
-                                    etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                    etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                     etl-ontology:symbol "inHg"^^xsd:string ;
                                     rdfs:label "inches of mercury"^^xsd:string .
 
@@ -1423,7 +1565,7 @@ etl-ontology:Unit:inches_of_mercury rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:kiloJoule_per_square_meter rdf:type owl:NamedIndividual ,
                                                       etl-ontology:UnitOfMeasurement ;
                                              etl-ontology:definition ""^^xsd:anyURI ;
-                                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                              etl-ontology:symbol "kJ/m^2"^^xsd:string ;
                                              rdfs:label "kiloJoule per square meter"^^xsd:string .
 
@@ -1432,9 +1574,18 @@ etl-ontology:Unit:kiloJoule_per_square_meter rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:kiloPascal rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000110"^^xsd:anyURI ;
-                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                              etl-ontology:symbol "kPa"^^xsd:string ;
                              rdfs:label "kiloPascal"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:kilogram_per_square_meter
+etl-ontology:Unit:kilogram_per_square_meter rdf:type owl:NamedIndividual ,
+                                                     etl-ontology:UnitOfMeasurement ;
+                                            etl-ontology:definition "http://www.ontobee.org/ontology/UO?iri=http://purl.obolibrary.org/obo/UO_0000086"^^xsd:anyURI ;
+                                            etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
+                                            etl-ontology:symbol "kg/m^2" ;
+                                            rdfs:label "Kilograms per square meter" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:kilometer
@@ -1442,7 +1593,7 @@ etl-ontology:Unit:kilometer rdf:type owl:NamedIndividual ,
                                      etl-ontology:UnitOfMeasurement ;
                             etl-ontology:definition "http://mmisw.org/ont/testing/semm/Kilometer"^^xsd:anyURI ,
                                                     "http://purl.obolibrary.org/obo/UO_0000008"^^xsd:anyURI ;
-                            etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                            etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                             etl-ontology:symbol "km"^^xsd:string ;
                             rdfs:label "kilometer"^^xsd:string .
 
@@ -1451,7 +1602,7 @@ etl-ontology:Unit:kilometer rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:kilometer_per_hour rdf:type owl:NamedIndividual ,
                                               etl-ontology:UnitOfMeasurement ;
                                      etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0010008"^^xsd:anyURI ;
-                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                      etl-ontology:symbol "km/h" ;
                                      rdfs:label "kilometer per hour" .
 
@@ -1460,7 +1611,7 @@ etl-ontology:Unit:kilometer_per_hour rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:meter rdf:type owl:NamedIndividual ,
                                  etl-ontology:UnitOfMeasurement ;
                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000008"^^xsd:anyURI ;
-                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                         etl-ontology:symbol "m"^^xsd:string ;
                         rdfs:label "meter"^^xsd:string .
 
@@ -1469,7 +1620,7 @@ etl-ontology:Unit:meter rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:micromol_per_mol rdf:type owl:NamedIndividual ,
                                             etl-ontology:UnitOfMeasurement ;
                                    etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000076"^^xsd:anyURI ;
-                                   etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                   etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                    etl-ontology:symbol "µmol/mol"^^xsd:string ;
                                    rdfs:label "micromol per mol"^^xsd:string .
 
@@ -1478,7 +1629,7 @@ etl-ontology:Unit:micromol_per_mol rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:millibar rdf:type owl:NamedIndividual ,
                                     etl-ontology:UnitOfMeasurement ;
                            etl-ontology:definition "http://mmisw.org/ont/drdc/parameter/_052"^^xsd:anyURI ;
-                           etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                           etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                            etl-ontology:symbol "mbar"^^xsd:string ;
                            rdfs:label "millibar"^^xsd:string .
 
@@ -1487,7 +1638,7 @@ etl-ontology:Unit:millibar rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:millimeter rdf:type owl:NamedIndividual ,
                                       etl-ontology:UnitOfMeasurement ;
                              etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000016"^^xsd:anyURI ;
-                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                             etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                              etl-ontology:symbol "mm"^^xsd:string ;
                              rdfs:label "millimeter"^^xsd:string .
 
@@ -1496,7 +1647,7 @@ etl-ontology:Unit:millimeter rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:obscuring_phenomena rdf:type owl:NamedIndividual ,
                                                etl-ontology:UnitOfMeasurement ;
                                       etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                      etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
+                                      etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"^^xsd:anyURI ;
                                       etl-ontology:symbol ""^^xsd:string ;
                                       rdfs:label "obscuring_phenomena"^^xsd:string .
 
@@ -1505,7 +1656,7 @@ etl-ontology:Unit:obscuring_phenomena rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:percent rdf:type owl:NamedIndividual ,
                                    etl-ontology:UnitOfMeasurement ;
                           etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000187"^^xsd:anyURI ;
-                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                           etl-ontology:symbol "%"^^xsd:string ;
                           rdfs:label "percent"^^xsd:string .
 
@@ -1514,7 +1665,7 @@ etl-ontology:Unit:percent rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:present_weather rdf:type owl:NamedIndividual ,
                                            etl-ontology:UnitOfMeasurement ;
                                   etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                  etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
+                                  etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"^^xsd:anyURI ;
                                   etl-ontology:symbol ""^^xsd:string ;
                                   rdfs:label "present_weather"^^xsd:string .
 
@@ -1523,16 +1674,25 @@ etl-ontology:Unit:present_weather rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:tendency_characteristic rdf:type owl:NamedIndividual ,
                                                    etl-ontology:UnitOfMeasurement ;
                                           etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
+                                          etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"^^xsd:anyURI ;
                                           etl-ontology:symbol ""^^xsd:string ;
                                           rdfs:label "tendency_characteristic"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:timestamp_hour_minute
+etl-ontology:Unit:timestamp_hour_minute rdf:type owl:NamedIndividual ,
+                                                 etl-ontology:UnitOfMeasurement ;
+                                        etl-ontology:definition ""^^xsd:anyURI ;
+                                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"^^xsd:anyURI ;
+                                        etl-ontology:symbol "" ;
+                                        rdfs:label "Timestamp at hour and minute" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:total_cloud_amount
 etl-ontology:Unit:total_cloud_amount rdf:type owl:NamedIndividual ,
                                               etl-ontology:UnitOfMeasurement ;
                                      etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation" ;
+                                     etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"^^xsd:anyURI ;
                                      etl-ontology:symbol ""^^xsd:string ;
                                      rdfs:label "total_cloud_amount"^^xsd:string .
 
@@ -1541,7 +1701,7 @@ etl-ontology:Unit:total_cloud_amount rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:watt rdf:type owl:NamedIndividual ,
                                 etl-ontology:UnitOfMeasurement ;
                        etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000114"^^xsd:anyURI ;
-                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                       etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                        etl-ontology:symbol "W"^^xsd:string ;
                        rdfs:label "watt"^^xsd:string .
 
@@ -1550,7 +1710,7 @@ etl-ontology:Unit:watt rdf:type owl:NamedIndividual ,
 etl-ontology:Unit:watt_per_square_meter rdf:type owl:NamedIndividual ,
                                                  etl-ontology:UnitOfMeasurement ;
                                         etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000155"^^xsd:anyURI ;
-                                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                        etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"^^xsd:anyURI ;
                                         etl-ontology:symbol "W/m^2"^^xsd:string ;
                                         rdfs:label "watt per square meter"^^xsd:string .
 
