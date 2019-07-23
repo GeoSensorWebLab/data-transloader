@@ -1,7 +1,7 @@
 require 'csv'
 require 'fileutils'
 
-require 'transloader/environment_canada_station'
+require 'transloader/environment_canada/station'
 
 module Transloader
   class EnvironmentCanadaProvider

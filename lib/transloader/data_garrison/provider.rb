@@ -1,6 +1,6 @@
 require 'fileutils'
 
-require 'transloader/data_garrison_station'
+require 'transloader/data_garrison/station'
 
 module Transloader
   class DataGarrisonProvider

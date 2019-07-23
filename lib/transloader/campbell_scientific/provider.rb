@@ -1,6 +1,6 @@
 require 'fileutils'
 
-require 'transloader/campbell_scientific_station'
+require 'transloader/campbell_scientific/station'
 
 module Transloader
   class CampbellScientificProvider
