@@ -653,7 +653,7 @@ etl-ontology:EnvironmentCanada:pk_wnd_rmk rdf:type owl:NamedIndividual ,
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:pres_tend_amt_pst3hrs
 etl-ontology:EnvironmentCanada:pres_tend_amt_pst3hrs rdf:type owl:NamedIndividual ,
                                                               etl-ontology:SourceProperty ;
-                                                     etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressurent_tendency_amount> ;
+                                                     etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressure_tendency_amount> ;
                                                      etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:hectoPascal .
 
 
@@ -778,511 +778,584 @@ etl-ontology:EnvironmentCanada:wnd_dir_10m_pst1hr_pk_spd rdf:type owl:NamedIndiv
 etl-ontology:Property:Air_Pressure rdf:type owl:NamedIndividual ,
                                             etl-ontology:ObservedProperty ;
                                    etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure"^^xsd:anyURI ;
-                                   etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string .
+                                   etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
+                                   rdfs:label "Air Pressure" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Air_Temperature
 etl-ontology:Property:Air_Temperature rdf:type owl:NamedIndividual ,
                                                etl-ontology:ObservedProperty ;
                                       etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                      etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                      etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                      rdfs:label "Air Temperature" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Air_Temperature_12_hours_ago
 etl-ontology:Property:Air_Temperature_12_hours_ago rdf:type owl:NamedIndividual ,
                                                             etl-ontology:ObservedProperty ;
                                                    etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                                   etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                                   etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                   rdfs:label "Air Temperature 12 hours ago" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_Air_Temperature_over_past_1_hour
 etl-ontology:Property:Average_Air_Temperature_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                         etl-ontology:ObservedProperty ;
                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                                               etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                                               etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                               rdfs:label "Average air temperature over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Battery_Voltage
 etl-ontology:Property:Battery_Voltage rdf:type owl:NamedIndividual ,
                                                etl-ontology:ObservedProperty ;
                                       etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                                      etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string .
+                                      etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                      rdfs:label "Battery Voltage" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_height_for_layer_1
 etl-ontology:Property:Cloud_height_for_layer_1 rdf:type owl:NamedIndividual ,
                                                         etl-ontology:ObservedProperty ;
                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/cloud_base_altitude"^^xsd:anyURI ;
-                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string .
+                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string ;
+                                               rdfs:label "Cloud height for layer 1" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_height_for_layer_2
 etl-ontology:Property:Cloud_height_for_layer_2 rdf:type owl:NamedIndividual ,
                                                         etl-ontology:ObservedProperty ;
                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/cloud_base_altitude"^^xsd:anyURI ;
-                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string .
+                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string ;
+                                               rdfs:label "Cloud height for layer 2" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_height_for_layer_3
 etl-ontology:Property:Cloud_height_for_layer_3 rdf:type owl:NamedIndividual ,
                                                         etl-ontology:ObservedProperty ;
                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/cloud_base_altitude"^^xsd:anyURI ;
-                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string .
+                                               etl-ontology:description "cloud_base refers to the base of the lowest cloud. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level."^^xsd:string ;
+                                               rdfs:label "Cloud height for layer 3" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_type_obscuring_phenomena_for_layer_1
 etl-ontology:Property:Cloud_type_obscuring_phenomena_for_layer_1 rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/?iri=http://vocab.ndg.nerc.ac.uk/term/P021/54/CLTY"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string .
+                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string ;
+                                                                 rdfs:label "Cloud type obscuring phenomena for layer 1" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_type_obscuring_phenomena_for_layer_2
 etl-ontology:Property:Cloud_type_obscuring_phenomena_for_layer_2 rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/?iri=http://vocab.ndg.nerc.ac.uk/term/P021/54/CLTY"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string .
+                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string ;
+                                                                 rdfs:label "Cloud type obscuring phenomena for layer 2" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Cloud_type_obscuring_phenomena_for_layer_3
 etl-ontology:Property:Cloud_type_obscuring_phenomena_for_layer_3 rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/?iri=http://vocab.ndg.nerc.ac.uk/term/P021/54/CLTY"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string .
+                                                                 etl-ontology:description "Parameters that classify cloud cover into types such as cumulus and cirrus."^^xsd:string ;
+                                                                 rdfs:label "Cloud type obscuring phenomena for layer 3" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Data_Availability
 etl-ontology:Property:Data_Availability rdf:type owl:NamedIndividual ,
                                                  etl-ontology:ObservedProperty ;
                                         etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                        etl-ontology:description "Data availability"^^xsd:string .
+                                        etl-ontology:description "Data availability"^^xsd:string ;
+                                        rdfs:label "Data Availability" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Datalogger_panel_temperature
 etl-ontology:Property:Datalogger_panel_temperature rdf:type owl:NamedIndividual ,
                                                             etl-ontology:ObservedProperty ;
                                                    etl-ontology:definition "http://mmisw.org/ont/secoora/parameter/enclosed_temperature"^^xsd:anyURI ;
-                                                   etl-ontology:description "Inside temperature of an enclosure or housing for sensor, system electronics, or battery that is recorded to monitor sensor health and data reliability. Some instruments may cease to operate or may perform poorly outside of manufacturer recommended operating temperatures."^^xsd:string .
+                                                   etl-ontology:description "Inside temperature of an enclosure or housing for sensor, system electronics, or battery that is recorded to monitor sensor health and data reliability. Some instruments may cease to operate or may perform poorly outside of manufacturer recommended operating temperatures."^^xsd:string ;
+                                                   rdfs:label "Datalogger panel temperature" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Derived_peak_wind_remark
 etl-ontology:Property:Derived_peak_wind_remark rdf:type owl:NamedIndividual ,
                                                         etl-ontology:ObservedProperty ;
                                                etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                               etl-ontology:description "Derived peak wind remark"^^xsd:string .
+                                               etl-ontology:description "Derived peak wind remark"^^xsd:string ;
+                                               rdfs:label "Derived peak wind remark"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Dew_Point_Temperature
 etl-ontology:Property:Dew_Point_Temperature rdf:type owl:NamedIndividual ,
                                                      etl-ontology:ObservedProperty ;
                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/dew_point_temperature"^^xsd:anyURI ;
-                                            etl-ontology:description "Dew point temperature is the temperature at which a parcel of air reaches saturation upon being cooled at constant pressure and specific humidity."^^xsd:string .
+                                            etl-ontology:description "Dew point temperature is the temperature at which a parcel of air reaches saturation upon being cooled at constant pressure and specific humidity."^^xsd:string ;
+                                            rdfs:label "Dew Point Temperature" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Downwelling_shortwave_flux_in_air
 etl-ontology:Property:Downwelling_shortwave_flux_in_air rdf:type owl:NamedIndividual ,
                                                                  etl-ontology:ObservedProperty ;
                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/downwelling_shortwave_flux_in_air"^^xsd:anyURI ;
-                                                        etl-ontology:description "Downwelling radiation is radiation from above. It does not mean \"net downward\". The sign convention is that \"upwelling\" is positive upwards and \"downwelling\" is positive downwards. The term \"shortwave\" means shortwave radiation. When thought of as being incident on a surface, a radiative flux is sometimes called \"irradiance\". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called \"vector irradiance\". In accordance with common usage in geophysical disciplines, \"flux\" implies per unit area, called \"flux density\" in physics."^^xsd:string .
+                                                        etl-ontology:description "Downwelling radiation is radiation from above. It does not mean \"net downward\". The sign convention is that \"upwelling\" is positive upwards and \"downwelling\" is positive downwards. The term \"shortwave\" means shortwave radiation. When thought of as being incident on a surface, a radiative flux is sometimes called \"irradiance\". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called \"vector irradiance\". In accordance with common usage in geophysical disciplines, \"flux\" implies per unit area, called \"flux density\" in physics."^^xsd:string ;
+                                                        rdfs:label "Downwelling shortwave flux in air" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Header_Supply_Voltage
 etl-ontology:Property:Header_Supply_Voltage rdf:type owl:NamedIndividual ,
                                                      etl-ontology:ObservedProperty ;
                                             etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                                            etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string .
+                                            etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                            rdfs:label "Header Supply Voltage" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:High_Data_Rate_transmitter_forward_power
 etl-ontology:Property:High_Data_Rate_transmitter_forward_power rdf:type owl:NamedIndividual ,
                                                                         etl-ontology:ObservedProperty ;
                                                                etl-ontology:definition "http://mmisw.org/ont/ioos/active_acoustic_metadata/data_processing_transceiver_power"^^xsd:anyURI ;
-                                                               etl-ontology:description "High Data Rate transmitter forward power"^^xsd:string .
+                                                               etl-ontology:description "High Data Rate transmitter forward power"^^xsd:string ;
+                                                               rdfs:label "High Data Rate Transmitter forward power" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:High_Data_Rate_transmitter_oscillator_drift
 etl-ontology:Property:High_Data_Rate_transmitter_oscillator_drift rdf:type owl:NamedIndividual ,
                                                                            etl-ontology:ObservedProperty ;
                                                                   etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                                                  etl-ontology:description "High Data Rate transmitter oscillator drift"^^xsd:string .
+                                                                  etl-ontology:description "High Data Rate transmitter oscillator drift"^^xsd:string ;
+                                                                  rdfs:label "High Data Rate Transmitter oscillator drift" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:High_Data_Rate_transmitter_reflected_power
 etl-ontology:Property:High_Data_Rate_transmitter_reflected_power rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/ioos/active_acoustic_metadata/data_processing_transceiver_power"^^xsd:anyURI ;
-                                                                 etl-ontology:description "High Data Rate transmitter reflected power"^^xsd:string .
+                                                                 etl-ontology:description "High Data Rate transmitter reflected power"^^xsd:string ;
+                                                                 rdfs:label "High Data Rate Transmitter reflected power" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Air_Temperature_over_past_1_hour
 etl-ontology:Property:Maximum_Air_Temperature_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                         etl-ontology:ObservedProperty ;
                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                                               etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                                               etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                               rdfs:label "Maximum Air Temperature over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Air_Temperature_over_past_24_hours
 etl-ontology:Property:Maximum_Air_Temperature_over_past_24_hours rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                                                 etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                                 rdfs:label "Maximum Air Temperature over past 24 hours" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Air_Temperature_over_past_6_hours
 etl-ontology:Property:Maximum_Air_Temperature_over_past_6_hours rdf:type owl:NamedIndividual ,
                                                                          etl-ontology:ObservedProperty ;
                                                                 etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
-                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string .
+                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                                rdfs:label "Maximum Air Temperature over past 6 hours" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Battery_Voltage_Past_1_Hour
 etl-ontology:Property:Maximum_Battery_Voltage_Past_1_Hour rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:ObservedProperty ;
                                                           etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                                                          etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string .
+                                                          etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                                          rdfs:label "Maximum Battery Voltage over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Relative_Humidity_over_past_1_hour
 etl-ontology:Property:Maximum_Relative_Humidity_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/relative_humidity"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string .
+                                                                 etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string ;
+                                                                 rdfs:label "Maximum Relative Humidity over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_visibility_over_past_10_minutes
 etl-ontology:Property:Maximum_visibility_over_past_10_minutes rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/visibility_in_air"^^xsd:anyURI ;
-                                                              etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string .
+                                                              etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string ;
+                                                              rdfs:label "Maximum visibility over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Mean_sea_level_pressure
 etl-ontology:Property:Mean_sea_level_pressure rdf:type owl:NamedIndividual ,
                                                        etl-ontology:ObservedProperty ;
                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure_at_mean_sea_level"^^xsd:anyURI ;
-                                              etl-ontology:description " Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation. \"Mean sea level\" means the time mean of sea surface elevation at a given location over an arbitrary period sufficient to eliminate the tidal signals."^^xsd:string .
+                                              etl-ontology:description " Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation. \"Mean sea level\" means the time mean of sea surface elevation at a given location over an arbitrary period sufficient to eliminate the tidal signals."^^xsd:string ;
+                                              rdfs:label "Mean Sea Level Pressure" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Battery_Voltage_Past_1_Hour
 etl-ontology:Property:Minimum_Battery_Voltage_Past_1_Hour rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:ObservedProperty ;
                                                           etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
-                                                          etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string .
+                                                          etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                                          rdfs:label "Minimum Battery Voltage Past 1 Hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Relative_Humidity_over_past_1_hour
 etl-ontology:Property:Minimum_Relative_Humidity_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/relative_humidity"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string .
+                                                                 etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string ;
+                                                                 rdfs:label "Minimum Relative Humidity over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_visibility_over_past_10_minutes
 etl-ontology:Property:Minimum_visibility_over_past_10_minutes rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/visibility_in_air"^^xsd:anyURI ;
-                                                              etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string .
+                                                              etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string ;
+                                                              rdfs:label "Minimum Visibility over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Mole_fraction_of_Carbon_Dioxide_in_air
 etl-ontology:Property:Mole_fraction_of_Carbon_Dioxide_in_air rdf:type owl:NamedIndividual ,
                                                                       etl-ontology:ObservedProperty ;
                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/mole_fraction_of_carbon_dioxide_in_air"^^xsd:anyURI ;
-                                                             etl-ontology:description "Ratio of Carbon Dioxide in air."^^xsd:string .
+                                                             etl-ontology:description "Ratio of Carbon Dioxide in air."^^xsd:string ;
+                                                             rdfs:label "Mole fraction of Carbon Dioxide in air" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Mole_fraction_of_water_vapor_in_air
 etl-ontology:Property:Mole_fraction_of_water_vapor_in_air rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:ObservedProperty ;
                                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/mole_fraction_of_water_vapor_in_air"^^xsd:anyURI ;
-                                                          etl-ontology:description "Mole fraction is used in the construction mole_fraction_of_X_in_Y, where X is a material constituent of Y. The chemical formula of water vapor is H2O."^^xsd:string .
+                                                          etl-ontology:description "Mole fraction is used in the construction mole_fraction_of_X_in_Y, where X is a material constituent of Y. The chemical formula of water vapor is H2O."^^xsd:string ;
+                                                          rdfs:label "Mole fraction of water vapor in air" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Non-cumulative_cloud_cover_or_amount_layer_1
 etl-ontology:Property:Non-cumulative_cloud_cover_or_amount_layer_1 rdf:type owl:NamedIndividual ,
                                                                             etl-ontology:ObservedProperty ;
                                                                    etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                                                   etl-ontology:description "Layer 1 cloud amount."^^xsd:string .
+                                                                   etl-ontology:description "Layer 1 cloud amount."^^xsd:string ;
+                                                                   rdfs:label "Non-cumulative cloud cover/amount for layer 1" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Non-cumulative_cloud_cover_or_amount_layer_2
 etl-ontology:Property:Non-cumulative_cloud_cover_or_amount_layer_2 rdf:type owl:NamedIndividual ,
                                                                             etl-ontology:ObservedProperty ;
                                                                    etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                                                   etl-ontology:description "Layer 2 cloud amount."^^xsd:string .
+                                                                   etl-ontology:description "Layer 2 cloud amount."^^xsd:string ;
+                                                                   rdfs:label "Non-cumulative cloud cover/amount for layer 2" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Non-cumulative_cloud_cover_or_amount_layer_3
 etl-ontology:Property:Non-cumulative_cloud_cover_or_amount_layer_3 rdf:type owl:NamedIndividual ,
                                                                             etl-ontology:ObservedProperty ;
                                                                    etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
-                                                                   etl-ontology:description "Layer 3 cloud amount."^^xsd:string .
+                                                                   etl-ontology:description "Layer 3 cloud amount."^^xsd:string ;
+                                                                   rdfs:label "Non-cumulative cloud cover/amount for layer 3" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_average_10m_wind_speed
 etl-ontology:Property:Past_1-hour_average_10m_wind_speed rdf:type owl:NamedIndividual ,
                                                                   etl-ontology:ObservedProperty ;
                                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                         rdfs:label "Average 10 meter wind speed over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_global_solar_radiation
 etl-ontology:Property:Past_1-hour_global_solar_radiation rdf:type owl:NamedIndividual ,
                                                                   etl-ontology:ObservedProperty ;
                                                          etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
-                                                         etl-ontology:description "Past 1-hour global solar radiation"^^xsd:string .
+                                                         etl-ontology:description "Past 1-hour global solar radiation"^^xsd:string ;
+                                                         rdfs:label "Global solar radiation over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_maximum_10m_peak_wind_speed
 etl-ontology:Property:Past_1-hour_maximum_10m_peak_wind_speed rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                              rdfs:label "Maximum 10 meter peak wind speed over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_maximum_10m_wind_speed
 etl-ontology:Property:Past_1-hour_maximum_10m_wind_speed rdf:type owl:NamedIndividual ,
                                                                   etl-ontology:ObservedProperty ;
                                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                         rdfs:label "Maximum 10 meter wind speed over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_rainfall_amount
 etl-ontology:Property:Past_1-hour_rainfall_amount rdf:type owl:NamedIndividual ,
                                                            etl-ontology:ObservedProperty ;
                                                   etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                  etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                  etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                  rdfs:label "Rainfall amount over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_total_global_solar_radiation
 etl-ontology:Property:Past_1-hour_total_global_solar_radiation rdf:type owl:NamedIndividual ,
                                                                         etl-ontology:ObservedProperty ;
                                                                etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/solar_radiation"^^xsd:anyURI ;
-                                                               etl-ontology:description "Past 1-hour total global solar radiation"^^xsd:string .
+                                                               etl-ontology:description "Past 1-hour total global solar radiation"^^xsd:string ;
+                                                               rdfs:label "Total global solar radiation over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_1-hour_vector_average_10m_wind_direction
 etl-ontology:Property:Past_1-hour_vector_average_10m_wind_direction rdf:type owl:NamedIndividual ,
                                                                              etl-ontology:ObservedProperty ;
                                                                     etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                    etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                    etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                    rdfs:label "Vector average 10 meter wind direction over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_average_10m_wind_speed
 etl-ontology:Property:Past_10-minutes_average_10m_wind_speed rdf:type owl:NamedIndividual ,
                                                                       etl-ontology:ObservedProperty ;
                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                             rdfs:label "Average 10 meter wind speed over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_maximum_10m_wind_gust_speed
 etl-ontology:Property:Past_10-minutes_maximum_10m_wind_gust_speed rdf:type owl:NamedIndividual ,
                                                                            etl-ontology:ObservedProperty ;
                                                                   etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
-                                                                  etl-ontology:description "A gust is a sudden brief period of high wind speed."^^xsd:string .
+                                                                  etl-ontology:description "A gust is a sudden brief period of high wind speed."^^xsd:string ;
+                                                                  rdfs:label "Maximum 10 meter wind gust speed over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_maximum_10m_wind_speed
 etl-ontology:Property:Past_10-minutes_maximum_10m_wind_speed rdf:type owl:NamedIndividual ,
                                                                       etl-ontology:ObservedProperty ;
                                                              etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                             etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                             rdfs:label "Maximum 10 meter wind speed over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_10-minutes_vectoral_average_10m_wind_direction
 etl-ontology:Property:Past_10-minutes_vectoral_average_10m_wind_direction rdf:type owl:NamedIndividual ,
                                                                                    etl-ontology:ObservedProperty ;
                                                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                          etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                          etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                          rdfs:label "Vectoral average 10 meter wind direction over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_2-minutes_average_10m_wind_speed
 etl-ontology:Property:Past_2-minutes_average_10m_wind_speed rdf:type owl:NamedIndividual ,
                                                                      etl-ontology:ObservedProperty ;
                                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                            etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                            etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                            rdfs:label "Average 10 meter wind speed over past 2 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Past_2-minutes_vectoral_average_10m_wind_direction
 etl-ontology:Property:Past_2-minutes_vectoral_average_10m_wind_direction rdf:type owl:NamedIndividual ,
                                                                                   etl-ontology:ObservedProperty ;
                                                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                         etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                         etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                         rdfs:label "Vectoral average 10 meter wind direction over past 2 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_over_past_1_hour
 etl-ontology:Property:Precipitation_Amount_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                      etl-ontology:ObservedProperty ;
                                                             etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                            etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                            etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                            rdfs:label "Precipitation Amount over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_over_past_24_hours
 etl-ontology:Property:Precipitation_Amount_over_past_24_hours rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                              etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                              etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                              rdfs:label "Precipitation amount over past 24 hours" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_over_past_3_hours
 etl-ontology:Property:Precipitation_Amount_over_past_3_hours rdf:type owl:NamedIndividual ,
                                                                       etl-ontology:ObservedProperty ;
                                                              etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                             etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                             etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                             rdfs:label "Precipitation amount over past 3 hours" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_over_past_6_hours
 etl-ontology:Property:Precipitation_Amount_over_past_6_hours rdf:type owl:NamedIndividual ,
                                                                       etl-ontology:ObservedProperty ;
                                                              etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                             etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                             etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                             rdfs:label "Precipitation amount over past 6 hours" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Precipitation_Amount_since_last_synoptic_hour
 etl-ontology:Property:Precipitation_Amount_since_last_synoptic_hour rdf:type owl:NamedIndividual ,
                                                                              etl-ontology:ObservedProperty ;
                                                                     etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                                    etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                                    etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                                    rdfs:label "Precipitation Amount since last synoptic hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Present_Weather
 etl-ontology:Property:Present_Weather rdf:type owl:NamedIndividual ,
                                                etl-ontology:ObservedProperty ;
                                       etl-ontology:definition "http://mmisw.org/ont/ioos/passive_acoustic_metadata/Weather_condition"^^xsd:anyURI ;
-                                      etl-ontology:description "Present weather conditions, usually a descriptive human-readable string."^^xsd:string .
+                                      etl-ontology:description "Present weather conditions, usually a descriptive human-readable string."^^xsd:string ;
+                                      rdfs:label "Present Weather" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Rainfall_since_last_synoptic_hour
 etl-ontology:Property:Rainfall_since_last_synoptic_hour rdf:type owl:NamedIndividual ,
                                                                  etl-ontology:ObservedProperty ;
                                                         etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                        etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                        etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                        rdfs:label "Rainfall since last synoptic hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Relative_Humidity
 etl-ontology:Property:Relative_Humidity rdf:type owl:NamedIndividual ,
                                                  etl-ontology:ObservedProperty ;
                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/relative_humidity"^^xsd:anyURI ;
-                                        etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string .
+                                        etl-ontology:description "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature."^^xsd:string ;
+                                        rdfs:label "Relative Humidity" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Snow_Depth
 etl-ontology:Property:Snow_Depth rdf:type owl:NamedIndividual ,
                                           etl-ontology:ObservedProperty ;
                                  etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
-                                 etl-ontology:description "Snow Depth"^^xsd:string .
+                                 etl-ontology:description "Snow Depth"^^xsd:string ;
+                                 rdfs:label "Snow Depth"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Station_Pressure
 etl-ontology:Property:Station_Pressure rdf:type owl:NamedIndividual ,
                                                 etl-ontology:ObservedProperty ;
                                        etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure"^^xsd:anyURI ;
-                                       etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string .
+                                       etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
+                                       rdfs:label "Station Pressure" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Vertical_visibility
 etl-ontology:Property:Vertical_visibility rdf:type owl:NamedIndividual ,
                                                    etl-ontology:ObservedProperty ;
                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/visibility_in_air"^^xsd:anyURI ;
-                                          etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string .
+                                          etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string ;
+                                          rdfs:label "Vertical Visibility" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Visibility
 etl-ontology:Property:Visibility rdf:type owl:NamedIndividual ,
                                           etl-ontology:ObservedProperty ;
                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/visibility_in_air"^^xsd:anyURI ;
-                                 etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string .
+                                 etl-ontology:description "The visibility is the distance at which something can be seen."^^xsd:string ;
+                                 rdfs:label "Visibility" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_From_Direction
 etl-ontology:Property:Wind_From_Direction rdf:type owl:NamedIndividual ,
                                                    etl-ontology:ObservedProperty ;
                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                          etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                          etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                          rdfs:label "Wind From Direction" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Speed
 etl-ontology:Property:Wind_Speed rdf:type owl:NamedIndividual ,
                                           etl-ontology:ObservedProperty ;
                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                 rdfs:label "Wind Speed" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_direction_associated_with_the_past_1-hour_maximum_wind_speed_at_10m
 etl-ontology:Property:Wind_direction_associated_with_the_past_1-hour_maximum_wind_speed_at_10m rdf:type owl:NamedIndividual ,
                                                                                                         etl-ontology:ObservedProperty ;
                                                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                                               etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                                               etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                                               rdfs:label "Wind direction associated with the maximum wind speed at 10 meters over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_direction_associated_with_the_past_1-hour_peak_wind_speed_at_10m
 etl-ontology:Property:Wind_direction_associated_with_the_past_1-hour_peak_wind_speed_at_10m rdf:type owl:NamedIndividual ,
                                                                                                      etl-ontology:ObservedProperty ;
                                                                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                                            etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                                            etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                                            rdfs:label "Wind direction associated with the peak wind speed at 10 meters over past 1 hour" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_direction_associated_with_the_past_10-minute_maximum_wind_speed_at_10m
 etl-ontology:Property:Wind_direction_associated_with_the_past_10-minute_maximum_wind_speed_at_10m rdf:type owl:NamedIndividual ,
                                                                                                            etl-ontology:ObservedProperty ;
                                                                                                   etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction"^^xsd:anyURI ;
-                                                                                                  etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string .
+                                                                                                  etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming."^^xsd:string ;
+                                                                                                  rdfs:label "Wind direction associated with the maximum wind speed at 10 meters over past 10 minutes" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_speed_of_gust
 etl-ontology:Property:Wind_speed_of_gust rdf:type owl:NamedIndividual ,
                                                   etl-ontology:ObservedProperty ;
                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
-                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed." .
+                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed." ;
+                                         rdfs:label "Wind speed of gust" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge
 <http://gswlab.ca/ontologies/etl-ontology#Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge> rdf:type owl:NamedIndividual ,
                                                                                                                                    etl-ontology:ObservedProperty ;
                                                                                                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                                                                          etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string .
+                                                                                                                          etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                                                                          rdfs:label "10-minute average wind speed at the height of the precipitation gauge" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressure_tendency_amount
+<http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressure_tendency_amount> rdf:type owl:NamedIndividual ,
+                                                                                             etl-ontology:ObservedProperty ;
+                                                                                    etl-ontology:definition "http://mmisw.org/ont/cf/parameter/tendency_of_air_pressure"^^xsd:anyURI ;
+                                                                                    etl-ontology:description "\"tendency_of_X\" means derivative of X with respect to time. Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
+                                                                                    rdfs:label "3-hour pressure tendency amount" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressure_tendency_characteristic
 <http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressure_tendency_characteristic> rdf:type owl:NamedIndividual ,
                                                                                                      etl-ontology:ObservedProperty ;
                                                                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/tendency_of_air_pressure"^^xsd:anyURI ;
-                                                                                            etl-ontology:description "\"tendency_of_X\" means derivative of X with respect to time. Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string .
-
-
-###  http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressurent_tendency_amount
-<http://gswlab.ca/ontologies/etl-ontology#Property:3-hour_pressurent_tendency_amount> rdf:type owl:NamedIndividual ,
-                                                                                               etl-ontology:ObservedProperty ;
-                                                                                      etl-ontology:definition "http://mmisw.org/ont/cf/parameter/tendency_of_air_pressure"^^xsd:anyURI ;
-                                                                                      etl-ontology:description "\"tendency_of_X\" means derivative of X with respect to time. Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string .
+                                                                                            etl-ontology:description "\"tendency_of_X\" means derivative of X with respect to time. Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
+                                                                                            rdfs:label "3-hour pressure tendency characteristic" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_1
 <http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_1> rdf:type owl:NamedIndividual ,
                                                                                            etl-ontology:ObservedProperty ;
                                                                                   etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
-                                                                                  etl-ontology:description "5 minute average snow depth 1"^^xsd:string .
+                                                                                  etl-ontology:description "5 minute average snow depth 1"^^xsd:string ;
+                                                                                  rdfs:label "5-minute average snow depth (1)" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_2
 <http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_2> rdf:type owl:NamedIndividual ,
                                                                                            etl-ontology:ObservedProperty ;
                                                                                   etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
-                                                                                  etl-ontology:description "5 minute average snow depth 2"^^xsd:string .
+                                                                                  etl-ontology:description "5 minute average snow depth 2"^^xsd:string ;
+                                                                                  rdfs:label "5-minute average snow depth (2)" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_3
 <http://gswlab.ca/ontologies/etl-ontology#Property:5_minute_average_snow_depth_3> rdf:type owl:NamedIndividual ,
                                                                                            etl-ontology:ObservedProperty ;
                                                                                   etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
-                                                                                  etl-ontology:description "5 minute average snow depth 3"^^xsd:string .
+                                                                                  etl-ontology:description "5 minute average snow depth 3"^^xsd:string ;
+                                                                                  rdfs:label "5-minute average snow depth (3)" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60
 <http://gswlab.ca/ontologies/etl-ontology#Property:5-minute_cumulative_precipitation_gauge_filtered_weight_for_minutes_55_to_60> rdf:type owl:NamedIndividual ,
                                                                                                                                           etl-ontology:ObservedProperty ;
                                                                                                                                  etl-ontology:definition "http://mmisw.org/ont/ioos/parameter/precipitation_amount"^^xsd:anyURI ;
-                                                                                                                                 etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string .
+                                                                                                                                 etl-ontology:description "The deposit of atmospheric moisture as rain, hail, sleet, snow, frost or dew. Precipition amount is often measured as depth of liquid equivalent moisture at a point but also can be expressed as liquid volume or mass per unit area."^^xsd:string ;
+                                                                                                                                 rdfs:label "5-minute cumulative precipitation gauge filtered weight for minutes 55 to 60" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:Remark
