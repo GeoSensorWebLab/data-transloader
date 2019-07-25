@@ -183,6 +183,28 @@ RSpec.describe Transloader::DataGarrisonStation do
           .with(body: /UO_0000218/).at_least_once
       end
     end
+
+    it "filters entities uploaded according to an allow list" do
+      VCR.use_cassette("data_garrison/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, allowed: ["Pressure"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .once
+      end
+    end
+
+    it "filters entities uploaded according to a block list" do
+      VCR.use_cassette("data_garrison/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, blocked: ["Pressure"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .times(6)
+      end
+    end
   end
 
   ##################
