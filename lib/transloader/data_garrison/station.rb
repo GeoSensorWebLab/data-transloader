@@ -19,6 +19,7 @@ module Transloader
       @metadata_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/metadata/#{@user_id}/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/#{@user_id}/#{@id}"
       @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
+      @ontology = DataGarrisonOntology.new
     end
 
     # Download and extract metadata from HTML, use to build metadata 
@@ -256,13 +257,20 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       @metadata[:datastreams].each do |stream|
-        # Create Observed Property entities
-        # TODO: Use mapping to improve these entities
-        observed_property = SensorThings::ObservedProperty.new({
-          name:        stream[:id],
-          definition:  "http://example.org/#{stream[:id]}",
-          description: stream[:id]
-        })
+        # Look up entity in ontology;
+        # if nil, then use default attributes
+        entity = @ontology.observed_property(stream[:id])
+
+        if entity.nil?
+          logger.warn "No Observed Property found in Ontology for DataGarrison:#{stream[:id]}"
+          entity = {
+            name:        stream[:id],
+            definition:  "http://example.org/#{stream[:id]}",
+            description: stream[:id]
+          }
+        end
+
+        observed_property = SensorThings::ObservedProperty.new(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)

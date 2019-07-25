@@ -142,8 +142,14 @@ RSpec.describe Transloader::DataGarrisonStation do
     end
 
     it "maps the source observed properties to standard observed properties" do
-      pending
-      fail
+      VCR.use_cassette("data_garrison/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+
+        # Check that a label from the ontology is used
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}ObservedProperties])
+          .with(body: /Battery Voltage/).at_least_once
+      end
     end
 
     it "creates Datastream entities and caches the URLs" do
