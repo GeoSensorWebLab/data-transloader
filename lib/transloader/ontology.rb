@@ -28,7 +28,7 @@ module Transloader
     end
 
     def observation_type(property)
-      solutions = get_uom_for(property)
+      solutions = get_uom_for(encode(property))
 
       if solutions.empty?
         nil
@@ -46,7 +46,7 @@ module Transloader
     # given source property. If no matches are available, `nil` is 
     # returned.
     def observed_property(property)
-      solutions = get_all_by_subject(RDF::URI(uri_for(property)))
+      solutions = get_all_by_subject(RDF::URI(uri_for(encode(property))))
         .filter(predicate: DEFS[:matchesObservedProperty])
 
       if solutions.empty?
@@ -66,7 +66,7 @@ module Transloader
     end
 
     def unit_of_measurement(property)
-      solutions = get_uom_for(property)
+      solutions = get_uom_for(encode(property))
 
       if solutions.empty?
         nil
@@ -85,6 +85,12 @@ module Transloader
     end
 
     private
+
+    # Convert a string for compatibility with URLs.
+    # Replaces spaces with underscores.
+    def encode(string)
+      string.gsub(" ", "_")
+    end
 
     # Return a solution set for all items matching the given subject.
     def get_all_by_subject(subject)
