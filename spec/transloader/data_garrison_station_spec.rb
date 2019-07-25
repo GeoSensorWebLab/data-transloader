@@ -302,5 +302,25 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
       }.to raise_error(RuntimeError)
     end
+
+    it "uploads filtered observations for a single timestamp with an allowed list" do
+      VCR.use_cassette("data_garrison/observations_upload") do
+        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z", allowed: ["Pressure"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).once
+      end
+    end
+
+    it "uploads filtered observations for a single timestamp with a blocked list" do
+      VCR.use_cassette("data_garrison/observations_upload") do
+        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z", blocked: ["Pressure"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(6)
+      end
+    end
+
+
   end
 end

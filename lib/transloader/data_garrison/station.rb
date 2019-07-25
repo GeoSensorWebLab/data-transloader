@@ -350,7 +350,18 @@ module Transloader
     # Upload station observations for `date` to the SensorThings API 
     # server at `destination`. If `date` is "latest", then the most 
     # recent cached observation file is used.
-    def upload_observations(destination, date)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * date: timestamp
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations(destination, date, options = {})
       get_metadata
       logger.info "Uploading observations for #{date} to #{destination}"
 
@@ -387,10 +398,25 @@ module Transloader
       end
 
       logger.info "Uploading observations from #{file_path}"
-      upload_observations_from_file(file_path)
+      upload_observations_from_file(file_path, options)
     end
 
-    def upload_observations_from_file(file)
+    def upload_observations_from_file(file, options)
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:id])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:id])
+        end
+      end
+
       html = Nokogiri::HTML(open(file))
 
       # Parse the time from the "Latest Conditions" element
@@ -442,7 +468,7 @@ module Transloader
         end
       end
 
-      @metadata[:datastreams].each do |datastream|
+      datastreams.each do |datastream|
         datastream_url = datastream[:"Datastream@iot.navigationLink"]
         datastream_name = datastream[:id]
 
