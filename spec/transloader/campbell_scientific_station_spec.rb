@@ -277,28 +277,28 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
     end
 
-    it "uploads the latest observations" do
-      VCR.use_cassette("campbell_scientific/observation_latest_upload") do
-        @station.upload_observations(@sensorthings_url, "latest")
-
-        expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-      end
-    end
-
-    it "uploads observations for a single timestamp" do
-      VCR.use_cassette("campbell_scientific/observation_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-07-02T14:00:00Z")
-
-        expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-      end
-    end
-
     it "raises an error of the timestamp has no data cached" do
       expect {
-        @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
+        @station.upload_observations_in_interval(@sensorthings_url, "2000-06-25T20:00:00Z/2000-06-25T21:00:00Z")
       }.to raise_error(RuntimeError)
+    end
+
+    it "filters entities uploaded in an interval according to an allow list" do
+      VCR.use_cassette("campbell_scientific/observation_upload_interval_allowed") do
+        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-28T14:00:00Z/2019-06-28T15:00:00Z", allowed: ["BP_Avg"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(2)
+      end
+    end
+
+    it "filters entities uploaded in an interval according to a block list" do
+      VCR.use_cassette("campbell_scientific/observation_upload_interval_blocked") do
+        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-28T16:00:00Z/2019-06-28T17:00:00Z", blocked: ["BP_Avg"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(42)
+      end
     end
   end
 end

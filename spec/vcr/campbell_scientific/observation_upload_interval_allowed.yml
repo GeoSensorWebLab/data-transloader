@@ -1,0 +1,241 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations?$filter=phenomenonTime%20eq%202019-06-28T14:00:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:11 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-28T14:00:00.000Z","result":"102.2","resultTime":"2019-06-28T14:00:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(87)
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:11 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(87)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-28T14:00:00.000Z",
+          "resultTime" : "2019-06-28T14:00:00.000Z",
+          "result" : "102.2",
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(87)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(87)/FeatureOfInterest",
+          "@iot.id" : 87,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(87)"
+        }
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:12 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations?$filter=phenomenonTime%20eq%202019-06-28T15:00:00.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:12 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2019-06-28T15:00:00.000Z","result":"102.2","resultTime":"2019-06-28T15:00:00.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(88)
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:12 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(88)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.4.0
+      Host:
+      - 192.168.33.77:8080
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Thu, 25 Jul 2019 23:08:12 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2019-06-28T15:00:00.000Z",
+          "resultTime" : "2019-06-28T15:00:00.000Z",
+          "result" : "102.2",
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(88)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(88)/FeatureOfInterest",
+          "@iot.id" : 88,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(88)"
+        }
+    http_version: 
+  recorded_at: Thu, 25 Jul 2019 23:08:12 GMT
+recorded_with: VCR 5.0.0

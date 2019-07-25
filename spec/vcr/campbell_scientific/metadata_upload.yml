@@ -29,7 +29,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:56 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -37,7 +37,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:13 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:56 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things
@@ -70,12 +70,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:56 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:13 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)
@@ -105,7 +105,7 @@ http_interactions:
       Content-Length:
       - '882'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:56 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -127,7 +127,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:13 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830'%20and%20description%20eq%20'Campbell%20Scientific%20Weather%20Station%20606830'
@@ -157,7 +157,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:56 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -165,7 +165,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:13 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations
@@ -198,12 +198,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)
@@ -233,7 +233,7 @@ http_interactions:
       Content-Length:
       - '554'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -248,7 +248,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20TEMPERATURE_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20TEMPERATURE_Avg%20Sensor'
@@ -278,7 +278,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -286,7 +286,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -319,12 +319,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)
@@ -354,7 +354,7 @@ http_interactions:
       Content-Length:
       - '555'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -369,7 +369,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_SPEED%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_SPEED%20Sensor'
@@ -399,7 +399,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -407,7 +407,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -440,12 +440,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:57 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)
@@ -475,7 +475,7 @@ http_interactions:
       Content-Length:
       - '545'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -490,7 +490,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_DIRECTION%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_DIRECTION%20Sensor'
@@ -520,7 +520,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -528,7 +528,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -561,12 +561,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)
@@ -596,7 +596,7 @@ http_interactions:
       Content-Length:
       - '553'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -611,7 +611,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20GUST_Max%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20GUST_Max%20Sensor'
@@ -641,7 +641,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -649,7 +649,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -682,12 +682,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)
@@ -717,7 +717,7 @@ http_interactions:
       Content-Length:
       - '541'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -732,7 +732,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20RH_B_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20RH_B_Avg%20Sensor'
@@ -762,7 +762,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -770,7 +770,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -803,12 +803,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)
@@ -838,7 +838,7 @@ http_interactions:
       Content-Length:
       - '541'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -853,7 +853,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20BP_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20BP_Avg%20Sensor'
@@ -883,7 +883,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -891,7 +891,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -924,12 +924,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)
@@ -959,7 +959,7 @@ http_interactions:
       Content-Length:
       - '537'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -974,7 +974,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20BattV_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20BattV_Avg%20Sensor'
@@ -1004,7 +1004,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1012,7 +1012,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1045,12 +1045,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)
@@ -1080,7 +1080,7 @@ http_interactions:
       Content-Length:
       - '543'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1095,7 +1095,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Kdn_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Kdn_Avg%20Sensor'
@@ -1125,7 +1125,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1133,7 +1133,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1166,12 +1166,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(8)
@@ -1201,7 +1201,7 @@ http_interactions:
       Content-Length:
       - '539'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1216,7 +1216,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(8)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Kup_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Kup_Avg%20Sensor'
@@ -1246,7 +1246,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1254,7 +1254,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1287,12 +1287,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(9)
@@ -1322,7 +1322,7 @@ http_interactions:
       Content-Length:
       - '539'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1337,7 +1337,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(9)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20LdnCo_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20LdnCo_Avg%20Sensor'
@@ -1367,7 +1367,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1375,7 +1375,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1408,12 +1408,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(10)
@@ -1443,7 +1443,7 @@ http_interactions:
       Content-Length:
       - '547'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1458,7 +1458,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(10)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20LupCo_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20LupCo_Avg%20Sensor'
@@ -1488,7 +1488,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1496,7 +1496,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1529,12 +1529,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(11)
@@ -1564,7 +1564,7 @@ http_interactions:
       Content-Length:
       - '547'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1579,7 +1579,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(11)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Ux_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Ux_Avg%20Sensor'
@@ -1609,7 +1609,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1617,7 +1617,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1650,12 +1650,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(12)
@@ -1685,7 +1685,7 @@ http_interactions:
       Content-Length:
       - '541'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1700,7 +1700,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(12)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Uy_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Uy_Avg%20Sensor'
@@ -1730,7 +1730,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1738,7 +1738,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1771,12 +1771,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(13)
@@ -1806,7 +1806,7 @@ http_interactions:
       Content-Length:
       - '541'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1821,7 +1821,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(13)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Uz_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Uz_Avg%20Sensor'
@@ -1851,7 +1851,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1859,7 +1859,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1892,12 +1892,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(14)
@@ -1927,7 +1927,7 @@ http_interactions:
       Content-Length:
       - '541'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1942,7 +1942,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(14)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_op_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_op_Avg%20Sensor'
@@ -1972,7 +1972,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1980,7 +1980,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2013,12 +2013,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:13 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(15)
@@ -2048,7 +2048,7 @@ http_interactions:
       Content-Length:
       - '549'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2063,7 +2063,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(15)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_op_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_op_Avg%20Sensor'
@@ -2093,7 +2093,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2101,7 +2101,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2134,12 +2134,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(16)
@@ -2169,7 +2169,7 @@ http_interactions:
       Content-Length:
       - '549'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2184,7 +2184,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(16)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_Avg%20Sensor'
@@ -2214,7 +2214,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2222,7 +2222,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2255,12 +2255,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(17)
@@ -2290,7 +2290,7 @@ http_interactions:
       Content-Length:
       - '543'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2305,7 +2305,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(17)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_Avg%20Sensor'
@@ -2335,7 +2335,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2343,7 +2343,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2376,12 +2376,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(18)
@@ -2411,7 +2411,7 @@ http_interactions:
       Content-Length:
       - '543'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2426,7 +2426,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(18)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Pfast_cp_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Pfast_cp_Avg%20Sensor'
@@ -2456,7 +2456,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2464,7 +2464,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2497,12 +2497,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(19)
@@ -2532,7 +2532,7 @@ http_interactions:
       Content-Length:
       - '553'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2547,7 +2547,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(19)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20xco2_cp_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20xco2_cp_Avg%20Sensor'
@@ -2577,7 +2577,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2585,7 +2585,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2618,12 +2618,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(20)
@@ -2653,7 +2653,7 @@ http_interactions:
       Content-Length:
       - '551'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2668,7 +2668,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(20)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20xh2o_cp_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20xh2o_cp_Avg%20Sensor'
@@ -2698,7 +2698,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2706,7 +2706,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2739,12 +2739,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(21)
@@ -2774,7 +2774,7 @@ http_interactions:
       Content-Length:
       - '551'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2789,7 +2789,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(21)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20mfc_Avg%20Sensor'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20mfc_Avg%20Sensor'
@@ -2819,7 +2819,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2827,7 +2827,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -2860,12 +2860,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(22)
@@ -2895,7 +2895,7 @@ http_interactions:
       Content-Length:
       - '543'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2910,7 +2910,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(22)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
@@ -2940,7 +2940,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2948,7 +2948,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -2982,12 +2982,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)
@@ -3017,7 +3017,7 @@ http_interactions:
       Content-Length:
       - '563'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3031,7 +3031,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20Speed'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
@@ -3061,7 +3061,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3069,7 +3069,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3105,12 +3105,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)
@@ -3140,7 +3140,7 @@ http_interactions:
       Content-Length:
       - '733'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3154,7 +3154,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20From%20Direction'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
@@ -3184,7 +3184,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3192,7 +3192,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3228,12 +3228,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)
@@ -3263,7 +3263,7 @@ http_interactions:
       Content-Length:
       - '721'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3277,7 +3277,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20speed%20of%20gust'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.%20A%20gust%20is%20a%20sudden%20brief%20period%20of%20high%20wind%20speed.%20In%20an%20observed%20timeseries%20of%20wind%20speed,%20the%20gust%20wind%20speed%20can%20be%20indicated%20by%20a%20cell_methods%20of%20maximum%20for%20the%20time-interval.%20In%20an%20atmospheric%20model%20which%20has%20a%20parametrised%20calculation%20of%20gustiness,%20the%20gust%20wind%20speed%20may%20be%20separately%20diagnosed%20from%20the%20wind%20speed.'
@@ -3307,7 +3307,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3315,7 +3315,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3355,12 +3355,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)
@@ -3390,7 +3390,7 @@ http_interactions:
       Content-Length:
       - '1075'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3404,7 +3404,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
@@ -3434,7 +3434,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3442,7 +3442,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3476,12 +3476,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)
@@ -3511,7 +3511,7 @@ http_interactions:
       Content-Length:
       - '585'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3525,7 +3525,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Pressure'%20and%20description%20eq%20'Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
@@ -3555,7 +3555,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3563,7 +3563,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3598,12 +3598,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)
@@ -3633,7 +3633,7 @@ http_interactions:
       Content-Length:
       - '640'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3647,7 +3647,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Battery%20Voltage'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
@@ -3677,7 +3677,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3685,7 +3685,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3719,12 +3719,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)
@@ -3754,7 +3754,7 @@ http_interactions:
       Content-Length:
       - '593'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3768,7 +3768,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Downwelling%20shortwave%20flux%20in%20air'%20and%20description%20eq%20'Downwelling%20radiation%20is%20radiation%20from%20above.%20It%20does%20not%20mean%20%22net%20downward%22.%20The%20sign%20convention%20is%20that%20%22upwelling%22%20is%20positive%20upwards%20and%20%22downwelling%22%20is%20positive%20downwards.%20The%20term%20%22shortwave%22%20means%20shortwave%20radiation.%20When%20thought%20of%20as%20being%20incident%20on%20a%20surface,%20a%20radiative%20flux%20is%20sometimes%20called%20%22irradiance%22.%20In%20addition,%20it%20is%20identical%20with%20the%20quantity%20measured%20by%20a%20cosine-collector%20light-meter%20and%20sometimes%20called%20%22vector%20irradiance%22.%20In%20accordance%20with%20common%20usage%20in%20geophysical%20disciplines,%20%22flux%22%20implies%20per%20unit%20area,%20called%20%22flux%20density%22%20in%20physics.'
@@ -3798,7 +3798,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3806,7 +3806,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3847,12 +3847,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(8)
@@ -3882,7 +3882,7 @@ http_interactions:
       Content-Length:
       - '1111'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3896,7 +3896,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(8)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Kup_Avg'%20and%20description%20eq%20'Kup_Avg'
@@ -3926,7 +3926,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -3934,7 +3934,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -3966,12 +3966,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(9)
@@ -4001,7 +4001,7 @@ http_interactions:
       Content-Length:
       - '452'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4015,7 +4015,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(9)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'LdnCo_Avg'%20and%20description%20eq%20'LdnCo_Avg'
@@ -4045,7 +4045,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4053,7 +4053,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4085,12 +4085,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(10)
@@ -4120,7 +4120,7 @@ http_interactions:
       Content-Length:
       - '462'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4134,7 +4134,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(10)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'LupCo_Avg'%20and%20description%20eq%20'LupCo_Avg'
@@ -4164,7 +4164,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4172,7 +4172,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4204,12 +4204,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(11)
@@ -4239,7 +4239,7 @@ http_interactions:
       Content-Length:
       - '462'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4253,7 +4253,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(11)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Ux_Avg'%20and%20description%20eq%20'Ux_Avg'
@@ -4283,7 +4283,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4291,7 +4291,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4323,12 +4323,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(12)
@@ -4358,7 +4358,7 @@ http_interactions:
       Content-Length:
       - '453'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4372,7 +4372,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(12)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Uy_Avg'%20and%20description%20eq%20'Uy_Avg'
@@ -4402,7 +4402,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4410,7 +4410,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4442,12 +4442,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(13)
@@ -4477,7 +4477,7 @@ http_interactions:
       Content-Length:
       - '453'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4491,7 +4491,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(13)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Uz_Avg'%20and%20description%20eq%20'Uz_Avg'
@@ -4521,7 +4521,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4529,7 +4529,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4561,12 +4561,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(14)
@@ -4596,7 +4596,7 @@ http_interactions:
       Content-Length:
       - '453'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4610,7 +4610,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(14)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'CO2_op_Avg'%20and%20description%20eq%20'CO2_op_Avg'
@@ -4640,7 +4640,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4648,7 +4648,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4680,12 +4680,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(15)
@@ -4715,7 +4715,7 @@ http_interactions:
       Content-Length:
       - '465'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4729,7 +4729,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(15)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'H2O_op_Avg'%20and%20description%20eq%20'H2O_op_Avg'
@@ -4759,7 +4759,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4767,7 +4767,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4799,12 +4799,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(16)
@@ -4834,7 +4834,7 @@ http_interactions:
       Content-Length:
       - '465'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4848,7 +4848,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(16)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Mole%20fraction%20of%20Carbon%20Dioxide%20in%20air'%20and%20description%20eq%20'Ratio%20of%20Carbon%20Dioxide%20in%20air.'
@@ -4878,7 +4878,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4886,7 +4886,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -4919,12 +4919,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(17)
@@ -4954,7 +4954,7 @@ http_interactions:
       Content-Length:
       - '557'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -4968,7 +4968,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(17)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Mole%20fraction%20of%20water%20vapor%20in%20air'%20and%20description%20eq%20'Mole%20fraction%20is%20used%20in%20the%20construction%20mole_fraction_of_X_in_Y,%20where%20X%20is%20a%20material%20constituent%20of%20Y.%20The%20chemical%20formula%20of%20water%20vapor%20is%20H2O.'
@@ -4998,7 +4998,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5006,7 +5006,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -5041,12 +5041,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(18)
@@ -5076,7 +5076,7 @@ http_interactions:
       Content-Length:
       - '670'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5090,7 +5090,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(18)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Pfast_cp_Avg'%20and%20description%20eq%20'Pfast_cp_Avg'
@@ -5120,7 +5120,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:57 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5128,7 +5128,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -5160,12 +5160,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(19)
@@ -5195,7 +5195,7 @@ http_interactions:
       Content-Length:
       - '471'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5209,7 +5209,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(19)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'xco2_cp_Avg'%20and%20description%20eq%20'xco2_cp_Avg'
@@ -5239,7 +5239,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5247,7 +5247,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -5279,12 +5279,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(20)
@@ -5314,7 +5314,7 @@ http_interactions:
       Content-Length:
       - '468'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5328,7 +5328,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(20)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'xh2o_cp_Avg'%20and%20description%20eq%20'xh2o_cp_Avg'
@@ -5358,7 +5358,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5366,7 +5366,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -5398,12 +5398,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(21)
@@ -5433,7 +5433,7 @@ http_interactions:
       Content-Length:
       - '468'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5447,7 +5447,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(21)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'mfc_Avg'%20and%20description%20eq%20'mfc_Avg'
@@ -5477,7 +5477,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5485,7 +5485,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -5517,12 +5517,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(22)
@@ -5552,7 +5552,7 @@ http_interactions:
       Content-Length:
       - '456'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5566,7 +5566,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(22)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:58 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20TEMPERATURE_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20TEMPERATURE_Avg'
@@ -5596,7 +5596,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5604,7 +5604,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -5638,12 +5638,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)
@@ -5673,13 +5673,13 @@ http_interactions:
       Content-Length:
       - '916'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJDYW1wYmVsbCBTY2llbnRpZmljIFN0YXRpb24gNjA2ODMwIFRFTVBFUkFUVVJFX0F2ZyIsCiAgImRlc2NyaXB0aW9uIiA6ICJDYW1wYmVsbCBTY2llbnRpZmljIFN0YXRpb24gNjA2ODMwIFRFTVBFUkFUVVJFX0F2ZyIsCiAgIm9ic2VydmF0aW9uVHlwZSIgOiAiaHR0cDovL3d3dy5vcGVuZ2lzLm5ldC9kZWYvb2JzZXJ2YXRpb25UeXBlL09HQy1PTS8yLjAvT01fTWVhc3VyZW1lbnQiLAogICJTZW5zb3JAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDEpL1NlbnNvciIsCiAgIlRoaW5nQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygxKS9UaGluZyIsCiAgIk9ic2VydmF0aW9uc0Bpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMSkvT2JzZXJ2YXRpb25zIiwKICAidW5pdE9mTWVhc3VyZW1lbnQiIDogewogICAgIm5hbWUiIDogImRlZ3JlZSBDZWxzaXVzIiwKICAgICJzeW1ib2wiIDogIsOiwoTCgyIsCiAgICAiZGVmaW5pdGlvbiIgOiAiaHR0cDovL3B1cmwub2JvbGlicmFyeS5vcmcvb2JvL1VPXzAwMDAwMjciCiAgfSwKICAiT2JzZXJ2ZWRQcm9wZXJ0eUBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMSkvT2JzZXJ2ZWRQcm9wZXJ0eSIsCiAgIkBpb3QuaWQiIDogMSwKICAiQGlvdC5zZWxmTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygxKSIKfQ==
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_SPEED'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_SPEED'
@@ -5709,7 +5709,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5717,7 +5717,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -5751,12 +5751,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)
@@ -5786,7 +5786,7 @@ http_interactions:
       Content-Length:
       - '908'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5807,7 +5807,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_DIRECTION'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20WIND_DIRECTION'
@@ -5837,7 +5837,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5845,7 +5845,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -5878,12 +5878,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)
@@ -5913,13 +5913,13 @@ http_interactions:
       Content-Length:
       - '904'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJDYW1wYmVsbCBTY2llbnRpZmljIFN0YXRpb24gNjA2ODMwIFdJTkRfRElSRUNUSU9OIiwKICAiZGVzY3JpcHRpb24iIDogIkNhbXBiZWxsIFNjaWVudGlmaWMgU3RhdGlvbiA2MDY4MzAgV0lORF9ESVJFQ1RJT04iLAogICJvYnNlcnZhdGlvblR5cGUiIDogImh0dHA6Ly93d3cub3Blbmdpcy5uZXQvZGVmL29ic2VydmF0aW9uVHlwZS9PR0MtT00vMi4wL09NX01lYXN1cmVtZW50IiwKICAiU2Vuc29yQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygzKS9TZW5zb3IiLAogICJUaGluZ0Bpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMykvVGhpbmciLAogICJPYnNlcnZhdGlvbnNAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDMpL09ic2VydmF0aW9ucyIsCiAgInVuaXRPZk1lYXN1cmVtZW50IiA6IHsKICAgICJuYW1lIiA6ICJkZWdyZWUiLAogICAgInN5bWJvbCIgOiAiw4LCsCIsCiAgICAiZGVmaW5pdGlvbiIgOiAiaHR0cDovL3B1cmwub2JvbGlicmFyeS5vcmcvb2JvL1VPXzAwMDAxODUiCiAgfSwKICAiT2JzZXJ2ZWRQcm9wZXJ0eUBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMykvT2JzZXJ2ZWRQcm9wZXJ0eSIsCiAgIkBpb3QuaWQiIDogMywKICAiQGlvdC5zZWxmTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygzKSIKfQ==
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20GUST_Max'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20GUST_Max'
@@ -5949,7 +5949,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -5957,7 +5957,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -5991,12 +5991,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)
@@ -6026,7 +6026,7 @@ http_interactions:
       Content-Length:
       - '904'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6047,7 +6047,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20RH_B_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20RH_B_Avg'
@@ -6077,7 +6077,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6085,7 +6085,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6118,12 +6118,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)
@@ -6153,7 +6153,7 @@ http_interactions:
       Content-Length:
       - '890'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6174,7 +6174,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20BP_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20BP_Avg'
@@ -6204,7 +6204,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6212,7 +6212,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6245,12 +6245,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)
@@ -6280,7 +6280,7 @@ http_interactions:
       Content-Length:
       - '891'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6301,7 +6301,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20BattV_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20BattV_Avg'
@@ -6331,7 +6331,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6339,7 +6339,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6372,12 +6372,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)
@@ -6407,7 +6407,7 @@ http_interactions:
       Content-Length:
       - '889'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6428,7 +6428,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Kdn_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Kdn_Avg'
@@ -6458,7 +6458,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6466,7 +6466,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6500,12 +6500,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(8)
@@ -6535,7 +6535,7 @@ http_interactions:
       Content-Length:
       - '906'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6556,7 +6556,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(8)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Kup_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Kup_Avg'
@@ -6586,7 +6586,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6594,7 +6594,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6627,12 +6627,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(9)
@@ -6662,7 +6662,7 @@ http_interactions:
       Content-Length:
       - '839'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6683,7 +6683,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(9)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20LdnCo_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20LdnCo_Avg'
@@ -6713,7 +6713,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6721,7 +6721,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6754,12 +6754,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(10)
@@ -6789,7 +6789,7 @@ http_interactions:
       Content-Length:
       - '849'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6810,7 +6810,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(10)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20LupCo_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20LupCo_Avg'
@@ -6840,7 +6840,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6848,7 +6848,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -6881,12 +6881,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(11)
@@ -6916,7 +6916,7 @@ http_interactions:
       Content-Length:
       - '849'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6937,7 +6937,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(11)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Ux_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Ux_Avg'
@@ -6967,7 +6967,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -6975,7 +6975,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:14 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7008,12 +7008,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(12)
@@ -7043,7 +7043,7 @@ http_interactions:
       Content-Length:
       - '843'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7064,7 +7064,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(12)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Uy_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Uy_Avg'
@@ -7094,7 +7094,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7102,7 +7102,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7135,12 +7135,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(13)
@@ -7170,7 +7170,7 @@ http_interactions:
       Content-Length:
       - '843'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7191,7 +7191,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(13)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Uz_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Uz_Avg'
@@ -7221,7 +7221,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7229,7 +7229,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7262,12 +7262,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(14)
@@ -7297,7 +7297,7 @@ http_interactions:
       Content-Length:
       - '843'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7318,7 +7318,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(14)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_op_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_op_Avg'
@@ -7348,7 +7348,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7356,7 +7356,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7389,12 +7389,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(15)
@@ -7424,7 +7424,7 @@ http_interactions:
       Content-Length:
       - '851'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7445,7 +7445,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(15)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_op_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_op_Avg'
@@ -7475,7 +7475,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7483,7 +7483,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7516,12 +7516,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(16)
@@ -7551,7 +7551,7 @@ http_interactions:
       Content-Length:
       - '851'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7572,7 +7572,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(16)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20CO2_Avg'
@@ -7602,7 +7602,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7610,7 +7610,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7644,12 +7644,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(17)
@@ -7679,13 +7679,13 @@ http_interactions:
       Content-Length:
       - '913'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJDYW1wYmVsbCBTY2llbnRpZmljIFN0YXRpb24gNjA2ODMwIENPMl9BdmciLAogICJkZXNjcmlwdGlvbiIgOiAiQ2FtcGJlbGwgU2NpZW50aWZpYyBTdGF0aW9uIDYwNjgzMCBDTzJfQXZnIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMTcpL1NlbnNvciIsCiAgIlRoaW5nQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygxNykvVGhpbmciLAogICJPYnNlcnZhdGlvbnNAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDE3KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAibWljcm9tb2wgcGVyIG1vbCIsCiAgICAic3ltYm9sIiA6ICLDgsK1bW9sL21vbCIsCiAgICAiZGVmaW5pdGlvbiIgOiAiaHR0cDovL3B1cmwub2JvbGlicmFyeS5vcmcvb2JvL1VPXzAwMDAwNzYiCiAgfSwKICAiT2JzZXJ2ZWRQcm9wZXJ0eUBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMTcpL09ic2VydmVkUHJvcGVydHkiLAogICJAaW90LmlkIiA6IDE3LAogICJAaW90LnNlbGZMaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDE3KSIKfQ==
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20H2O_Avg'
@@ -7715,7 +7715,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7723,7 +7723,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7757,12 +7757,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(18)
@@ -7792,13 +7792,13 @@ http_interactions:
       Content-Length:
       - '913'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJDYW1wYmVsbCBTY2llbnRpZmljIFN0YXRpb24gNjA2ODMwIEgyT19BdmciLAogICJkZXNjcmlwdGlvbiIgOiAiQ2FtcGJlbGwgU2NpZW50aWZpYyBTdGF0aW9uIDYwNjgzMCBIMk9fQXZnIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMTgpL1NlbnNvciIsCiAgIlRoaW5nQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcygxOCkvVGhpbmciLAogICJPYnNlcnZhdGlvbnNAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDE4KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAibWljcm9tb2wgcGVyIG1vbCIsCiAgICAic3ltYm9sIiA6ICLDgsK1bW9sL21vbCIsCiAgICAiZGVmaW5pdGlvbiIgOiAiaHR0cDovL3B1cmwub2JvbGlicmFyeS5vcmcvb2JvL1VPXzAwMDAwNzYiCiAgfSwKICAiT2JzZXJ2ZWRQcm9wZXJ0eUBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoMTgpL09ic2VydmVkUHJvcGVydHkiLAogICJAaW90LmlkIiA6IDE4LAogICJAaW90LnNlbGZMaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDE4KSIKfQ==
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20Pfast_cp_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20Pfast_cp_Avg'
@@ -7828,7 +7828,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7836,7 +7836,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7869,12 +7869,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(19)
@@ -7904,7 +7904,7 @@ http_interactions:
       Content-Length:
       - '855'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7925,7 +7925,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(19)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20xco2_cp_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20xco2_cp_Avg'
@@ -7955,7 +7955,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -7963,7 +7963,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -7996,12 +7996,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(20)
@@ -8031,7 +8031,7 @@ http_interactions:
       Content-Length:
       - '853'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -8052,7 +8052,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(20)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20xh2o_cp_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20xh2o_cp_Avg'
@@ -8082,7 +8082,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -8090,7 +8090,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -8123,12 +8123,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(21)
@@ -8158,7 +8158,7 @@ http_interactions:
       Content-Length:
       - '853'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -8179,7 +8179,7 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(21)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Campbell%20Scientific%20Station%20606830%20mfc_Avg'%20and%20description%20eq%20'Campbell%20Scientific%20Station%20606830%20mfc_Avg'
@@ -8209,7 +8209,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -8217,7 +8217,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -8250,12 +8250,12 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(22)
@@ -8285,7 +8285,7 @@ http_interactions:
       Content-Length:
       - '845'
       Date:
-      - Thu, 25 Jul 2019 20:51:14 GMT
+      - Thu, 25 Jul 2019 23:07:58 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -8306,5 +8306,5 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(22)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:51:15 GMT
+  recorded_at: Thu, 25 Jul 2019 23:07:59 GMT
 recorded_with: VCR 5.0.0

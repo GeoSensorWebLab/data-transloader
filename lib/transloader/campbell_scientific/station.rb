@@ -302,15 +302,40 @@ module Transloader
     # from the most recently uploaded observation (by phenomenon time) 
     # up to the most recently parsed observation (by phenomenon time)
     # are uploaded.
-    def upload_observations(destination, date)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * date: timestamp
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations(destination, date, options = {})
       get_metadata
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
 
       # Create hash map of observed properties to datastream URLs.
       # This is used to determine where Observation entities are 
       # uploaded.
-      datastream_hash = {}
-      @metadata[:datastreams].each do |datastream|
-        datastream_hash[datastream[:name]] = datastream
+      datastream_hash = datastreams.reduce({}) do |memo, datastream|
+        memo[datastream[:name]] = datastream
+        memo
       end
 
       # Iterate over data files to parse observations in date range
@@ -385,10 +410,14 @@ module Transloader
               resultTime: row_timestamp
             })
 
-            datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
+            # Only upload if Datastream has not been filtered from
+            # datastream list.
+            if datastream_hash[obs[:name]]
+              datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
 
-            # Upload to SensorThings API
-            new_observation.upload_to(datastream_url)
+              # Upload to SensorThings API
+              new_observation.upload_to(datastream_url)
+            end
           end
         end
 
@@ -407,15 +436,40 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    def upload_observations_in_interval(destination, interval)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * interval: ISO8601 <start>/<end> interval
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_in_interval(destination, interval, options = {})
       get_metadata
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
 
       # Create hash map of observed properties to datastream URLs.
       # This is used to determine where Observation entities are 
       # uploaded.
-      datastream_hash = {}
-      @metadata[:datastreams].each do |datastream|
-        datastream_hash[datastream[:name]] = datastream
+      datastream_hash = datastreams.reduce({}) do |memo, datastream|
+        memo[datastream[:name]] = datastream
+        memo
       end
 
       # Iterate over data files to parse observations in date range
@@ -433,6 +487,10 @@ module Transloader
           # Load data from file for timestamp
           obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
           obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
+
+          if !File.exist?(obs_filename)
+            raise "File for timestamp '#{timestamp}' does not exist"
+          end
 
           if File.exist?(obs_filename)
             rows = CSV.read(obs_filename, { headers: true })
@@ -480,10 +538,14 @@ module Transloader
               resultTime: row_timestamp
             })
 
-            datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
+            # Only upload if Datastream has not been filtered from
+            # datastream list.
+            if datastream_hash[obs[:name]]
+              datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
 
-            # Upload to SensorThings API
-            new_observation.upload_to(datastream_url)
+              # Upload to SensorThings API
+              new_observation.upload_to(datastream_url)
+            end
           end
         end
 
