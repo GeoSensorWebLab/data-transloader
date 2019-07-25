@@ -15,6 +15,7 @@ module Transloader
       @metadata = {}
       @metadata_path = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/#{@id}"
+      @ontology = CampbellScientificOntology.new
     end
 
     # Download and extract metadata from HTML, use to build metadata 
@@ -206,13 +207,20 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       @metadata[:datastreams].each do |stream|
-        # Create Observed Property entities
-        # TODO: Use mapping to improve these entities
-        observed_property = SensorThings::ObservedProperty.new({
-          name:        stream[:name],
-          definition:  "http://example.org/#{stream[:name]}",
-          description: stream[:name]
-        })
+        # Look up entity in ontology;
+        # if nil, then use default attributes
+        entity = @ontology.observed_property(stream[:name])
+
+        if entity.nil?
+          logger.warn "No Observed Property found in Ontology for CampbellScientific:#{stream[:name]}"
+          entity = {
+            name:        stream[:name],
+            definition:  "http://example.org/#{stream[:name]}",
+            description: stream[:name]
+          }
+        end
+
+        observed_property = SensorThings::ObservedProperty.new(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -226,24 +234,31 @@ module Transloader
 
       # DATASTREAM entities
       @metadata[:datastreams].each do |stream|
-        # Create Datastream entities
-        # TODO: Use mapping to improve these entities
+        # Look up UOM, observationType in ontology;
+        # if nil, then use default attributes
+        uom = @ontology.unit_of_measurement(stream[:name])
+
+        if uom.nil?
+          logger.warn "No Unit of Measurement found in Ontology for DataGarrison:#{stream[:name]} (#{stream[:uom]})"
+          uom = {
+            name:       stream[:Units] || "",
+            symbol:     stream[:Units] || "",
+            definition: ''
+          }
+        end
+
+        observation_type = observation_type_for(stream[:name])
+
         datastream = SensorThings::Datastream.new({
           name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
           description: "Campbell Scientific Station #{@id} #{stream[:name]}",
-          # TODO: Use mapping to improve unit of measurement
-          unitOfMeasurement: {
-            name:       stream[:units] || "",
-            symbol:     stream[:units] || "",
-            definition: ''
-          },
-          # TODO: Use more specific observation types, if possible
-          observationType: 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation',
+          unitOfMeasurement: uom,
+          observationType: observation_type,
           Sensor: {
-            '@iot.id' => stream[:"Sensor@iot.id"]
+            '@iot.id' => stream[:'Sensor@iot.id']
           },
           ObservedProperty: {
-            '@iot.id' => stream[:"ObservedProperty@iot.id"]
+            '@iot.id' => stream[:'ObservedProperty@iot.id']
           }
         })
 
@@ -709,6 +724,11 @@ module Transloader
       end
       
       observations
+    end
+
+    def observation_type_for(property)
+      @ontology.observation_type(property) ||
+      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
     end
   end
 end
