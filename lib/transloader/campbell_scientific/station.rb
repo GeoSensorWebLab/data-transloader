@@ -133,8 +133,32 @@ module Transloader
       end
     end
 
-    # Upload metadata to SensorThings API
-    def upload_metadata(server_url)
+    # Upload metadata to SensorThings API.
+    # * server_url: URL endpoint of SensorThings API
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will be
+    #              uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_metadata(server_url, options = {})
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
+
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
@@ -181,7 +205,7 @@ module Transloader
       save_metadata
 
       # SENSOR entities
-      @metadata[:datastreams].each do |stream|
+      datastreams.each do |stream|
         # Create Sensor entities
         sensor = SensorThings::Sensor.new({
           name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
@@ -206,7 +230,7 @@ module Transloader
       save_metadata
 
       # OBSERVED PROPERTY entities
-      @metadata[:datastreams].each do |stream|
+      datastreams.each do |stream|
         # Look up entity in ontology;
         # if nil, then use default attributes
         entity = @ontology.observed_property(stream[:name])
@@ -233,7 +257,7 @@ module Transloader
       save_metadata
 
       # DATASTREAM entities
-      @metadata[:datastreams].each do |stream|
+      datastreams.each do |stream|
         # Look up UOM, observationType in ontology;
         # if nil, then use default attributes
         uom = @ontology.unit_of_measurement(stream[:name])

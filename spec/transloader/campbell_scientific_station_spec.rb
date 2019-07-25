@@ -181,6 +181,28 @@ RSpec.describe Transloader::CampbellScientificStation do
           .with(body: /UO_0000027/).at_least_once
       end
     end
+
+    it "filters entities uploaded according to an allow list" do
+      VCR.use_cassette("campbell_scientific/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, allowed: ["BP_Avg"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .once
+      end
+    end
+
+    it "filters entities uploaded according to a block list" do
+      VCR.use_cassette("campbell_scientific/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, blocked: ["BP_Avg"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .times(21)
+      end
+    end
   end
 
   ##################
