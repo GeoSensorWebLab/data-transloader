@@ -144,6 +144,28 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
           .with(body: /UO_0000187/).at_least_once
       end
     end
+
+    it "filters entities uploaded according to an allow list" do
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, allowed: ["data_avail"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .times(1)
+      end
+    end
+
+    it "filters entities uploaded according to a block list" do
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url, blocked: ["data_avail"])
+
+        # Only a single Datastream should be created
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
+          .times(52)
+      end
+    end
   end
 
   ##################
