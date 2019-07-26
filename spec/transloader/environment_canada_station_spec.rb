@@ -214,16 +214,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
       end
-
-      VCR.use_cassette("environment_canada/metadata_upload") do
-        @station.upload_metadata(@sensorthings_url)
-      end
-
-      @station.save_observations
     end
 
     it "uploads the latest observations" do
-      VCR.use_cassette("environment_canada/observations_upload") do
+      VCR.use_cassette("environment_canada/observations_upload_latest") do
+        @station.upload_metadata(@sensorthings_url)
+        @station.save_observations
+
         @station.upload_observations(@sensorthings_url, "latest")
 
         expect(WebMock).to have_requested(:post, 
@@ -232,7 +229,10 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     end
 
     it "uploads observations for a single timestamp" do
-      VCR.use_cassette("environment_canada/observations_upload") do
+      VCR.use_cassette("environment_canada/observations_upload_single") do
+        @station.upload_metadata(@sensorthings_url)
+        @station.save_observations
+
         @station.upload_observations(@sensorthings_url, "2019-06-25T20:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
@@ -242,6 +242,9 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "uploads observations for a time range" do
       VCR.use_cassette("environment_canada/observations_upload_interval") do
+        @station.upload_metadata(@sensorthings_url)
+        @station.save_observations
+
         @station.upload_observations_in_interval(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
@@ -249,10 +252,36 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    it "raises an error of the timestamp has no data cached" do
+    it "raises an error if the timestamp has no data cached" do
       expect {
         @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
       }.to raise_error(RuntimeError)
+    end
+
+    it "filters entities uploaded in an interval according to an allow list" do
+      VCR.use_cassette("environment_canada/observations_upload_interval_allowed") do
+        @station.upload_metadata(@sensorthings_url)
+        @station.save_observations
+
+        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z", 
+          allowed: ["min_batry_volt_pst1hr"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(1)
+      end
+    end
+
+    it "filters entities uploaded in an interval according to a block list" do
+      VCR.use_cassette("environment_canada/observations_upload_interval_blocked") do
+        @station.upload_metadata(@sensorthings_url)
+        @station.save_observations
+
+        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z",
+          blocked: ["min_batry_volt_pst1hr"])
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(52)
+      end
     end
   end
 end

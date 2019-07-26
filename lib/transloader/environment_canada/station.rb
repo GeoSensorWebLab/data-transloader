@@ -120,7 +120,7 @@ module Transloader
           !options[:blocked].include?(datastream[:name])
         end
       end
-      
+
       # THING entity
       # Create Thing entity
       thing = SensorThings::Thing.new({
@@ -301,10 +301,33 @@ module Transloader
       upload_observations_from_file(file_path)
     end
 
-    def upload_observations_from_file(file)
+    # * file: Path to file with source data
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_from_file(file, options = {})
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
+
       xml = Nokogiri::XML(IO.read(file))
       
-      @metadata[:datastreams].each do |datastream|
+      datastreams.each do |datastream|
         datastream_url = datastream[:'Datastream@iot.navigationLink']
         datastream_name = datastream[:name]
 
@@ -342,7 +365,18 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    def upload_observations_in_interval(destination, interval)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * interval: ISO8601 <start>/<end> interval
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_in_interval(destination, interval, options = {})
       time_interval = Transloader::TimeInterval.new(interval)
       start_time = time_interval.start.utc
       end_time = time_interval.end.utc
@@ -395,7 +429,7 @@ module Transloader
       end
 
       output.each do |file|
-        upload_observations_from_file(file)
+        upload_observations_from_file(file, options)
       end
     end
 
