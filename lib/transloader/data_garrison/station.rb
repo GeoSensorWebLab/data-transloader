@@ -401,6 +401,14 @@ module Transloader
       upload_observations_from_file(file_path, options)
     end
 
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
     def upload_observations_from_file(file, options)
 
       # Filter Datastreams based on allowed/blocked lists.
@@ -510,7 +518,18 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    def upload_observations_in_interval(destination, interval)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * interval: ISO8601 <start>/<end> interval
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_in_interval(destination, interval, options = {})
       time_interval = Transloader::TimeInterval.new(interval)
       start_time = time_interval.start.utc
       end_time = time_interval.end.utc
@@ -563,7 +582,7 @@ module Transloader
       end
 
       output.each do |file|
-        upload_observations_from_file(file)
+        upload_observations_from_file(file, options)
       end
     end
 
