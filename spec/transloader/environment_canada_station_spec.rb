@@ -240,6 +240,15 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
+    it "uploads observations for a time range" do
+      VCR.use_cassette("environment_canada/observations_upload_interval") do
+        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z")
+
+        expect(WebMock).to have_requested(:post, 
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+      end
+    end
+
     it "raises an error of the timestamp has no data cached" do
       expect {
         @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
