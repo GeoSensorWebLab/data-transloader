@@ -2,10 +2,12 @@ require 'uri'
 
 module Transloader
   class CommandLineOptions
-    attr_reader :cache, :data_urls, :date, :destination,
-                :provider, :station_id, :user_id
+    attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
+                :destination, :provider, :station_id, :user_id
     # Set default values
     def initialize
+      @allowed     = nil
+      @blocked     = nil
       @cache       = nil
       @data_url    = []
       @date        = nil
@@ -27,6 +29,8 @@ module Transloader
       parser.separator ""
       parser.separator "Specific options:"
 
+      allowed_option(parser)
+      blocked_option(parser)
       cache_directory_option(parser)
       data_url_option(parser)
       date_interval_option(parser)
@@ -46,6 +50,30 @@ module Transloader
       parser.on_tail("-V", "--version", "Show version") do
         puts Transloader.version
         exit
+      end
+    end
+
+    # Allowed source property list
+    def allowed_option(parser)
+      parser.on("--allowed [A,B,C]",
+        <<-EOH
+        Comma separated list of exclusive properties for upload. 
+        Exact matches only. Use quotes for spaces/special characters.
+        EOH
+        ) do |value|
+        @allowed = value.split(",").map { |i| i.strip }
+      end
+    end
+
+    # Blocked source property list
+    def blocked_option(parser)
+      parser.on("--blocked [D,E,F]",
+        <<-EOH
+        Comma separated list of properties to omit on upload. 
+        Exact matches only. Use quotes for spaces/special characters.
+        EOH
+        ) do |value|
+        @blocked = value.split(",").map { |i| i.strip }
       end
     end
 

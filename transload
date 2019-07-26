@@ -28,16 +28,22 @@ def put_metadata(options)
   when "environment_canada"
     provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
     station = provider.get_station(station_id: options.station_id)
-    station.upload_metadata(options.destination)
+    station.upload_metadata(options.destination,
+      allowed: options.allowed,
+      blocked: options.blocked)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(options.cache)
     station = provider.get_station(user_id: options.user_id,
                                    station_id: options.station_id)
-    station.upload_metadata(options.destination)
+    station.upload_metadata(options.destination,
+      allowed: options.allowed,
+      blocked: options.blocked)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(options.cache)
     station = provider.get_station(station_id: options.station_id)
-    station.upload_metadata(options.destination)
+    station.upload_metadata(options.destination,
+      allowed: options.allowed,
+      blocked: options.blocked)
   end
 end
 
@@ -65,17 +71,25 @@ def put_observations(options)
     provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
     station = provider.get_station(station_id: options.station_id)
     station.save_metadata
-    station.upload_metadata(options.destination)
-    station.upload_observations_in_interval(options.destination, options.date)
+    station.upload_metadata(options.destination,
+      allowed: options.allowed,
+      blocked: options.blocked)
+    station.upload_observations_in_interval(options.destination, options.date,
+      allowed: options.allowed,
+      blocked: options.blocked)
   when "data_garrison"
     provider = Transloader::DataGarrisonProvider.new(options.cache)
     station = provider.get_station(user_id: options.user_id,
                                    station_id: options.station_id)
-    station.upload_observations_in_interval(options.destination, options.date)
+    station.upload_observations_in_interval(options.destination, options.date,
+      allowed: options.allowed,
+      blocked: options.blocked)
   when "campbell_scientific"
     provider = Transloader::CampbellScientificProvider.new(options.cache)
     station = provider.get_station(station_id: options.station_id)
-    station.upload_observations_in_interval(options.destination, options.date)
+    station.upload_observations_in_interval(options.destination, options.date,
+      allowed: options.allowed,
+      blocked: options.blocked)
   end
 end
 
