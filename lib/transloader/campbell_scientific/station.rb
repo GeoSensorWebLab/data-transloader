@@ -362,32 +362,32 @@ module Transloader
           obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
           obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
 
-          if !File.exist?(obs_filename)
-            raise "File for timestamp '#{timestamp}' does not exist"
+          # A locally cached file might not exist; in that case, ignore
+          # that "day" and continue looping.
+          if File.exist?(obs_filename)
+            rows = CSV.read(obs_filename, { headers: true })
+            # headers (excluding timestamp)
+            headers = rows.headers[1..-1]
+
+            # convert to format:
+            # [
+            #   ["2018-08-05T15:00:00.000-0700", {
+            #     name: "TEMPERATURE_Avg",
+            #     reading: 5.479
+            #   }, { ... }],
+            #   [...]
+            # ]
+            converted_rows = rows.map do |row|
+              [row["timestamp"], row[1..-1].map.with_index { |cell, i|
+                {
+                  name: headers[i],
+                  reading: cell
+                }
+              }]
+            end
+
+            observations.concat(converted_rows)
           end
-
-          rows = CSV.read(obs_filename, { headers: true })
-          # headers (excluding timestamp)
-          headers = rows.headers[1..-1]
-
-          # convert to format:
-          # [
-          #   ["2018-08-05T15:00:00.000-0700", {
-          #     name: "TEMPERATURE_Avg",
-          #     reading: 5.479
-          #   }, { ... }],
-          #   [...]
-          # ]
-          converted_rows = rows.map do |row|
-            [row["timestamp"], row[1..-1].map.with_index { |cell, i|
-              {
-                name: headers[i],
-                reading: cell
-              }
-            }]
-          end
-
-          observations.concat(converted_rows)
 
           timestamp += 86400
         end
@@ -488,10 +488,8 @@ module Transloader
           obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
           obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
 
-          if !File.exist?(obs_filename)
-            raise "File for timestamp '#{timestamp}' does not exist"
-          end
-
+          # A locally cached file might not exist; in that case, ignore
+          # that "day" and continue looping.
           if File.exist?(obs_filename)
             rows = CSV.read(obs_filename, { headers: true })
             # headers (excluding timestamp)
@@ -549,15 +547,17 @@ module Transloader
           end
         end
 
-        # Update metadata cache file with latest uploaded timestamp
-        newest_in_set = to_utc_iso8601(observations.last[0])
+        # Update metadata cache file with latest uploaded timestamp.
+        # Only runs if any observations were uploaded.
+        if observations.last
+          newest_in_set = to_utc_iso8601(observations.last[0])
 
-        if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
-          data_file[:newest_uploaded_timestamp] = newest_in_set
+          if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
+            data_file[:newest_uploaded_timestamp] = newest_in_set
+          end
+
+          save_metadata
         end
-
-        save_metadata
-
       end
     end
 
