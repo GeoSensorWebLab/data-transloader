@@ -10,16 +10,18 @@ module Transloader
 
     attr_accessor :id, :metadata, :properties, :provider
 
-    def initialize(id, provider, properties)
-      @id = id
-      @provider = provider
-      @properties = properties
-      @user_id = @properties[:user_id]
-      @metadata = {}
-      @metadata_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/metadata/#{@user_id}/#{@id}.json"
+    def initialize(options = {})
+      @id                = options[:id]
+      @http_client       = options[:http_client]
+      @provider          = options[:provider]
+      @properties        = options[:properties]
+      @user_id           = @properties[:user_id]
+      @metadata          = {}
+      @metadata_path     = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/metadata/#{@user_id}/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/#{@user_id}/#{@id}"
-      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
-      @ontology = DataGarrisonOntology.new
+      @base_path         = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
+      @ontology          = DataGarrisonOntology.new
+      @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Download and extract metadata from HTML, use to build metadata 
@@ -207,7 +209,7 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = SensorThings::Thing.new({
+      thing = @entity_factory.new_thing({
         name:        @metadata[:name],
         description: @metadata[:description],
         properties:  {
@@ -237,7 +239,7 @@ module Transloader
       end
       
       # Create Location entity
-      location = SensorThings::Location.new({
+      location = @entity_factory.new_location({
         name:         @metadata[:name],
         description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
@@ -257,7 +259,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = SensorThings::Sensor.new({
+        sensor = @entity_factory.new_sensor({
           name:        "Station #{@id} #{stream[:id]} Sensor",
           description: "Data Garrison Station #{@id} #{stream[:id]} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -294,7 +296,7 @@ module Transloader
           }
         end
 
-        observed_property = SensorThings::ObservedProperty.new(entity)
+        observed_property = @entity_factory.new_observed_property(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -323,7 +325,7 @@ module Transloader
 
         observation_type = observation_type_for(stream[:id])
 
-        datastream = SensorThings::Datastream.new({
+        datastream = @entity_factory.new_datastream({
           name:        "Station #{@id} #{stream[:id]}",
           description: "Data Garrison Station #{@id} #{stream[:id]}",
           unitOfMeasurement: uom,
@@ -504,7 +506,7 @@ module Transloader
         # fractional seconds.
         # Times are also coerced to UTC for the server.
         time = phenomenon_time.to_time.utc.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
-        observation = SensorThings::Observation.new({
+        observation = @entity_factory.new_observation({
           phenomenonTime: time,
           result: result,
           resultTime: time
