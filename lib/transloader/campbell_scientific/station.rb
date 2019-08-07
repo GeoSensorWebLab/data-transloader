@@ -7,15 +7,17 @@ module Transloader
 
     attr_accessor :id, :metadata, :properties, :provider
 
-    def initialize(id, provider, properties)
-      @id = id
-      @provider = provider
-      @properties = properties
-      @user_id = @properties[:user_id]
-      @metadata = {}
-      @metadata_path = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
+    def initialize(options = {})
+      @id                = options[:id]
+      @http_client       = options[:http_client]
+      @provider          = options[:provider]
+      @properties        = options[:properties]
+      @user_id           = @properties[:user_id]
+      @metadata          = {}
+      @metadata_path     = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/#{@id}"
-      @ontology = CampbellScientificOntology.new
+      @ontology          = CampbellScientificOntology.new
+      @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Download and extract metadata from HTML, use to build metadata 
@@ -33,7 +35,7 @@ module Transloader
 
       data_urls.each do |data_url|
         # Download CSV
-        response = Transloader::HTTP.get(uri: data_url)
+        response = @http_client.get(uri: data_url)
 
         # Incorrect URLs triggers a 302 Found that redirects to the 404 
         # page, we need to catch that here.
@@ -161,7 +163,7 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = SensorThings::Thing.new({
+      thing = @entity_factory.new_thing({
         name:        @metadata[:name],
         description: @metadata[:description],
         properties:  {
@@ -187,7 +189,7 @@ module Transloader
       end
       
       # Create Location entity
-      location = SensorThings::Location.new({
+      location = @entity_factory.new_location({
         name:         @metadata[:name],
         description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
@@ -207,7 +209,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = SensorThings::Sensor.new({
+        sensor = @entity_factory.new_sensor({
           name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
           description: "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -244,7 +246,7 @@ module Transloader
           }
         end
 
-        observed_property = SensorThings::ObservedProperty.new(entity)
+        observed_property = @entity_factory.new_observed_property(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -273,7 +275,7 @@ module Transloader
 
         observation_type = observation_type_for(stream[:name])
 
-        datastream = SensorThings::Datastream.new({
+        datastream = @entity_factory.new_datastream({
           name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
           description: "Campbell Scientific Station #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
@@ -404,7 +406,7 @@ module Transloader
 
           row[1].each do |obs|
             # Create Observation entity
-            new_observation = SensorThings::Observation.new({
+            new_observation = @entity_factory.new_observation({
               phenomenonTime: row_timestamp,
               result: obs[:reading],
               resultTime: row_timestamp
@@ -530,7 +532,7 @@ module Transloader
 
           row[1].each do |obs|
             # Create Observation entity
-            new_observation = SensorThings::Observation.new({
+            new_observation = @entity_factory.new_observation({
               phenomenonTime: row_timestamp,
               result: obs[:reading],
               resultTime: row_timestamp
@@ -722,7 +724,7 @@ module Transloader
         # (last_length). If it is smaller, that means the file was
         # probably truncated and the file should be re-downloaded 
         # instead.
-        response = Transloader::HTTP.head(uri: data_file[:url])
+        response = @http_client.head(uri: data_file[:url])
 
         last_modified = parse_last_modified(response["Last-Modified"])
         new_length    = response["Content-Length"].to_i
@@ -732,7 +734,7 @@ module Transloader
           redownload = true
         else
           # Do a partial GET
-          response = Transloader::HTTP.get({
+          response = @http_client.get({
             uri: data_file[:url],
             headers: {
               'Accept-Encoding' => '',
@@ -764,7 +766,7 @@ module Transloader
       if redownload
         logger.info "Downloading entire data file."
         # Download entire file; can use gzip compression
-        response = Transloader::HTTP.get(uri: data_file[:url])
+        response = @http_client.get(uri: data_file[:url])
 
         filedata      = response.body
         last_modified = parse_last_modified(response["Last-Modified"])

@@ -16,7 +16,7 @@ def get_metadata(options, http_client)
                                    station_id: options.station_id)
     station.save_metadata
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id, 
                                    data_urls: options.data_urls)
     station.save_metadata
@@ -39,7 +39,7 @@ def put_metadata(options, http_client)
       allowed: options.allowed,
       blocked: options.blocked)
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.upload_metadata(options.destination,
       allowed: options.allowed,
@@ -59,7 +59,7 @@ def get_observations(options, http_client)
                                    station_id: options.station_id)
     station.save_observations
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.save_observations
   end
@@ -85,7 +85,7 @@ def put_observations(options, http_client)
       allowed: options.allowed,
       blocked: options.blocked)
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache)
+    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.upload_observations_in_interval(options.destination, options.date,
       allowed: options.allowed,
