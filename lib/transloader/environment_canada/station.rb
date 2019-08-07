@@ -28,6 +28,7 @@ module Transloader
       @metadata_path     = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
       @ontology          = EnvironmentCanadaOntology.new
+      @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -124,7 +125,7 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = SensorThings::Thing.new({
+      thing = @entity_factory.new_thing({
         name:        @metadata[:name],
         description: @metadata[:description],
         properties:  @metadata[:properties]
@@ -139,7 +140,7 @@ module Transloader
 
       # LOCATION entity
       # Create Location entity
-      location = SensorThings::Location.new({
+      location = @entity_factory.new_location({
         name:         @metadata[:name],
         description:  @metadata[:description],
         encodingType: 'application/vnd.geo+json',
@@ -159,7 +160,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = SensorThings::Sensor.new({
+        sensor = @entity_factory.new_sensor({
           name:        "Station #{@id} #{stream[:name]} Sensor",
           description: "Environment Canada Station #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
@@ -196,7 +197,7 @@ module Transloader
           }
         end
 
-        observed_property = SensorThings::ObservedProperty.new(entity)
+        observed_property = @entity_factory.new_observed_property(entity)
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -225,7 +226,7 @@ module Transloader
 
         observation_type = observation_type_for(stream[:name])
 
-        datastream = SensorThings::Datastream.new({
+        datastream = @entity_factory.new_datastream({
           name:        "Station #{@id} #{stream[:name]}",
           description: "Environment Canada Station #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
@@ -351,7 +352,7 @@ module Transloader
             result = "null"
           end
 
-          observation = SensorThings::Observation.new({
+          observation = @entity_factory.new_observation({
             phenomenonTime: xml.xpath('//om:samplingTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text,
             result: result,
             resultTime: xml.xpath('//om:resultTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text

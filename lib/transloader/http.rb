@@ -87,7 +87,7 @@ module Transloader
     # Define the default options for the requests. Options passed into
     # the API will overwrite the default options.
     def default_options(options)
-      @default_options.deep_merge(options)
+      @default_options.deep_merge!(options)
     end
 
     def log_response(response)

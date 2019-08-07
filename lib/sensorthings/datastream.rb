@@ -9,8 +9,8 @@ module SensorThings
     attr_accessor :description, :name, :observation_type, :observed_property,
                   :sensor, :unit_of_measurement
 
-    def initialize(attributes)
-      super(attributes)
+    def initialize(attributes, http_client)
+      super(attributes, http_client)
       @description = attributes[:description]
       @name = attributes[:name]
       @observation_type = attributes[:observationType]

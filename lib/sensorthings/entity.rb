@@ -10,8 +10,9 @@ module SensorThings
     # These accessors are inherited by subclasses.
     attr_accessor :attributes, :id, :link
 
-    def initialize(attributes)
+    def initialize(attributes, http_client)
       @attributes = attributes
+      @http_client = http_client
     end
 
     # Override URI join function to handle OData style parenthesis properly
@@ -31,7 +32,7 @@ module SensorThings
     end
 
     def get(url)
-      response = Transloader::HTTP.get({
+      response = @http_client.get({
         uri: url,
         open_timeout: 1800,
         read_timeout: 1800
@@ -100,11 +101,11 @@ module SensorThings
 
       response = case method_name
         when :PATCH
-          Transloader::HTTP.patch(options)
+          @http_client.patch(options)
         when :POST
-          Transloader::HTTP.post(options)
+          @http_client.post(options)
         when :PUT
-          Transloader::HTTP.put(options)
+          @http_client.put(options)
         else
           raise "Unknown HTTP method: #{method_name}"
       end

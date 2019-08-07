@@ -8,8 +8,8 @@ module SensorThings
 
     attr_accessor :description, :definition, :name
 
-    def initialize(attributes)
-      super(attributes)
+    def initialize(attributes, http_client)
+      super(attributes, http_client)
       @definition = attributes[:definition]
       @description = attributes[:description]
       @name = attributes[:name]

@@ -8,8 +8,8 @@ module SensorThings
 
     attr_accessor :phenomenon_time, :result, :result_time
 
-    def initialize(attributes)
-      super(attributes)
+    def initialize(attributes, http_client)
+      super(attributes, http_client)
       @phenomenon_time = attributes[:phenomenonTime]
       @result = attributes[:result]
       @result_time = attributes[:resultTime]

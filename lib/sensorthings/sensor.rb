@@ -8,8 +8,8 @@ module SensorThings
 
     attr_accessor :description, :encoding_type, :metadata, :name
 
-    def initialize(attributes)
-      super(attributes)
+    def initialize(attributes, http_client)
+      super(attributes, http_client)
       @name = attributes[:name]
       @description = attributes[:description]
       @encoding_type = attributes[:encodingType]
