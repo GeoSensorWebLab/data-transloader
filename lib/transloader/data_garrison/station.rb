@@ -627,7 +627,7 @@ module Transloader
     # Use the HTTP wrapper to fetch the base path and return the 
     # response body.
     def get_base_path_body
-      response = Transloader::HTTP.get(uri: @base_path)
+      response = @http_client.get(uri: @base_path)
 
       if response.code != "200"
         raise "Could not download station data"
@@ -639,7 +639,6 @@ module Transloader
     # Return the HTML document object for the station. Will cache the
     # object.
     def station_data_html
-      # TODO: Add HTTP error handling
       @html ||= Nokogiri::HTML(get_base_path_body)
 
       if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
