@@ -14,6 +14,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       reset_cache($cache_dir)
 
       # Use instance variables to avoid scope issues with VCR
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
     end
@@ -22,7 +23,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/stations") do
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be false
 
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
 
@@ -34,7 +35,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "raises an error if metadata source file cannot be downloaded" do
       VCR.use_cassette("environment_canada/observations_not_found") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         expect {
           @provider.get_station(station_id: "CXCM")
         }.to raise_error(RuntimeError)
@@ -50,11 +51,12 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
       end
@@ -176,12 +178,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
       end
@@ -205,12 +208,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir)
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.save_metadata
       end

@@ -16,6 +16,7 @@ RSpec.describe Transloader::DataGarrisonStation do
       reset_cache($cache_dir)
 
       # Use instance variables to avoid scope issues with VCR
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
     end
@@ -25,7 +26,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         metadata_file = "#{$cache_dir}/data_garrison/metadata/300234063581640/300234065673960.json"
         expect(File.exist?(metadata_file)).to be false
 
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
@@ -40,7 +41,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "raises an error if metadata source file cannot be downloaded" do
       VCR.use_cassette("data_garrison/station_not_found") do
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         expect {
           @provider.get_station(
             user_id: "300234063581640",
@@ -54,7 +55,7 @@ RSpec.describe Transloader::DataGarrisonStation do
       VCR.use_cassette("data_garrison/station") do
         metadata_file = "#{$cache_dir}/data_garrison/metadata/300234063581640/300234065673960.json"
 
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
@@ -80,11 +81,12 @@ RSpec.describe Transloader::DataGarrisonStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
 
       VCR.use_cassette("data_garrison/station") do
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
@@ -215,12 +217,13 @@ RSpec.describe Transloader::DataGarrisonStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("data_garrison/station") do
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
@@ -253,12 +256,13 @@ RSpec.describe Transloader::DataGarrisonStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
+      @http_client = Transloader::HTTP.new
       @provider = nil
       @station = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("data_garrison/station") do
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir)
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
@@ -320,7 +324,5 @@ RSpec.describe Transloader::DataGarrisonStation do
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(6)
       end
     end
-
-
   end
 end

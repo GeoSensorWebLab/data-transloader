@@ -6,16 +6,17 @@ require 'vcr'
 RSpec.describe Transloader::DataGarrisonProvider do
   before(:each) do
     reset_cache($cache_dir)
+    @http_client = Transloader::HTTP.new
   end
 
   it "auto-creates a cache directory" do
-    Transloader::DataGarrisonProvider.new($cache_dir)
+    Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
     expect(Dir.exist?("#{$cache_dir}/data_garrison/metadata")).to be true
   end
 
   it "creates a station object with the given user id and station id" do
     VCR.use_cassette("data_garrison/station") do
-      provider = Transloader::DataGarrisonProvider.new($cache_dir)
+      provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
       station = provider.get_station(
         user_id: "300234063581640",
         station_id: "300234065673960"
@@ -29,7 +30,7 @@ RSpec.describe Transloader::DataGarrisonProvider do
 
   it "initializes a new station without loading any metadata" do
     VCR.use_cassette("data_garrison/station") do
-      provider = Transloader::DataGarrisonProvider.new($cache_dir)
+      provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
       station = provider.new_station(
         user_id: "300234063581640",
         station_id: "300234065673960"
