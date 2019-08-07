@@ -17,16 +17,17 @@ module Transloader
 
     attr_accessor :id, :metadata, :properties, :provider
 
-    def initialize(id, provider, properties)
-      @id = id
-      @provider = provider
-      @properties = properties.merge({
+    def initialize(options = {})
+      @http_client = options[:http_client]
+      @id          = options[:id]
+      @provider    = options[:provider]
+      @properties  = options[:properties].merge({
         provider: "Environment Canada"
       })
-      @metadata = {}
-      @metadata_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
+      @metadata          = {}
+      @metadata_path     = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
-      @ontology = EnvironmentCanadaOntology.new
+      @ontology          = EnvironmentCanadaOntology.new
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -80,7 +81,7 @@ module Transloader
       end
 
       swobml_url = URI.join(OBSERVATIONS_URL, "#{@id}-#{type}-swob.xml")
-      response = Transloader::HTTP.get(uri: swobml_url)
+      response = @http_client.get(uri: swobml_url)
 
       if response.code != '200'
         logger.error "Error downloading station observation data"

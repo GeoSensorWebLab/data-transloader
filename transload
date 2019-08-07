@@ -4,10 +4,10 @@ require 'transloader'
 SemanticLogger.add_appender(io: $stdout, level: :warn)
 SemanticLogger.add_appender(io: $stderr, level: :error)
 
-def get_metadata(options)
+def get_metadata(options, http_client)
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.save_metadata
   when "data_garrison"
@@ -23,10 +23,10 @@ def get_metadata(options)
   end
 end
 
-def put_metadata(options)
+def put_metadata(options, http_client)
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.upload_metadata(options.destination,
       allowed: options.allowed,
@@ -47,10 +47,10 @@ def put_metadata(options)
   end
 end
 
-def get_observations(options)
+def get_observations(options, http_client)
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.save_observations
   when "data_garrison"
@@ -65,10 +65,10 @@ def get_observations(options)
   end
 end
 
-def put_observations(options)
+def put_observations(options, http_client)
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
     station = provider.get_station(station_id: options.station_id)
     station.save_metadata
     station.upload_metadata(options.destination,
@@ -100,14 +100,16 @@ args = parser.parse(ARGV)
 verb = args[0]
 noun = args[1]
 options = args[2]
+# Create re-usable HTTP client with pre-set options
+http_client = Transloader::HTTP.new(auth: options.http_auth)
 
 # Determine action
 if verb == :get && noun == :metadata
-  get_metadata(options)
+  get_metadata(options, http_client)
 elsif verb == :put && noun == :metadata
-  put_metadata(options)
+  put_metadata(options, http_client)
 elsif verb == :get && noun == :observations
-  get_observations(options)
+  get_observations(options, http_client)
 elsif verb == :put && noun == :observations
-  put_observations(options)
+  put_observations(options, http_client)
 end

@@ -3,7 +3,8 @@ require 'uri'
 module Transloader
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
-                :destination, :provider, :station_id, :user_id
+                :destination, :http_auth, :provider, :station_id, 
+                :user_id
     # Set default values
     def initialize
       @allowed     = nil
@@ -12,6 +13,7 @@ module Transloader
       @data_url    = []
       @date        = nil
       @destination = nil
+      @http_auth   = nil
       @provider    = nil
       @station_id  = nil
       @user_id     = nil
@@ -35,6 +37,7 @@ module Transloader
       data_url_option(parser)
       date_interval_option(parser)
       destination_option(parser)
+      http_auth_option(parser)
       provider_option(parser)
       station_id_option(parser)      
       user_id_option(parser)
@@ -133,6 +136,14 @@ module Transloader
           puts parser
           exit 1
         end
+      end
+    end
+
+    # Specify BASIC username:password for requests
+    def http_auth_option(parser)
+      parser.on("--user <USERNAME>:<PASSWORD>",
+        "Specify HTTP BASIC username:password for requests.") do |value|
+        @http_auth = value
       end
     end
 

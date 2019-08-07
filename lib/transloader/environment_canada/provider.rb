@@ -12,8 +12,9 @@ module Transloader
 
     attr_accessor :cache_path
 
-    def initialize(cache_path)
+    def initialize(cache_path, http_client)
       @cache_path = cache_path
+      @http_client = http_client
 
       FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}")
       FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}/metadata")
@@ -24,7 +25,11 @@ module Transloader
     # automatically load its metadata from data source or file
     def get_station(station_id:)
       station_row = get_station_row(station_id)
-      stn = EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
+      stn = EnvironmentCanadaStation.new(
+        id: station_id, 
+        provider: self,
+        http_client: @http_client,
+        properties: station_row.to_hash)
       stn.get_metadata
       stn
     end
@@ -33,7 +38,11 @@ module Transloader
     # Does not load any metadata.
     def new_station(station_id:)
       station_row = get_station_row(station_id)
-      EnvironmentCanadaStation.new(station_id, self, station_row.to_hash)
+      EnvironmentCanadaStation.new(
+        id: station_id,
+        provider: self,
+        http_client: @http_client,
+        properties: station_row.to_hash)
     end
 
     def stations
@@ -45,7 +54,7 @@ module Transloader
     # Download the station list from Environment Canada and return the 
     # body string
     def download_station_list
-      response = Transloader::HTTP.get(uri: METADATA_URL)
+      response = @http_client.get(uri: METADATA_URL)
 
       raise "Error downloading station list" if response.code != '200'
 
