@@ -108,6 +108,8 @@ $ transload put observations \
 
 In the example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache. Only cached files with dates that fall into the time interval will be uploaded.
 
+If your SensorThings API instance requires authentication or special headers, please see [http_customization.md](http_customization.md) for instructions on setting that up with the command line tool.
+
 ## Data Model Mapping
 
 Here is how the metadata and data from Data Garrison is mapped to SensorThings API entities.

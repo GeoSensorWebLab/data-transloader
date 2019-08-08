@@ -138,6 +138,8 @@ $ transload put observations \
 
 In the example above, the observations for Campbell Scientific weather station with ID `606830` are read from the filesystem cache. All observations in the time interval specificied will be uploaded. In the CSV file(s), any observation that matches the date timestamp will be uploaded; if there are no matches, then a warning will be printed.
 
+If your SensorThings API instance requires authentication or special headers, please see [http_customization.md](http_customization.md) for instructions on setting that up with the command line tool.
+
 ## Data Model Mapping
 
 Here is how the metadata and data from Campbell Scientific are mapped to SensorThings API entities.
