@@ -22,6 +22,13 @@ module Transloader
       if options[:auth]
         @default_options[:headers][:"Authorization"] = "Basic #{Base64.strict_encode64(options[:auth])}"
       end
+
+      if options[:headers]
+        options[:headers].each do |row|
+          header, value = row.split(": ", 2)
+          @default_options[:headers][header] = value
+        end
+      end
     end
 
     # For GET requests.

@@ -21,8 +21,6 @@ By wrapping the string in single quotes, only some special characters need to be
 
 ## Custom Headers
 
-*Work in Progress*
-
 One or more custom HTTP headers can be added to requests, for servers that use headers for custom authorization.
 
 ```

@@ -101,7 +101,10 @@ verb = args[0]
 noun = args[1]
 options = args[2]
 # Create re-usable HTTP client with pre-set options
-http_client = Transloader::HTTP.new(auth: options.http_auth)
+http_client = Transloader::HTTP.new(
+  auth: options.http_auth,
+  headers: options.http_headers
+)
 
 # Determine action
 if verb == :get && noun == :metadata
