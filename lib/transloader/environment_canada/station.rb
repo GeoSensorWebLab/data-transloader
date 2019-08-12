@@ -18,14 +18,14 @@ module Transloader
     attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
-      @http_client = options[:http_client]
-      @id          = options[:id]
-      @provider    = options[:provider]
-      @properties  = options[:properties].merge({
+      @http_client    = options[:http_client]
+      @id             = options[:id]
+      @metadata_store = options[:metadata_store]
+      @provider       = options[:provider]
+      @properties     = options[:properties].merge({
         provider: "Environment Canada"
       })
       @metadata          = {}
-      @metadata_path     = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
       @ontology          = EnvironmentCanadaOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
@@ -61,9 +61,8 @@ module Transloader
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
     def get_metadata
-      if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
-      else
+      @metadata = @metadata_store.metadata
+      if (@metadata == {})
         @metadata = download_metadata
         save_metadata
       end
@@ -437,7 +436,7 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      IO.write(@metadata_path, JSON.pretty_generate(@metadata))
+      @metadata_store.merge(@metadata)
     end
 
     # Save the SWOB-ML file to file cache
