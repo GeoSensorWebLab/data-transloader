@@ -26,15 +26,15 @@ module Transloader
     end
 
     # Retrieve all observations in the time interval
-    def in_range(interval:)
-      day = interval.start
+    def get_all_in_range(start_time, end_time)
+      day = start_time
 
       observations = []
-      while (day < interval.end)
+      while (day <= end_time)
         cache = read_cache(day.strftime('%Y/%m/%d'))
         observations.concat(cache.values.select { |observation|
           t = Time.parse(observation[:timestamp])
-          t >= interval.start && t <= interval.end
+          t >= start_time && t <= end_time
         })
         day += 86400
       end
