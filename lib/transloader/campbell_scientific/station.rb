@@ -8,13 +8,13 @@ module Transloader
     attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
-      @id                = options[:id]
+      @data_store        = options[:data_store]
       @http_client       = options[:http_client]
+      @id                = options[:id]
+      @metadata_store    = options[:metadata_store]
       @provider          = options[:provider]
       @properties        = options[:properties]
-      @user_id           = @properties[:user_id]
       @metadata          = {}
-      @metadata_path     = "#{@provider.cache_path}/#{CampbellScientificProvider::PROVIDER_NAME}/metadata/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::PROVIDER_NAME}/#{@id}"
       @ontology          = CampbellScientificOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
@@ -127,9 +127,8 @@ module Transloader
     # If the station data is already cached, use that. If not, download
     # and save to a cache file.
     def get_metadata
-      if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
-      else
+      @metadata = @metadata_store.metadata
+      if (@metadata == {})
         @metadata = download_metadata
         save_metadata
       end
@@ -565,8 +564,7 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      FileUtils.mkdir_p(File.dirname(@metadata_path))
-      IO.write(@metadata_path, JSON.pretty_generate(@metadata))
+      @metadata_store.merge(@metadata)
     end
 
     # Save the observations to file cache
