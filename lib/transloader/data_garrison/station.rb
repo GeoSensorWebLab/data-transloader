@@ -11,14 +11,16 @@ module Transloader
     attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
-      @id                = options[:id]
+      @data_store        = options[:data_store]
       @http_client       = options[:http_client]
+      @id                = options[:id]
+      @metadata_store    = options[:metadata_store]
       @provider          = options[:provider]
       @properties        = options[:properties]
       @user_id           = @properties[:user_id]
       @metadata          = {}
-      @metadata_path     = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/metadata/#{@user_id}/#{@id}.json"
-      @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::CACHE_DIRECTORY}/#{@user_id}/#{@id}"
+      @metadata_path     = "#{@provider.cache_path}/#{DataGarrisonProvider::PROVIDER_NAME}/metadata/#{@user_id}/#{@id}.json"
+      @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::PROVIDER_NAME}/#{@user_id}/#{@id}"
       @base_path         = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
       @ontology          = DataGarrisonOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
