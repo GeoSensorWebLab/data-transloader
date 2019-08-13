@@ -18,6 +18,7 @@ module Transloader
     attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
+      @data_store     = options[:data_store]
       @http_client    = options[:http_client]
       @id             = options[:id]
       @metadata_store = options[:metadata_store]
@@ -453,6 +454,17 @@ module Transloader
 
       # Dump XML to file
       IO.write("#{@observations_path}/#{date_path}/#{time_path}", xml.to_s)
+
+      # New data store
+      observations = xml.xpath("//om:result/po:elements/po:element", NAMESPACES).collect do |element|
+        {
+          timestamp: timestamp,
+          result: element.at_xpath("@value", NAMESPACES).text,
+          property: element.at_xpath("@name", NAMESPACES).text,
+          unit: element.at_xpath("@uom", NAMESPACES).text
+        }
+      end
+      @data_store.store(observations)
     end
 
     def observation_type_for(property)

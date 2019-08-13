@@ -1,6 +1,7 @@
 require 'csv'
 require 'fileutils'
 
+require 'transloader/data_store'
 require 'transloader/metadata_store'
 require 'transloader/environment_canada/station'
 
@@ -26,17 +27,20 @@ module Transloader
     # automatically load its metadata from data source or file
     def get_station(station_id:)
       station_row = get_station_row(station_id)
-      metadata_store = MetadataStore.new({
+      store_opts = {
         cache_path: @cache_path,
         provider: "environment_canada",
         station: station_id
-      })
+      }
+      data_store     = DataStore.new(store_opts)
+      metadata_store = MetadataStore.new(store_opts)
       stn = EnvironmentCanadaStation.new(
+        data_store: data_store,
+        http_client: @http_client,
         id: station_id,
         metadata_store: metadata_store,
-        provider: self,
-        http_client: @http_client,
-        properties: station_row.to_hash)
+        properties: station_row.to_hash,
+        provider: self)
       stn.get_metadata
       stn
     end
@@ -45,17 +49,20 @@ module Transloader
     # Does not load any metadata.
     def new_station(station_id:)
       station_row = get_station_row(station_id)
-      metadata_store = MetadataStore.new({
+      store_opts = {
         cache_path: @cache_path,
         provider: "environment_canada",
         station: station_id
-      })
+      }
+      data_store     = DataStore.new(store_opts)
+      metadata_store = MetadataStore.new(store_opts)
       EnvironmentCanadaStation.new(
+        data_store: data_store,
+        http_client: @http_client,
         id: station_id,
         metadata_store: metadata_store,
-        provider: self,
-        http_client: @http_client,
-        properties: station_row.to_hash)
+        properties: station_row.to_hash,
+        provider: self)
     end
 
     def stations
