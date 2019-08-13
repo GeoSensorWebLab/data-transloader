@@ -19,7 +19,6 @@ module Transloader
       @properties        = options[:properties]
       @user_id           = @properties[:user_id]
       @metadata          = {}
-      @metadata_path     = "#{@provider.cache_path}/#{DataGarrisonProvider::PROVIDER_NAME}/metadata/#{@user_id}/#{@id}.json"
       @observations_path = "#{@provider.cache_path}/#{DataGarrisonProvider::PROVIDER_NAME}/#{@user_id}/#{@id}"
       @base_path         = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
       @ontology          = DataGarrisonOntology.new
@@ -171,9 +170,8 @@ module Transloader
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
     def get_metadata
-      if File.exist?(@metadata_path)
-        @metadata = JSON.parse(IO.read(@metadata_path), symbolize_names: true)
-      else
+      @metadata = @metadata_store.metadata
+      if (@metadata == {})
         @metadata = download_metadata
         save_metadata
       end
@@ -592,8 +590,7 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      FileUtils.mkdir_p(File.dirname(@metadata_path))
-      IO.write(@metadata_path, JSON.pretty_generate(@metadata))
+      @metadata_store.merge(@metadata)
     end
 
     # Save the webpage observations to file cache
