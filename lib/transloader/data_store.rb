@@ -32,7 +32,10 @@ module Transloader
       observations = []
       while (day < interval.end)
         cache = read_cache(day.strftime('%Y/%m/%d'))
-        observations.concat(cache.values)
+        observations.concat(cache.values.select { |observation|
+          t = Time.parse(observation[:timestamp])
+          t >= interval.start && t <= interval.end
+        })
         day += 86400
       end
 
