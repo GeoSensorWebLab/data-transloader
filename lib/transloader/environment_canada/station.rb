@@ -307,7 +307,7 @@ module Transloader
           end
 
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
-          result = coerce_result(result, observation_type_for(datastream[:name]))
+          result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
           observation = @entity_factory.new_observation({
             phenomenonTime: phenomenonTime,
