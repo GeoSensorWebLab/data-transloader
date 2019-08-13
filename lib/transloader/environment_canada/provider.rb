@@ -9,7 +9,7 @@ module Transloader
   class EnvironmentCanadaProvider
     include SemanticLogger::Loggable
 
-    CACHE_DIRECTORY = "environment_canada"
+    PROVIDER_NAME = "environment_canada"
     METADATA_URL = "http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
 
     attr_accessor :cache_path
@@ -18,8 +18,8 @@ module Transloader
       @cache_path = cache_path
       @http_client = http_client
 
-      FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}")
-      @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
+      FileUtils.mkdir_p("#{@cache_path}/#{PROVIDER_NAME}")
+      @station_list_path = "#{@cache_path}/#{PROVIDER_NAME}/stations_list.csv"
     end
 
     # Create a new Station object based on the station ID, and
@@ -28,7 +28,7 @@ module Transloader
       station_row = get_station_row(station_id)
       store_opts = {
         cache_path: @cache_path,
-        provider: "environment_canada",
+        provider: PROVIDER_NAME,
         station: station_id
       }
       data_store     = DataStore.new(store_opts)
@@ -50,7 +50,7 @@ module Transloader
       station_row = get_station_row(station_id)
       store_opts = {
         cache_path: @cache_path,
-        provider: "environment_canada",
+        provider: PROVIDER_NAME,
         station: station_id
       }
       data_store     = DataStore.new(store_opts)
