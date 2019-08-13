@@ -14,8 +14,8 @@ module Transloader
       @properties        = options[:properties]
       @user_id           = @properties[:user_id]
       @metadata          = {}
-      @metadata_path     = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/metadata/#{@id}.json"
-      @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::CACHE_DIRECTORY}/#{@id}"
+      @metadata_path     = "#{@provider.cache_path}/#{CampbellScientificProvider::PROVIDER_NAME}/metadata/#{@id}.json"
+      @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::PROVIDER_NAME}/#{@id}"
       @ontology          = CampbellScientificOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end

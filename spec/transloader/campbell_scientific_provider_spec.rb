@@ -9,11 +9,6 @@ RSpec.describe Transloader::CampbellScientificProvider do
     @http_client = Transloader::HTTP.new
   end
 
-  it "auto-creates a cache directory" do
-    Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
-    expect(Dir.exist?("#{$cache_dir}/campbell_scientific/metadata")).to be true
-  end
-
   it "creates a station object with the given user id and station id" do
     VCR.use_cassette("campbell_scientific/station") do
       provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
