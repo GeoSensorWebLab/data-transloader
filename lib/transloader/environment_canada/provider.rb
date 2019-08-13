@@ -19,7 +19,6 @@ module Transloader
       @http_client = http_client
 
       FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}")
-      FileUtils.mkdir_p("#{@cache_path}/#{CACHE_DIRECTORY}/metadata")
       @station_list_path = "#{@cache_path}/#{CACHE_DIRECTORY}/stations_list.csv"
     end
 

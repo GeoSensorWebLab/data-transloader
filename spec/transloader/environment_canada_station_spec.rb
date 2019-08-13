@@ -220,18 +220,6 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    it "uploads the latest observations" do
-      VCR.use_cassette("environment_canada/observations_upload_latest") do
-        @station.upload_metadata(@sensorthings_url)
-        @station.save_observations
-
-        @station.upload_observations(@sensorthings_url, "latest")
-
-        expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-      end
-    end
-
     it "uploads observations for a single timestamp" do
       VCR.use_cassette("environment_canada/observations_upload_single") do
         @station.upload_metadata(@sensorthings_url)
@@ -254,12 +242,6 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
       end
-    end
-
-    it "raises an error if the timestamp has no data cached" do
-      expect {
-        @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
-      }.to raise_error(RuntimeError)
     end
 
     it "filters entities uploaded in an interval according to an allow list" do

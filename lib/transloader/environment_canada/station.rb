@@ -1,5 +1,3 @@
-require 'fileutils'
-require 'json'
 require 'nokogiri'
 require 'time'
 
@@ -27,7 +25,6 @@ module Transloader
         provider: "Environment Canada"
       })
       @metadata          = {}
-      @observations_path = "#{@provider.cache_path}/#{EnvironmentCanadaProvider::CACHE_DIRECTORY}/#{@id}"
       @ontology          = EnvironmentCanadaOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end
@@ -250,60 +247,18 @@ module Transloader
       save_metadata
     end
 
-    # Upload station observations for `date` to the SensorThings API server at
-    # `destination`. If `date` is "latest", then the most recent SWOB-ML file
-    # is used.
+    # Upload station observations for `date` to the SensorThings API 
+    # server at `destination`. NOTE: "latest" is no longer supported.
     def upload_observations(destination, date)
       logger.info "Uploading observations for #{date} to #{destination}"
+      locate_date  = Time.parse(date)
+      observations = @data_store.get_all_in_range(locate_date, locate_date)
 
-      # Check for metadata
-      if @metadata.empty?
-        logger.error "station metadata not loaded"
-        raise
-      end
-
-      # Check for cached datastream URLs
-      @metadata[:datastreams].each do |stream|
-        if stream[:'Datastream@iot.navigationLink'].nil?
-          logger.error "Datastream navigation URLs not cached"
-          raise
-        end
-      end
-
-      # Check for cached observations at date
-      if !Dir.exist?(@observations_path)
-        logger.error "observation cache directory does not exist"
-        raise
-      end
-
-      if date == "latest"
-        begin
-          year_dir = Dir.entries(@observations_path).sort.last
-          month_dir = Dir.entries(File.join(@observations_path, year_dir)).sort.last
-          day_dir = Dir.entries(File.join(@observations_path, year_dir, month_dir)).sort.last
-          filename = Dir.entries(File.join(@observations_path, year_dir, month_dir, day_dir)).sort.last
-        rescue
-          logger.error "Could not locate latest observation cache file"
-          raise
-        end
-
-        file_path = File.join(@observations_path, year_dir, month_dir, day_dir, filename)
-      else
-        locate_date = Time.parse(date)
-        file_path = File.join(@observations_path, locate_date.strftime('%Y/%m/%d/%H%M%S%z.xml'))
-
-        if !File.exist?(file_path)
-          logger.error "Could not locate desired observation cache file: #{file_path}"
-          raise
-        end
-      end
-
-      logger.info "Uploading observations from #{file_path}"
-
-      upload_observations_from_file(file_path)
+      upload_observations_array(observations)
     end
 
-    # * file: Path to file with source data
+    # Upload all observations in an array.
+    # * observations: Array of DataStore observations
     # * options: Hash
     #   * allowed: Array of strings, only matching properties will have
     #              observations uploaded to STA.
@@ -312,9 +267,13 @@ module Transloader
     # 
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
-    def upload_observations_from_file(file, options = {})
-      # Filter Datastreams based on allowed/blocked lists.
-      # If both are blank, no filtering will be applied.
+    def upload_observations_array(observations, options = {})
+      # Check for metadata
+      if @metadata.empty?
+        logger.error "station metadata not loaded"
+        raise
+      end
+
       datastreams = @metadata[:datastreams]
 
       if options[:allowed]
@@ -327,35 +286,33 @@ module Transloader
         end
       end
 
-      xml = Nokogiri::XML(IO.read(file))
-      
-      datastreams.each do |datastream|
-        datastream_url = datastream[:'Datastream@iot.navigationLink']
-        datastream_name = datastream[:name]
+      # Observation from DataStore:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      observations.each do |observation|
+        datastream = datastreams.find { |datastream|
+          datastream[:name] == observation[:property]
+        }
 
-        if xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']", NAMESPACES).empty?
-          # The result is not in this SWOB-ML document, perhaps not reported
-          # during this reporting interval. In that case, no Observation is
-          # created.
+        if datastream.nil?
+          logger.warn "No datastream found for observation property: #{observation[:property]}"
         else
-          # OBSERVATION entity
-          # Create Observation entity
-          result = xml.xpath("//om:result/po:elements/po:element[@name='#{datastream_name}']/@value", NAMESPACES).text
+          datastream_url = datastream[:'Datastream@iot.navigationLink']
 
-          # Coerce result type based on datastream observation type
-          result = coerce_result(result, observation_type_for(datastream[:name]))
-
-          # SensorThings API does not like an empty string, instead "null" string
-          # should be used.
-          if result == ""
-            logger.info "Found null for #{datastream_name}"
-            result = "null"
+          if datastream_url.nil?
+            logger.error "Datastream navigation URLs not cached"
+            raise
           end
 
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          result = coerce_result(result, observation_type_for(datastream[:name]))
+
           observation = @entity_factory.new_observation({
-            phenomenonTime: xml.xpath('//om:samplingTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text,
+            phenomenonTime: phenomenonTime,
             result: result,
-            resultTime: xml.xpath('//om:resultTime/gml:TimeInstant/gml:timePosition', NAMESPACES).text
+            resultTime: phenomenonTime
           })
 
           # Upload entity and parse response
@@ -366,7 +323,6 @@ module Transloader
 
     # Collect all the observation files in the date interval, and upload
     # them.
-    # (Kind of wish I had a database here.)
     # 
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
@@ -380,59 +336,9 @@ module Transloader
     # ignored.
     def upload_observations_in_interval(destination, interval, options = {})
       time_interval = Transloader::TimeInterval.new(interval)
-      start_time = time_interval.start.utc
-      end_time = time_interval.end.utc
+      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
 
-      matching_years = Dir.entries(@observations_path).reduce([]) do |memo, year_dir|
-        if year_dir.to_i >= start_time.year && year_dir.to_i <= end_time.year
-          memo.push("#{@observations_path}/#{year_dir}")
-        end
-        memo
-      end
-
-      matching_months = matching_years.collect do |year_dir|
-        Dir.entries(year_dir).reduce([]) do |memo, month_dir|
-          if month_dir.to_i >= start_time.month && month_dir.to_i <= end_time.month
-            memo.push("#{year_dir}/#{month_dir}")
-          end
-          memo
-        end
-      end.flatten
-
-      matching_days = matching_months.collect do |month_dir|
-        Dir.entries(month_dir).reduce([]) do |memo, day_dir|
-          if day_dir.to_i >= start_time.day && day_dir.to_i <= end_time.day
-            memo.push("#{month_dir}/#{day_dir}")
-          end
-          memo
-        end
-      end.flatten
-
-      day_files = matching_days.collect do |day_dir|
-        Dir.entries(day_dir).collect do |file|
-          "#{day_dir}/#{file}"
-        end
-      end.flatten
-
-      # Filter files in time interval
-      output = day_files.reduce([]) do |memo, file|
-        if !(file.end_with?("/.") || file.end_with?("/.."))
-          parts = file.split("/")
-          year = parts[-4]
-          month = parts[-3]
-          day = parts[-2]
-          time = parts[-1].split(".")[0]
-          timestamp = Time.parse("#{year}#{month}#{day}T#{time}").utc
-          if (timestamp >= start_time && timestamp <= end_time)
-            memo.push(file)
-          end
-        end
-        memo
-      end
-
-      output.each do |file|
-        upload_observations_from_file(file, options)
-      end
+      upload_observations_array(observations, options)
     end
 
     # Save the Station metadata to the metadata cache file
@@ -446,14 +352,6 @@ module Transloader
 
       # Parse date from SWOB-ML
       timestamp = Time.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
-
-      # Create cache directory structure
-      date_path = timestamp.strftime('%Y/%m/%d')
-      time_path = timestamp.strftime('%H%M%S%z.xml')
-      FileUtils.mkdir_p("#{@observations_path}/#{date_path}")
-
-      # Dump XML to file
-      IO.write("#{@observations_path}/#{date_path}/#{time_path}", xml.to_s)
 
       # New data store
       observations = xml.xpath("//om:result/po:elements/po:element", NAMESPACES).collect do |element|
