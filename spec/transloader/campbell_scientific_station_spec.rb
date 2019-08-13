@@ -242,7 +242,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/observations_download") do
         @station.save_observations
       end
-      expect(File.exist?("#{$cache_dir}/campbell_scientific/606830/CBAY_MET_1HR.dat/2019/07/03.csv")).to be true
+      expect(File.exist?("#{$cache_dir}/v2/campbell_scientific/606830/2019/07/03.json")).to be true
     end
   end
 
@@ -279,12 +279,6 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/observations_download") do
         @station.save_observations
       end
-    end
-
-    it "raises an error of the timestamp has no data cached" do
-      expect {
-        @station.upload_observations_in_interval(@sensorthings_url, "2000-06-25T20:00:00Z/2000-06-25T21:00:00Z")
-      }.to raise_error(RuntimeError)
     end
 
     it "filters entities uploaded in an interval according to an allow list" do

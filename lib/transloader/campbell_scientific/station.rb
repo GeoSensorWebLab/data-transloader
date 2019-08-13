@@ -15,7 +15,6 @@ module Transloader
       @provider          = options[:provider]
       @properties        = options[:properties]
       @metadata          = {}
-      @observations_path = "#{@provider.cache_path}/#{CampbellScientificProvider::PROVIDER_NAME}/#{@id}"
       @ontology          = CampbellScientificOntology.new
       @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
     end
@@ -317,6 +316,29 @@ module Transloader
     def upload_observations(destination, date, options = {})
       get_metadata
 
+      date_boundary = Time.parse(date)
+      observations  = @data_store.get_all_in_range(date_boundary, date_boundary)
+
+      upload_observations_array(observations, options)
+    end
+
+    # Upload all observations in an array.
+    # * observations: Array of DataStore observations
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_array(observations, options = {})
+      # Check for metadata
+      if @metadata.empty?
+        logger.error "station metadata not loaded"
+        raise
+      end
+
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
       datastreams = @metadata[:datastreams]
@@ -339,98 +361,36 @@ module Transloader
         memo
       end
 
-      # Iterate over data files to parse observations in date range
-      @metadata[:data_files].each do |data_file|
-        data_filename = data_file[:filename]
-        # specify the start and end dates (ISO8601 strings) to upload
-        # nil is used for unbounded
-        date_range = [data_file[:parsed][:oldest], data_file[:parsed][:newest]]
+      # Observation from DataStore:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      observations.each do |observation|
+        datastream = datastream_hash[observation[:property]]
 
-        if date != "latest"
-          date_range = [date, date]
+        if datastream.nil?
+          logger.warn "No datastream found for observation property: #{observation[:property]}"
         else
-          date_range = [data_file[:parsed][:newest], data_file[:parsed][:newest]]
-        end
+          datastream_url = datastream[:'Datastream@iot.navigationLink']
 
-        # Load observations in date range
-        start_timestamp = Time.iso8601(date_range[0])
-        end_timestamp   = Time.iso8601(date_range[1])
-
-        observations = []
-        timestamp = start_timestamp
-        while timestamp <= end_timestamp
-          # Load data from file for timestamp
-          obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
-          obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
-
-          # A locally cached file might not exist; in that case, ignore
-          # that "day" and continue looping.
-          if File.exist?(obs_filename)
-            rows = CSV.read(obs_filename, { headers: true })
-            # headers (excluding timestamp)
-            headers = rows.headers[1..-1]
-
-            # convert to format:
-            # [
-            #   ["2018-08-05T15:00:00.000-0700", {
-            #     name: "TEMPERATURE_Avg",
-            #     reading: 5.479
-            #   }, { ... }],
-            #   [...]
-            # ]
-            converted_rows = rows.map do |row|
-              [row["timestamp"], row[1..-1].map.with_index { |cell, i|
-                {
-                  name: headers[i],
-                  reading: cell
-                }
-              }]
-            end
-
-            observations.concat(converted_rows)
+          if datastream_url.nil?
+            logger.error "Datastream navigation URLs not cached"
+            raise
           end
 
-          timestamp += 86400
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          result = observation[:result]
+
+          observation = @entity_factory.new_observation({
+            phenomenonTime: phenomenonTime,
+            result: result,
+            resultTime: phenomenonTime
+          })
+
+          # Upload entity and parse response
+          observation.upload_to(datastream_url)
         end
-
-        # filter observations in time range
-        observations.select! do |row|
-          row_timestamp = Time.iso8601(row[0])
-          (row_timestamp >= start_timestamp && row_timestamp <= end_timestamp)
-        end
-        
-        observations.each do |row|
-          # Convert from ISO8601 string to ISO8601 string in UTC
-          row_timestamp = to_iso8601(Time.iso8601(row[0]).utc)
-
-          row[1].each do |obs|
-            # Create Observation entity
-            new_observation = @entity_factory.new_observation({
-              phenomenonTime: row_timestamp,
-              result: obs[:reading],
-              resultTime: row_timestamp
-            })
-
-            # Only upload if Datastream has not been filtered from
-            # datastream list.
-            if datastream_hash[obs[:name]]
-              datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
-
-              # Upload to SensorThings API
-              new_observation.upload_to(datastream_url)
-            end
-          end
-        end
-
-        # Update metadata cache file with latest uploaded timestamp
-        newest_in_set = to_utc_iso8601(observations.last[0])
-
-        if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
-          data_file[:newest_uploaded_timestamp] = newest_in_set
-        end
-
-        save_metadata
-
       end
     end
 
@@ -451,115 +411,10 @@ module Transloader
     def upload_observations_in_interval(destination, interval, options = {})
       get_metadata
 
-      # Filter Datastreams based on allowed/blocked lists.
-      # If both are blank, no filtering will be applied.
-      datastreams = @metadata[:datastreams]
+      time_interval = Transloader::TimeInterval.new(interval)
+      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
 
-      if options[:allowed]
-        datastreams = datastreams.filter do |datastream|
-          options[:allowed].include?(datastream[:name])
-        end
-      elsif options[:blocked]
-        datastreams = datastreams.filter do |datastream|
-          !options[:blocked].include?(datastream[:name])
-        end
-      end
-
-      # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
-      # uploaded.
-      datastream_hash = datastreams.reduce({}) do |memo, datastream|
-        memo[datastream[:name]] = datastream
-        memo
-      end
-
-      # Iterate over data files to parse observations in date range
-      @metadata[:data_files].each do |data_file|
-        data_filename = data_file[:filename]
-        time_interval = Transloader::TimeInterval.new(interval)
-
-        # Load observations in date range
-        start_timestamp = time_interval.start
-        end_timestamp   = time_interval.end
-
-        observations = []
-        timestamp = start_timestamp
-        while timestamp <= end_timestamp
-          # Load data from file for timestamp
-          obs_dir = "#{@observations_path}/#{data_filename}/#{timestamp.strftime('%Y/%m')}"
-          obs_filename = "#{obs_dir}/#{timestamp.strftime('%d')}.csv"
-
-          # A locally cached file might not exist; in that case, ignore
-          # that "day" and continue looping.
-          if File.exist?(obs_filename)
-            rows = CSV.read(obs_filename, { headers: true })
-            # headers (excluding timestamp)
-            headers = rows.headers[1..-1]
-
-            # convert to format:
-            # [
-            #   ["2018-08-05T15:00:00.000-0700", {
-            #     name: "TEMPERATURE_Avg",
-            #     reading: 5.479
-            #   }, { ... }],
-            #   [...]
-            # ]
-            converted_rows = rows.map do |row|
-              [row["timestamp"], row[1..-1].map.with_index { |cell, i|
-                {
-                  name: headers[i],
-                  reading: cell
-                }
-              }]
-            end
-
-            observations.concat(converted_rows)
-          end
-
-          timestamp += 86400
-        end
-
-        # filter observations in time range
-        observations.select! do |row|
-          row_timestamp = Time.iso8601(row[0])
-          (row_timestamp >= start_timestamp && row_timestamp <= end_timestamp)
-        end
-        
-        observations.each do |row|
-          # Convert from ISO8601 string to ISO8601 string in UTC
-          row_timestamp = to_iso8601(Time.iso8601(row[0]).utc)
-
-          row[1].each do |obs|
-            # Create Observation entity
-            new_observation = @entity_factory.new_observation({
-              phenomenonTime: row_timestamp,
-              result: obs[:reading],
-              resultTime: row_timestamp
-            })
-
-            # Only upload if Datastream has not been filtered from
-            # datastream list.
-            if datastream_hash[obs[:name]]
-              datastream_url = datastream_hash[obs[:name]][:"Datastream@iot.navigationLink"]
-
-              # Upload to SensorThings API
-              new_observation.upload_to(datastream_url)
-            end
-          end
-        end
-
-        # Update metadata cache file with latest uploaded timestamp.
-        # Only runs if any observations were uploaded.
-        if observations.last
-          newest_in_set = to_utc_iso8601(observations.last[0])
-
-          if data_file[:newest_uploaded_timestamp].nil? || data_file[:newest_uploaded_timestamp] < newest_in_set
-            data_file[:newest_uploaded_timestamp] = newest_in_set
-          end
-
-          save_metadata
-        end
-      end
+      upload_observations_array(observations, options)
     end
 
     # Save the Station metadata to the metadata cache file
@@ -605,69 +460,6 @@ module Transloader
         end
         observations.flatten!.compact!
         @data_store.store(observations)
-
-        # Store Observations in older store method
-        # TODO: Remove when class is updated to read from new store
-        #       instead.
-        # 
-        # Group observations by date. This converts the array from
-        # [ [A, {B}, {C}], ... ] to { A': [A, {B}, {C} ], ...}.
-        # 
-        # Split the ISO8601 string to just the date
-        # Example key: "2019-03-05T17:00:00.000Z"
-        observations_by_day = all_observations.group_by do |set|
-          set[0].split("T")[0]
-        end
-
-        observations_by_day.each do |date, observations|
-          # Save observations as CSV file
-          year, month, day = date.split("-")
-          obs_dir = "#{@observations_path}/#{data_filename}/#{year}/#{month}"
-          obs_filename = "#{obs_dir}/#{day}.csv"
-          FileUtils.mkdir_p(obs_dir)
-
-          # If the observations file doesn't exist, convert the
-          # observations to CSV and dump to the file.
-          # If the file DOES exist, then it needs to be read and the
-          # observations from file merged with the new observations.
-          if File.exist?(obs_filename)
-            old_observations = CSV.read(obs_filename, { headers: true })
-            headers = old_observations.headers[1..-1]
-
-            # Convert from row object into observations array format:
-            # ["date", [{reading}, {reading}, ...]]
-            converted_observations = old_observations.map do |row|
-              [row["timestamp"]].concat([row[1..-1].map.with_index { |reading, i|
-                # Parse non-null to float values
-                r = (reading == "null" ? "null" : reading.to_f)
-                { name: headers[i], reading: r }
-              }])
-            end
-
-            # Merge, then sort by timestamp, then remove duplicates
-            observations = observations.concat(converted_observations).sort { |a,b|
-              a[0] <=> b[0]
-            }.uniq { |obs|
-              obs[0]
-            }
-          end
-
-          CSV.open(obs_filename, "wb") do |csv|
-            # Add header row
-            csv << [:timestamp].concat(data_file[:headers])
-
-            # take observations and make an array of readings for the 
-            # CSV file.
-            # Example observations item:
-            # ["2018-08-05T15:00:00.000-0700", [{
-            #   name: "", reading: ""
-            #  }, {...}]]
-            observations.each do |set|
-              csv << [set[0]].concat(set[1].map { |i| i[:reading] })
-            end
-          end
-          
-        end
 
         # Update station metadata cache file with observation date range.
         # Ignore if there are no observations.
