@@ -575,6 +575,41 @@ module Transloader
         data_filename = data_file[:filename]
         all_observations = download_observations(data_file).sort { |a,b| a[0] <=> b[0] }
 
+        # Store Observations in DataStore.
+        # Convert to new store format first:
+        # * timestamp
+        # * result
+        # * property
+        # * unit
+        observations = all_observations.collect do |observation_set|
+          timestamp = Time.parse(observation_set[0])
+          # observation:
+          # * name (property)
+          # * reading (result)
+          observation_set[1].collect do |observation|
+            datastream = @metadata[:datastreams].find do |datastream|
+              datastream[:name] == observation[:name]
+            end
+
+            if datastream
+              {
+                timestamp: timestamp,
+                result: observation[:reading],
+                property: observation[:name],
+                unit: datastream[:units]
+              }
+            else
+              nil
+            end
+          end
+        end
+        observations.flatten!.compact!
+        @data_store.store(observations)
+
+        # Store Observations in older store method
+        # TODO: Remove when class is updated to read from new store
+        #       instead.
+        # 
         # Group observations by date. This converts the array from
         # [ [A, {B}, {C}], ... ] to { A': [A, {B}, {C} ], ...}.
         # 
