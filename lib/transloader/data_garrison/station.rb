@@ -438,45 +438,7 @@ module Transloader
       phenomenon_time = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
 
       # Parse latest readings
-      readings = []
-      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
-        # Skip empty elements, "Latest Conditions" element, and "Station 
-        # Status" element. They all start with a blank line.
-        text = element.text
-        if !text.match?(/^\W$/)
-          # replace all non-breaking space characters
-          text.gsub!(/ /, ' ')
-
-          # Special case for parsing wind speed/gust/direction
-          if text.match?(/Wind Speed/)
-            text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
-              readings.push({
-                "id"     => "Wind Speed",
-                "result" => m[1].to_f,
-                "units"  => m[2]
-              }, {
-                "id"     => "Gust Speed",
-                "result" => m[3].to_f,
-                "units"  => m[4]
-              }, {
-                "id"     => "Wind Direction",
-                "result" => m[6].to_f,
-                "units"  => "deg"
-              })
-            end
-          else
-            # Only "Pressure", "Temperature", "RH", "Backup Batteries"
-            # are supported!
-            text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
-              readings.push({
-                "id"     => m[1],
-                "result" => m[2].to_f,
-                "units"  => m[3]
-              })
-            end
-          end
-        end
-      end
+      readings = parse_readings_from_html(html)
 
       datastreams.each do |datastream|
         datastream_url = datastream[:"Datastream@iot.navigationLink"]
@@ -618,6 +580,75 @@ module Transloader
 
       # Dump HTML to file
       IO.write("#{@observations_path}/#{date_path}/#{time_path}", html.to_s)
+
+      # New DataStore
+      readings = parse_readings_from_html(html)
+
+      # Observation:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      observations = readings.collect do |reading|
+        {
+          timestamp: utc_time,
+          result: reading["result"],
+          property: reading["id"],
+          unit: reading["units"]
+        }
+      end
+
+      @data_store.store(observations)
+    end
+
+    # Returns an array of Reading Hashes.
+    # Reading (string keys):
+    # * id (property)
+    # * result
+    # * units
+    def parse_readings_from_html(html)
+      # TODO: Replace string keys with symbol keys
+      readings = []
+      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
+        # Skip empty elements, "Latest Conditions" element, and "Station 
+        # Status" element. They all start with a blank line.
+        text = element.text
+        if !text.match?(/^\W$/)
+          # replace all non-breaking space characters
+          text.gsub!(/ /, ' ')
+
+          # Special case for parsing wind speed/gust/direction
+          if text.match?(/Wind Speed/)
+            text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
+              readings.push({
+                "id"     => "Wind Speed",
+                "result" => m[1].to_f,
+                "units"  => m[2]
+              }, {
+                "id"     => "Gust Speed",
+                "result" => m[3].to_f,
+                "units"  => m[4]
+              }, {
+                "id"     => "Wind Direction",
+                "result" => m[6].to_f,
+                "units"  => "deg"
+              })
+            end
+          else
+            # Only "Pressure", "Temperature", "RH", "Backup Batteries"
+            # are supported!
+            text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
+              readings.push({
+                "id"     => m[1],
+                "result" => m[2].to_f,
+                "units"  => m[3]
+              })
+            end
+          end
+        end
+      end
+
+      readings
     end
 
     # For parsing functionality specific to Data Garrison
