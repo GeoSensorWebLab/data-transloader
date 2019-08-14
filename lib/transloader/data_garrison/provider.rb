@@ -1,5 +1,3 @@
-require 'fileutils'
-
 require 'transloader/data_garrison/station'
 
 module Transloader
@@ -11,9 +9,6 @@ module Transloader
     def initialize(cache_path, http_client)
       @cache_path  = cache_path
       @http_client = http_client
-
-      FileUtils.mkdir_p("#{@cache_path}/#{PROVIDER_NAME}")
-      FileUtils.mkdir_p("#{@cache_path}/#{PROVIDER_NAME}/metadata")
     end
 
     # Create a new Station object based on the station ID, and

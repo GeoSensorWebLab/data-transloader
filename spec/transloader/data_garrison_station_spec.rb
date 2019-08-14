@@ -244,7 +244,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "creates a dated directory for the observations data cache" do
       @station.save_observations
-      expect(File.exist?("#{$cache_dir}/data_garrison/300234063581640/300234065673960/2019/06/26/144300Z.html")).to be true
+      expect(File.exist?("#{$cache_dir}/v2/data_garrison/300234063581640-300234065673960/2019/06/26.json")).to be true
     end
   end
 
@@ -283,15 +283,6 @@ RSpec.describe Transloader::DataGarrisonStation do
       @station.save_observations
     end
 
-    it "uploads the latest observations" do
-      VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "latest")
-
-        expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-      end
-    end
-
     it "uploads observations for a single timestamp" do
       VCR.use_cassette("data_garrison/observations_upload") do
         @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z")
@@ -299,12 +290,6 @@ RSpec.describe Transloader::DataGarrisonStation do
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
       end
-    end
-
-    it "raises an error of the timestamp has no data cached" do
-      expect {
-        @station.upload_observations(@sensorthings_url, "2000-06-25T20:00:00Z")
-      }.to raise_error(RuntimeError)
     end
 
     it "uploads filtered observations for a single timestamp with an allowed list" do
