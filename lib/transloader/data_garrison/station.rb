@@ -495,9 +495,9 @@ module Transloader
       observations = readings.collect do |reading|
         {
           timestamp: utc_time,
-          result: reading["result"],
-          property: reading["id"],
-          unit: reading["units"]
+          result:    reading[:result],
+          property:  reading[:id],
+          unit:      reading[:units]
         }
       end
 
@@ -505,12 +505,11 @@ module Transloader
     end
 
     # Returns an array of Reading Hashes.
-    # Reading (string keys):
+    # Reading (symbol keys):
     # * id (property)
     # * result
     # * units
     def parse_readings_from_html(html)
-      # TODO: Replace string keys with symbol keys
       readings = []
       html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
         # Skip empty elements, "Latest Conditions" element, and "Station 
@@ -524,17 +523,17 @@ module Transloader
           if text.match?(/Wind Speed/)
             text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
               readings.push({
-                "id"     => "Wind Speed",
-                "result" => m[1].to_f,
-                "units"  => m[2]
+                id:     "Wind Speed",
+                result: m[1].to_f,
+                units:  m[2]
               }, {
-                "id"     => "Gust Speed",
-                "result" => m[3].to_f,
-                "units"  => m[4]
+                id:     "Gust Speed",
+                result: m[3].to_f,
+                units:  m[4]
               }, {
-                "id"     => "Wind Direction",
-                "result" => m[6].to_f,
-                "units"  => "deg"
+                id:     "Wind Direction",
+                result: m[6].to_f,
+                units:  "deg"
               })
             end
           else
@@ -542,9 +541,9 @@ module Transloader
             # are supported!
             text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
               readings.push({
-                "id"     => m[1],
-                "result" => m[2].to_f,
-                "units"  => m[3]
+                id:     m[1],
+                result: m[2].to_f,
+                units:  m[3]
               })
             end
           end
