@@ -64,12 +64,12 @@ module Transloader
         # Match headers and create a new metadata section object
         case matched
         when /-Transceiver/
-          station_metadata.push({id: "transceiver"})
+          station_metadata.push({name: "transceiver"})
         when /-Logger/
-          station_metadata.push({id: "logger"})
+          station_metadata.push({name: "logger"})
         when /-Sensors/
         when /^-([^-]+)/
-          station_metadata.push({id: $1})
+          station_metadata.push({name: $1})
         else
           # Match sub-section objects
           last = station_metadata[-1]
@@ -81,7 +81,7 @@ module Transloader
       end
 
       # Print warning if multiple sensors have the same ID
-      sensor_ids = station_metadata.collect { |i| i[:id] }
+      sensor_ids = station_metadata.collect { |i| i[:name] }
       if sensor_ids.count != sensor_ids.uniq.count
         # Use a Set to find which ones are duplicates
         s = Set.new
@@ -95,7 +95,7 @@ module Transloader
       datastream_metadata = []
 
       station_metadata.each do |meta|
-        case meta[:id]
+        case meta[:name]
         when "transceiver"
           transceiver_metadata = meta
         when "logger"
@@ -196,11 +196,11 @@ module Transloader
 
       if options[:allowed]
         datastreams = datastreams.filter do |datastream|
-          options[:allowed].include?(datastream[:id])
+          options[:allowed].include?(datastream[:name])
         end
       elsif options[:blocked]
         datastreams = datastreams.filter do |datastream|
-          !options[:blocked].include?(datastream[:id])
+          !options[:blocked].include?(datastream[:name])
         end
       end
 
@@ -257,8 +257,8 @@ module Transloader
       datastreams.each do |stream|
         # Create Sensor entities
         sensor = @entity_factory.new_sensor({
-          name:        "Station #{@id} #{stream[:id]} Sensor",
-          description: "Data Garrison Station #{@id} #{stream[:id]} Sensor",
+          name:        "Station #{@id} #{stream[:name]} Sensor",
+          description: "Data Garrison Station #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
@@ -282,14 +282,14 @@ module Transloader
       datastreams.each do |stream|
         # Look up entity in ontology;
         # if nil, then use default attributes
-        entity = @ontology.observed_property(stream[:id])
+        entity = @ontology.observed_property(stream[:name])
 
         if entity.nil?
-          logger.warn "No Observed Property found in Ontology for DataGarrison:#{stream[:id]}"
+          logger.warn "No Observed Property found in Ontology for DataGarrison:#{stream[:name]}"
           entity = {
-            name:        stream[:id],
-            definition:  "http://example.org/#{stream[:id]}",
-            description: stream[:id]
+            name:        stream[:name],
+            definition:  "http://example.org/#{stream[:name]}",
+            description: stream[:name]
           }
         end
 
@@ -309,10 +309,10 @@ module Transloader
       datastreams.each do |stream|
         # Look up UOM, observationType in ontology;
         # if nil, then use default attributes
-        uom = @ontology.unit_of_measurement(stream[:id])
+        uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for DataGarrison:#{stream[:id]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for DataGarrison:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:Units] || "",
             symbol:     stream[:Units] || "",
@@ -320,11 +320,11 @@ module Transloader
           }
         end
 
-        observation_type = observation_type_for(stream[:id])
+        observation_type = observation_type_for(stream[:name])
 
         datastream = @entity_factory.new_datastream({
-          name:        "Station #{@id} #{stream[:id]}",
-          description: "Data Garrison Station #{@id} #{stream[:id]}",
+          name:        "Station #{@id} #{stream[:name]}",
+          description: "Data Garrison Station #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
           observationType: observation_type,
           Sensor: {
@@ -369,11 +369,11 @@ module Transloader
 
       if options[:allowed]
         datastreams = datastreams.filter do |datastream|
-          options[:allowed].include?(datastream[:id])
+          options[:allowed].include?(datastream[:name])
         end
       elsif options[:blocked]
         datastreams = datastreams.filter do |datastream|
-          !options[:blocked].include?(datastream[:id])
+          !options[:blocked].include?(datastream[:name])
         end
       end
 
@@ -381,7 +381,7 @@ module Transloader
       # This is used to determine where Observation entities are 
       # uploaded.
       datastream_hash = datastreams.reduce({}) do |memo, datastream|
-        memo[datastream[:id]] = datastream
+        memo[datastream[:name]] = datastream
         memo
       end
 
@@ -496,7 +496,7 @@ module Transloader
         {
           timestamp: utc_time,
           result:    reading[:result],
-          property:  reading[:id],
+          property:  reading[:name],
           unit:      reading[:units]
         }
       end
@@ -523,15 +523,15 @@ module Transloader
           if text.match?(/Wind Speed/)
             text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
               readings.push({
-                id:     "Wind Speed",
+                name:   "Wind Speed",
                 result: m[1].to_f,
                 units:  m[2]
               }, {
-                id:     "Gust Speed",
+                name:   "Gust Speed",
                 result: m[3].to_f,
                 units:  m[4]
               }, {
-                id:     "Wind Direction",
+                name:   "Wind Direction",
                 result: m[6].to_f,
                 units:  "deg"
               })
@@ -541,7 +541,7 @@ module Transloader
             # are supported!
             text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
               readings.push({
-                id:     m[1],
+                name:   m[1],
                 result: m[2].to_f,
                 units:  m[3]
               })

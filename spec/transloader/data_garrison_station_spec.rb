@@ -96,7 +96,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.metadata[:longitude] = -107.0403
         @station.metadata[:timezone_offset] = "-06:00"
         # Fix for error in source data
-        @station.metadata[:datastreams].last[:id] = "Backup Batteries"
+        @station.metadata[:datastreams].last[:name] = "Backup Batteries"
         @station.save_metadata
       end
 
@@ -182,7 +182,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         # Check that a definition from the ontology is used
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
-          .with(body: /UO_0000218/).at_least_once
+          .with(body: /Volt/).at_least_once
       end
     end
 
@@ -233,7 +233,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.metadata[:longitude] = -107.0403
         @station.metadata[:timezone_offset] = "-06:00"
         # Fix for error in source data
-        @station.metadata[:datastreams].last[:id] = "Backup Batteries"
+        @station.metadata[:datastreams].last[:name] = "Backup Batteries"
         @station.save_metadata
       end
 
@@ -272,7 +272,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.metadata[:longitude] = -107.0403
         @station.metadata[:timezone_offset] = "-06:00"
         # Fix for error in source data
-        @station.metadata[:datastreams].last[:id] = "Backup Batteries"
+        @station.metadata[:datastreams].last[:name] = "Backup Batteries"
         @station.save_metadata
       end
 
