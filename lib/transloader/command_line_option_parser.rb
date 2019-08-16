@@ -113,7 +113,7 @@ module Transloader
 
       case options.provider
       when "campbell_scientific"
-        require_options(options, [:data_url])
+        require_options(options, [:data_urls])
       when "data_garrison"
         require_options(options, [:user_id])
       end

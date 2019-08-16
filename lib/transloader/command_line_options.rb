@@ -10,7 +10,7 @@ module Transloader
       @allowed      = nil
       @blocked      = nil
       @cache        = nil
-      @data_url     = []
+      @data_urls    = []
       @date         = nil
       @destination  = nil
       @http_auth    = nil
@@ -101,7 +101,7 @@ module Transloader
     def data_url_option(parser)
       parser.on("--data_url [URL]", 
         "Data URL to monitor for observations.") do |value|
-        @data_url.push(value)
+        @data_urls.push(value)
         
         if !(value =~ /\A#{URI::regexp(["http", "https"])}\z/)
           puts %Q[ERROR: Data URL "#{value}" is not a valid URL.]
