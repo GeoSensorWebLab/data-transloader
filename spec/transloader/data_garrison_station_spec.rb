@@ -31,7 +31,7 @@ RSpec.describe Transloader::DataGarrisonStation do
           user_id: "300234063581640",
           station_id: "300234065673960"
         )
-        @station.save_metadata
+        @station.download_metadata
 
         expect(WebMock).to have_requested(:get, 
           %r[https://datagarrison\.com/users/300234063581640/300234065673960/index\.php.+]).times(1)
@@ -42,33 +42,13 @@ RSpec.describe Transloader::DataGarrisonStation do
     it "raises an error if metadata source file cannot be downloaded" do
       VCR.use_cassette("data_garrison/station_not_found") do
         @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
-        expect {
-          @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
-        }.to raise_error(RuntimeError, "Could not download station data")
-      end
-    end
-
-    it "overwrites metadata file if it already exists" do
-      VCR.use_cassette("data_garrison/station") do
-        metadata_file = "#{$cache_dir}/v2/data_garrison/metadata/300234063581640-300234065673960.json"
-
-        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(
           user_id: "300234063581640",
           station_id: "300234065673960"
         )
-        @station.save_metadata
-        # drop the modified time back 1 day, so we can check to see if
-        # it is actually updated
-        File.utime((Time.now - 86400), (Time.now - 86400), metadata_file)
-        mtime = File.stat(metadata_file).mtime
-
-        @station.save_metadata
-
-        expect(File.stat(metadata_file).mtime).to_not eq(mtime)
+        expect {
+          @station.download_metadata
+        }.to raise_error(RuntimeError, "Could not download station data")
       end
     end
   end
@@ -91,13 +71,15 @@ RSpec.describe Transloader::DataGarrisonStation do
           user_id: "300234063581640",
           station_id: "300234065673960"
         )
+        @station.download_metadata
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 69.158
-        @station.metadata[:longitude] = -107.0403
-        @station.metadata[:timezone_offset] = "-06:00"
-        # Fix for error in source data
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 69.158,
+          longitude: -107.0403,
+          timezone_offset: "-06:00",
+          datastreams: @station.metadata[:datastreams]
+        })
       end
 
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
@@ -228,13 +210,15 @@ RSpec.describe Transloader::DataGarrisonStation do
           user_id: "300234063581640",
           station_id: "300234065673960"
         )
+        @station.download_metadata
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 69.158
-        @station.metadata[:longitude] = -107.0403
-        @station.metadata[:timezone_offset] = "-06:00"
-        # Fix for error in source data
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 69.158,
+          longitude: -107.0403,
+          timezone_offset: "-06:00",
+          datastreams: @station.metadata[:datastreams]
+        })
       end
 
       VCR.use_cassette("data_garrison/metadata_upload") do
@@ -242,10 +226,7 @@ RSpec.describe Transloader::DataGarrisonStation do
       end
     end
 
-    it "creates a dated directory for the observations data cache" do
-      @station.save_observations
-      expect(File.exist?("#{$cache_dir}/v2/data_garrison/300234063581640-300234065673960/2019/06/26.json")).to be true
-    end
+    # TODO: Spec for downloading historical observations
   end
 
   ##################
@@ -267,25 +248,27 @@ RSpec.describe Transloader::DataGarrisonStation do
           user_id: "300234063581640",
           station_id: "300234065673960"
         )
+        @station.download_metadata
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 69.158
-        @station.metadata[:longitude] = -107.0403
-        @station.metadata[:timezone_offset] = "-06:00"
-        # Fix for error in source data
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 69.158,
+          longitude: -107.0403,
+          timezone_offset: "-06:00",
+          datastreams: @station.metadata[:datastreams]
+        })
       end
 
       VCR.use_cassette("data_garrison/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
       end
 
-      @station.save_observations
+      @station.download_observations
     end
 
     it "uploads observations for a single timestamp" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z")
+        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z")
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
@@ -294,7 +277,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "uploads filtered observations for a single timestamp with an allowed list" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z", allowed: ["Pressure"])
+        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z", allowed: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).once
@@ -303,7 +286,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "uploads filtered observations for a single timestamp with a blocked list" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z", blocked: ["Pressure"])
+        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z", blocked: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(6)

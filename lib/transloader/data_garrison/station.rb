@@ -23,9 +23,11 @@ module Transloader
     end
 
     # Download and extract metadata from HTML, use to build metadata 
-    # needed for Sensor/Observed Property/Datastream
-    def download_metadata
-      html = station_data_html
+    # needed for Sensor/Observed Property/Datastream.
+    # If `override_metadata` is specified, it is merged on top of the 
+    # downloaded metadata before being cached.
+    def download_metadata(override_metadata = nil)
+      html = get_station_data_html
 
       unit_id = html.xpath('/html/body/table/tr/td/table/tr/td/font')[0].text.to_s
       unit_id = unit_id[/Unit (?<id>\d+)/, "id"]
@@ -161,21 +163,12 @@ module Transloader
         download_links:  download_links,
         properties:  @properties
       }
-    end
 
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download and
-    # save to a cache file.
-    def get_metadata
-      @metadata = @metadata_store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
+      if !override_metadata.nil?
+        @metadata.merge!(override_metadata)
       end
-    end
 
-    # Connect to Data Garrison and download Observations
-    def get_observations
+      save_metadata
     end
 
     # Upload metadata to SensorThings API
@@ -189,6 +182,7 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
+      get_metadata
 
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
@@ -346,6 +340,180 @@ module Transloader
       save_metadata
     end
 
+    # Connect to Data Garrison and download Observations
+    # TODO: Support interval download
+    def download_observations(interval = nil)
+      get_metadata
+      html = get_station_data_html
+
+      # Parse the time from the "Latest Conditions" element
+      # e.g. 02/22/19 8:28 pm
+      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
+      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
+      # append the time zone from the metadata cache file
+      if raw_phenomenon_time.nil?
+        logger.error "Could not parse observation time"
+        raise "Could not parse observation time"
+      end
+      raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
+      phenomenon_time     = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
+      utc_time            = phenomenon_time.to_time.utc
+      readings            = parse_readings_from_html(html)
+
+      # Observation:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      observations = readings.collect do |reading|
+        {
+          timestamp: utc_time,
+          result:    reading[:result],
+          property:  reading[:name],
+          unit:      reading[:units]
+        }
+      end
+
+      @data_store.store(observations)
+    end
+
+    # Collect all the observation files in the date interval, and upload
+    # them.
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * interval: ISO8601 <start>/<end> interval
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations(destination, interval, options = {})
+      get_metadata
+
+      time_interval = Transloader::TimeInterval.new(interval)
+      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
+
+      upload_observations_array(observations, options)
+    end
+
+
+
+    # For parsing functionality specific to Data Garrison
+    private
+
+    # Use the observation_type to convert result to float, int, or 
+    # string.
+    def coerce_result(result, observation_type)
+      case observation_type
+      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
+        result.to_f
+      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation"
+        result.to_i
+      else # OM_Observation, any other type
+        result
+      end
+    end
+
+    # Load the metadata for a station.
+    # If the station data is already cached, use that. If not, download and
+    # save to a cache file.
+    def get_metadata
+      @metadata = @metadata_store.metadata
+      if (@metadata == {})
+        @metadata = download_metadata
+        save_metadata
+      end
+    end
+
+    # Use the HTTP wrapper to fetch the base path and return the 
+    # response body.
+    def get_station_data
+      response = @http_client.get(uri: @base_path)
+
+      if response.code != "200"
+        raise "Could not download station data"
+      end
+
+      response.body
+    end
+
+    # Return the HTML document object for the station. Will cache the
+    # object.
+    def get_station_data_html
+      @html ||= Nokogiri::HTML(get_station_data)
+
+      if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
+        logger.warn <<-EOH
+        Page is not HTML 4.01 Transitional, and may have been updated
+        since this tool was created. Parsing may fail, proceed with caution.
+        EOH
+      end
+
+      @html
+    end
+
+    def observation_type_for(property)
+      @ontology.observation_type(property) ||
+      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
+    end
+
+    # Returns an array of Reading Hashes.
+    # Reading (symbol keys):
+    # * id (property)
+    # * result
+    # * units
+    def parse_readings_from_html(html)
+      readings = []
+      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
+        # Skip empty elements, "Latest Conditions" element, and "Station 
+        # Status" element. They all start with a blank line.
+        text = element.text
+        if !text.match?(/^\W$/)
+          # replace all non-breaking space characters
+          text.gsub!(/ /, ' ')
+
+          # Special case for parsing wind speed/gust/direction
+          if text.match?(/Wind Speed/)
+            text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
+              readings.push({
+                name:   "Wind Speed",
+                result: m[1].to_f,
+                units:  m[2]
+              }, {
+                name:   "Gust Speed",
+                result: m[3].to_f,
+                units:  m[4]
+              }, {
+                name:   "Wind Direction",
+                result: m[6].to_f,
+                units:  "deg"
+              })
+            end
+          else
+            # Only "Pressure", "Temperature", "RH", "Backup Batteries"
+            # are supported!
+            text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
+              readings.push({
+                name:   m[1],
+                result: m[2].to_f,
+                units:  m[3]
+              })
+            end
+          end
+        end
+      end
+
+      readings
+    end
+
+    # Save the Station metadata to the metadata cache file
+    def save_metadata
+      @metadata_store.merge(@metadata)
+    end
+
     # Upload all observations in an array.
     # * observations: Array of DataStore observations
     # * options: Hash
@@ -415,189 +583,6 @@ module Transloader
           # Upload entity and parse response
           observation.upload_to(datastream_url)
         end
-      end
-    end
-
-    # Upload station observations for `date` to the SensorThings API 
-    # server at `destination`. If `date` is "latest", then the most 
-    # recent cached observation file is used.
-    # 
-    # * destination: URL endpoint of SensorThings API
-    # * date: timestamp
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    # 
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations(destination, date, options = {})
-      get_metadata
-
-      date_boundary = Time.parse(date)
-      observations  = @data_store.get_all_in_range(date_boundary, date_boundary)
-
-      upload_observations_array(observations, options)
-    end
-
-    # Collect all the observation files in the date interval, and upload
-    # them.
-    # 
-    # * destination: URL endpoint of SensorThings API
-    # * interval: ISO8601 <start>/<end> interval
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    # 
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations_in_interval(destination, interval, options = {})
-      get_metadata
-
-      time_interval = Transloader::TimeInterval.new(interval)
-      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
-
-      upload_observations_array(observations, options)
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @metadata_store.merge(@metadata)
-    end
-
-    # Save the webpage observations to file cache
-    def save_observations
-      get_metadata
-      html = station_data_html
-
-      # Parse the time from the "Latest Conditions" element
-      # e.g. 02/22/19 8:28 pm
-      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
-      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
-      # append the time zone from the metadata cache file
-      if raw_phenomenon_time.nil?
-        logger.error "Could not parse observation time"
-        raise "Could not parse observation time"
-      end
-      raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
-      phenomenon_time     = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
-      utc_time            = phenomenon_time.to_time.utc
-      readings            = parse_readings_from_html(html)
-
-      # Observation:
-      # * timestamp
-      # * result
-      # * property
-      # * unit
-      observations = readings.collect do |reading|
-        {
-          timestamp: utc_time,
-          result:    reading[:result],
-          property:  reading[:name],
-          unit:      reading[:units]
-        }
-      end
-
-      @data_store.store(observations)
-    end
-
-    # Returns an array of Reading Hashes.
-    # Reading (symbol keys):
-    # * id (property)
-    # * result
-    # * units
-    def parse_readings_from_html(html)
-      readings = []
-      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
-        # Skip empty elements, "Latest Conditions" element, and "Station 
-        # Status" element. They all start with a blank line.
-        text = element.text
-        if !text.match?(/^\W$/)
-          # replace all non-breaking space characters
-          text.gsub!(/ /, ' ')
-
-          # Special case for parsing wind speed/gust/direction
-          if text.match?(/Wind Speed/)
-            text.match(/Wind Speed: (\S+) (\S+) Gust: (\S+) (\S+) Direction: (\S+) \((\d+)o\)/) do |m|
-              readings.push({
-                name:   "Wind Speed",
-                result: m[1].to_f,
-                units:  m[2]
-              }, {
-                name:   "Gust Speed",
-                result: m[3].to_f,
-                units:  m[4]
-              }, {
-                name:   "Wind Direction",
-                result: m[6].to_f,
-                units:  "deg"
-              })
-            end
-          else
-            # Only "Pressure", "Temperature", "RH", "Backup Batteries"
-            # are supported!
-            text.match(/^\s+(Pressure|Temperature|RH|Backup Batteries)\s(\S+)\W(.+)$/) do |m|
-              readings.push({
-                name:   m[1],
-                result: m[2].to_f,
-                units:  m[3]
-              })
-            end
-          end
-        end
-      end
-
-      readings
-    end
-
-    # For parsing functionality specific to Data Garrison
-    private
-
-    # Use the HTTP wrapper to fetch the base path and return the 
-    # response body.
-    def get_base_path_body
-      response = @http_client.get(uri: @base_path)
-
-      if response.code != "200"
-        raise "Could not download station data"
-      end
-
-      response.body
-    end
-
-    # Return the HTML document object for the station. Will cache the
-    # object.
-    def station_data_html
-      @html ||= Nokogiri::HTML(get_base_path_body)
-
-      if @html.internal_subset.external_id != "-//W3C//DTD HTML 4.01 Transitional//EN"
-        logger.warn <<-EOH
-        Page is not HTML 4.01 Transitional, and may have been updated
-        since this tool was created. Parsing may fail, proceed with caution.
-        EOH
-      end
-
-      @html
-    end
-
-    def observation_type_for(property)
-      @ontology.observation_type(property) ||
-      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
-    end
-
-    # Use the observation_type to convert result to float, int, or 
-    # string.
-    def coerce_result(result, observation_type)
-      case observation_type
-      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
-        result.to_f
-      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation"
-        result.to_i
-      else # OM_Observation, any other type
-        result
       end
     end
   end
