@@ -11,7 +11,7 @@ module Transloader
       'po'    => 'http://dms.ec.gc.ca/schema/point-observation/2.0',
       'xlink' => 'http://www.w3.org/1999/xlink'
     }
-    OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml/latest/"
+    OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml"
 
     attr_accessor :id, :metadata, :properties, :provider
 
@@ -32,26 +32,26 @@ module Transloader
     # Parse metadata from the Provider properties and the SWOB-ML file for a
     # metadata hash.
     def download_metadata
-      xml = observation_xml
+      xml = get_observation_xml
 
       # Extract results from XML, use to build metadata needed for Sensor/
       # Observed Property/Datastream
       datastreams = xml.xpath('//om:result/po:elements/po:element', NAMESPACES).collect do |node|
         {
           name: node.xpath('@name').text,
-          uom: node.xpath('@uom').text
+          uom:  node.xpath('@uom').text
         }
       end
 
       # Convert to Hash
       @metadata = {
-        name: "Environment Canada Station #{@id}",
+        name:        "Environment Canada Station #{@id}",
         description: "Environment Canada Weather Station #{@properties["Name"]}",
-        elevation: xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
-        updated_at: Time.now,
+        elevation:   xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
+        updated_at:  Time.now,
         datastreams: datastreams,
-        procedure: xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
-        properties: @properties
+        procedure:   xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
+        properties:  @properties
       }
 
       save_metadata
@@ -68,6 +68,7 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
+      get_metadata
 
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
@@ -213,8 +214,29 @@ module Transloader
     # Download observations from the provider for this station in
     # `interval`. If `interval` is nil, only the latest will be
     # downloaded. Observations will be sent to the DataStore.
+    # TODO: Support interval download
     def download_observations(interval = nil)
-      save_observations
+      get_metadata
+      xml = get_observation_xml
+
+      if xml.nil?
+        logger.error "Unable to download SWOB-ML"
+        raise
+      end
+
+      # Parse date from SWOB-ML
+      timestamp = Time.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
+
+      # New data store
+      observations = xml.xpath("//om:result/po:elements/po:element", NAMESPACES).collect do |element|
+        {
+          timestamp: timestamp,
+          result: element.at_xpath("@value", NAMESPACES).text,
+          property: element.at_xpath("@name", NAMESPACES).text,
+          unit: element.at_xpath("@uom", NAMESPACES).text
+        }
+      end
+      @data_store.store(observations)
     end
 
     # Collect all the observation files in the date interval, and upload
@@ -231,6 +253,7 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
+      get_metadata
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
 
@@ -266,8 +289,43 @@ module Transloader
       end
     end
 
-    # Connect to Environment Canada and download SWOB-ML
-    def get_observations
+    # Return the XML document object for the SWOB-ML file.
+    # If `timestamp` is `nil`, then the latest SWOB-ML file will be used.
+    # If `timestamp` is specified, then the *closest* SWOB-ML to that
+    # timestamp will be downloaded.
+    # If no SWOB-ML is available, `nil` is returned.
+    def get_observation_xml(timestamp = nil)
+      data = get_swob_data(timestamp)
+      data && Nokogiri::XML(data)
+    end
+
+    # Connect to Environment Canada and download the SWOB-ML data that
+    # is closest to `timestamp`. If `timestamp` is `nil`, then the 
+    # latest SWOB-ML will be used. Otherwise, the SWOB-ML closest to the
+    # timestamp will be returned. If the SWOB-ML is unavailable, `nil`
+    # is returned.
+    # 
+    # Note that SWOB-ML files may be delayed in reporting, so trying to
+    # get 0900 would fail as it may be at 0905 instead. To solve this,
+    # this method will try to get the next closest SWOB-ML file after
+    # `timestamp`.
+    # 
+    # Note 2: Minutely SWOB-ML files are currently **not used**.
+    def get_swob_data(timestamp = nil)
+      if timestamp.nil?
+        # Download latest data
+        url = "#{OBSERVATIONS_URL}/latest"
+        get_swob_data_from_url(url)
+      else
+        # Determine if SWOB-ML is available for day
+
+      end
+    end
+
+    # Download the hourly SWOB-ML file in the `url` directory.
+    # "AUTO" or "MANNED" will be determined automatically from the
+    # station metadata.
+    def get_swob_data_from_url(url)
       case @properties['AUTO/MAN']
       when "AUTO", "Auto", "Manned/Auto"
         type = "AUTO"
@@ -278,7 +336,7 @@ module Transloader
         raise
       end
 
-      swobml_url = URI.join(OBSERVATIONS_URL, "#{@id}-#{type}-swob.xml")
+      swobml_url = "#{url}/#{@id}-#{type}-swob.xml"
       response = @http_client.get(uri: swobml_url)
 
       if response.code != '200'
@@ -293,34 +351,9 @@ module Transloader
       "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
     end
 
-    # Return the XML document object for the SWOB-ML file. Will cache the
-    # object.
-    def observation_xml
-      @xml ||= Nokogiri::XML(get_observations())
-    end
-
     # Save the Station metadata to the metadata cache file
     def save_metadata
       @metadata_store.merge(@metadata)
-    end
-
-    # Save the SWOB-ML file to file cache
-    def save_observations
-      xml = observation_xml
-
-      # Parse date from SWOB-ML
-      timestamp = Time.parse(xml.xpath('//po:identification-elements/po:element[@name="date_tm"]/@value', NAMESPACES).text)
-
-      # New data store
-      observations = xml.xpath("//om:result/po:elements/po:element", NAMESPACES).collect do |element|
-        {
-          timestamp: timestamp,
-          result: element.at_xpath("@value", NAMESPACES).text,
-          property: element.at_xpath("@name", NAMESPACES).text,
-          unit: element.at_xpath("@uom", NAMESPACES).text
-        }
-      end
-      @data_store.store(observations)
     end
 
     # Upload all observations in an array.

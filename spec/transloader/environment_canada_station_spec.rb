@@ -195,10 +195,8 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    it "creates a dated directory for the observations data cache" do
-      @station.download_observations
-      expect(File.exist?("#{$cache_dir}/v2/environment_canada/CXCM/2019/06/25.json")).to be true
-    end
+    # TODO: Download latest to data store
+    # TODO: Download historical to data store
   end
 
   ##################
@@ -219,13 +217,18 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
       end
+
+      VCR.use_cassette("environment_canada/metadata_upload") do
+        @station.upload_metadata(@sensorthings_url)
+      end
+
+      VCR.use_cassette("environment_canada/stations") do
+        @station.download_observations
+      end
     end
 
     it "uploads observations for a time range" do
       VCR.use_cassette("environment_canada/observations_upload_interval") do
-        @station.upload_metadata(@sensorthings_url)
-        @station.download_observations
-
         @station.upload_observations(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
@@ -235,9 +238,6 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "filters entities uploaded in an interval according to an allow list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_allowed") do
-        @station.upload_metadata(@sensorthings_url)
-        @station.download_observations
-
         @station.upload_observations(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z", 
           allowed: ["min_batry_volt_pst1hr"])
 
@@ -248,9 +248,6 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "filters entities uploaded in an interval according to a block list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_blocked") do
-        @station.upload_metadata(@sensorthings_url)
-        @station.download_observations
-
         @station.upload_observations(@sensorthings_url, "2019-06-25T19:00:00Z/2019-06-25T21:00:00Z",
           blocked: ["min_batry_volt_pst1hr"])
 
