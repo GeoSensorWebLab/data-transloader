@@ -22,31 +22,9 @@ module Transloader
       @station_list_path = "#{@cache_path}/#{PROVIDER_NAME}/stations_list.csv"
     end
 
-    # Create a new Station object based on the station ID, and
-    # automatically load its metadata from data source or file
-    def get_station(station_id:)
-      station_row = get_station_row(station_id)
-      store_opts = {
-        cache_path: @cache_path,
-        provider: PROVIDER_NAME,
-        station: station_id
-      }
-      data_store     = DataStore.new(store_opts)
-      metadata_store = MetadataStore.new(store_opts)
-      stn = EnvironmentCanadaStation.new(
-        data_store: data_store,
-        http_client: @http_client,
-        id: station_id,
-        metadata_store: metadata_store,
-        properties: station_row.to_hash,
-        provider: self)
-      stn.get_metadata
-      stn
-    end
-
     # Create a new Station object based on the station ID.
     # Does not load any metadata.
-    def new_station(station_id:)
+    def get_station(station_id:)
       station_row = get_station_row(station_id)
       store_opts = {
         cache_path: @cache_path,
