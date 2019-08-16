@@ -1,108 +1,72 @@
 #!/usr/bin/env ruby -Ilib
 require 'transloader'
+require 'pry'
 
-SemanticLogger.add_appender(io: $stdout, level: :warn)
+SemanticLogger.add_appender(io: $stdout, level: :info)
 SemanticLogger.add_appender(io: $stderr, level: :error)
 
-def get_metadata(options, http_client)
+def get_station(options, http_client)
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.save_metadata
+    Transloader::Station.new({
+      cache:       options.cache,
+      http_client: http_client,
+      provider:    "environment_canada",
+      station_id:  options.station_id
+    })
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(options.cache, http_client)
-    station = provider.get_station(user_id: options.user_id, 
-                                   station_id: options.station_id)
-    station.save_metadata
+    Transloader::Station.new({
+      cache:       options.cache,
+      http_client: http_client,
+      provider:    "data_garrison",
+      station_id:  options.station_id,
+      user_id:     options.user_id
+    })
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id, 
-                                   data_urls: options.data_urls)
-    station.save_metadata
+    Transloader::Station.new({
+      cache:       options.cache,
+      data_urls:   options.data_urls,
+      http_client: http_client,
+      provider:    "campbell_scientific",
+      station_id:  options.station_id
+    })
   end
+end
+
+def get_metadata(options, http_client)
+  station = get_station(options, http_client)
+  station.download_metadata
 end
 
 def put_metadata(options, http_client)
-  case options.provider
-  when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.upload_metadata(options.destination,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(options.cache, http_client)
-    station = provider.get_station(user_id: options.user_id,
-                                   station_id: options.station_id)
-    station.upload_metadata(options.destination,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.upload_metadata(options.destination,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  end
+  station = get_station(options, http_client)
+  station.upload_metadata(options.destination,
+    allowed: options.allowed,
+    blocked: options.blocked)
 end
 
 def get_observations(options, http_client)
+  station = get_station(options, http_client)
+  station.download_observations
   case options.provider
-  when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.save_observations
-  when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(options.cache, http_client)
-    station = provider.get_station(user_id: options.user_id,
-                                   station_id: options.station_id)
-    station.save_observations
-  when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.save_observations
-  end
 end
 
 def put_observations(options, http_client)
-  case options.provider
-  when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.save_metadata
-    station.upload_metadata(options.destination,
-      allowed: options.allowed,
-      blocked: options.blocked)
-    station.upload_observations_in_interval(options.destination, options.date,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(options.cache, http_client)
-    station = provider.get_station(user_id: options.user_id,
-                                   station_id: options.station_id)
-    station.upload_observations_in_interval(options.destination, options.date,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
-    station = provider.get_station(station_id: options.station_id)
-    station.upload_observations_in_interval(options.destination, options.date,
-      allowed: options.allowed,
-      blocked: options.blocked)
-  end
+  station = get_station(options, http_client)
+  station.upload_observations_in_interval(options.destination, options.date,
+    allowed: options.allowed,
+    blocked: options.blocked)
 end
 
 # Parse Args
-parser = Transloader::CommandLineOptionParser.new
-args = parser.parse(ARGV)
-
-verb = args[0]
-noun = args[1]
+parser  = Transloader::CommandLineOptionParser.new
+args    = parser.parse(ARGV)
+verb    = args[0]
+noun    = args[1]
 options = args[2]
 # Create re-usable HTTP client with pre-set options
 http_client = Transloader::HTTP.new(
-  auth: options.http_auth,
+  auth:    options.http_auth,
   headers: options.http_headers
 )
 

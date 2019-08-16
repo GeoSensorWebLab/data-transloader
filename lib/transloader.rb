@@ -16,6 +16,7 @@ require 'transloader/data_store'
 require 'transloader/http'
 require 'transloader/metadata_store'
 require 'transloader/ontology'
+require 'transloader/station'
 require 'transloader/time_interval'
 require 'transloader/version'
 
