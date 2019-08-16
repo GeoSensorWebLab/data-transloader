@@ -9,20 +9,10 @@ RSpec.describe Transloader::EnvironmentCanadaProvider do
     @http_client = Transloader::HTTP.new
   end
 
-  it "creates a station object with the given id" do
-    VCR.use_cassette("environment_canada/stations") do
-      provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
-      station = provider.get_station(station_id: "CXCM")
-
-      expect(station.id).to eq("CXCM")
-      expect(station.metadata).to_not eq({})
-    end
-  end
-
   it "initializes a new station without loading any metadata" do
     VCR.use_cassette("environment_canada/stations") do
       provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
-      station = provider.new_station(station_id: "CXCM")
+      station = provider.get_station(station_id: "CXCM")
       expect(station.metadata).to eq({})
     end
   end
