@@ -48,12 +48,11 @@ end
 def get_observations(options, http_client)
   station = get_station(options, http_client)
   station.download_observations
-  case options.provider
 end
 
 def put_observations(options, http_client)
   station = get_station(options, http_client)
-  station.upload_observations_in_interval(options.destination, options.date,
+  station.upload_observations(options.destination, options.date,
     allowed: options.allowed,
     blocked: options.blocked)
 end
