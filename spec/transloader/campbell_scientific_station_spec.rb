@@ -31,44 +31,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
-        @station.save_metadata
+        @station.download_metadata
 
         expect(WebMock).to have_requested(:get, 
           "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
         expect(File.exist?(metadata_file)).to be true
-      end
-    end
-
-    it "raises an error if metadata source file cannot be downloaded" do
-      VCR.use_cassette("campbell_scientific/station_not_found") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
-        expect {
-          @provider.get_station(
-            station_id: "606830",
-            data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/null.dat"]
-          )
-        }.to raise_error(RuntimeError, /Not Found/)
-      end
-    end
-
-    it "overwrites metadata file if it already exists" do
-      VCR.use_cassette("campbell_scientific/station") do
-        metadata_file = "#{$cache_dir}/v2/campbell_scientific/metadata/606830.json"
-
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
-        @station.save_metadata
-        # drop the modified time back 1 day, so we can check to see if
-        # it is actually updated
-        File.utime((Time.now - 86400), (Time.now - 86400), metadata_file)
-        mtime = File.stat(metadata_file).mtime
-
-        @station.save_metadata
-
-        expect(File.stat(metadata_file).mtime).to_not eq(mtime)
       end
     end
   end
@@ -92,10 +59,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 68.983639
-        @station.metadata[:longitude] = -105.835833
-        @station.metadata[:timezone_offset] = "-06:00"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 68.983639,
+          longitude: -105.835833,
+          timezone_offset: "-06:00"
+        })
       end
 
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
@@ -227,10 +195,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 68.983639
-        @station.metadata[:longitude] = -105.835833
-        @station.metadata[:timezone_offset] = "-06:00"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 68.983639,
+          longitude: -105.835833,
+          timezone_offset: "-06:00"
+        })
       end
 
       VCR.use_cassette("campbell_scientific/metadata_upload") do
@@ -238,12 +207,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
     end
 
-    it "creates a dated directory for the observations data cache" do
-      VCR.use_cassette("campbell_scientific/observations_download") do
-        @station.save_observations
-      end
-      expect(File.exist?("#{$cache_dir}/v2/campbell_scientific/606830/2019/07/03.json")).to be true
-    end
+    # TODO: Create spec for interval download
   end
 
   ##################
@@ -266,10 +230,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.metadata[:latitude] = 68.983639
-        @station.metadata[:longitude] = -105.835833
-        @station.metadata[:timezone_offset] = "-06:00"
-        @station.save_metadata
+        @station.download_metadata({
+          latitude: 68.983639,
+          longitude: -105.835833,
+          timezone_offset: "-06:00"
+        })
       end
 
       VCR.use_cassette("campbell_scientific/metadata_upload") do
@@ -277,13 +242,13 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
 
       VCR.use_cassette("campbell_scientific/observations_download") do
-        @station.save_observations
+        @station.download_observations
       end
     end
 
     it "filters entities uploaded in an interval according to an allow list" do
       VCR.use_cassette("campbell_scientific/observation_upload_interval_allowed") do
-        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-28T14:00:00Z/2019-06-28T15:00:00Z", allowed: ["BP_Avg"])
+        @station.upload_observations(@sensorthings_url, "2019-06-28T14:00:00Z/2019-06-28T15:00:00Z", allowed: ["BP_Avg"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(2)
@@ -292,7 +257,7 @@ RSpec.describe Transloader::CampbellScientificStation do
 
     it "filters entities uploaded in an interval according to a block list" do
       VCR.use_cassette("campbell_scientific/observation_upload_interval_blocked") do
-        @station.upload_observations_in_interval(@sensorthings_url, "2019-06-28T16:00:00Z/2019-06-28T17:00:00Z", blocked: ["BP_Avg"])
+        @station.upload_observations(@sensorthings_url, "2019-06-28T16:00:00Z/2019-06-28T17:00:00Z", blocked: ["BP_Avg"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(42)

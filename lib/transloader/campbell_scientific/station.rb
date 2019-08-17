@@ -20,8 +20,10 @@ module Transloader
     end
 
     # Download and extract metadata from HTML, use to build metadata 
-    # needed for Sensor/Observed Property/Datastream
-    def download_metadata
+    # needed for Sensor/Observed Property/Datastream.
+    # If `override_metadata` is specified, it is merged on top of the 
+    # downloaded metadata before being cached.
+    def download_metadata(override_metadata = {})
       # Check for data files
       data_urls = @properties[:data_urls]
 
@@ -120,17 +122,12 @@ module Transloader
         data_files:      data_files,
         properties:      @properties
       }
-    end
 
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download
-    # and save to a cache file.
-    def get_metadata
-      @metadata = @metadata_store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
+      if !override_metadata.nil?
+        @metadata.merge!(override_metadata)
       end
+
+      save_metadata
     end
 
     # Upload metadata to SensorThings API.
@@ -144,6 +141,7 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
+      get_metadata
 
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
@@ -297,138 +295,13 @@ module Transloader
       save_metadata
     end
 
-    # Upload station observations for `date` to the SensorThings API 
-    # server at `destination`. If `date` is "latest", then observations
-    # from the most recently uploaded observation (by phenomenon time) 
-    # up to the most recently parsed observation (by phenomenon time)
-    # are uploaded.
-    # 
-    # * destination: URL endpoint of SensorThings API
-    # * date: timestamp
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    # 
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations(destination, date, options = {})
-      get_metadata
-
-      date_boundary = Time.parse(date)
-      observations  = @data_store.get_all_in_range(date_boundary, date_boundary)
-
-      upload_observations_array(observations, options)
-    end
-
-    # Upload all observations in an array.
-    # * observations: Array of DataStore observations
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    # 
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations_array(observations, options = {})
-      # Check for metadata
-      if @metadata.empty?
-        logger.error "station metadata not loaded"
-        raise
-      end
-
-      # Filter Datastreams based on allowed/blocked lists.
-      # If both are blank, no filtering will be applied.
-      datastreams = @metadata[:datastreams]
-
-      if options[:allowed]
-        datastreams = datastreams.filter do |datastream|
-          options[:allowed].include?(datastream[:name])
-        end
-      elsif options[:blocked]
-        datastreams = datastreams.filter do |datastream|
-          !options[:blocked].include?(datastream[:name])
-        end
-      end
-
-      # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
-      # uploaded.
-      datastream_hash = datastreams.reduce({}) do |memo, datastream|
-        memo[datastream[:name]] = datastream
-        memo
-      end
-
-      # Observation from DataStore:
-      # * timestamp
-      # * result
-      # * property
-      # * unit
-      observations.each do |observation|
-        datastream = datastream_hash[observation[:property]]
-
-        if datastream.nil?
-          logger.warn "No datastream found for observation property: #{observation[:property]}"
-        else
-          datastream_url = datastream[:'Datastream@iot.navigationLink']
-
-          if datastream_url.nil?
-            logger.error "Datastream navigation URLs not cached"
-            raise
-          end
-
-          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
-          result = observation[:result]
-
-          observation = @entity_factory.new_observation({
-            phenomenonTime: phenomenonTime,
-            result: result,
-            resultTime: phenomenonTime
-          })
-
-          # Upload entity and parse response
-          observation.upload_to(datastream_url)
-        end
-      end
-    end
-
-    # Collect all the observation files in the date interval, and upload
-    # them.
-    # (Kind of wish I had a database here.)
-    # 
-    # * destination: URL endpoint of SensorThings API
-    # * interval: ISO8601 <start>/<end> interval
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    # 
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations_in_interval(destination, interval, options = {})
-      get_metadata
-
-      time_interval = Transloader::TimeInterval.new(interval)
-      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
-
-      upload_observations_array(observations, options)
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @metadata_store.merge(@metadata)
-    end
-
     # Save the observations to file cache
-    def save_observations
+    def download_observations
       get_metadata
 
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
-        all_observations = download_observations(data_file).sort { |a,b| a[0] <=> b[0] }
+        all_observations = download_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
 
         # Store Observations in DataStore.
         # Convert to new store format first:
@@ -481,37 +354,33 @@ module Transloader
       end
     end
 
+    # Collect all the observation files in the date interval, and upload
+    # them.
+    # (Kind of wish I had a database here.)
+    # 
+    # * destination: URL endpoint of SensorThings API
+    # * interval: ISO8601 <start>/<end> interval
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations(destination, interval, options = {})
+      get_metadata
+
+      time_interval = Transloader::TimeInterval.new(interval)
+      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
+
+      upload_observations_array(observations, options)
+    end
+
+
+
     # For parsing functionality specific to this data provider
     private
-
-    # Convert an ISO8601 string to an ISO8601 string in UTC
-    def to_utc_iso8601(iso8601)
-      to_iso8601(Time.iso8601(iso8601))
-    end
-
-    # Convert Time object to ISO8601 string with fractional seconds
-    def to_iso8601(time)
-      time.utc.strftime("%FT%T.%LZ")
-    end
-
-    # Convert Last-Modified header String to Time object.
-    def parse_last_modified(time)
-      Time.httpdate(time)
-    end
-
-    # Convert a TOA5 timestamp String to a Time object.
-    # An ISO8601 time zone offset (e.g. "-07:00") is required.
-    def parse_toa5_timestamp(time, zone_offset)
-      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
-    end
-
-    # Parse an observation reading from the data source, converting a
-    # string to a float or if null (i.e. "NAN") then use STA compatible
-    # "null" string.
-    # "NAN" usage here is specific to Campbell Scientific loggers.
-    def parse_reading(reading)
-      reading == "NAN" ? "null" : reading.to_f
-    end
 
     # Connect to data provider and download Observations for a specific
     # data_file entry.
@@ -529,7 +398,7 @@ module Transloader
     #   ...
     #   }]
     # ]
-    def download_observations(data_file)
+    def download_observations_for_file(data_file)
       data          = []
       last_modified = nil
       new_length    = nil
@@ -639,9 +508,126 @@ module Transloader
       observations
     end
 
+    # Load the metadata for a station.
+    # If the station data is already cached, use that. If not, download
+    # and save to a cache file.
+    def get_metadata
+      @metadata = @metadata_store.metadata
+      if (@metadata == {})
+        @metadata = download_metadata
+        save_metadata
+      end
+    end
+
     def observation_type_for(property)
       @ontology.observation_type(property) ||
       "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
+    end
+
+    # Convert Last-Modified header String to Time object.
+    def parse_last_modified(time)
+      Time.httpdate(time)
+    end
+
+    # Parse an observation reading from the data source, converting a
+    # string to a float or if null (i.e. "NAN") then use STA compatible
+    # "null" string.
+    # "NAN" usage here is specific to Campbell Scientific loggers.
+    def parse_reading(reading)
+      reading == "NAN" ? "null" : reading.to_f
+    end
+
+    # Convert a TOA5 timestamp String to a Time object.
+    # An ISO8601 time zone offset (e.g. "-07:00") is required.
+    def parse_toa5_timestamp(time, zone_offset)
+      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
+    end
+
+    # Save the Station metadata to the metadata cache file
+    def save_metadata
+      @metadata_store.merge(@metadata)
+    end
+
+    # Convert Time object to ISO8601 string with fractional seconds
+    def to_iso8601(time)
+      time.utc.strftime("%FT%T.%LZ")
+    end
+
+    # Convert an ISO8601 string to an ISO8601 string in UTC
+    def to_utc_iso8601(iso8601)
+      to_iso8601(Time.iso8601(iso8601))
+    end
+
+    # Upload all observations in an array.
+    # * observations: Array of DataStore observations
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_array(observations, options = {})
+      # Check for metadata
+      if @metadata.empty?
+        logger.error "station metadata not loaded"
+        raise
+      end
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.filter do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.filter do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
+
+      # Create hash map of observed properties to datastream URLs.
+      # This is used to determine where Observation entities are 
+      # uploaded.
+      datastream_hash = datastreams.reduce({}) do |memo, datastream|
+        memo[datastream[:name]] = datastream
+        memo
+      end
+
+      # Observation from DataStore:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      observations.each do |observation|
+        datastream = datastream_hash[observation[:property]]
+
+        if datastream.nil?
+          logger.warn "No datastream found for observation property: #{observation[:property]}"
+        else
+          datastream_url = datastream[:'Datastream@iot.navigationLink']
+
+          if datastream_url.nil?
+            logger.error "Datastream navigation URLs not cached"
+            raise
+          end
+
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          result = observation[:result]
+
+          observation = @entity_factory.new_observation({
+            phenomenonTime: phenomenonTime,
+            result: result,
+            resultTime: phenomenonTime
+          })
+
+          # Upload entity and parse response
+          observation.upload_to(datastream_url)
+        end
+      end
     end
   end
 end
