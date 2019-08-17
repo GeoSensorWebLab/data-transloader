@@ -31,7 +31,9 @@ module Transloader
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
     # metadata hash.
-    def download_metadata
+    # If `override_metadata` is specified, it is merged on top of the 
+    # downloaded metadata before being cached.
+    def download_metadata(override_metadata = {})
       xml = get_observation_xml
 
       # Extract results from XML, use to build metadata needed for Sensor/
@@ -53,6 +55,10 @@ module Transloader
         procedure:   xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
         properties:  @properties
       }
+
+      if !override_metadata.nil?
+        @metadata.merge!(override_metadata)
+      end
 
       save_metadata
     end

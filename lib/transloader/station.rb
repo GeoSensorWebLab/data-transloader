@@ -21,24 +21,26 @@ module Transloader
       @station = get_station(@provider, options)
     end
 
-    # Download the station metadata to the metadata store cache
-    def download_metadata
-      @station.download_metadata
+    # Download the station metadata to the metadata store cache.
+    # `override_attributes`: Hash of attributes to merge into the 
+    # metadata before it is sent to the MetadataStore.
+    def download_metadata(override_attributes = nil)
+      @station.download_metadata(override_attributes)
     end
 
-    # Upload the station metadata from the metadata store cache to 
+    # Upload the station metadata from the MetadataStore cache to 
     # SensorThings API
     def upload_metadata(server_url, options = {})
       @station.upload_metadata(server_url, options)
     end
 
-    # Download the station observations for an interval to the data 
-    # store cache
+    # Download the station observations for an interval to the DataStore 
+    # cache
     def download_observations(interval = nil)
       @station.download_observations(interval)
     end
 
-    # Upload the station observations in `interval` from the data store
+    # Upload the station observations in `interval` from the DataStore
     # cache to SensorThings API. `destination` may be ignored and the
     # cached URLs (from metadata store cache) will be used instead.
     def upload_observations(destination, interval, options = {})
