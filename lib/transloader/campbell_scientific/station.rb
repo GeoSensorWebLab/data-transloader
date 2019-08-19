@@ -1,9 +1,11 @@
 require 'csv'
 require 'time'
+require 'transloader/station_methods'
 
 module Transloader
   class CampbellScientificStation
     include SemanticLogger::Loggable
+    include Transloader::StationMethods
 
     attr_accessor :id, :metadata, :properties, :provider
 
@@ -269,7 +271,7 @@ module Transloader
           }
         end
 
-        observation_type = observation_type_for(stream[:name])
+        observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({
           name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
@@ -517,11 +519,6 @@ module Transloader
         @metadata = download_metadata
         save_metadata
       end
-    end
-
-    def observation_type_for(property)
-      @ontology.observation_type(property) ||
-      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
     end
 
     # Convert Last-Modified header String to Time object.

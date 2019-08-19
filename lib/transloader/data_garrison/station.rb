@@ -1,10 +1,12 @@
 require 'nokogiri'
 require 'set'
 require 'time'
+require 'transloader/station_methods'
 
 module Transloader
   class DataGarrisonStation
     include SemanticLogger::Loggable
+    include Transloader::StationMethods
 
     attr_accessor :id, :metadata, :properties, :provider
 
@@ -314,7 +316,7 @@ module Transloader
           }
         end
 
-        observation_type = observation_type_for(stream[:name])
+        observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({
           name:        "Station #{@id} #{stream[:name]}",
@@ -453,11 +455,6 @@ module Transloader
       end
 
       @html
-    end
-
-    def observation_type_for(property)
-      @ontology.observation_type(property) ||
-      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
     end
 
     # Returns an array of Reading Hashes.

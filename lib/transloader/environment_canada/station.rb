@@ -1,9 +1,11 @@
 require 'nokogiri'
 require 'time'
+require 'transloader/station_methods'
 
 module Transloader
   class EnvironmentCanadaStation
     include SemanticLogger::Loggable
+    include Transloader::StationMethods
 
     NAMESPACES = {
       'gml'   => 'http://www.opengis.net/gml',
@@ -191,7 +193,7 @@ module Transloader
           }
         end
 
-        observation_type = observation_type_for(stream[:name])
+        observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({
           name:        "Station #{@id} #{stream[:name]}",
@@ -352,11 +354,6 @@ module Transloader
       response.body
     end
 
-    def observation_type_for(property)
-      @ontology.observation_type(property) ||
-      "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
-    end
-
     # Save the Station metadata to the metadata cache file
     def save_metadata
       @metadata_store.merge(@metadata)
@@ -412,7 +409,7 @@ module Transloader
           end
 
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
-          result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
+          result = coerce_result(observation[:result], observation_type_for(datastream[:name], @ontology))
 
           observation = @entity_factory.new_observation({
             phenomenonTime: phenomenonTime,
