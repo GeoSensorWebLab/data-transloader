@@ -273,19 +273,6 @@ module Transloader
 
     private
 
-    # Use the observation_type to convert result to float, int, or 
-    # string.
-    def coerce_result(result, observation_type)
-      case observation_type
-      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
-        result.to_f
-      when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation"
-        result.to_i
-      else # OM_Observation, any other type
-        result
-      end
-    end
-
     # Load the metadata for a station.
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
