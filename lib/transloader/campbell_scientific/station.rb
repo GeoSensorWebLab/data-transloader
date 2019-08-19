@@ -334,7 +334,7 @@ module Transloader
             end
           end
         end
-        observations.flatten!.compact!
+        observations.flatten! && observations.compact!
         @data_store.store(observations)
 
         # Update station metadata cache file with observation date range.
