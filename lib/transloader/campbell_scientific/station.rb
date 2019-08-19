@@ -298,7 +298,8 @@ module Transloader
     end
 
     # Save the observations to file cache
-    def download_observations
+    # TODO: Support interval download
+    def download_observations(interval = nil)
       get_metadata
 
       @metadata[:data_files].each do |data_file|
