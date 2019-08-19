@@ -522,11 +522,6 @@ module Transloader
       end
     end
 
-    # Convert Last-Modified header String to Time object.
-    def parse_last_modified(time)
-      Time.httpdate(time)
-    end
-
     # Parse an observation reading from the data source, converting a
     # string to a float or if null (i.e. "NAN") then use STA compatible
     # "null" string.
@@ -535,25 +530,9 @@ module Transloader
       reading == "NAN" ? "null" : reading.to_f
     end
 
-    # Convert a TOA5 timestamp String to a Time object.
-    # An ISO8601 time zone offset (e.g. "-07:00") is required.
-    def parse_toa5_timestamp(time, zone_offset)
-      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
-    end
-
     # Save the Station metadata to the metadata cache file
     def save_metadata
       @metadata_store.merge(@metadata)
-    end
-
-    # Convert Time object to ISO8601 string with fractional seconds
-    def to_iso8601(time)
-      time.utc.strftime("%FT%T.%LZ")
-    end
-
-    # Convert an ISO8601 string to an ISO8601 string in UTC
-    def to_utc_iso8601(iso8601)
-      to_iso8601(Time.iso8601(iso8601))
     end
 
     # Upload all observations in an array.

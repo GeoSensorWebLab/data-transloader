@@ -21,5 +21,27 @@ module Transloader
       ontology.observation_type(property) ||
       "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
     end
+
+    # Convert Last-Modified header String to Time object.
+    def parse_last_modified(time)
+      Time.httpdate(time)
+    end
+
+    # Convert a TOA5 timestamp String to a Time object.
+    # An ISO8601 time zone offset (e.g. "-07:00") is required.
+    def parse_toa5_timestamp(time, zone_offset)
+      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
+    end
+
+    # Convert Time object to ISO8601 string with fractional seconds
+    def to_iso8601(time)
+      time.utc.strftime("%FT%T.%LZ")
+    end
+
+    # Convert an ISO8601 string to an ISO8601 string in UTC.
+    # e.g. "2019-08-19T17:00:00.000-0600" to "2019-08-19T23:00:00.000Z"
+    def to_utc_iso8601(iso8601)
+      to_iso8601(Time.iso8601(iso8601))
+    end
   end
 end
