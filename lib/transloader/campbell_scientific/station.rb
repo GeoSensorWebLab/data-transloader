@@ -25,7 +25,12 @@ module Transloader
     # needed for Sensor/Observed Property/Datastream.
     # If `override_metadata` is specified, it is merged on top of the 
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata = {})
+    def download_metadata(override_metadata: {}, overwrite: false)
+      if (@metadata_store.metadata != {} && !overwrite)
+        logger.warn "Existing metadata found, will not overwrite."
+        return false
+      end
+
       # Check for data files
       data_urls = @properties[:data_urls]
 

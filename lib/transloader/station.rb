@@ -22,10 +22,15 @@ module Transloader
     end
 
     # Download the station metadata to the metadata store cache.
-    # `override_attributes`: Hash of attributes to merge into the 
-    # metadata before it is sent to the MetadataStore.
-    def download_metadata(override_attributes = nil)
-      @station.download_metadata(override_attributes)
+    # `override_metadata`: Hash of attributes to merge into the 
+    #                      metadata before it is sent to the 
+    #                      MetadataStore.
+    # `overwrite`: If metadata already exists locally, overwrite it.
+    def download_metadata(override_metadata: nil, overwrite: false)
+      @station.download_metadata(
+        override_metadata: override_metadata,
+        overwrite: overwrite
+      )
     end
 
     # Upload the station metadata from the MetadataStore cache to 

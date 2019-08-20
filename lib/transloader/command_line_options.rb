@@ -3,8 +3,8 @@ require 'uri'
 module Transloader
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
-                :destination, :http_auth, :http_headers, :provider, 
-                :station_id, :user_id
+                :destination, :http_auth, :http_headers, :overwrite,
+                :provider, :station_id, :user_id
     # Set default values
     def initialize
       @allowed      = nil
@@ -15,6 +15,7 @@ module Transloader
       @destination  = nil
       @http_auth    = nil
       @http_headers = []
+      @overwrite    = false
       @provider     = nil
       @station_id   = nil
       @user_id      = nil
@@ -40,6 +41,7 @@ module Transloader
       destination_option(parser)
       http_auth_option(parser)
       http_header_option(parser)
+      overwrite_option(parser)
       provider_option(parser)
       station_id_option(parser)      
       user_id_option(parser)
@@ -154,6 +156,15 @@ module Transloader
       parser.on("--header \"Header: Value\"",
         "Specify additional HTTP headers for requests.") do |value|
         @http_headers.push(value)
+      end
+    end
+
+    # Overwrite option.
+    # If true, downloaded metadata will overwrite any existing metadata.
+    def overwrite_option(parser)
+      parser.on("--overwrite",
+        "Ovewrite existing metadata if true (default false)") do |value|
+        @overwrite = true
       end
     end
 

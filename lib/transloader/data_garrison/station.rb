@@ -28,7 +28,12 @@ module Transloader
     # needed for Sensor/Observed Property/Datastream.
     # If `override_metadata` is specified, it is merged on top of the 
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata = nil)
+    def download_metadata(override_metadata: nil, overwrite: false)
+      if (@metadata_store.metadata != {} && !overwrite)
+        logger.warn "Existing metadata found, will not overwrite."
+        return false
+      end
+
       html = get_station_data_html
 
       unit_id = html.xpath('/html/body/table/tr/td/table/tr/td/font')[0].text.to_s

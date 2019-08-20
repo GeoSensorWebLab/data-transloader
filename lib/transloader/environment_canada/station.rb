@@ -35,7 +35,12 @@ module Transloader
     # metadata hash.
     # If `override_metadata` is specified, it is merged on top of the 
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata = {})
+    def download_metadata(override_metadata: {}, overwrite: false)
+      if (@metadata_store.metadata != {} && !overwrite)
+        logger.warn "Existing metadata found, will not overwrite."
+        return false
+      end
+
       xml = get_observation_xml
 
       # Extract results from XML, use to build metadata needed for Sensor/

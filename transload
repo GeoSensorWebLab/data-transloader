@@ -35,7 +35,7 @@ end
 
 def get_metadata(options, http_client)
   station = get_station(options, http_client)
-  station.download_metadata
+  station.download_metadata(overwrite: options.overwrite)
 end
 
 def put_metadata(options, http_client)

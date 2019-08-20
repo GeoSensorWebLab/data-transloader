@@ -59,11 +59,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 68.983639,
           longitude: -105.835833,
           timezone_offset: "-06:00"
-        })
+        }, overwrite: true)
       end
 
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
@@ -195,11 +195,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 68.983639,
           longitude: -105.835833,
           timezone_offset: "-06:00"
-        })
+        }, overwrite: true)
       end
 
       VCR.use_cassette("campbell_scientific/metadata_upload") do
@@ -230,11 +230,11 @@ RSpec.describe Transloader::CampbellScientificStation do
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         # These values must be fixed before uploading to STA.
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 68.983639,
           longitude: -105.835833,
           timezone_offset: "-06:00"
-        })
+        }, overwrite: true)
       end
 
       VCR.use_cassette("campbell_scientific/metadata_upload") do

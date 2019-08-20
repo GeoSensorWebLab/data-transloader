@@ -74,12 +74,12 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.download_metadata
         # These values must be fixed before uploading to STA.
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 69.158,
           longitude: -107.0403,
           timezone_offset: "-06:00",
           datastreams: @station.metadata[:datastreams]
-        })
+        }, overwrite: true)
       end
 
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
@@ -213,12 +213,12 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.download_metadata
         # These values must be fixed before uploading to STA.
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 69.158,
           longitude: -107.0403,
           timezone_offset: "-06:00",
           datastreams: @station.metadata[:datastreams]
-        })
+        }, overwrite: true)
       end
 
       VCR.use_cassette("data_garrison/metadata_upload") do
@@ -251,12 +251,12 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.download_metadata
         # These values must be fixed before uploading to STA.
         @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-        @station.download_metadata({
+        @station.download_metadata(override_metadata: {
           latitude: 69.158,
           longitude: -107.0403,
           timezone_offset: "-06:00",
           datastreams: @station.metadata[:datastreams]
-        })
+        }, overwrite: true)
       end
 
       VCR.use_cassette("data_garrison/metadata_upload") do
