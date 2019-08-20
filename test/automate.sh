@@ -75,7 +75,8 @@ ruby $SCRIPT put metadata \
     --provider campbell_scientific \
     --station_id 606830 \
     --cache datastore/weather \
-    --destination $DESTINATION
+    --destination $DESTINATION \
+    --blocked LdnCo_Avg,Ux_Avg,Uy_Avg,Uz_Avg,CO2_op_Avg,H2O_op_Avg,Pfast_cp_Avg,xco2_cp_Avg,xh2o_cp_Avg,mfc_Avg
 
 ruby $SCRIPT get observations \
     --provider campbell_scientific \
@@ -87,4 +88,5 @@ ruby $SCRIPT put observations \
     --station_id 606830 \
     --cache datastore/weather \
     --date $INTERVAL \
-    --destination $DESTINATION
+    --destination $DESTINATION \
+    --blocked LdnCo_Avg,Ux_Avg,Uy_Avg,Uz_Avg,CO2_op_Avg,H2O_op_Avg,Pfast_cp_Avg,xco2_cp_Avg,xh2o_cp_Avg,mfc_Avg
