@@ -5,6 +5,8 @@ require 'json'
 module Transloader
   # Class for abstracting away filesystem storage for station metadata.
   class MetadataStore
+    # Schema version for handling schema upgrades
+    SCHEMA_VERSION = 2
 
     attr_reader :metadata
 
@@ -41,14 +43,26 @@ module Transloader
 
     private
 
+    # Print a warning if the schema version doesn't match
+    def check_schema(data)
+      if data[:schema_version] != SCHEMA_VERSION
+        logger.warn "Local metadata store schema version mismatch!"
+      end
+    end
+
     # Dump the current contents of the metadata hash to a file.
     def commit
-      IO.write(@path, JSON.pretty_generate(@metadata))
+      IO.write(@path, JSON.pretty_generate({
+        metadata: @metadata,
+        schema_version: SCHEMA_VERSION
+      }))
     end
 
     def read
       if (File.exists?(@path))
-        JSON.parse(IO.read(@path), symbolize_names: true)
+        data = JSON.parse(IO.read(@path), symbolize_names: true)
+        check_schema(data)
+        data[:metadata]
       else
         {}
       end

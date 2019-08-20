@@ -11,6 +11,8 @@ module Transloader
   # * property
   # * unit
   class DataStore
+    # Schema version for handling schema upgrades
+    SCHEMA_VERSION = 2
 
     # Create a new DataStore.
     # * cache_path: Path to directory where metadata is stored
@@ -67,12 +69,21 @@ module Transloader
 
     private
 
+    # Print a warning if the schema version doesn't match
+    def check_schema(data)
+      if data[:schema_version] != SCHEMA_VERSION
+        logger.warn "Local metadata store schema version mismatch!"
+      end
+    end
+
     # Return Hash of observations for a day ("%Y/%m/%d" format).
     # Key is "timestamp-property" to prevent duplicates.
     def read_cache(day)
       path = "#{@path}/#{day}.json"
       if File.exists?(path)
-        JSON.parse(IO.read(path), symbolize_names: true)
+        data = JSON.parse(IO.read(path), symbolize_names: true)
+        check_schema(data)
+        data[:data]
       else
         {}
       end
@@ -84,7 +95,10 @@ module Transloader
     def write_cache(day, observations)
       path = "#{@path}/#{day}.json"
       FileUtils.mkdir_p(File.dirname(path))
-      IO.write(path, JSON.pretty_generate(observations))
+      IO.write(path, JSON.pretty_generate({
+        data: observations,
+        schema_version: SCHEMA_VERSION
+      }))
     end
   end
 end
