@@ -468,7 +468,10 @@ module Transloader
       if redownload
         logger.info "Downloading entire data file."
         # Download entire file; can use gzip compression
-        response = @http_client.get(uri: data_file[:url])
+        response = @http_client.get(
+          uri: data_file[:url],
+          headers: { 'Range' => '' }
+        )
 
         filedata      = response.body
         last_modified = parse_last_modified(response["Last-Modified"])
