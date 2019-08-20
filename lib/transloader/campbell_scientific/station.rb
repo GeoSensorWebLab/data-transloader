@@ -268,7 +268,7 @@ module Transloader
         uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for DataGarrison:#{stream[:name]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for CampbellScientific:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:Units] || "",
             symbol:     stream[:Units] || "",
