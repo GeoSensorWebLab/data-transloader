@@ -106,6 +106,9 @@ module Transloader
         end
       end
 
+      # TODO: Reduce datastreams to unique entries, as multiple data 
+      # files *may* share the same properties
+
       logger.warn "Latitude and Longitude unavailable from metadata."
       logger.warn "These values must be manually added to the station metadata file."
 
