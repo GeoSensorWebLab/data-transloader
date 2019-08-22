@@ -305,9 +305,14 @@ module Transloader
       save_metadata
     end
 
-    # Save the observations to file cache
-    # TODO: Support interval download
+    # Save the observations to file cache.
+    # Interval download does nothing as there is no way to currently
+    # extract a range from the Campbell Scientific data files.
     def download_observations(interval = nil)
+      if !interval.nil?
+        logger.warn "Interval download for observations is unsupported for Campbell Scientific"
+      end
+
       get_metadata
 
       @metadata[:data_files].each do |data_file|

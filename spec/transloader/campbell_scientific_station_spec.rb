@@ -71,6 +71,9 @@ RSpec.describe Transloader::CampbellScientificStation do
         expect(@station.metadata[:datastreams].length).to eq(22)
       end
     end
+
+    # TODO: Removes duplicate datastreams parsed from the headers of 
+    # multiple data files
   end
 
   ##############
@@ -239,8 +242,6 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url)
       end
     end
-
-    # TODO: Create spec for interval download
   end
 
   ##################
