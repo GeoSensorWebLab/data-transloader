@@ -38,6 +38,39 @@ RSpec.describe Transloader::CampbellScientificStation do
         expect(File.exist?(metadata_file)).to be true
       end
     end
+
+    it "stores the data file's HTTP response headers in the metadata" do
+      VCR.use_cassette("campbell_scientific/station") do
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+        )
+        expect(@station.metadata[:data_files]).to eq(nil)
+
+        @station.download_metadata
+
+        # These may need to be updated if the VCR recording is updated
+        expect(@station.metadata[:data_files][0][:last_modified]).to eq("2019-07-02T20:06:09.000Z")
+        expect(@station.metadata[:data_files][0][:initial_length]).to eq(205208)
+        expect(@station.metadata[:data_files][0][:last_length]).to eq(nil)
+      end
+    end
+
+    it "parses the datastreams from the data file headers" do
+      VCR.use_cassette("campbell_scientific/station") do
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+        )
+        expect(@station.metadata[:datastreams]).to eq(nil)
+
+        @station.download_metadata
+
+        expect(@station.metadata[:datastreams].length).to eq(22)
+      end
+    end
   end
 
   ##############
