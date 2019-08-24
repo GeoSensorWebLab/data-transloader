@@ -7,7 +7,7 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
-    attr_accessor :id, :metadata, :properties, :provider
+    attr_accessor :data_store, :id, :metadata, :properties, :provider
 
     def initialize(options = {})
       @data_store        = options[:data_store]
@@ -442,6 +442,8 @@ module Transloader
         if response["Content-Length"].to_i < data_file[:last_length]
           logger.info "Remote data file length is shorter than expected."
           redownload = true
+        elsif response["Content-Length"].to_i == data_file[:last_length]
+          # Do nothing, no download necessary
         else
           # Do a partial GET
           response = @http_client.get({

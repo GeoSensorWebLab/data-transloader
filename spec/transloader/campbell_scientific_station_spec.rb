@@ -242,6 +242,143 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url)
       end
     end
+
+    it "converts downloaded observations and stores in DataStore" do
+      VCR.use_cassette("campbell_scientific/observations_download") do
+        expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to eq(0)
+        @station.download_observations
+        expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to_not eq(0)        
+      end
+    end
+
+    context "when the data file's 'last_length' has not been set" do
+      before(:each) do
+        @station.metadata[:data_files][0][:last_length] = nil
+      end
+
+      it "downloads and parses the entire data file" do
+        VCR.use_cassette("campbell_scientific/observations_download") do
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:get, 
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .with(headers: { 'Range' => '' })
+            .times(1)
+        end
+      end
+
+      it "updates the last_modified and last_length after a download" do
+        VCR.use_cassette("campbell_scientific/observations_download") do
+          @station.download_observations
+
+          expect(@station.metadata[:data_files][0][:last_length]).to_not be_nil
+          expect(@station.metadata[:data_files][0][:last_modified]).to_not be_nil
+        end
+      end
+    end
+
+    context "when the 'last_length' has been cached" do
+      before(:each) do
+        @station.metadata[:data_files][0][:last_length] = 0
+        # If this is not set, then the ETL doesn't know how to map row
+        # values to datastreams.
+        @station.metadata[:data_files][0][:headers] = [
+          "TEMPERATURE_Avg",
+          "WIND_SPEED",
+          "WIND_DIRECTION",
+          "GUST_Max",
+          "RH_B_Avg",
+          "BP_Avg",
+          "BattV_Avg",
+          "Kdn_Avg",
+          "LdnCo_Avg",
+          "Ux_Avg",
+          "Uy_Avg",
+          "Uz_Avg",
+          "CO2_op_Avg",
+          "H2O_op_Avg",
+          "Pfast_cp_Avg",
+          "xco2_cp_Avg",
+          "xh2o_cp_Avg",
+          "mfc_Avg"
+        ]
+      end
+
+      it "executes a HEAD request for the updated Content-Length" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 1
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .times(1)
+        end
+      end
+
+      it "redownloads the entire data file if Content-Length is shorter than expected" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 999999999
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .times(1)
+          expect(WebMock).to have_requested(:get,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .with(headers: { 'Range' => '' })
+            .times(1)
+        end
+      end
+
+      it "executes no GET request when the Content-Length is equal" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 205808
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .times(1)
+          expect(WebMock).to have_requested(:get,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .with(headers: { 'Range' => '' })
+            .times(0)
+        end
+      end
+
+      it "executes a partial GET when the Content-Length has increased" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 102904
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .times(1)
+          expect(WebMock).to have_requested(:get,
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
+            .with(headers: { 'Range' => 'bytes=102904-' })
+            .times(1)
+        end
+      end
+
+      it "returns new observations when the server responds 206" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 0
+          @station.download_observations
+          observations = @station.data_store.get_all_in_range(Time.new(2000), Time.new(2019, 9, 1))
+          expect(observations.length).to_not eq(0)
+        end
+      end
+
+      it "updates the last_modified and last_length after a download" do
+        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 0
+          @station.download_observations
+          
+          expect(@station.metadata[:data_files][0][:last_length]).to_not eq(0)
+          expect(@station.metadata[:data_files][0][:last_modified]).to_not be_nil
+        end
+      end
+    end
   end
 
   ##################
