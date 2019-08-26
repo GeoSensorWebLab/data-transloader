@@ -415,78 +415,17 @@ module Transloader
     #   }]
     # ]
     def download_observations_for_file(data_file)
-      data          = []
-      last_modified = nil
-      new_length    = nil
-      observations  = []
+      download = partial_download_url(
+        url: data_file[:url],
+        offset: data_file[:last_length])
 
-      # Should the full remote file be downloaded, or should a partial
-      # download be used instead?
-      redownload = true
+      data         = []
+      observations = []
 
-      # Check if file has already been downloaded, and if so use HTTP
-      # Range header to only download the newest part of the file
-      if data_file[:last_length]
-        # Download part of file; do not use gzip compression
-        redownload = false
-
-        # Check if content-length is smaller than expected 
-        # (last_length). If it is smaller, that means the file was
-        # probably truncated and the file should be re-downloaded 
-        # instead.
-        response = @http_client.head(uri: data_file[:url])
-
-        last_modified = parse_last_modified(response["Last-Modified"])
-        new_length    = response["Content-Length"].to_i
-
-        if response["Content-Length"].to_i < data_file[:last_length]
-          logger.info "Remote data file length is shorter than expected."
-          redownload = true
-        elsif response["Content-Length"].to_i == data_file[:last_length]
-          # Do nothing, no download necessary
-        else
-          # Do a partial GET
-          response = @http_client.get({
-            uri: data_file[:url],
-            headers: {
-              'Accept-Encoding' => '',
-              'Range' => "bytes=#{data_file[:last_length]}-"
-            }
-          })
-
-          # 416 Requested Range Not Satisfiable
-          if response.code == "416"
-            logger.info "No new data."
-          elsif response.code == "206"
-            logger.info "Downloaded partial data."
-            filedata      = response.body
-            last_modified = parse_last_modified(response["Last-Modified"])
-            new_length    = data_file[:last_length] + filedata.length
-            begin
-              data = CSV.parse(filedata)
-            rescue CSV::MalformedCSVError => e
-              logger.error "Could not parse partial response data.", e
-              redownload = true
-            end
-          else
-            # Other codes are probably errors
-            logger.error "Error downloading partial data."
-          end
-        end
-      end
-        
-      if redownload
-        logger.info "Downloading entire data file."
-        # Download entire file; can use gzip compression
-        response = @http_client.get(
-          uri: data_file[:url],
-          headers: { 'Range' => '' }
-        )
-
-        filedata      = response.body
-        last_modified = parse_last_modified(response["Last-Modified"])
-        new_length    = filedata.length
-        data          = CSV.parse(filedata)
+      # If full file was downloaded, parse from beginning. Otherwise
+      # only parse extract of file.
+      if download[:body] && download[:full_file]
+        data = CSV.parse(download[:body])
         # Parse column headers for observed properties
         # (Skip first column with timestamp)
         column_headers = data[1].slice(1..-1)
@@ -501,12 +440,19 @@ module Transloader
         # step may run from a partial file that doesn't know any
         # headers.
         data.slice!(0..3)
+      elsif download[:body]
+        # TODO: Improve parsing by excluding partial rows
+        begin
+          data = CSV.parse(download[:body])
+        rescue CSV::MalformedCSVError => e
+          logger.error "Could not parse partial response data.", e
+        end
       end
 
       # Update station metadata cache with what the server says is the
       # latest file update time and the latest file length in bytes
-      data_file[:last_modified] = to_iso8601(last_modified)
-      data_file[:last_length]   = new_length
+      data_file[:last_modified] = to_iso8601(download[:last_modified])
+      data_file[:last_length]   = download[:content_length]
       save_metadata
 
       # Parse observations from CSV
