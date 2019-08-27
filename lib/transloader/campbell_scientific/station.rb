@@ -1,5 +1,6 @@
 require 'csv'
 require 'time'
+require 'transloader/data_file'
 require 'transloader/station_methods'
 
 module Transloader
@@ -60,12 +61,11 @@ module Transloader
         # encoded by gzip, which is enabled by default for Ruby 
         # net/http.
         last_modified = parse_last_modified(response["Last-Modified"])
-        data_files.push({
-          filename:       File.basename(data_url),
-          url:            data_url,
-          last_modified:  to_iso8601(last_modified),
-          initial_length: filedata.length
-        })
+        data_files.push(DataFile.new({
+          url:           data_url,
+          last_modified: to_iso8601(last_modified),
+          length:        filedata.length
+        }).to_h)
 
         # Parse CSV headers for station metadata
         # 
