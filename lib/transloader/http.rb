@@ -29,6 +29,8 @@ module Transloader
           @default_options[:headers][header] = value
         end
       end
+
+      @default_options.freeze
     end
 
     # For GET requests.
@@ -94,7 +96,8 @@ module Transloader
     # Define the default options for the requests. Options passed into
     # the API will overwrite the default options.
     def default_options(options)
-      @default_options.deep_merge!(options)
+      defaults = @default_options.dup
+      defaults.deep_merge!(options)
     end
 
     def log_response(response)
