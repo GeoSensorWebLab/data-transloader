@@ -34,8 +34,40 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.download_metadata
 
         expect(WebMock).to have_requested(:get, 
-          %r[https://datagarrison\.com/users/300234063581640/300234065673960/index\.php.+]).times(1)
+          %r[https://datagarrison\.com/users/300234063581640/300234065673960/index\.php.+])
+          .times(1)
         expect(File.exist?(metadata_file)).to be true
+      end
+    end
+
+    it "downloads information about data files" do
+      VCR.use_cassette("data_garrison/station") do
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          user_id: "300234063581640",
+          station_id: "300234065673960"
+        )
+        @station.download_metadata
+
+        expect(WebMock).to have_requested(:get, 
+          %r[https://datagarrison\.com/users/300234063581640/300234065673960/index\.php.+])
+          .times(1)
+        
+        expect(WebMock).to have_requested(:head,
+          "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+          .times(1)
+        expect(WebMock).to have_requested(:head,
+          "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_002.txt")
+          .times(1)
+        expect(WebMock).to have_requested(:head,
+          "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_003.txt")
+          .times(1)
+        expect(WebMock).to have_requested(:head,
+          "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_004.txt")
+          .times(1)
+
+        expect(@station.metadata[:data_files]).to_not be_nil
+        expect(@station.metadata[:data_files].length).to eq(4)
       end
     end
 
@@ -268,7 +300,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "uploads observations for a single timestamp" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z")
+        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
@@ -277,7 +309,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "uploads filtered observations for a single timestamp with an allowed list" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z", allowed: ["Pressure"])
+        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z", allowed: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).once
@@ -286,7 +318,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "uploads filtered observations for a single timestamp with a blocked list" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-06-26T14:43:00Z/2019-06-26T14:43:00Z", blocked: ["Pressure"])
+        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z", blocked: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(6)

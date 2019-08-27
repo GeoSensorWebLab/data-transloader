@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
   response:
@@ -29,7 +29,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:09 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -37,18 +37,18 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:43 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:11 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things
     body:
       encoding: UTF-8
       string: '{"name":"Data Garrison Station 300234065673960","description":"Data
-        Garrison Weather Station 300234065673960","properties":{"logger":{"id":"logger","Serial
+        Garrison Weather Station 300234065673960","properties":{"logger":{"name":"logger","Serial
         number":"20301990","Logging start":"08/12/18 10:58 am local time","Logging
         interval":"every 15.00 minutes","Sampling interval":"off","Launch description":"Test
         Launch","Part number":"S-BPA-XXXX","Data start address":"1105","Logging power":"Yes"},"provider":"Data
-        Garrison","station_id":"300234065673960","station_url":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7","transceiver":{"id":"transceiver","ID":"300234065673960","Status":"active","Power
+        Garrison","station_id":"300234065673960","station_url":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7","transceiver":{"name":"transceiver","ID":"300234065673960","Status":"active","Power
         level":"100 %","Transmission interval":"every 120 minutes","Mode":"standby
         unless power falls below 75 %","Low power alarm":"triggers if power falls
         below 30 %","Sensor alarm(s)":"on","Network":"Satellite","Board revision":"0xA0"},"user_id":"300234063581640"}}'
@@ -58,7 +58,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -77,27 +77,37 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:09 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:43 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:11 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
+        Garrison Weather Station 300234065673960","properties":{"logger":{"name":"logger","Serial
+        number":"20301990","Logging start":"08/12/18 10:58 am local time","Logging
+        interval":"every 15.00 minutes","Sampling interval":"off","Launch description":"Test
+        Launch","Part number":"S-BPA-XXXX","Data start address":"1105","Logging power":"Yes"},"provider":"Data
+        Garrison","station_id":"300234065673960","station_url":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7","transceiver":{"name":"transceiver","ID":"300234065673960","Status":"active","Power
+        level":"100 %","Transmission interval":"every 120 minutes","Mode":"standby
+        unless power falls below 75 %","Low power alarm":"triggers if power falls
+        below 30 %","Sensor alarm(s)":"on","Network":"Satellite","Board revision":"0xA0"},"user_id":"300234063581640"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -110,9 +120,9 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '1700'
+      - '1704'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:09 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -121,7 +131,7 @@ http_interactions:
           "description" : "Data Garrison Weather Station 300234065673960",
           "properties" : {
             "logger" : {
-              "id" : "logger",
+              "name" : "logger",
               "Serial number" : "20301990",
               "Logging start" : "08/12/18 10:58 am local time",
               "Logging interval" : "every 15.00 minutes",
@@ -135,7 +145,7 @@ http_interactions:
             "station_id" : "300234065673960",
             "station_url" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
             "transceiver" : {
-              "id" : "transceiver",
+              "name" : "transceiver",
               "ID" : "300234065673960",
               "Status" : "active",
               "Power level" : "100 %",
@@ -156,22 +166,32 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:43 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:11 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations?$filter=name%20eq%20'Data%20Garrison%20Station%20300234065673960'%20and%20description%20eq%20'Data%20Garrison%20Weather%20Station%20300234065673960'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
+        Garrison Weather Station 300234065673960","properties":{"logger":{"name":"logger","Serial
+        number":"20301990","Logging start":"08/12/18 10:58 am local time","Logging
+        interval":"every 15.00 minutes","Sampling interval":"off","Launch description":"Test
+        Launch","Part number":"S-BPA-XXXX","Data start address":"1105","Logging power":"Yes"},"provider":"Data
+        Garrison","station_id":"300234065673960","station_url":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7","transceiver":{"name":"transceiver","ID":"300234065673960","Status":"active","Power
+        level":"100 %","Transmission interval":"every 120 minutes","Mode":"standby
+        unless power falls below 75 %","Low power alarm":"triggers if power falls
+        below 30 %","Sensor alarm(s)":"on","Network":"Satellite","Board revision":"0xA0"},"user_id":"300234063581640"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -186,7 +206,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:09 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -194,7 +214,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:43 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:11 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations
@@ -208,7 +228,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -227,27 +247,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
+        Garrison Weather Station 300234065673960","encodingType":"application/vnd.geo+json","location":{"type":"Point","coordinates":[-107.0403,69.158]}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -262,7 +285,7 @@ http_interactions:
       Content-Length:
       - '555'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -277,22 +300,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Pressure%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Pressure%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
+        Garrison Weather Station 300234065673960","encodingType":"application/vnd.geo+json","location":{"type":"Point","coordinates":[-107.0403,69.158]}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -307,7 +333,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -315,7 +341,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -329,7 +355,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -348,27 +374,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Pressure Sensor","description":"Data
+        Garrison Station 300234065673960 Pressure Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -383,7 +412,7 @@ http_interactions:
       Content-Length:
       - '606'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -398,22 +427,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Speed%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Speed%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Pressure Sensor","description":"Data
+        Garrison Station 300234065673960 Pressure Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -428,7 +460,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -436,7 +468,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -450,7 +482,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -469,27 +501,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Wind Speed Sensor","description":"Data
+        Garrison Station 300234065673960 Wind Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -504,7 +539,7 @@ http_interactions:
       Content-Length:
       - '610'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -519,22 +554,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Gust%20Speed%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Gust%20Speed%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Wind Speed Sensor","description":"Data
+        Garrison Station 300234065673960 Wind Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -549,7 +587,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -557,7 +595,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -571,7 +609,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -590,27 +628,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Gust Speed Sensor","description":"Data
+        Garrison Station 300234065673960 Gust Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -625,7 +666,7 @@ http_interactions:
       Content-Length:
       - '610'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -640,22 +681,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Direction%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Direction%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Gust Speed Sensor","description":"Data
+        Garrison Station 300234065673960 Gust Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -670,7 +714,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -678,7 +722,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -692,7 +736,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -711,27 +755,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Wind Direction Sensor","description":"Data
+        Garrison Station 300234065673960 Wind Direction Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -746,7 +793,7 @@ http_interactions:
       Content-Length:
       - '618'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -761,22 +808,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Temperature%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Temperature%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Wind Direction Sensor","description":"Data
+        Garrison Station 300234065673960 Wind Direction Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -791,7 +841,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -799,7 +849,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -813,7 +863,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -832,27 +882,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Temperature Sensor","description":"Data
+        Garrison Station 300234065673960 Temperature Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -867,7 +920,7 @@ http_interactions:
       Content-Length:
       - '612'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -882,22 +935,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20RH%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20RH%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Temperature Sensor","description":"Data
+        Garrison Station 300234065673960 Temperature Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -912,7 +968,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -920,7 +976,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -934,7 +990,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -953,27 +1009,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 RH Sensor","description":"Data Garrison
+        Station 300234065673960 RH Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -988,7 +1047,7 @@ http_interactions:
       Content-Length:
       - '594'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1003,22 +1062,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Backup%20Batteries%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Backup%20Batteries%20Sensor'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 RH Sensor","description":"Data Garrison
+        Station 300234065673960 RH Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1033,7 +1095,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1041,7 +1103,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
@@ -1055,7 +1117,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1074,27 +1136,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Backup Batteries Sensor","description":"Data
+        Garrison Station 300234065673960 Backup Batteries Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1109,7 +1174,7 @@ http_interactions:
       Content-Length:
       - '622'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1124,22 +1189,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Pressure'%20and%20description%20eq%20'Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"name":"Station 300234065673960 Backup Batteries Sensor","description":"Data
+        Garrison Station 300234065673960 Backup Batteries Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1154,7 +1222,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1162,7 +1230,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1178,7 +1246,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1197,27 +1265,32 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_pressure","description":"Air
+        pressure is the force per unit area which would be exerted when the moving
+        gas molecules of which the air is composed strike a theoretical surface of
+        any orientation.","name":"Air Pressure"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1232,7 +1305,7 @@ http_interactions:
       Content-Length:
       - '640'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1246,22 +1319,27 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20Speed'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_pressure","description":"Air
+        pressure is the force per unit area which would be exerted when the moving
+        gas molecules of which the air is composed strike a theoretical surface of
+        any orientation.","name":"Air Pressure"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1276,7 +1354,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1284,7 +1362,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1301,7 +1379,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1320,27 +1398,33 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed","description":"Speed
+        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
+        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
+        has the standard name upward_air_velocity.) The wind speed is the magnitude
+        of the wind velocity.","name":"Wind Speed"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1355,7 +1439,7 @@ http_interactions:
       Content-Length:
       - '733'
       Date:
-      - Thu, 25 Jul 2019 20:42:43 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1369,22 +1453,28 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20speed%20of%20gust'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.%20A%20gust%20is%20a%20sudden%20brief%20period%20of%20high%20wind%20speed.%20In%20an%20observed%20timeseries%20of%20wind%20speed,%20the%20gust%20wind%20speed%20can%20be%20indicated%20by%20a%20cell_methods%20of%20maximum%20for%20the%20time-interval.%20In%20an%20atmospheric%20model%20which%20has%20a%20parametrised%20calculation%20of%20gustiness,%20the%20gust%20wind%20speed%20may%20be%20separately%20diagnosed%20from%20the%20wind%20speed.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed","description":"Speed
+        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
+        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
+        has the standard name upward_air_velocity.) The wind speed is the magnitude
+        of the wind velocity.","name":"Wind Speed"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1399,7 +1489,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1407,7 +1497,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1428,7 +1518,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1447,27 +1537,37 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed_of_gust","description":"Speed
+        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
+        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
+        has the standard name upward_air_velocity.) The wind speed is the magnitude
+        of the wind velocity. A gust is a sudden brief period of high wind speed.
+        In an observed timeseries of wind speed, the gust wind speed can be indicated
+        by a cell_methods of maximum for the time-interval. In an atmospheric model
+        which has a parametrised calculation of gustiness, the gust wind speed may
+        be separately diagnosed from the wind speed.","name":"Wind speed of gust"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1482,7 +1582,7 @@ http_interactions:
       Content-Length:
       - '1075'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1496,22 +1596,32 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20From%20Direction'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed_of_gust","description":"Speed
+        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
+        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
+        has the standard name upward_air_velocity.) The wind speed is the magnitude
+        of the wind velocity. A gust is a sudden brief period of high wind speed.
+        In an observed timeseries of wind speed, the gust wind speed can be indicated
+        by a cell_methods of maximum for the time-interval. In an atmospheric model
+        which has a parametrised calculation of gustiness, the gust wind speed may
+        be separately diagnosed from the wind speed.","name":"Wind speed of gust"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1526,7 +1636,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1534,7 +1644,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1551,7 +1661,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1570,27 +1680,33 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_from_direction","description":"Wind
+        is defined as a two-dimensional (horizontal) air velocity vector, with no
+        vertical component. \"from_direction\" is used in the construction X_from_direction
+        and indicates the direction from which the velocity vector of X is coming.","name":"Wind
+        From Direction"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1605,7 +1721,7 @@ http_interactions:
       Content-Length:
       - '721'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1619,22 +1735,28 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_from_direction","description":"Wind
+        is defined as a two-dimensional (horizontal) air velocity vector, with no
+        vertical component. \"from_direction\" is used in the construction X_from_direction
+        and indicates the direction from which the velocity vector of X is coming.","name":"Wind
+        From Direction"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1649,7 +1771,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1657,7 +1779,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1672,7 +1794,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1691,27 +1813,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_temperature","description":"Air
+        temperature is the bulk temperature of the air, not the surface (skin) temperature.","name":"Air
+        Temperature"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1726,7 +1852,7 @@ http_interactions:
       Content-Length:
       - '563'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1740,22 +1866,26 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_temperature","description":"Air
+        temperature is the bulk temperature of the air, not the surface (skin) temperature.","name":"Air
+        Temperature"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1770,7 +1900,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1778,7 +1908,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1793,7 +1923,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1812,27 +1942,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/relative_humidity","description":"Amount
+        of moisture in the air as vapor relative to how much it can possibly hold
+        at the same temperature.","name":"Relative Humidity"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1847,7 +1981,7 @@ http_interactions:
       Content-Length:
       - '585'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1861,22 +1995,26 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Battery%20Voltage'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/cf/parameter/relative_humidity","description":"Amount
+        of moisture in the air as vapor relative to how much it can possibly hold
+        at the same temperature.","name":"Relative Humidity"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1891,7 +2029,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1899,7 +2037,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
@@ -1914,7 +2052,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -1933,27 +2071,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage","description":"The
+        battery voltage of a datalogger or sensing system, often recorded as an indicator
+        of data reliability.","name":"Battery Voltage"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -1968,7 +2110,7 @@ http_interactions:
       Content-Length:
       - '593'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1982,22 +2124,26 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Pressure'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Pressure'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"definition":"http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage","description":"The
+        battery voltage of a datalogger or sensing system, often recorded as an indicator
+        of data reliability.","name":"Battery Voltage"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2012,7 +2158,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2020,7 +2166,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2034,7 +2180,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2053,27 +2199,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Pressure","name":"Station
+        300234065673960 Pressure","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":1},"Sensor":{"@iot.id":1},"unitOfMeasurement":{"definition":"http://mmisw.org/ont/drdc/parameter/_052","symbol":"mbar","name":"millibar"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2088,7 +2237,7 @@ http_interactions:
       Content-Length:
       - '885'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2109,22 +2258,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Speed'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Speed'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Pressure","name":"Station
+        300234065673960 Pressure","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":1},"Sensor":{"@iot.id":1},"unitOfMeasurement":{"definition":"http://mmisw.org/ont/drdc/parameter/_052","symbol":"mbar","name":"millibar"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2139,7 +2291,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2147,7 +2299,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2162,7 +2314,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2181,27 +2333,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Wind Speed","name":"Station
+        300234065673960 Wind Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":2},"Sensor":{"@iot.id":2},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
+        per hour"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2216,7 +2372,7 @@ http_interactions:
       Content-Length:
       - '900'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2237,22 +2393,26 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Gust%20Speed'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Gust%20Speed'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Wind Speed","name":"Station
+        300234065673960 Wind Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":2},"Sensor":{"@iot.id":2},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
+        per hour"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2267,7 +2427,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2275,7 +2435,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2290,7 +2450,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2309,27 +2469,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Gust Speed","name":"Station
+        300234065673960 Gust Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":3},"Sensor":{"@iot.id":3},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
+        per hour"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2344,7 +2508,7 @@ http_interactions:
       Content-Length:
       - '900'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2365,22 +2529,26 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Direction'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Direction'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Gust Speed","name":"Station
+        300234065673960 Gust Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":3},"Sensor":{"@iot.id":3},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
+        per hour"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2395,7 +2563,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2403,7 +2571,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2417,7 +2585,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2436,27 +2604,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Wind Direction","name":"Station
+        300234065673960 Wind Direction","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":4},"Sensor":{"@iot.id":4},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000185","symbol":"°","name":"degree"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2471,28 +2642,31 @@ http_interactions:
       Content-Length:
       - '896'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJTdGF0aW9uIDMwMDIzNDA2NTY3Mzk2MCBXaW5kIERpcmVjdGlvbiIsCiAgImRlc2NyaXB0aW9uIiA6ICJEYXRhIEdhcnJpc29uIFN0YXRpb24gMzAwMjM0MDY1NjczOTYwIFdpbmQgRGlyZWN0aW9uIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNCkvU2Vuc29yIiwKICAiVGhpbmdAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDQpL1RoaW5nIiwKICAiT2JzZXJ2YXRpb25zQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg0KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAiZGVncmVlIiwKICAgICJzeW1ib2wiIDogIsOCwrAiLAogICAgImRlZmluaXRpb24iIDogImh0dHA6Ly9wdXJsLm9ib2xpYnJhcnkub3JnL29iby9VT18wMDAwMTg1IgogIH0sCiAgIk9ic2VydmVkUHJvcGVydHlAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDQpL09ic2VydmVkUHJvcGVydHkiLAogICJAaW90LmlkIiA6IDQsCiAgIkBpb3Quc2VsZkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNCkiCn0=
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Temperature'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Temperature'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Wind Direction","name":"Station
+        300234065673960 Wind Direction","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":4},"Sensor":{"@iot.id":4},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000185","symbol":"°","name":"degree"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2507,7 +2681,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2515,7 +2689,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2530,7 +2704,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2549,27 +2723,31 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Temperature","name":"Station
+        300234065673960 Temperature","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":5},"Sensor":{"@iot.id":5},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000027","symbol":"℃","name":"degree
+        Celsius"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2584,28 +2762,32 @@ http_interactions:
       Content-Length:
       - '900'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJuYW1lIiA6ICJTdGF0aW9uIDMwMDIzNDA2NTY3Mzk2MCBUZW1wZXJhdHVyZSIsCiAgImRlc2NyaXB0aW9uIiA6ICJEYXRhIEdhcnJpc29uIFN0YXRpb24gMzAwMjM0MDY1NjczOTYwIFRlbXBlcmF0dXJlIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNSkvU2Vuc29yIiwKICAiVGhpbmdAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDUpL1RoaW5nIiwKICAiT2JzZXJ2YXRpb25zQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg1KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAiZGVncmVlIENlbHNpdXMiLAogICAgInN5bWJvbCIgOiAiw6LChMKDIiwKICAgICJkZWZpbml0aW9uIiA6ICJodHRwOi8vcHVybC5vYm9saWJyYXJ5Lm9yZy9vYm8vVU9fMDAwMDAyNyIKICB9LAogICJPYnNlcnZlZFByb3BlcnR5QGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg1KS9PYnNlcnZlZFByb3BlcnR5IiwKICAiQGlvdC5pZCIgOiA1LAogICJAaW90LnNlbGZMaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDUpIgp9
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20RH'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20RH'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Temperature","name":"Station
+        300234065673960 Temperature","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":5},"Sensor":{"@iot.id":5},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000027","symbol":"℃","name":"degree
+        Celsius"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2620,7 +2802,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2628,7 +2810,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2642,7 +2824,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2661,27 +2843,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 RH","name":"Station
+        300234065673960 RH","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":6},"Sensor":{"@iot.id":6},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000187","symbol":"%","name":"percent"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2696,7 +2881,7 @@ http_interactions:
       Content-Length:
       - '870'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2717,22 +2902,25 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Backup%20Batteries'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Backup%20Batteries'
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 RH","name":"Station
+        300234065673960 RH","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":6},"Sensor":{"@iot.id":6},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000187","symbol":"%","name":"percent"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2747,7 +2935,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2755,7 +2943,7 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: post
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
@@ -2769,7 +2957,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
       Content-Type:
@@ -2788,27 +2976,30 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 - request:
     method: get
     uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"description":"Data Garrison Station 300234065673960 Backup Batteries","name":"Station
+        300234065673960 Backup Batteries","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":7},"Sensor":{"@iot.id":7},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000218","symbol":"V","name":"Volt"}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.4.0
+      - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -2823,7 +3014,7 @@ http_interactions:
       Content-Length:
       - '895'
       Date:
-      - Thu, 25 Jul 2019 20:42:44 GMT
+      - Tue, 27 Aug 2019 01:04:10 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2844,5 +3035,5 @@ http_interactions:
           "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)"
         }
     http_version: 
-  recorded_at: Thu, 25 Jul 2019 20:42:44 GMT
+  recorded_at: Tue, 27 Aug 2019 01:04:12 GMT
 recorded_with: VCR 5.0.0

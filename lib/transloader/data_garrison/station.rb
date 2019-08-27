@@ -43,20 +43,26 @@ module Transloader
         logger.warn "id does not match unit id"
       end
 
-      # Parse download links
-      # These aren't used yet, but are cached for future use
-      # e.g. https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
-      download_links = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td[position()=2]/div[position()=2]/table/tr[position()=2]/td/table/tr/td/font/a').collect do |element|
-        href = element.attr('href')
-        filename = element.text.to_s.sub(/ /, '_')
+      data_files = []
+
+      # Parse download links into data files
+      html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td[position()=2]/div[position()=2]/table/tr[position()=2]/td/table/tr/td/font/a').collect do |element|
+        href       = element.attr('href')
+        filename   = element.text.to_s.sub(/ /, '_')
         file_index = href[/data_launch=(\d+)/, 1].rjust(3, '0')
-        {
-          data_start: href[/data_start=(\d+)/, 1],
-          data_end: href[/data_end=(\d+)/, 1],
-          filename: filename,
-          index: file_index,
-          download_url: "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{file_index}.txt"
-        }
+        url        = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{file_index}.txt"
+
+        # Issue HEAD request for data files
+        response = @http_client.head(uri: url)
+        last_modified = parse_last_modified(response["Last-Modified"])
+
+        # Content-Length can be used here because there is no 
+        # compression encoding.
+        data_files.push(DataFile.new({
+          url:           url,
+          last_modified: to_iso8601(last_modified),
+          length:        response["Content-Length"]
+        }).to_h)
       end
 
       # Parse sensor metadata
@@ -167,7 +173,7 @@ module Transloader
         #   "Logging power": "Yes"
         # }
         logger:  logger_metadata,
-        download_links:  download_links,
+        data_files:  data_files,
         properties:  @properties
       }
 

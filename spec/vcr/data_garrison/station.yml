@@ -12,25 +12,27 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - Ruby
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 26 Jun 2019 17:08:25 GMT
+      - Tue, 27 Aug 2019 00:57:56 GMT
       Server:
       - Apache
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Last-Modified:
-      - Wed, 26 Jun 2019 17:08:25 GMT
+      - Tue, 27 Aug 2019 00:57:56 GMT
       Cache-Control:
       - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       - post-check=0, pre-check=0
       Set-Cookie:
-      - PHPSESSID=r3sm2139bfpa22v0fk0vlfj1o4; path=/
+      - PHPSESSID=1gaickbtca6mf4vv7orj9vjan0; path=/
       Pragma:
       - no-cache
       Transfer-Encoding:
@@ -74,18 +76,18 @@ http_interactions:
         \ bgcolor=#bebdbd\n>\n\t  <!--<td width=\"140\" height=\"500\" valign=\"top\"
         bgcolor=\"#cac9c9\"> -->\n\t  \n        <table width=\"100%\" height=\"148\"
         border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n\t\t<td>\n\n\r\n<TR><TD><font
-        size='2' face='arial'>\r\n\t\r\n&nbsp;<b>Latest Conditions</b><br>&nbsp; 06/26/19
-        8:43 am\t\r\n\t\r\n\t</font></TD></TR>\r\n\r\n\t<TR><TD>&nbsp;</TD></TR>\r\n\r\n<TR><TD><font
-        size='2' face='arial'>&nbsp;<b>Pressure</b><br>&nbsp;1016.150 mbar</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
-        size='2' face='arial'>&nbsp;<b>Temperature</b><br>&nbsp;4.610 <sup>o</sup>C</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
-        size='2' face='arial'>&nbsp;<b>RH</b><br>&nbsp;96.700 %</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
-        size='2' face='arial'>&nbsp;<b>Backup Batteries</b><br>&nbsp;13.954 V</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
-        size='2' face='arial'>&nbsp;<b>Wind</b><br>&nbsp;Speed: 19.646 km/h<br>&nbsp;Gust:
-        28.065 km/h<br>&nbsp;Direction: NW (324<sup>o</sup>)<br>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>\r\n\t\r\n&nbsp;<b>Latest Conditions</b><br>&nbsp; 08/26/19
+        4:28 pm\t\r\n\t\r\n\t</font></TD></TR>\r\n\r\n\t<TR><TD>&nbsp;</TD></TR>\r\n\r\n<TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Pressure</b><br>&nbsp;1009.950 mbar</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Temperature</b><br>&nbsp;8.369 <sup>o</sup>C</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>RH</b><br>&nbsp;84.100 %</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Backup Batteries</b><br>&nbsp;13.737 V</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Wind</b><br>&nbsp;Speed: 23.154 km/h<br>&nbsp;Gust:
+        26.662 km/h<br>&nbsp;Direction: SSW (213<sup>o</sup>)<br>&nbsp;</font></TD></TR><TR><TD><font
         size='2' face='arial'>\r\n<br>&nbsp;<HR NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'>\r\n\r\n\r\n<P>&nbsp;<b>Station
         Status</b><br>&nbsp;Trans: every 120 min.<br>&nbsp;Logging: every 15.0 min.<P>&nbsp;<b>Next
         Update</b><br>&nbsp;\t<script language=\"JavaScript\">\r\n\r\n\r\n\tvar now
-        = new Date();\r\n\tvar j = now.getTime();\r\n\tj = j + 2200000;\r\n// document.write(now);\r\n\tvar
+        = new Date();\r\n\tvar j = now.getTime();\r\n\tj = j + 2661000;\r\n// document.write(now);\r\n\tvar
         now2 = new Date(j);\r\n\r\n/*\r\n*/\r\nvar hour = now2.getHours();\r\nvar
         am_pm = \"PM\";\r\n\r\nif (hour < 12)\r\n{\r\n\tam_pm = \"AM\";\r\n}\t\r\n\r\nif
         (hour < 10)\r\n{\r\n\thour = \"0\" + hour;\r\n}\r\n\r\nhour %= 12;\r\n\r\nif
@@ -121,9 +123,9 @@ http_interactions:
         BGCOLOR='#dddddd'><FONT FACE='Arial'><A HREF='download.php?data_launch=3&data_start=1532883851&data_end=1534070054&data_desc=Test
         Launch&utc=0' ><u>Test Launch</u></A></TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'>07/29/18
         5:04 pm </TD><TD BGCOLOR='#dddddd'><FONT FACE='Arial'> 08/12/18 10:34 am</TD><TD></TD></TR><TR><TD
-        BGCOLOR='#bebdbd'><FONT FACE='Arial'><A HREF='download.php?data_launch=4&data_start=1534071487&data_end=1561538590&data_desc=Test
+        BGCOLOR='#bebdbd'><FONT FACE='Arial'><A HREF='download.php?data_launch=4&data_start=1534071487&data_end=1566836890&data_desc=Test
         Launch&utc=0' ><u>Test Launch</u></A></TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'>08/12/18
-        10:58 am </TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'> 06/26/19 8:43 am</TD><TD></TD></TR>\n</TABLE></td></tr>\n\n<tr><td>\n\n&nbsp;<HR
+        10:58 am </TD><TD BGCOLOR='#bebdbd'><FONT FACE='Arial'> 08/26/19 4:28 pm</TD><TD></TD></TR>\n</TABLE></td></tr>\n\n<tr><td>\n\n&nbsp;<HR
         NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'><P><FONT FACE='Arial'><H3>Status</H3>&nbsp;&nbsp;<a
         href = 'index.php?utc=0&cmd=&sens_details=127&details=6#status'>-Transceiver</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID:
         300234065673960<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: active<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Power
@@ -198,5 +200,301 @@ http_interactions:
         Arial, Helvetica, sans-serif\">\n\t \n\n&copy; 2004-2019 Upward Innovations
         Inc. &nbsp;&nbsp;</font></td></tr>\n\t</table></td></tr>\n\t\n</table>\n\n</body>\n</html>\n\n\n\n"
     http_version: 
-  recorded_at: Wed, 26 Jun 2019 17:08:25 GMT
+  recorded_at: Tue, 27 Aug 2019 00:57:56 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:57 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Mon, 26 Aug 2019 23:28:20 GMT
+      Etag:
+      - '"1cd2-5910d82e69690"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '7378'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:57 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_002.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:57 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Tue, 27 Aug 2019 00:48:20 GMT
+      Etag:
+      - '"fa9-5910ea107824e"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '4009'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:57 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_003.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:57 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Fri, 16 Aug 2019 21:19:14 GMT
+      Etag:
+      - '"18180-590428ac79c34"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '98688'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:57 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_004.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:58 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Sat, 24 Aug 2019 11:14:49 GMT
+      Etag:
+      - '"270288-590db07f6985f"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '2556552'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:58 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:58 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Mon, 26 Aug 2019 23:28:20 GMT
+      Etag:
+      - '"1cd2-5910d82e69690"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '7378'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:58 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_002.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:58 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Tue, 27 Aug 2019 00:48:20 GMT
+      Etag:
+      - '"fa9-5910ea107824e"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '4009'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:58 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_003.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:58 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Fri, 16 Aug 2019 21:19:14 GMT
+      Etag:
+      - '"18180-590428ac79c34"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '98688'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:58 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_004.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - datagarrison.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Aug 2019 00:57:59 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Sat, 24 Aug 2019 11:14:49 GMT
+      Etag:
+      - '"270288-590db07f6985f"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '2556552'
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 00:57:59 GMT
 recorded_with: VCR 5.0.0
