@@ -259,13 +259,138 @@ RSpec.describe Transloader::DataGarrisonStation do
     end
 
     it "converts downloaded observations and stores in DataStore" do
-      VCR.use_cassette("data_garrison/station") do
+      VCR.use_cassette("data_garrison/observations_download") do
         expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to eq(0)
         @station.download_observations
         expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to_not eq(0)        
       end
     end
 
+    context "when the data file's 'last_length' has not been set" do
+      before(:each) do
+        @station.metadata[:data_files][0][:last_length] = nil
+      end
+
+      it "downloads and parses the entire data file" do
+        VCR.use_cassette("data_garrison/observations_download") do
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:get, 
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .with(headers: { 'Range' => '' }).times(1)
+          expect(WebMock).to have_requested(:get, 
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_002.txt")
+            .with(headers: { 'Range' => '' }).times(1)
+          expect(WebMock).to have_requested(:get, 
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_003.txt")
+            .with(headers: { 'Range' => '' }).times(1)
+          expect(WebMock).to have_requested(:get, 
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/Test_Launch_004.txt")
+            .with(headers: { 'Range' => '' }).times(1)
+        end
+      end
+
+      it "updates the last_modified and last_length after a download" do
+        VCR.use_cassette("data_garrison/observations_download") do
+          @station.download_observations
+
+          expect(@station.metadata[:data_files][0][:last_length]).to_not be_nil
+          expect(@station.metadata[:data_files][0][:last_modified]).to_not be_nil
+        end
+      end
+    end
+
+    context "when the 'last_length' has been cached" do
+      before(:each) do
+        # Only test with first data file, to simplify specs
+        @station.metadata[:data_files] = @station.metadata[:data_files].slice(0, 1)
+        @station.metadata[:data_files][0][:last_length] = 0
+        # If this is not set, then the ETL doesn't know how to map row
+        # values to datastreams.
+        @station.metadata[:data_files][0][:headers] = [
+          "Temperature_9986750_deg_C"
+        ]
+      end
+
+      it "executes a HEAD request for the updated Content-Length" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          expect(WebMock).to have_requested(:head,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .times(2)
+
+          @station.metadata[:data_files][0][:last_length] = 1
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .times(3)
+        end
+      end
+
+      it "redownloads the entire data file if Content-Length is shorter than expected" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 999999999
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .times(3)
+          expect(WebMock).to have_requested(:get,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .with(headers: { 'Range' => '' })
+            .times(1)
+        end
+      end
+
+      it "executes no GET request when the Content-Length is equal" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 7377
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .times(3)
+          expect(WebMock).to have_requested(:get,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .with(headers: { 'Range' => '' })
+            .times(0)
+        end
+      end
+
+      it "executes a partial GET when the Content-Length has increased" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 100
+          @station.download_observations
+
+          expect(WebMock).to have_requested(:head,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .times(3)
+          expect(WebMock).to have_requested(:get,
+            "https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt")
+            .with(headers: { 'Range' => 'bytes=100-' })
+            .times(1)
+        end
+      end
+
+      it "returns new observations when the server responds 206" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 0
+          @station.download_observations
+          observations = @station.data_store.get_all_in_range(Time.new(2000), Time.new(2019, 9, 1))
+          expect(observations.length).to_not eq(0)
+        end
+      end
+
+      it "updates the last_modified and last_length after a download" do
+        VCR.use_cassette("data_garrison/observations_download_partial") do
+          @station.metadata[:data_files][0][:last_length] = 0
+          @station.download_observations
+          
+          expect(@station.metadata[:data_files][0][:last_length]).to_not eq(0)
+          expect(@station.metadata[:data_files][0][:last_modified]).to_not be_nil
+        end
+      end
+    end
   end
 
   ##################
@@ -302,33 +427,35 @@ RSpec.describe Transloader::DataGarrisonStation do
         @station.upload_metadata(@sensorthings_url)
       end
 
-      @station.download_observations
+      VCR.use_cassette("data_garrison/observations_download") do
+        @station.download_observations
+      end
     end
 
-    it "uploads observations for a single timestamp" do
+    it "uploads observations for a single time range" do
       VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z")
+        @station.upload_observations(@sensorthings_url, "2018-08-01T00:00:00Z/2018-09-01T00:00:00Z")
 
         expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(162)
       end
     end
 
     it "uploads filtered observations for a single timestamp with an allowed list" do
-      VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z", allowed: ["Pressure"])
+      VCR.use_cassette("data_garrison/observations_upload_allowed") do
+        @station.upload_observations(@sensorthings_url, "2018-08-01T00:00:00Z/2018-09-01T00:00:00Z", allowed: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).once
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(27)
       end
     end
 
     it "uploads filtered observations for a single timestamp with a blocked list" do
-      VCR.use_cassette("data_garrison/observations_upload") do
-        @station.upload_observations(@sensorthings_url, "2019-07-01T00:00:00Z/2019-09-01T00:00:00Z", blocked: ["Pressure"])
+      VCR.use_cassette("data_garrison/observations_upload_blocked") do
+        @station.upload_observations(@sensorthings_url, "2018-08-01T00:00:00Z/2018-09-01T00:00:00Z", blocked: ["Pressure"])
 
         expect(WebMock).to have_requested(:post, 
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(6)
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(162)
       end
     end
   end

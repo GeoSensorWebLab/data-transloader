@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things?$filter=name%20eq%20'Data%20Garrison%20Station%20300234065673960'%20and%20description%20eq%20'Data%20Garrison%20Weather%20Station%20300234065673960'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T16:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -15,6 +15,10 @@ http_interactions:
       - GeoSensorWebLab/data-transloader/0.5.0
       Host:
       - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -29,7 +33,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -37,21 +41,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:38 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
-        Garrison Weather Station 300234065673960","properties":{"logger":{"name":"logger","Serial
-        number":"20301990","Logging start":"08/12/18 10:58 am local time","Logging
-        interval":"every 15.00 minutes","Sampling interval":"off","Launch description":"Test
-        Launch","Part number":"S-BPA-XXXX","Data start address":"1105","Logging power":"Yes"},"provider":"Data
-        Garrison","station_id":"300234065673960","station_url":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7","transceiver":{"name":"transceiver","ID":"300234065673960","Status":"active","Power
-        level":"100 %","Transmission interval":"every 120 minutes","Mode":"standby
-        unless power falls below 75 %","Low power alarm":"triggers if power falls
-        below 30 %","Sensor alarm(s)":"on","Network":"Satellite","Board revision":"0xA0"},"user_id":"300234063581640"}}'
+      string: '{"phenomenonTime":"2018-08-12T16:58:10.000Z","result":1010.15,"resultTime":"2018-08-12T16:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -63,6 +59,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -73,19 +71,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:38 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)
     body:
       encoding: US-ASCII
       string: ''
@@ -100,6 +98,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -112,56 +112,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '1704'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Data Garrison Station 300234065673960",
-          "description" : "Data Garrison Weather Station 300234065673960",
-          "properties" : {
-            "logger" : {
-              "name" : "logger",
-              "Serial number" : "20301990",
-              "Logging start" : "08/12/18 10:58 am local time",
-              "Logging interval" : "every 15.00 minutes",
-              "Sampling interval" : "off",
-              "Launch description" : "Test Launch",
-              "Part number" : "S-BPA-XXXX",
-              "Data start address" : "1105",
-              "Logging power" : "Yes"
-            },
-            "provider" : "Data Garrison",
-            "station_id" : "300234065673960",
-            "station_url" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
-            "transceiver" : {
-              "name" : "transceiver",
-              "ID" : "300234065673960",
-              "Status" : "active",
-              "Power level" : "100 %",
-              "Transmission interval" : "every 120 minutes",
-              "Mode" : "standby unless power falls below 75 %",
-              "Low power alarm" : "triggers if power falls below 30 %",
-              "Sensor alarm(s)" : "on",
-              "Network" : "Satellite",
-              "Board revision" : "0xA0"
-            },
-            "user_id" : "300234063581640"
-          },
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/MultiDatastreams",
-          "Locations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations",
-          "HistoricalLocations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/HistoricalLocations",
+          "phenomenonTime" : "2018-08-12T16:58:10.000Z",
+          "resultTime" : "2018-08-12T16:58:10.000Z",
+          "result" : 1010.15,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)/FeatureOfInterest",
           "@iot.id" : 1,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(1)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:38 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations?$filter=name%20eq%20'Data%20Garrison%20Station%20300234065673960'%20and%20description%20eq%20'Data%20Garrison%20Weather%20Station%20300234065673960'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T17:13:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -176,6 +146,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -190,7 +162,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -198,14 +170,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Locations
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Data Garrison Station 300234065673960","description":"Data
-        Garrison Weather Station 300234065673960","encodingType":"application/vnd.geo+json","location":{"type":"Point","coordinates":[-107.0403,69.158]}}'
+      string: '{"phenomenonTime":"2018-08-12T17:13:10.000Z","result":1010.05,"resultTime":"2018-08-12T17:13:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -217,6 +188,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -227,19 +200,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)
     body:
       encoding: US-ASCII
       string: ''
@@ -254,6 +227,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -266,277 +241,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '555'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Data Garrison Station 300234065673960",
-          "description" : "Data Garrison Weather Station 300234065673960",
-          "encodingType" : "application/vnd.geo+json",
-          "location" : {"type":"Point","coordinates":[-107.0403,69.158]},
-          "HistoricalLocations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)/HistoricalLocations",
-          "Things@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)/Things",
-          "@iot.id" : 1,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Locations(1)"
-        }
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Pressure%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Pressure%20Sensor'
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Content-Type:
-      - application/json;charset=UTF-8
-      Content-Length:
-      - '19'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "value" : [ ]
-        }
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
-    body:
-      encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Pressure Sensor","description":"Data
-        Garrison Station 300234065673960 Pressure Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 201
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)
-      Content-Length:
-      - '0'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Content-Type:
-      - application/json;charset=UTF-8
-      Content-Length:
-      - '606'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "name" : "Station 300234065673960 Pressure Sensor",
-          "description" : "Data Garrison Station 300234065673960 Pressure Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
-          "@iot.id" : 1,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(1)"
-        }
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Speed%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Speed%20Sensor'
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Content-Type:
-      - application/json;charset=UTF-8
-      Content-Length:
-      - '19'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "value" : [ ]
-        }
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
-    body:
-      encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Wind Speed Sensor","description":"Data
-        Garrison Station 300234065673960 Wind Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 201
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)
-      Content-Length:
-      - '0'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
-- request:
-    method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
-      Host:
-      - 192.168.33.77:8080
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Location
-      Content-Type:
-      - application/json;charset=UTF-8
-      Content-Length:
-      - '610'
-      Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "name" : "Station 300234065673960 Wind Speed Sensor",
-          "description" : "Data Garrison Station 300234065673960 Wind Speed Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T17:13:10.000Z",
+          "resultTime" : "2018-08-12T17:13:10.000Z",
+          "result" : 1010.05,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)/FeatureOfInterest",
           "@iot.id" : 2,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(2)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(2)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Gust%20Speed%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Gust%20Speed%20Sensor'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T17:28:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -551,6 +275,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -565,7 +291,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -573,14 +299,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Gust Speed Sensor","description":"Data
-        Garrison Station 300234065673960 Gust Speed Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
+      string: '{"phenomenonTime":"2018-08-12T17:28:10.000Z","result":1009.65,"resultTime":"2018-08-12T17:28:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -592,6 +317,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -602,19 +329,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)
     body:
       encoding: US-ASCII
       string: ''
@@ -629,6 +356,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -641,27 +370,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '610'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Gust Speed Sensor",
-          "description" : "Data Garrison Station 300234065673960 Gust Speed Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T17:28:10.000Z",
+          "resultTime" : "2018-08-12T17:28:10.000Z",
+          "result" : 1009.65,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)/FeatureOfInterest",
           "@iot.id" : 3,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(3)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(3)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Direction%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Direction%20Sensor'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T17:43:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -676,6 +404,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -690,7 +420,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -698,14 +428,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Wind Direction Sensor","description":"Data
-        Garrison Station 300234065673960 Wind Direction Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
+      string: '{"phenomenonTime":"2018-08-12T17:43:10.000Z","result":1009.45,"resultTime":"2018-08-12T17:43:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -717,6 +446,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -727,19 +458,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)
     body:
       encoding: US-ASCII
       string: ''
@@ -754,6 +485,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -766,27 +499,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '618'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Wind Direction Sensor",
-          "description" : "Data Garrison Station 300234065673960 Wind Direction Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T17:43:10.000Z",
+          "resultTime" : "2018-08-12T17:43:10.000Z",
+          "result" : 1009.45,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)/FeatureOfInterest",
           "@iot.id" : 4,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(4)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(4)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:41 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Temperature%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Temperature%20Sensor'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T17:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -801,6 +533,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -815,7 +549,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -823,14 +557,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Temperature Sensor","description":"Data
-        Garrison Station 300234065673960 Temperature Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
+      string: '{"phenomenonTime":"2018-08-12T17:58:10.000Z","result":1009.45,"resultTime":"2018-08-12T17:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -842,6 +575,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -852,19 +587,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)
     body:
       encoding: US-ASCII
       string: ''
@@ -879,6 +614,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -891,27 +628,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '612'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Temperature Sensor",
-          "description" : "Data Garrison Station 300234065673960 Temperature Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T17:58:10.000Z",
+          "resultTime" : "2018-08-12T17:58:10.000Z",
+          "result" : 1009.45,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)/FeatureOfInterest",
           "@iot.id" : 5,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(5)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(5)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20RH%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20RH%20Sensor'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T18:13:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -926,6 +662,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -940,7 +678,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:38 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -948,14 +686,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Station 300234065673960 RH Sensor","description":"Data Garrison
-        Station 300234065673960 RH Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
+      string: '{"phenomenonTime":"2018-08-12T18:13:10.000Z","result":1009.25,"resultTime":"2018-08-12T18:13:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -967,6 +704,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -977,19 +716,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)
     body:
       encoding: US-ASCII
       string: ''
@@ -1004,6 +743,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1016,27 +757,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '594'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 RH Sensor",
-          "description" : "Data Garrison Station 300234065673960 RH Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T18:13:10.000Z",
+          "resultTime" : "2018-08-12T18:13:10.000Z",
+          "result" : 1009.25,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)/FeatureOfInterest",
           "@iot.id" : 6,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(6)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(6)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors?$filter=name%20eq%20'Station%20300234065673960%20Backup%20Batteries%20Sensor'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Backup%20Batteries%20Sensor'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T18:28:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1051,6 +791,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1065,7 +807,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1073,14 +815,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"name":"Station 300234065673960 Backup Batteries Sensor","description":"Data
-        Garrison Station 300234065673960 Backup Batteries Sensor","encodingType":"application/pdf","metadata":"https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7"}'
+      string: '{"phenomenonTime":"2018-08-12T18:28:10.000Z","result":1009.05,"resultTime":"2018-08-12T18:28:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1092,6 +833,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1102,19 +845,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)
     body:
       encoding: US-ASCII
       string: ''
@@ -1129,6 +872,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1141,27 +886,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '622'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Backup Batteries Sensor",
-          "description" : "Data Garrison Station 300234065673960 Backup Batteries Sensor",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)/MultiDatastreams",
-          "encodingType" : "application/pdf",
-          "metadata" : "https://datagarrison.com/users/300234063581640/300234065673960/index.php?sens_details=127&details=7",
+          "phenomenonTime" : "2018-08-12T18:28:10.000Z",
+          "resultTime" : "2018-08-12T18:28:10.000Z",
+          "result" : 1009.05,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)/FeatureOfInterest",
           "@iot.id" : 7,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Sensors(7)"
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(7)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Pressure'%20and%20description%20eq%20'Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T18:43:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1176,6 +920,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1190,7 +936,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1198,16 +944,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_pressure","description":"Air
-        pressure is the force per unit area which would be exerted when the moving
-        gas molecules of which the air is composed strike a theoretical surface of
-        any orientation.","name":"Air Pressure"}'
+      string: '{"phenomenonTime":"2018-08-12T18:43:10.000Z","result":1008.85,"resultTime":"2018-08-12T18:43:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1219,6 +962,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1229,19 +974,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(8)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(8)
     body:
       encoding: US-ASCII
       string: ''
@@ -1256,6 +1001,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1268,26 +1015,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '640'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Air Pressure",
-          "description" : "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/air_pressure",
-          "@iot.id" : 1,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(1)"
+          "phenomenonTime" : "2018-08-12T18:43:10.000Z",
+          "resultTime" : "2018-08-12T18:43:10.000Z",
+          "result" : 1008.85,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(8)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(8)/FeatureOfInterest",
+          "@iot.id" : 8,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(8)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20Speed'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T18:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1302,6 +1049,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1316,7 +1065,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1324,17 +1073,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed","description":"Speed
-        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
-        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
-        has the standard name upward_air_velocity.) The wind speed is the magnitude
-        of the wind velocity.","name":"Wind Speed"}'
+      string: '{"phenomenonTime":"2018-08-12T18:58:10.000Z","result":1008.75,"resultTime":"2018-08-12T18:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1346,6 +1091,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1356,19 +1103,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(9)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(9)
     body:
       encoding: US-ASCII
       string: ''
@@ -1383,6 +1130,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1395,26 +1144,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '733'
+      - '452'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Wind Speed",
-          "description" : "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/wind_speed",
-          "@iot.id" : 2,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(2)"
+          "phenomenonTime" : "2018-08-12T18:58:10.000Z",
+          "resultTime" : "2018-08-12T18:58:10.000Z",
+          "result" : 1008.75,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(9)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(9)/FeatureOfInterest",
+          "@iot.id" : 9,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(9)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20speed%20of%20gust'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.%20A%20gust%20is%20a%20sudden%20brief%20period%20of%20high%20wind%20speed.%20In%20an%20observed%20timeseries%20of%20wind%20speed,%20the%20gust%20wind%20speed%20can%20be%20indicated%20by%20a%20cell_methods%20of%20maximum%20for%20the%20time-interval.%20In%20an%20atmospheric%20model%20which%20has%20a%20parametrised%20calculation%20of%20gustiness,%20the%20gust%20wind%20speed%20may%20be%20separately%20diagnosed%20from%20the%20wind%20speed.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T19:13:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1429,6 +1178,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1443,7 +1194,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1451,21 +1202,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_speed_of_gust","description":"Speed
-        is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal)
-        air velocity vector, with no vertical component. (Vertical motion in the atmosphere
-        has the standard name upward_air_velocity.) The wind speed is the magnitude
-        of the wind velocity. A gust is a sudden brief period of high wind speed.
-        In an observed timeseries of wind speed, the gust wind speed can be indicated
-        by a cell_methods of maximum for the time-interval. In an atmospheric model
-        which has a parametrised calculation of gustiness, the gust wind speed may
-        be separately diagnosed from the wind speed.","name":"Wind speed of gust"}'
+      string: '{"phenomenonTime":"2018-08-12T19:13:10.000Z","result":1008.65,"resultTime":"2018-08-12T19:13:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1477,6 +1220,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1487,19 +1232,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(10)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(10)
     body:
       encoding: US-ASCII
       string: ''
@@ -1514,6 +1259,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1526,26 +1273,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '1075'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Wind speed of gust",
-          "description" : "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust",
-          "@iot.id" : 3,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(3)"
+          "phenomenonTime" : "2018-08-12T19:13:10.000Z",
+          "resultTime" : "2018-08-12T19:13:10.000Z",
+          "result" : 1008.65,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(10)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(10)/FeatureOfInterest",
+          "@iot.id" : 10,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(10)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20From%20Direction'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T19:28:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1560,6 +1307,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1574,7 +1323,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:41 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1582,17 +1331,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/wind_from_direction","description":"Wind
-        is defined as a two-dimensional (horizontal) air velocity vector, with no
-        vertical component. \"from_direction\" is used in the construction X_from_direction
-        and indicates the direction from which the velocity vector of X is coming.","name":"Wind
-        From Direction"}'
+      string: '{"phenomenonTime":"2018-08-12T19:28:10.000Z","result":1008.65,"resultTime":"2018-08-12T19:28:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1604,6 +1349,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1614,19 +1361,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(11)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(11)
     body:
       encoding: US-ASCII
       string: ''
@@ -1641,6 +1388,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1653,26 +1402,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '721'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Wind From Direction",
-          "description" : "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/wind_from_direction",
-          "@iot.id" : 4,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(4)"
+          "phenomenonTime" : "2018-08-12T19:28:10.000Z",
+          "resultTime" : "2018-08-12T19:28:10.000Z",
+          "result" : 1008.65,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(11)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(11)/FeatureOfInterest",
+          "@iot.id" : 11,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(11)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T19:43:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1687,6 +1436,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1701,7 +1452,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1709,15 +1460,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/air_temperature","description":"Air
-        temperature is the bulk temperature of the air, not the surface (skin) temperature.","name":"Air
-        Temperature"}'
+      string: '{"phenomenonTime":"2018-08-12T19:43:10.000Z","result":1008.45,"resultTime":"2018-08-12T19:43:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1729,6 +1478,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1739,19 +1490,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(12)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(12)
     body:
       encoding: US-ASCII
       string: ''
@@ -1766,6 +1517,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1778,26 +1531,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '563'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Air Temperature",
-          "description" : "Air temperature is the bulk temperature of the air, not the surface (skin) temperature.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/air_temperature",
-          "@iot.id" : 5,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(5)"
+          "phenomenonTime" : "2018-08-12T19:43:10.000Z",
+          "resultTime" : "2018-08-12T19:43:10.000Z",
+          "result" : 1008.45,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(12)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(12)/FeatureOfInterest",
+          "@iot.id" : 12,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(12)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T19:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1812,6 +1565,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1826,7 +1581,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1834,15 +1589,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/cf/parameter/relative_humidity","description":"Amount
-        of moisture in the air as vapor relative to how much it can possibly hold
-        at the same temperature.","name":"Relative Humidity"}'
+      string: '{"phenomenonTime":"2018-08-12T19:58:10.000Z","result":1008.35,"resultTime":"2018-08-12T19:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1854,6 +1607,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1864,19 +1619,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(13)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(13)
     body:
       encoding: US-ASCII
       string: ''
@@ -1891,6 +1646,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1903,26 +1660,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '585'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Relative Humidity",
-          "description" : "Amount of moisture in the air as vapor relative to how much it can possibly hold at the same temperature.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/cf/parameter/relative_humidity",
-          "@iot.id" : 6,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(6)"
+          "phenomenonTime" : "2018-08-12T19:58:10.000Z",
+          "resultTime" : "2018-08-12T19:58:10.000Z",
+          "result" : 1008.35,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(13)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(13)/FeatureOfInterest",
+          "@iot.id" : 13,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(13)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Battery%20Voltage'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T20:13:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -1937,6 +1694,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -1951,7 +1710,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -1959,15 +1718,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"definition":"http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage","description":"The
-        battery voltage of a datalogger or sensing system, often recorded as an indicator
-        of data reliability.","name":"Battery Voltage"}'
+      string: '{"phenomenonTime":"2018-08-12T20:13:10.000Z","result":1007.95,"resultTime":"2018-08-12T20:13:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -1979,6 +1736,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -1989,19 +1748,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(14)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(14)
     body:
       encoding: US-ASCII
       string: ''
@@ -2016,6 +1775,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2028,26 +1789,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '593'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Battery Voltage",
-          "description" : "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability.",
-          "Datastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)/Datastreams",
-          "MultiDatastreams@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)/MultiDatastreams",
-          "definition" : "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage",
-          "@iot.id" : 7,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties(7)"
+          "phenomenonTime" : "2018-08-12T20:13:10.000Z",
+          "resultTime" : "2018-08-12T20:13:10.000Z",
+          "result" : 1007.95,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(14)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(14)/FeatureOfInterest",
+          "@iot.id" : 14,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(14)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Pressure'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Pressure'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T20:28:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2062,6 +1823,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2076,7 +1839,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2084,14 +1847,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Pressure","name":"Station
-        300234065673960 Pressure","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":1},"Sensor":{"@iot.id":1},"unitOfMeasurement":{"definition":"http://mmisw.org/ont/drdc/parameter/_052","symbol":"mbar","name":"millibar"}}'
+      string: '{"phenomenonTime":"2018-08-12T20:28:10.000Z","result":1007.85,"resultTime":"2018-08-12T20:28:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2103,6 +1865,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2113,19 +1877,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(15)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(15)
     body:
       encoding: US-ASCII
       string: ''
@@ -2140,6 +1904,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2152,33 +1918,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '885'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Pressure",
-          "description" : "Data Garrison Station 300234065673960 Pressure",
-          "observationType" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-          "Sensor@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Sensor",
-          "Thing@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Thing",
-          "Observations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations",
-          "unitOfMeasurement" : {
-            "name" : "millibar",
-            "symbol" : "mbar",
-            "definition" : "http://mmisw.org/ont/drdc/parameter/_052"
-          },
-          "ObservedProperty@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/ObservedProperty",
-          "@iot.id" : 1,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)"
+          "phenomenonTime" : "2018-08-12T20:28:10.000Z",
+          "resultTime" : "2018-08-12T20:28:10.000Z",
+          "result" : 1007.85,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(15)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(15)/FeatureOfInterest",
+          "@iot.id" : 15,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(15)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Speed'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Speed'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T20:43:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2193,6 +1952,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2207,7 +1968,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2215,15 +1976,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Wind Speed","name":"Station
-        300234065673960 Wind Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":2},"Sensor":{"@iot.id":2},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
-        per hour"}}'
+      string: '{"phenomenonTime":"2018-08-12T20:43:10.000Z","result":1007.85,"resultTime":"2018-08-12T20:43:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2235,6 +1994,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2245,19 +2006,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(16)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(16)
     body:
       encoding: US-ASCII
       string: ''
@@ -2272,6 +2033,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2284,33 +2047,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '900'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Wind Speed",
-          "description" : "Data Garrison Station 300234065673960 Wind Speed",
-          "observationType" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-          "Sensor@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/Sensor",
-          "Thing@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/Thing",
-          "Observations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/Observations",
-          "unitOfMeasurement" : {
-            "name" : "kilometer per hour",
-            "symbol" : "km/h",
-            "definition" : "http://purl.obolibrary.org/obo/UO_0010008"
-          },
-          "ObservedProperty@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)/ObservedProperty",
-          "@iot.id" : 2,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(2)"
+          "phenomenonTime" : "2018-08-12T20:43:10.000Z",
+          "resultTime" : "2018-08-12T20:43:10.000Z",
+          "result" : 1007.85,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(16)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(16)/FeatureOfInterest",
+          "@iot.id" : 16,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(16)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Gust%20Speed'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Gust%20Speed'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T20:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2325,6 +2081,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2339,7 +2097,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2347,15 +2105,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Gust Speed","name":"Station
-        300234065673960 Gust Speed","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":3},"Sensor":{"@iot.id":3},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0010008","symbol":"km/h","name":"kilometer
-        per hour"}}'
+      string: '{"phenomenonTime":"2018-08-12T20:58:10.000Z","result":1007.95,"resultTime":"2018-08-12T20:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2367,6 +2123,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2377,19 +2135,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(17)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(17)
     body:
       encoding: US-ASCII
       string: ''
@@ -2404,6 +2162,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2416,33 +2176,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '900'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Gust Speed",
-          "description" : "Data Garrison Station 300234065673960 Gust Speed",
-          "observationType" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-          "Sensor@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/Sensor",
-          "Thing@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/Thing",
-          "Observations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/Observations",
-          "unitOfMeasurement" : {
-            "name" : "kilometer per hour",
-            "symbol" : "km/h",
-            "definition" : "http://purl.obolibrary.org/obo/UO_0010008"
-          },
-          "ObservedProperty@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)/ObservedProperty",
-          "@iot.id" : 3,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(3)"
+          "phenomenonTime" : "2018-08-12T20:58:10.000Z",
+          "resultTime" : "2018-08-12T20:58:10.000Z",
+          "result" : 1007.95,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(17)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(17)/FeatureOfInterest",
+          "@iot.id" : 17,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(17)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Wind%20Direction'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Wind%20Direction'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T21:13:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2457,6 +2210,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2471,7 +2226,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2479,14 +2234,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Wind Direction","name":"Station
-        300234065673960 Wind Direction","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":4},"Sensor":{"@iot.id":4},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000185","symbol":"°","name":"degree"}}'
+      string: '{"phenomenonTime":"2018-08-12T21:13:10.000Z","result":1007.95,"resultTime":"2018-08-12T21:13:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2498,6 +2252,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2508,19 +2264,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(18)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(4)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(18)
     body:
       encoding: US-ASCII
       string: ''
@@ -2535,6 +2291,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2547,18 +2305,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '896'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJuYW1lIiA6ICJTdGF0aW9uIDMwMDIzNDA2NTY3Mzk2MCBXaW5kIERpcmVjdGlvbiIsCiAgImRlc2NyaXB0aW9uIiA6ICJEYXRhIEdhcnJpc29uIFN0YXRpb24gMzAwMjM0MDY1NjczOTYwIFdpbmQgRGlyZWN0aW9uIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNCkvU2Vuc29yIiwKICAiVGhpbmdAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDQpL1RoaW5nIiwKICAiT2JzZXJ2YXRpb25zQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg0KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAiZGVncmVlIiwKICAgICJzeW1ib2wiIDogIsOCwrAiLAogICAgImRlZmluaXRpb24iIDogImh0dHA6Ly9wdXJsLm9ib2xpYnJhcnkub3JnL29iby9VT18wMDAwMTg1IgogIH0sCiAgIk9ic2VydmVkUHJvcGVydHlAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDQpL09ic2VydmVkUHJvcGVydHkiLAogICJAaW90LmlkIiA6IDQsCiAgIkBpb3Quc2VsZkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNCkiCn0=
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T21:13:10.000Z",
+          "resultTime" : "2018-08-12T21:13:10.000Z",
+          "result" : 1007.95,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(18)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(18)/FeatureOfInterest",
+          "@iot.id" : 18,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(18)"
+        }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Temperature'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Temperature'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T21:28:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2573,6 +2339,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2587,7 +2355,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2595,15 +2363,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Temperature","name":"Station
-        300234065673960 Temperature","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":5},"Sensor":{"@iot.id":5},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000027","symbol":"℃","name":"degree
-        Celsius"}}'
+      string: '{"phenomenonTime":"2018-08-12T21:28:10.000Z","result":1008.05,"resultTime":"2018-08-12T21:28:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2615,6 +2381,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2625,19 +2393,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(19)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(5)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(19)
     body:
       encoding: US-ASCII
       string: ''
@@ -2652,6 +2420,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2664,18 +2434,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '900'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJuYW1lIiA6ICJTdGF0aW9uIDMwMDIzNDA2NTY3Mzk2MCBUZW1wZXJhdHVyZSIsCiAgImRlc2NyaXB0aW9uIiA6ICJEYXRhIEdhcnJpc29uIFN0YXRpb24gMzAwMjM0MDY1NjczOTYwIFRlbXBlcmF0dXJlIiwKICAib2JzZXJ2YXRpb25UeXBlIiA6ICJodHRwOi8vd3d3Lm9wZW5naXMubmV0L2RlZi9vYnNlcnZhdGlvblR5cGUvT0dDLU9NLzIuMC9PTV9NZWFzdXJlbWVudCIsCiAgIlNlbnNvckBpb3QubmF2aWdhdGlvbkxpbmsiIDogImh0dHA6Ly8xOTIuMTY4LjMzLjc3OjgwODAvRlJPU1QtU2VydmVyL3YxLjAvRGF0YXN0cmVhbXMoNSkvU2Vuc29yIiwKICAiVGhpbmdAaW90Lm5hdmlnYXRpb25MaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDUpL1RoaW5nIiwKICAiT2JzZXJ2YXRpb25zQGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg1KS9PYnNlcnZhdGlvbnMiLAogICJ1bml0T2ZNZWFzdXJlbWVudCIgOiB7CiAgICAibmFtZSIgOiAiZGVncmVlIENlbHNpdXMiLAogICAgInN5bWJvbCIgOiAiw6LChMKDIiwKICAgICJkZWZpbml0aW9uIiA6ICJodHRwOi8vcHVybC5vYm9saWJyYXJ5Lm9yZy9vYm8vVU9fMDAwMDAyNyIKICB9LAogICJPYnNlcnZlZFByb3BlcnR5QGlvdC5uYXZpZ2F0aW9uTGluayIgOiAiaHR0cDovLzE5Mi4xNjguMzMuNzc6ODA4MC9GUk9TVC1TZXJ2ZXIvdjEuMC9EYXRhc3RyZWFtcyg1KS9PYnNlcnZlZFByb3BlcnR5IiwKICAiQGlvdC5pZCIgOiA1LAogICJAaW90LnNlbGZMaW5rIiA6ICJodHRwOi8vMTkyLjE2OC4zMy43Nzo4MDgwL0ZST1NULVNlcnZlci92MS4wL0RhdGFzdHJlYW1zKDUpIgp9
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T21:28:10.000Z",
+          "resultTime" : "2018-08-12T21:28:10.000Z",
+          "result" : 1008.05,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(19)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(19)/FeatureOfInterest",
+          "@iot.id" : 19,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(19)"
+        }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20RH'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20RH'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T21:43:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2690,6 +2468,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2704,7 +2484,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2712,14 +2492,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 RH","name":"Station
-        300234065673960 RH","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":6},"Sensor":{"@iot.id":6},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000187","symbol":"%","name":"percent"}}'
+      string: '{"phenomenonTime":"2018-08-12T21:43:10.000Z","result":1008.15,"resultTime":"2018-08-12T21:43:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2731,6 +2510,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2741,19 +2522,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(20)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(20)
     body:
       encoding: US-ASCII
       string: ''
@@ -2768,6 +2549,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2780,33 +2563,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '870'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 RH",
-          "description" : "Data Garrison Station 300234065673960 RH",
-          "observationType" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-          "Sensor@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Sensor",
-          "Thing@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Thing",
-          "Observations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/Observations",
-          "unitOfMeasurement" : {
-            "name" : "percent",
-            "symbol" : "%",
-            "definition" : "http://purl.obolibrary.org/obo/UO_0000187"
-          },
-          "ObservedProperty@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)/ObservedProperty",
-          "@iot.id" : 6,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(6)"
+          "phenomenonTime" : "2018-08-12T21:43:10.000Z",
+          "resultTime" : "2018-08-12T21:43:10.000Z",
+          "result" : 1008.15,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(20)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(20)/FeatureOfInterest",
+          "@iot.id" : 20,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(20)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams?$filter=name%20eq%20'Station%20300234065673960%20Backup%20Batteries'%20and%20description%20eq%20'Data%20Garrison%20Station%20300234065673960%20Backup%20Batteries'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T21:58:10.000Z
     body:
       encoding: US-ASCII
       string: ''
@@ -2821,6 +2597,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2835,7 +2613,7 @@ http_interactions:
       Content-Length:
       - '19'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
@@ -2843,14 +2621,13 @@ http_interactions:
           "value" : [ ]
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: post
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Things(1)/Datastreams
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
     body:
       encoding: UTF-8
-      string: '{"description":"Data Garrison Station 300234065673960 Backup Batteries","name":"Station
-        300234065673960 Backup Batteries","observationType":"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement","ObservedProperty":{"@iot.id":7},"Sensor":{"@iot.id":7},"unitOfMeasurement":{"definition":"http://purl.obolibrary.org/obo/UO_0000218","symbol":"V","name":"Volt"}}'
+      string: '{"phenomenonTime":"2018-08-12T21:58:10.000Z","result":1008.25,"resultTime":"2018-08-12T21:58:10.000Z"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -2862,6 +2639,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 201
@@ -2872,19 +2651,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - Location
       Location:
-      - http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(21)
       Content-Length:
       - '0'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(21)
     body:
       encoding: US-ASCII
       string: ''
@@ -2899,6 +2678,8 @@ http_interactions:
       - 192.168.33.77:8080
       Content-Type:
       - application/json
+      Range:
+      - ''
   response:
     status:
       code: 200
@@ -2911,28 +2692,795 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '895'
+      - '456'
       Date:
-      - Tue, 27 Aug 2019 23:44:39 GMT
+      - Tue, 27 Aug 2019 23:40:42 GMT
     body:
       encoding: UTF-8
       string: |-
         {
-          "name" : "Station 300234065673960 Backup Batteries",
-          "description" : "Data Garrison Station 300234065673960 Backup Batteries",
-          "observationType" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-          "Sensor@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/Sensor",
-          "Thing@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/Thing",
-          "Observations@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/Observations",
-          "unitOfMeasurement" : {
-            "name" : "Volt",
-            "symbol" : "V",
-            "definition" : "http://purl.obolibrary.org/obo/UO_0000218"
-          },
-          "ObservedProperty@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)/ObservedProperty",
-          "@iot.id" : 7,
-          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(7)"
+          "phenomenonTime" : "2018-08-12T21:58:10.000Z",
+          "resultTime" : "2018-08-12T21:58:10.000Z",
+          "result" : 1008.25,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(21)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(21)/FeatureOfInterest",
+          "@iot.id" : 21,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(21)"
         }
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:44:40 GMT
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T22:13:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T22:13:10.000Z","result":1008.25,"resultTime":"2018-08-12T22:13:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(22)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(22)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T22:13:10.000Z",
+          "resultTime" : "2018-08-12T22:13:10.000Z",
+          "result" : 1008.25,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(22)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(22)/FeatureOfInterest",
+          "@iot.id" : 22,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(22)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T22:28:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T22:28:10.000Z","result":1008.15,"resultTime":"2018-08-12T22:28:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(23)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(23)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T22:28:10.000Z",
+          "resultTime" : "2018-08-12T22:28:10.000Z",
+          "result" : 1008.15,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(23)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(23)/FeatureOfInterest",
+          "@iot.id" : 23,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(23)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T22:43:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T22:43:10.000Z","result":1008.35,"resultTime":"2018-08-12T22:43:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(24)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(24)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T22:43:10.000Z",
+          "resultTime" : "2018-08-12T22:43:10.000Z",
+          "result" : 1008.35,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(24)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(24)/FeatureOfInterest",
+          "@iot.id" : 24,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(24)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T22:58:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T22:58:10.000Z","result":1008.35,"resultTime":"2018-08-12T22:58:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(25)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(25)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T22:58:10.000Z",
+          "resultTime" : "2018-08-12T22:58:10.000Z",
+          "result" : 1008.35,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(25)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(25)/FeatureOfInterest",
+          "@iot.id" : 25,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(25)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T23:13:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T23:13:10.000Z","result":1008.35,"resultTime":"2018-08-12T23:13:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(26)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(26)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T23:13:10.000Z",
+          "resultTime" : "2018-08-12T23:13:10.000Z",
+          "result" : 1008.35,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(26)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(26)/FeatureOfInterest",
+          "@iot.id" : 26,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(26)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations?$filter=phenomenonTime%20eq%202018-08-12T23:28:10.000Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '19'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "value" : [ ]
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: post
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Datastreams(1)/Observations
+    body:
+      encoding: UTF-8
+      string: '{"phenomenonTime":"2018-08-12T23:28:10.000Z","result":1008.25,"resultTime":"2018-08-12T23:28:10.000Z"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Location:
+      - http://192.168.33.77:8080/FROST-Server/v1.0/Observations(27)
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
+- request:
+    method: get
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/Observations(27)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - 192.168.33.77:8080
+      Content-Type:
+      - application/json
+      Range:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '456'
+      Date:
+      - Tue, 27 Aug 2019 23:40:42 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "phenomenonTime" : "2018-08-12T23:28:10.000Z",
+          "resultTime" : "2018-08-12T23:28:10.000Z",
+          "result" : 1008.25,
+          "Datastream@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(27)/Datastream",
+          "FeatureOfInterest@iot.navigationLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(27)/FeatureOfInterest",
+          "@iot.id" : 27,
+          "@iot.selfLink" : "http://192.168.33.77:8080/FROST-Server/v1.0/Observations(27)"
+        }
+    http_version: 
+  recorded_at: Tue, 27 Aug 2019 23:40:42 GMT
 recorded_with: VCR 5.0.0

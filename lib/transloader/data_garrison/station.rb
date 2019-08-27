@@ -354,40 +354,53 @@ module Transloader
     end
 
     # Connect to Data Garrison and download Observations
-    # TODO: Support interval download
+    # Interval download does nothing as there is no way to currently
+    # extract a range from the Data Garrison data files.
     def download_observations(interval = nil)
+      if !interval.nil?
+        logger.warn "Interval download for observations is unsupported for Data Garrison"
+      end
+
       get_metadata
-      html = get_station_data_html
+      
+      @metadata[:data_files].each do |data_file|
+        data_filename = data_file[:filename]
+        all_observations = download_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
 
-      # Parse the time from the "Latest Conditions" element
-      # e.g. 02/22/19 8:28 pm
-      raw_phenomenon_time = html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr[position()=1]').text.to_s
-      raw_phenomenon_time = raw_phenomenon_time[/\d{2}\/\d{2}\/\d{2} \d{1,2}:\d{2} (am|pm)/]
-      # append the time zone from the metadata cache file
-      if raw_phenomenon_time.nil?
-        logger.error "Could not parse observation time"
-        raise "Could not parse observation time"
+        # Store Observations in DataStore.
+        # 
+        # Convert to new store format first:
+        # * timestamp
+        # * result
+        # * property
+        # * unit
+        observations = all_observations.collect do |observation_set|
+          timestamp = Time.parse(observation_set[0])
+          # observation:
+          # * name (property)
+          # * reading (result)
+          observation_set[1].collect do |observation|
+            # For HOBO Weather Station data, the TSV file headers 
+            # include the Datastream names as a substring.
+            datastream = @metadata[:datastreams].find do |datastream|
+              observation[:name].include?(datastream[:name])
+            end
+
+            if datastream
+              {
+                timestamp: timestamp,
+                result: observation[:reading],
+                property: datastream[:name],
+                unit: datastream[:units]
+              }
+            else
+              nil
+            end
+          end
+        end
+        observations.flatten! && observations.compact!
+        @data_store.store(observations)
       end
-      raw_phenomenon_time = raw_phenomenon_time + @metadata[:timezone_offset]
-      phenomenon_time     = Time.strptime(raw_phenomenon_time, '%m/%d/%y %l:%M %P %Z')
-      utc_time            = phenomenon_time.to_time.utc
-      readings            = parse_readings_from_html(html)
-
-      # Observation:
-      # * timestamp
-      # * result
-      # * property
-      # * unit
-      observations = readings.collect do |reading|
-        {
-          timestamp: utc_time,
-          result:    reading[:result],
-          property:  reading[:name],
-          unit:      reading[:units]
-        }
-      end
-
-      @data_store.store(observations)
     end
 
     # Collect all the observation files in the date interval, and upload
@@ -416,6 +429,94 @@ module Transloader
 
     # For parsing functionality specific to Data Garrison
     private
+
+    # Connect to data provider and download Observations for a specific
+    # data_file entry.
+    # 
+    # Return an array of observation rows:
+    # [
+    #   ["2019-03-05T17:00:00.000Z", {
+    #     name: "Temperature_20305795_deg_C",
+    #     reading: 22.441
+    #   }, {
+    #     name: "Pressure_20290325_mbar",
+    #     reading: 928.950
+    #   }],
+    #   ["2019-03-05T18:00:00.000Z", {
+    #   ...
+    #   }]
+    # ]
+    # 
+    # TODO: Parse time zone offsets for each data file and store in 
+    # metadata, which means metadata would not need to be manually 
+    # edited.
+    def download_observations_for_file(data_file)
+      download = partial_download_url(
+        url: data_file[:url],
+        offset: data_file[:last_length])
+
+      data         = []
+      observations = []
+
+      # If full file was downloaded, parse from beginning. Otherwise
+      # only parse extract of file.
+      if download[:body] && download[:full_file]
+        data = CSV.parse(download[:body], col_sep: "\t")
+        # Parse column headers for observed properties.
+        # For HOBO Weather Station TSV files, headers are on line 3.
+        # We use slice to skip the first column with "Date_Time"
+        column_headers = data[2].slice(1..-1)
+
+        # Store column names in station metadata cache file, as 
+        # partial requests later will not be able to know the column
+        # headers.
+        data_file[:headers] = column_headers.compact!
+        save_metadata
+
+        # Omit the file header rows from the next step, as the next
+        # step may run from a partial file that doesn't know any
+        # headers. HOBO Weather Station TSV files have 3 header rows.
+        data.slice!(0..3)
+      elsif download[:body]
+        # TODO: Improve parsing by excluding partial rows
+        begin
+          data = CSV.parse(download[:body], col_sep: "\t")
+        rescue CSV::MalformedCSVError => e
+          logger.error "Could not parse partial response data.", e
+        end
+      end
+
+      # Update station metadata cache with what the server says is the
+      # latest file update time and the latest file length in bytes
+      data_file[:last_modified] = to_iso8601(download[:last_modified])
+      data_file[:last_length]   = download[:content_length]
+      save_metadata
+
+      # Parse observations from TSV
+      data.each do |row|
+        # Transform dates into ISO8601 in UTC.
+        # This will make it simpler to group them by day and to simplify
+        # timezones for multiple stations.
+        # HOBO Weather Station Example: "08/12/18 10:58:07"
+        begin
+          timestamp = Time.strptime(row[0] + @metadata[:timezone_offset], 
+            "%m/%d/%y %H:%M:%S%z")
+          utc_time = to_iso8601(timestamp)
+          observations.push([utc_time, 
+            row[1..-1].map.with_index { |x, i|
+              {
+                name: data_file[:headers][i],
+                reading: x
+              }
+            }
+          ])
+        rescue Exception => e
+          logger.warn "Skipping parsing of line: #{e}"
+        end
+      end
+      
+      observations
+    end
 
     # Load the metadata for a station.
     # If the station data is already cached, use that. If not, download and
