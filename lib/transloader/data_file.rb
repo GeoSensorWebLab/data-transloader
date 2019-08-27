@@ -1,4 +1,7 @@
 module Transloader
+  # Class to serialize information about remote data files for use in
+  # partial downloads. This is a class so that different providers will
+  # use the same interface.
   class DataFile
     attr_reader :data_url, :filename, :last_modified, :length
 
