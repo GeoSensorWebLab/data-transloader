@@ -8,7 +8,7 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
-    attr_accessor :id, :metadata, :properties, :provider
+    attr_accessor :data_store, :id, :metadata, :properties, :provider
 
     def initialize(options = {})
       @data_store        = options[:data_store]

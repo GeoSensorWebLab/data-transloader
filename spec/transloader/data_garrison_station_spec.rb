@@ -258,7 +258,14 @@ RSpec.describe Transloader::DataGarrisonStation do
       end
     end
 
-    # TODO: Spec for downloading historical observations
+    it "converts downloaded observations and stores in DataStore" do
+      VCR.use_cassette("data_garrison/station") do
+        expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to eq(0)
+        @station.download_observations
+        expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to_not eq(0)        
+      end
+    end
+
   end
 
   ##################
