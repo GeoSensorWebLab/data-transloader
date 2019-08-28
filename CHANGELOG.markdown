@@ -1,5 +1,32 @@
 # Changelog for Data Transloader
 
+## Version 0.6.0 (TBD)
+
+* Add support for HTTP Basic Access Authentication when downloading and uploading data/metadata
+* Support custom HTTP headers being specified by API or by command-line tool
+* Switch to using centralized class for managing station metadata (`MetadataStore`) instead of it being specific to each provider
+* Also switch to similar class for station observations being centrally managed
+* Use symbolized keys for hashes in more classes
+* Change `:id` to `:name` for `DataGarrisonStation`
+* Fix broken `data_urls` argument option in command-line interface
+* Add Station façade class and simplify public interface to stations API
+* Support downloading historical observations for Environment Canada (only past 1 month is available from provider)
+* Fix typos in transload tool
+* Rename `new_station` to `get_station` for Provider classes
+* Add shared StationMethods module for sharing code between Station classes
+* Add overwrite option for metadata (defaults to `false` or "off")
+* Add schema versioning for stores to make future upgrades cleaner
+* Fix bug where HTTP class would inherit request options from previous requests
+* Fix wrong string for warning message on Campbell Scientific
+* Enable datastream blocks in test automate script to mirror production usage
+* Add tests for data and metadata stores, and remove similar code from station tests
+* Add tests for data file parsing for Campbell Scientific
+* Add tests for partial download support
+* Extract partial download code to shared methods
+* Add DataFile class for re-using data file partial downloading between providers
+* Download data file metadata for Data Garrison when downloading metadata
+* Use Data File partial downloads for Data Garrison instead of HTML parsing for observations
+
 ## Version 0.5.0 (2019-07-26)
 
 The "HTTP and Ontology" Refactoring Release
