@@ -47,7 +47,7 @@ end
 
 def get_observations(options, http_client)
   station = get_station(options, http_client)
-  station.download_observations
+  station.download_observations(options.date)
 end
 
 def put_observations(options, http_client)
