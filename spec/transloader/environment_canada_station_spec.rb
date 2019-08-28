@@ -195,8 +195,22 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    # TODO: Download latest to data store
+    it "downloads the latest data by default" do
+      VCR.use_cassette("environment_canada/stations") do
+        expect(WebMock).to have_requested(:get, 
+          "http://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml")
+          .times(1)
+
+        @station.download_observations
+
+        expect(WebMock).to have_requested(:get, 
+          "http://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml")
+          .times(2)
+      end
+    end
+
     # TODO: Download historical to data store
+    # TODO: Returns an error if no historical data is available to download
   end
 
   ##################

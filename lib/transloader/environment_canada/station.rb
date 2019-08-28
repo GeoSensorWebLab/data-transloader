@@ -227,10 +227,9 @@ module Transloader
     # Download observations from the provider for this station in
     # `interval`. If `interval` is nil, only the latest will be
     # downloaded. Observations will be sent to the DataStore.
-    # TODO: Support interval download
     def download_observations(interval = nil)
       get_metadata
-      xml = get_observation_xml
+      xml = get_observation_xml(interval)
 
       if xml.nil?
         logger.error "Unable to download SWOB-ML"
@@ -317,8 +316,8 @@ module Transloader
         url = "#{OBSERVATIONS_URL}/latest"
         get_swob_data_from_url(url)
       else
-        # Determine if SWOB-ML is available for day
-
+        # TODO: Determine if SWOB-ML is available for day
+        logger.warn "Interval download not yet implemented for Environment Canada data"
       end
     end
 
