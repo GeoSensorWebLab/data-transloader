@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - dataservices.campbellsci.ca
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 28 Aug 2019 23:35:57 GMT
+      Server:
+      - nginx/1.15.10
+      Content-Length:
+      - '2233'
+      Last-Modified:
+      - Sat, 10 Aug 2019 22:05:54 GMT
+      Accept-Ranges:
+      - bytes
+      X-Server-Cache:
+      - 'true'
+      X-Proxy-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: "\"TOA5\",\"69927\",\"CR1000\",\"69927\",\"CR1000.Std.31.03\",\"CPU:QikIsland_Met_2019_v1.1.CR1\",\"26913\",\"CBAY_MET_1HR\"\r\n\"TIMESTAMP\",\"TEMPERATURE_Avg\",\"WIND_SPEED\",\"WIND_DIRECTION\",\"GUST_Max\",\"RH_B_Avg\",\"BP_Avg\",\"BattV_Avg\",\"Kdn_Avg\",\"LdnCo_Avg\",\"Ux_Avg\",\"Uy_Avg\",\"Uz_Avg\",\"CO2_op_Avg\",\"H2O_op_Avg\",\"Pfast_cp_Avg\",\"xco2_cp_Avg\",\"xh2o_cp_Avg\",\"mfc_Avg\"\r\n\"TS\",\"Deg
+        C\",\"\",\"Deg\",\"km/hr\",\"\",\"kPa\",\"Volts\",\"W/m^2\",\"W/m^2\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"\r\n\"\",\"Avg\",\"WVc\",\"WVc\",\"Max\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\"\r\n\"2019-08-09
+        16:00:00\",9.08,17.23,12.23,20.32,84.9,100.1,13.01,470.8,304.5,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        01:00:00\",8.12,11.39,4.066,15.66,89.8,101.8,13.09,-1.081,341.4,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        02:00:00\",7.412,13.42,16.73,15.59,90.8,101.8,13.09,-1.409,337.1,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        03:00:00\",7.065,16.54,354.8,19.62,91.5,101.8,13.09,-1.189,335.7,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        04:00:00\",6.879,17.68,0.122,20.89,89.6,101.8,13.08,-0.12,335.1,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        05:00:00\",6.911,16.65,10.1,20.11,90.3,101.8,13.08,5.286,336.6,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        06:00:00\",7.003,15.99,20.38,19.26,90.2,101.8,13.08,16.99,336.9,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        07:00:00\",6.819,19.47,32.18,24.2,89,101.8,13.08,49.18,337.5,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        08:00:00\",6.529,21.8,25.95,25.54,88.5,101.8,13.08,99.9,334.8,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        09:00:00\",6.533,20.95,23.65,26.18,87.7,101.8,13.08,147.5,335.7,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        10:00:00\",6.685,16.97,21.73,21.73,87.8,101.8,13.09,150.9,339.3,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        11:00:00\",6.862,15.43,18.69,20.39,87.6,101.8,13.08,151.7,340,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        12:00:00\",7.031,14.02,21.27,19.33,85.4,101.8,13.09,185.4,339.1,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        13:00:00\",7.34,14.58,21.93,18.2,82,101.8,13.09,246.1,338.5,0,0,0,0,0,0,0,0,0\r\n\"2019-08-10
+        14:00:00\",8.64,4.251,70.08,16.72,76.62,101.9,12.71,160.9,355.1,0.798,-0.046,1.435,\"NAN\",\"NAN\",\"NAN\",-7999,\"NAN\",5.789\r\n\"2019-08-10
+        15:00:00\",9.52,2.276,86.4,4.163,73.47,101.9,12.19,175,359.4,1.404,-0.31,2.086,\"NAN\",\"NAN\",\"NAN\",-7999,\"NAN\",9.83\r\n\"2019-08-10
+        16:00:00\",9.66,2.326,85.7,5.08,71.38,101.9,12.59,199.7,359.6,1.322,-0.373,2.12,\"NAN\",\"NAN\",\"NAN\",-7999,\"NAN\",9.75\r\n"
+    http_version: 
+  recorded_at: Wed, 28 Aug 2019 23:35:57 GMT
+- request:
+    method: get
+    uri: http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR-Archive_2018-08-05%2015-04-05.dat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.5.0
+      Host:
+      - dataservices.campbellsci.ca
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 28 Aug 2019 23:35:57 GMT
+      Server:
+      - nginx/1.15.10
+      Content-Length:
+      - '1089'
+      Last-Modified:
+      - Sun, 05 Aug 2018 20:04:06 GMT
+      Accept-Ranges:
+      - bytes
+      X-Server-Cache:
+      - 'true'
+      X-Proxy-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: "\"TOA5\",\"69927\",\"CR1000\",\"69927\",\"CR1000.Std.31.03\",\"CPU:QikIsland_Met_2018_v1.1.CR1\",\"58687\",\"CBAY_MET_1HR\"\r\n\"TIMESTAMP\",\"TEMPERATURE_Avg\",\"WIND_SPEED\",\"WIND_DIRECTION\",\"GUST_Max\",\"RH_B_Avg\",\"BP_Avg\",\"BattV_Avg\",\"Kdn_Avg\",\"Kup_Avg\",\"LdnCo_Avg\",\"LupCo_Avg\",\"Ux_Avg\",\"Uy_Avg\",\"Uz_Avg\",\"CO2_op_Avg\",\"H2O_op_Avg\",\"CO2_Avg\",\"H2O_Avg\",\"Pfast_cp_Avg\",\"xco2_cp_Avg\",\"xh2o_cp_Avg\",\"mfc_Avg\"\r\n\"TS\",\"Deg
+        C\",\"\",\"Deg\",\"km/hr\",\"\",\"kPa\",\"Volts\",\"W/m^2\",\"W/m^2\",\"W/m^2\",\"W/m^2\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"\r\n\"\",\"Avg\",\"WVc\",\"WVc\",\"Max\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\",\"Avg\"\r\n\"2018-08-05
+        12:00:00\",6.224,2.799,259,2.893,83.1,\"NAN\",11.3,331.3,92.6,347.5,345.1,-0.576,1.865,0.095,\"NAN\",\"NAN\",747,3.958,\"NAN\",-7999,\"NAN\",6.981\r\n\"2018-08-05
+        13:00:00\",7.247,1.918,260.6,3.457,78.43,\"NAN\",11.86,657.8,101.1,343.9,350.1,-0.651,2.057,0.06,\"NAN\",\"NAN\",752.6,4.395,\"NAN\",-7999,\"NAN\",6.962\r\n\"2018-08-05
+        14:00:00\",7.725,0.509,258.5,3.528,76.52,\"NAN\",12.07,699.3,87.7,343.1,356,-0.436,1.013,0.548,\"NAN\",\"NAN\",772.7,4.396,\"NAN\",-7999,\"NAN\",6.952\r\n"
+    http_version: 
+  recorded_at: Wed, 28 Aug 2019 23:35:57 GMT
+recorded_with: VCR 5.0.0

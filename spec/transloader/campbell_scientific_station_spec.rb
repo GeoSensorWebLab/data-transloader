@@ -72,8 +72,21 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
     end
 
-    # TODO: Removes duplicate datastreams parsed from the headers of 
-    # multiple data files
+    it "removes duplicate datastreams for multiple data files" do
+      VCR.use_cassette("campbell_scientific/station_two") do
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: [
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat",
+            "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR-Archive_2018-08-05%2015-04-05.dat"
+          ]
+        )
+        @station.download_metadata
+
+        expect(@station.metadata[:datastreams].length).to eq(22)
+      end
+    end
   end
 
   ##############
