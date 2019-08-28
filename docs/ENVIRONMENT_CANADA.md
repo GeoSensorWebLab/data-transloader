@@ -94,3 +94,5 @@ In the example above, the observations for Environment Canada station `CXCM` are
 Safety Tip: It is possible to create multiple OGC SensorThings API `Observation` entities for the same timestamp, which can confuse clients who don't expect that.
 
 If your SensorThings API instance requires authentication or special headers, please see [http_customization.md](http_customization.md) for instructions on setting that up with the command line tool.
+
+Optionally, a list of allowed or blocked datastreams can be specified on the command line to limit the data that is uploaded to SensorThings API. See the command-line tool help information for `--allowed` and `--blocked`.

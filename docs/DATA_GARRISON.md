@@ -20,9 +20,9 @@ This will download the sensor metadata from the Data Garrison source for the use
 
 The directory `datastore/weather/data_garrison/metadata` will be created if it does not already exist.
 
-A file will be created at `datastore/weather/data_garrison/metadata/300234063581640/300234065673960.json`; if it already exists, it will be **overwritten**. Setting up automated backups of this directory is recommended.
-
 Inside the `300234065673960.json` file the sensor metadata will be stored. Editing these values will affect the metadata that is stored in SensorThings API in the metadata upload step. This file also will store the URLs to the SensorThings API entities, which is used by a later step to upload Observations without first having to crawl the SensorThings API instance.
+
+The station information page will list one or more data files with historical observations for this station. The data transloader tool will cache information about those data files and will download the historical observations in the "download observations" step below.
 
 **Please Note**
 
@@ -72,7 +72,9 @@ The tool will try to do a search for existing similar entities on the remote OGC
 
 ### Step 3: Downloading Sensor Observations
 
-After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the latest observations and store them on the local filesystem.
+After the base entities have been created in the OGC SensorThings API service, the observation can be downloaded from the data source. The tool will download the observations from all linked data files and store them on the filesystem.
+
+After the observations have been downloaded once, the next run of the tool will attempt to only download the newer parts of the files from Data Garrison (by using HTTP Ranges). If the files have not been updated, then no observations are downloaded. If the files are longer than they were the last time the tool was run, only the new section is downloaded and parsed for observations. If the files are shorter than last time, the tool assumes the files have been reset and will re-download the files entirely.
 
 ```
 $ transload get observations \
@@ -82,11 +84,7 @@ $ transload get observations \
     --cache datastore/weather
 ```
 
-In this example, the observations page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache in the `datastore/weather/data_garrison/300234063581640/300234065673960/YYYY/MM/DD/HHMMSSZ.html` file. The year/month/day and hour/minute/second/time zone offset are parsed from the current conditions page provided by the data source.
-
-The filename will use the **UTC** version of the date, not the local time for the station. This should make it easier to specify a custom date in the next step without having to deal with timezones.
-
-If a file already exists with the same name, it is **overwritten**.
+In this example, the observations from the data files listed on the page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache.
 
 ### Step 4: Uploading Sensor Observations to OGC SensorThings API
 
@@ -109,6 +107,8 @@ $ transload put observations \
 In the example above, the observations for Data Garrison weather station with ID `300234065673960` for user with ID `300234063581640` are read from the filesystem cache. Only cached files with dates that fall into the time interval will be uploaded.
 
 If your SensorThings API instance requires authentication or special headers, please see [http_customization.md](http_customization.md) for instructions on setting that up with the command line tool.
+
+Optionally, a list of allowed or blocked datastreams can be specified on the command line to limit the data that is uploaded to SensorThings API. See the command-line tool help information for `--allowed` and `--blocked`.
 
 ## Data Model Mapping
 
@@ -177,35 +177,3 @@ There is also no latitude/longitude or location information. This must be manual
     * Description (longer form of Name)
     * encodingType (`application/vnd.geo+json`)
     * feature (GeoJSON, uses lat/lon from metadata cache file)
-
-## Future Work: Loading from TSV
-
-Data Garrison provides the entire history of the station in a list of downloadable files. The files are available in HOBOware or tab-delimited value files. Instead of loading the observations from the HTML on the station page, the observations could be parsed from the TSV file.
-
-As the TSV file can be a long file, it can be over a MB to download. This is somewhat of a waste of bandwidth to download every hour for each station. Fortunately the server is Apache and supports HTTP caching headers.
-
-When executing a `HEAD` request for the TSV file, the following headers are provided:
-
-* [Date](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Date)
-* [Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified)
-* [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
-* [Accept-Ranges](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Ranges)
-* [Content-Length](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length)
-
-"Accept-Ranges" means we can request only part of the file, cutting back on the bandwidth used. The process could be as follows.
-
-1. Retrieve metadata for a station
-2. Metadata is stored in station metadata cache file, which would include the list of downloadable TSV files
-3. Metadata cache file would also have a history state parameter, which would include:
-    * The byte offset to which data had been downloaded for each TSV file
-    * The last-downloaded date for each TSV file that could be compared to the "Last-Modified" header
-    * The last parsed Observation phenomenon time from each TSV file
-4. The state could then be used to check if new data was available from the server, using a low-bandwidth `HEAD` request
-5. If new data is available, use a `GET` request with the [`Range` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range), using the last known byte offset as the *start* of the range to only retrieve the newest part of the file
-6. The transloader would then parse the file and remove any headers, and determine which readings are new and need to be cached as observations in the file system
-
-This is a more advanced method of retrieving Observation data than from the HTML on the station page. It requires more coding and is more complicated. It also provides the ability to download all historical data for a station.
-
-It might be possible to use the [`If-Range` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Range) or [`If-None-Match`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) to request the partial document, although I haven't tested it.
-
-Potential Issue: The only way to check if a new download file has been created (e.g. when the station is reset) is to re-download the metadata every time the observations are fetched. This is a small waste of bandwidth.

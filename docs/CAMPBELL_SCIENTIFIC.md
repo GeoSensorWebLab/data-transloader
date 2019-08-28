@@ -140,6 +140,8 @@ In the example above, the observations for Campbell Scientific weather station w
 
 If your SensorThings API instance requires authentication or special headers, please see [http_customization.md](http_customization.md) for instructions on setting that up with the command line tool.
 
+Optionally, a list of allowed or blocked datastreams can be specified on the command line to limit the data that is uploaded to SensorThings API. See the command-line tool help information for `--allowed` and `--blocked`.
+
 ## Data Model Mapping
 
 Here is how the metadata and data from Campbell Scientific are mapped to SensorThings API entities.
