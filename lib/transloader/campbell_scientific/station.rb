@@ -349,25 +349,6 @@ module Transloader
         end
         observations.flatten! && observations.compact!
         @data_store.store(observations)
-
-        # Update station metadata cache file with observation date range.
-        # Ignore if there are no observations.
-        # TODO: Remove this obsolete code
-        if all_observations[0]
-          oldest_in_set         = all_observations[0][0]
-          newest_in_set         = all_observations[-1][0]
-          data_file[:parsed] ||= {}
-
-          if data_file[:parsed][:oldest].nil? || data_file[:parsed][:oldest] > oldest_in_set
-            data_file[:parsed][:oldest] = oldest_in_set
-          end
-
-          if data_file[:parsed][:newest].nil? || data_file[:parsed][:newest] < newest_in_set
-            data_file[:parsed][:newest] = newest_in_set
-          end
-
-          save_metadata
-        end
       end
     end
 
