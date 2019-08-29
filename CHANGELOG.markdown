@@ -1,6 +1,6 @@
 # Changelog for Data Transloader
 
-## Version 0.6.0 (TBD)
+## Version 0.6.0 (2019-08-28)
 
 * Add support for HTTP Basic Access Authentication when downloading and uploading data/metadata
 * Support custom HTTP headers being specified by API or by command-line tool
@@ -26,6 +26,8 @@
 * Add DataFile class for re-using data file partial downloading between providers
 * Download data file metadata for Data Garrison when downloading metadata
 * Use Data File partial downloads for Data Garrison instead of HTML parsing for observations
+* Remove obsolete code in Campbell Scientific station class
+* Avoid storing multiple duplicate datastreams for Campbell Scientific stations
 
 ## Version 0.5.0 (2019-07-26)
 
