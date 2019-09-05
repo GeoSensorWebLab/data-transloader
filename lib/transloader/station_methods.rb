@@ -3,10 +3,13 @@ require 'time'
 module Transloader
   # Shared methods for multiple station classes
   module StationMethods
+    include SemanticLogger::Loggable
+
     # Use the observation_type to convert result to float, int, or 
     # string. This is used to use the most appropriate data type when
     # converting results to JSON.
     def coerce_result(result, observation_type)
+      logger.trace %Q[Coercing #{result} for #{observation_type}]
       case observation_type
       when "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
         result.to_f
@@ -25,13 +28,20 @@ module Transloader
     end
 
     # Convert Last-Modified header String to Time object.
+    # If `time` is nil, nil is returned.
     def parse_last_modified(time)
-      Time.httpdate(time)
+      logger.trace %Q[Parsing HTTP Date "#{time}"]
+      if time.nil?
+        nil
+      else
+        Time.httpdate(time)
+      end
     end
 
     # Convert a TOA5 timestamp String to a Time object.
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
+      logger.trace %Q[Converting TOA5 timestamp "#{time}" with offset "#{zone_offset}"]
       Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
     end
 
@@ -56,6 +66,9 @@ module Transloader
     # * full_file: Boolean if file was completely downloaded and may 
     #              still include headers.
     def partial_download_url(url:, offset:)
+      logger.info "Executing partial download for #{url}"
+      logger.debug "Using byte offset #{offset}"
+
       body           = nil
       last_modified  = nil
       content_length = nil
@@ -80,10 +93,11 @@ module Transloader
         content_length = response["Content-Length"].to_i
 
         if response["Content-Length"].to_i < offset
-          logger.info "Remote data file length is shorter than expected."
+          logger.debug "Remote data file length is shorter than expected."
           redownload = true
         elsif response["Content-Length"].to_i == offset
           # Do nothing, no download necessary
+          logger.debug "Remote file length unchanged, no download necessary."
         else
           # Do a partial GET
           response = @http_client.get({
@@ -96,9 +110,9 @@ module Transloader
 
           # 416 Requested Range Not Satisfiable
           if response.code == "416"
-            logger.info "No new data."
+            logger.debug "No new data."
           elsif response.code == "206"
-            logger.info "Downloaded partial data."
+            logger.debug "Downloaded partial data."
             body           = response.body
             last_modified  = parse_last_modified(response["Last-Modified"])
             content_length = offset + body.length
@@ -110,7 +124,7 @@ module Transloader
       end
         
       if redownload
-        logger.info "Downloading entire data file."
+        logger.debug "Downloading entire data file."
         # Download entire file; can use gzip compression
         response = @http_client.get(
           uri: url,

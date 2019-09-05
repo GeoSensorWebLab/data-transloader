@@ -4,12 +4,15 @@ module Transloader
   # Parse an ISO8601 time interval in "<start>/<end>" format into two 
   # `Time` instances.
   class TimeInterval
+    include SemanticLogger::Loggable
+
     attr_reader :end, :start
 
     class InvalidIntervalFormat < StandardError; end
 
     # Parse an ISO8601 interval time string.
     def initialize(interval)
+      logger.trace %Q[Creating interval from "#{interval}"]
       @start = nil
       @end   = nil
 
@@ -18,14 +21,18 @@ module Transloader
       end
 
       if dates.length != 2
-        raise InvalidIntervalFormat, "Invalid ISO8601 interval format"
+        error = "Invalid ISO8601 interval format"
+        logger.error error
+        raise InvalidIntervalFormat, error
       end
 
       @start = dates[0]
-      @end = dates[1]
+      @end   = dates[1]
 
       if @start > @end
-        raise InvalidIntervalFormat, "Start date cannot be after end date"
+        error = "Start date cannot be after end date"
+        logger.error error
+        raise InvalidIntervalFormat, error
       end
     end
   end
