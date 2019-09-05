@@ -4,7 +4,7 @@ module Transloader
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
                 :destination, :http_auth, :http_headers, :key,
-                :overwrite, :provider, :station_id, :user_id
+                :overwrite, :provider, :station_id, :user_id, :value
     # Set default values
     def initialize
       @allowed      = nil
@@ -20,6 +20,7 @@ module Transloader
       @provider     = nil
       @station_id   = nil
       @user_id      = nil
+      @value        = nil
     end
 
     def define_options(parser)
@@ -29,6 +30,7 @@ module Transloader
       parser.separator "Available subcommands:"
       parser.separator "transload get metadata [options]"
       parser.separator "transload put metadata [options]"
+      parser.separator "transload set metadata [options]"
       parser.separator "transload show metadata [options]"
       parser.separator "transload get observations [options]"
       parser.separator "transload put observations [options]"
@@ -48,6 +50,7 @@ module Transloader
       provider_option(parser)
       station_id_option(parser)      
       user_id_option(parser)
+      value_option(parser)
 
       parser.separator ""
       parser.separator "Common options:"
@@ -207,6 +210,14 @@ module Transloader
       parser.on("--user_id [ID]",
         "User ID (string or number) for ETL.") do |value|
         @user_id = value
+      end
+    end
+
+    # Specify value for metadata set method
+    def value_option(parser)
+      parser.on("--value <VALUE>",
+        "Specify value to set in metadata (with --key).") do |value|
+        @value = value
       end
     end
   end

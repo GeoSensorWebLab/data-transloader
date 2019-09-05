@@ -63,7 +63,33 @@ def put_metadata(options, http_client)
     blocked: options.blocked)
 end
 
-def show_metadata(options, http_client)
+def set_metadata(options)
+  $logger.debug "Editing metadata"
+
+  if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
+    station_id = "#{options.user_id}-#{options.station_id}"
+  else
+    station_id = options.station_id
+  end
+
+  # Convert value to float, if possible. Otherwise leave as a string.
+  begin
+    value = Float(options.value)
+  rescue
+    value = options.value
+  end
+
+  store_opts = {
+    cache_path: options.cache,
+    provider: options.provider,
+    station: station_id
+  }
+  metadata_store = Transloader::MetadataStore.new(store_opts)
+  metadata_store.set(options.key.to_sym, value)
+  puts JSON.pretty_generate({ options.key => value })
+end
+
+def show_metadata(options)
   $logger.debug "Showing metadata"
 
   if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
@@ -79,9 +105,7 @@ def show_metadata(options, http_client)
   }
   metadata_store = Transloader::MetadataStore.new(store_opts)
   value = metadata_store.get(options.key.to_sym)
-  puts JSON.pretty_generate({
-    options.key => value
-  })
+  puts JSON.pretty_generate({ options.key => value })
 end
 
 def get_observations(options, http_client)
@@ -115,8 +139,10 @@ if verb == :get && noun == :metadata
   get_metadata(options, http_client)
 elsif verb == :put && noun == :metadata
   put_metadata(options, http_client)
+elsif verb == :set && noun == :metadata
+  set_metadata(options)
 elsif verb == :show && noun == :metadata
-  show_metadata(options, http_client)
+  show_metadata(options)
 elsif verb == :get && noun == :observations
   get_observations(options, http_client)
 elsif verb == :put && noun == :observations

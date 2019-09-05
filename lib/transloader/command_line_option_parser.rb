@@ -57,8 +57,8 @@ module Transloader
     end
 
     # Parse verb from args.
-    # Verb may be `get`, `put`, or `show`; if missing then an error is 
-    # raised.
+    # Verb may be `get`, `put`, `set`, or `show`; if missing then an 
+    # error is raised.
     def parse_verb(args)
       if args.nil? || args[0].nil?
         puts "ERROR: Missing VERB from arguments"
@@ -71,6 +71,8 @@ module Transloader
         return :get
       when /put/i
         return :put
+      when /set/i
+        return :set
       when /show/i
         return :show
       else
@@ -101,6 +103,8 @@ module Transloader
         validate_get_metadata(options)
       elsif verb == :put && noun == :metadata
         validate_put_metadata(options)
+      elsif verb == :set && noun == :metadata
+        validate_set_metadata(options)
       elsif verb == :show && noun == :metadata
         validate_show_metadata(options)
       elsif verb == :get && noun == :observations
@@ -147,6 +151,16 @@ module Transloader
     # Options validation for "put observations" command
     def validate_put_observations(options)
       require_options(options, [:provider, :station_id, :cache, :date, :destination])
+
+      case options.provider
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
+    end
+
+    # Options validation for "set metadata" command
+    def validate_set_metadata(options)
+      require_options(options, [:provider, :station_id, :cache, :key, :value])
 
       case options.provider
       when "data_garrison"
