@@ -26,7 +26,7 @@ module Transloader
 
     # Retrieve a value for a given key from the metadata store.
     def get(key)
-      @metadata.fetch(key)
+      @metadata.fetch(key, nil)
     end
 
     # Store a value for a given key in the metadata store.
