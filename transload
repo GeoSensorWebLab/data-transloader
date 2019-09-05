@@ -63,6 +63,27 @@ def put_metadata(options, http_client)
     blocked: options.blocked)
 end
 
+def show_metadata(options, http_client)
+  $logger.debug "Showing metadata"
+
+  if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
+    station_id = "#{options.user_id}-#{options.station_id}"
+  else
+    station_id = options.station_id
+  end
+
+  store_opts = {
+    cache_path: options.cache,
+    provider: options.provider,
+    station: station_id
+  }
+  metadata_store = Transloader::MetadataStore.new(store_opts)
+  value = metadata_store.get(options.key.to_sym)
+  puts JSON.pretty_generate({
+    options.key => value
+  })
+end
+
 def get_observations(options, http_client)
   $logger.debug "Getting observations"
   station = get_station(options, http_client)
@@ -94,6 +115,8 @@ if verb == :get && noun == :metadata
   get_metadata(options, http_client)
 elsif verb == :put && noun == :metadata
   put_metadata(options, http_client)
+elsif verb == :show && noun == :metadata
+  show_metadata(options, http_client)
 elsif verb == :get && noun == :observations
   get_observations(options, http_client)
 elsif verb == :put && noun == :observations

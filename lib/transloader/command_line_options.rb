@@ -3,8 +3,8 @@ require 'uri'
 module Transloader
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
-                :destination, :http_auth, :http_headers, :overwrite,
-                :provider, :station_id, :user_id
+                :destination, :http_auth, :http_headers, :key,
+                :overwrite, :provider, :station_id, :user_id
     # Set default values
     def initialize
       @allowed      = nil
@@ -15,6 +15,7 @@ module Transloader
       @destination  = nil
       @http_auth    = nil
       @http_headers = []
+      @key          = nil
       @overwrite    = false
       @provider     = nil
       @station_id   = nil
@@ -28,6 +29,7 @@ module Transloader
       parser.separator "Available subcommands:"
       parser.separator "transload get metadata [options]"
       parser.separator "transload put metadata [options]"
+      parser.separator "transload show metadata [options]"
       parser.separator "transload get observations [options]"
       parser.separator "transload put observations [options]"
       parser.separator ""
@@ -41,6 +43,7 @@ module Transloader
       destination_option(parser)
       http_auth_option(parser)
       http_header_option(parser)
+      key_option(parser)
       overwrite_option(parser)
       provider_option(parser)
       station_id_option(parser)      
@@ -156,6 +159,14 @@ module Transloader
       parser.on("--header \"Header: Value\"",
         "Specify additional HTTP headers for requests.") do |value|
         @http_headers.push(value)
+      end
+    end
+
+    # Specify key for metadata show method
+    def key_option(parser)
+      parser.on("--key <KEY>",
+        "Specify key to lookup in metadata.") do |value|
+        @key = value
       end
     end
 

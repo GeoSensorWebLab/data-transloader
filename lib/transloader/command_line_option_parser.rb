@@ -14,8 +14,8 @@ module Transloader
     # Returns an array of [verb, noun, options].
     def parse(args)
       @options = parse_options!(args)
-      verb = parse_verb(args)
-      noun = parse_noun(args)
+      verb     = parse_verb(args)
+      noun     = parse_noun(args)
 
       validate(verb, noun, @options)
     end
@@ -57,7 +57,8 @@ module Transloader
     end
 
     # Parse verb from args.
-    # Verb may be `get` or `put`; if missing then an error is raised.
+    # Verb may be `get`, `put`, or `show`; if missing then an error is 
+    # raised.
     def parse_verb(args)
       if args.nil? || args[0].nil?
         puts "ERROR: Missing VERB from arguments"
@@ -70,6 +71,8 @@ module Transloader
         return :get
       when /put/i
         return :put
+      when /show/i
+        return :show
       else
         puts "ERROR: Invalid first argument for VERB"
         puts @parser
@@ -98,6 +101,8 @@ module Transloader
         validate_get_metadata(options)
       elsif verb == :put && noun == :metadata
         validate_put_metadata(options)
+      elsif verb == :show && noun == :metadata
+        validate_show_metadata(options)
       elsif verb == :get && noun == :observations
         validate_get_observations(options)
       elsif verb == :put && noun == :observations
@@ -142,6 +147,16 @@ module Transloader
     # Options validation for "put observations" command
     def validate_put_observations(options)
       require_options(options, [:provider, :station_id, :cache, :date, :destination])
+
+      case options.provider
+      when "data_garrison"
+        require_options(options, [:user_id])
+      end
+    end
+
+    # Options validation for "show metadata" command
+    def validate_show_metadata(options)
+      require_options(options, [:provider, :station_id, :cache, :key])
 
       case options.provider
       when "data_garrison"
