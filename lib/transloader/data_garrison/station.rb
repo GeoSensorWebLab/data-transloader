@@ -49,21 +49,29 @@ module Transloader
       html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td[position()=2]/div[position()=2]/table/tr[position()=2]/td/table/tr/td/font/a').collect do |element|
         href       = element.attr('href')
         filename   = element.text.to_s.sub(/ /, '_')
-        file_index = href[/data_launch=(\d+)/, 1].rjust(3, '0')
-        url        = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{file_index}.txt"
 
-        # Issue HEAD request for data files
-        response = @http_client.head(uri: url)
-        last_modified = parse_last_modified(response["Last-Modified"])
+        if filename == ""
+          # Without a filename, the file cannot be downloaded as a TSV
+          logger.debug "Skipping data file with missing filename (station #{@id})"
+        else
+          file_index = href[/data_launch=(\d+)/, 1].rjust(3, '0')
+          url        = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{file_index}.txt"
 
-        # Content-Length can be used here because there is no 
-        # compression encoding.
-        data_files.push(DataFile.new({
-          url:           url,
-          last_modified: to_iso8601(last_modified),
-          length:        response["Content-Length"]
-        }).to_h)
+          # Issue HEAD request for data files
+          response = @http_client.head(uri: url)
+          last_modified = parse_last_modified(response["Last-Modified"])
+
+          # Content-Length can be used here because there is no 
+          # compression encoding.
+          data_files.push(DataFile.new({
+            url:           url,
+            last_modified: to_iso8601(last_modified),
+            length:        response["Content-Length"]
+          }).to_h)
+        end
       end
+
+      logger.debug "Found #{data_files.length} valid data files."
 
       # Parse sensor metadata
       # It is possible for some sensors to have the same name, which is
