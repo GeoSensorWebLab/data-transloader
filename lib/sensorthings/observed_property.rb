@@ -53,7 +53,7 @@ module SensorThings
         @id = existing_entity['@iot.id']
 
         if same_as?(existing_entity)
-          logger.info "Re-using existing ObservedProperty entity."
+          logger.debug "Re-using existing ObservedProperty entity."
         else
           self.patch_to_path(@link)
         end
