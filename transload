@@ -2,10 +2,26 @@
 require 'transloader'
 require 'pry'
 
-SemanticLogger.add_appender(io: $stdout, level: :info)
+# Adjust the logging level based on the "LOG_LEVEL" environment 
+# variable.
+LOG_LEVELS = {
+  "ERROR" => :error,
+  "WARN"  => :warn,
+  "INFO"  => :info,
+  "DEBUG" => :debug,
+  "TRACE" => :trace
+}
+env_log_level = ENV["LOG_LEVEL"].nil? ? nil : ENV["LOG_LEVEL"].upcase
+level = LOG_LEVELS.fetch(env_log_level, :info)
+
+SemanticLogger.default_level = level
+SemanticLogger.add_appender(io: $stdout)
 SemanticLogger.add_appender(io: $stderr, level: :error)
 
+$logger = SemanticLogger['Transload']
+
 def get_station(options, http_client)
+  $logger.debug "Creating station instance for #{options.provider}"
   case options.provider
   when "environment_canada"
     Transloader::Station.new({
@@ -34,11 +50,13 @@ def get_station(options, http_client)
 end
 
 def get_metadata(options, http_client)
+  $logger.debug "Getting metadata"
   station = get_station(options, http_client)
   station.download_metadata(overwrite: options.overwrite)
 end
 
 def put_metadata(options, http_client)
+  $logger.debug "Putting metadata"
   station = get_station(options, http_client)
   station.upload_metadata(options.destination,
     allowed: options.allowed,
@@ -46,11 +64,13 @@ def put_metadata(options, http_client)
 end
 
 def get_observations(options, http_client)
+  $logger.debug "Getting observations"
   station = get_station(options, http_client)
   station.download_observations(options.date)
 end
 
 def put_observations(options, http_client)
+  $logger.debug "Putting observations"
   station = get_station(options, http_client)
   station.upload_observations(options.destination, options.date,
     allowed: options.allowed,
