@@ -27,6 +27,7 @@ module Transloader
     #                      MetadataStore.
     # `overwrite`: If metadata already exists locally, overwrite it.
     def download_metadata(override_metadata: nil, overwrite: false)
+      logger.info "Downloading metadata"
       @station.download_metadata(
         override_metadata: override_metadata,
         overwrite: overwrite
@@ -36,12 +37,14 @@ module Transloader
     # Upload the station metadata from the MetadataStore cache to 
     # SensorThings API
     def upload_metadata(server_url, options = {})
+      logger.info "Uploading metadata"
       @station.upload_metadata(server_url, options)
     end
 
     # Download the station observations for an interval to the DataStore 
     # cache
     def download_observations(interval = nil)
+      logger.info "Downloading observations"
       @station.download_observations(interval)
     end
 
@@ -49,6 +52,7 @@ module Transloader
     # cache to SensorThings API. `destination` may be ignored and the
     # cached URLs (from metadata store cache) will be used instead.
     def upload_observations(destination, interval, options = {})
+      logger.info "Uploading observations"
       @station.upload_observations(destination, interval, options)
     end
 
