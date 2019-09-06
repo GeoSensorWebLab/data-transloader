@@ -1,5 +1,15 @@
 # Changelog for Data Transloader
 
+## Version 0.6.1 (2019-09-05)
+
+* Support customizable log level from environment variable `LOG_LEVEL` for `transload` tool
+* Expand usage of debug and trace logging in Transloader library
+* Change message for entity re-use to a debug log (from an info log)
+* Fix bug in Data Garrison where linked data files with empty file names would cause a crash as they had no TSV to download
+* Add `show metadata` command to `transload` tool
+* Add `edit metadata` comamnd to `transload` tool
+* **Remove** inclusion of `v2` from cache path; provider directories will now be added directly to the cache directory (as in v0.5.0)
+
 ## Version 0.6.0 (2019-08-28)
 
 * Add support for HTTP Basic Access Authentication when downloading and uploading data/metadata
