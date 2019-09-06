@@ -23,7 +23,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
     it "downloads the station metadata when saving the metadata" do
       VCR.use_cassette("data_garrison/station") do
-        metadata_file = "#{$cache_dir}/v2/data_garrison/metadata/300234063581640-300234065673960.json"
+        metadata_file = "#{$cache_dir}/data_garrison/metadata/300234063581640-300234065673960.json"
         expect(File.exist?(metadata_file)).to be false
 
         @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)

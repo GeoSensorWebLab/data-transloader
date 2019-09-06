@@ -23,7 +23,7 @@ module Transloader
       @cache_path   = cache_path
       @provider     = provider
       @station      = station
-      @path         = "#{@cache_path}/v2/#{@provider}/#{@station}"
+      @path         = "#{@cache_path}/#{@provider}/#{@station}"
       FileUtils.mkdir_p(@path)
     end
 

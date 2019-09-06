@@ -11,14 +11,14 @@ RSpec.describe Transloader::MetadataStore do
   end
 
   it "creates the storage path on initialization" do
-    expect(Dir.exists?("#{$cache_dir}/v2/test/metadata")).to be false
+    expect(Dir.exists?("#{$cache_dir}/test/metadata")).to be false
 
     Transloader::MetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
 
-    expect(Dir.exists?("#{$cache_dir}/v2/test/metadata")).to be true
+    expect(Dir.exists?("#{$cache_dir}/test/metadata")).to be true
   end
 
   it "returns empty metadata if the cache is empty" do
@@ -36,7 +36,7 @@ RSpec.describe Transloader::MetadataStore do
       provider: "test",
       station: "unique")
     store.set("test", "value")
-    raw_data = JSON.parse(IO.read("#{$cache_dir}/v2/test/metadata/unique.json"))
+    raw_data = JSON.parse(IO.read("#{$cache_dir}/test/metadata/unique.json"))
 
     expect(raw_data["metadata"]["test"]).to eq("value")
   end

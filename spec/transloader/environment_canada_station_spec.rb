@@ -21,7 +21,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "downloads the station metadata when saving the metadata" do
       VCR.use_cassette("environment_canada/stations") do
-        expect(File.exist?("#{$cache_dir}/v2/environment_canada/metadata/CXCM.json")).to be false
+        expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be false
 
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
@@ -29,7 +29,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
         expect(WebMock).to have_requested(:get, 
           "http://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
-        expect(File.exist?("#{$cache_dir}/v2/environment_canada/metadata/CXCM.json")).to be true
+        expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be true
       end
     end
 

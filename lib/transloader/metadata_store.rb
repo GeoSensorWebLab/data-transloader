@@ -19,9 +19,9 @@ module Transloader
       @cache_path = cache_path
       @provider   = provider
       @station    = station
-      @path       = "#{@cache_path}/v2/#{@provider}/metadata/#{@station}.json"
+      @path       = "#{@cache_path}/#{@provider}/metadata/#{@station}.json"
       @metadata   = read()
-      FileUtils.mkdir_p("#{@cache_path}/v2/#{@provider}/metadata")
+      FileUtils.mkdir_p("#{@cache_path}/#{@provider}/metadata")
     end
 
     # Retrieve a value for a given key from the metadata store.

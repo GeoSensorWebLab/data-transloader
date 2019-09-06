@@ -11,14 +11,14 @@ RSpec.describe Transloader::DataStore do
   end
 
   it "creates the storage path on initialization" do
-    expect(Dir.exists?("#{$cache_dir}/v2/test/unique")).to be false
+    expect(Dir.exists?("#{$cache_dir}/test/unique")).to be false
 
     Transloader::DataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
 
-    expect(Dir.exists?("#{$cache_dir}/v2/test/unique")).to be true
+    expect(Dir.exists?("#{$cache_dir}/test/unique")).to be true
   end
 
   it "returns an empty set of observations if the cache is empty" do
@@ -53,7 +53,7 @@ RSpec.describe Transloader::DataStore do
       unit: "degC"
     }
     store.store([observation])
-    raw_data = JSON.parse(IO.read("#{$cache_dir}/v2/test/unique/2000/01/01.json"))
+    raw_data = JSON.parse(IO.read("#{$cache_dir}/test/unique/2000/01/01.json"))
 
     expect(raw_data["data"].keys.length).to be(1)
   end
