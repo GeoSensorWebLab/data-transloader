@@ -41,7 +41,7 @@ module SensorThings
       body = JSON.parse(response.body)
 
       if response.code != "200"
-        raise "Error: Could not GET entities. #{url}\n #{response.body}\n #{filter}"
+        raise HTTPError.new(response, "Error: Could not GET entities.")
       end
 
       # Look for matching existing entities. If no entities match, use POST to

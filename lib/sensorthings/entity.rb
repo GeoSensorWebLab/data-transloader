@@ -46,7 +46,7 @@ module SensorThings
       response = send_request(url, :PATCH)
 
       if response.code != "200" && response.code != "204"
-        raise "Error: Could not PATCH entity. #{url}\n #{response.body}"
+        raise HTTPError.new(response, "Error: Could not PATCH entity.")
       end
     end
 
@@ -54,7 +54,7 @@ module SensorThings
       response = send_request(url, :POST)
 
       if response.code != "201"
-        raise "Error: Could not POST entity. #{url}\n #{response.code} #{response.body}"
+        raise HTTPError.new(response, "Error: Could not POST entity.")
       end
 
       entity = nil
@@ -64,7 +64,7 @@ module SensorThings
       # entity to get its true self link and id.
       if response.body.empty?
         if response['Location'].empty?
-          raise "Cannot retrieve entity details without body or Location"
+          raise HTTPError.new(response, "Cannot retrieve entity details without body or Location")
         end
 
         response = get(response['Location'])
@@ -81,7 +81,7 @@ module SensorThings
       response = send_request(url, :PUT)
 
       if response.code != "201"
-        raise "Error: Could not PUT entity. #{url}\n #{response.body}"
+        raise HTTPError.new(response, "Error: Could not PUT entity.")
       end
 
       @link = response['Location']
@@ -107,7 +107,7 @@ module SensorThings
         when :PUT
           @http_client.put(options)
         else
-          raise "Unknown HTTP method: #{method_name}"
+          raise SensorThings::Error.new("Unknown HTTP method: #{method_name}")
       end
 
       response.body = fix_encoding(response.body)
