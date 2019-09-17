@@ -76,7 +76,7 @@ module Transloader
           station_id: options[:station_id]
         )
       else
-        raise "Unhandled provider class: #{provider.class}"
+        raise Error, "Unhandled provider class: #{provider.class}"
       end
     end
 
@@ -86,7 +86,7 @@ module Transloader
       when "environment_canada" then EnvironmentCanadaProvider
       when "data_garrison" then DataGarrisonProvider
       when "campbell_scientific" then CampbellScientificProvider
-      else raise "Unknown provider name: #{provider_name}"
+      else raise Error, "Unknown provider name: #{provider_name}"
       end
     end
   end

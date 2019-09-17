@@ -38,7 +38,7 @@ module Transloader
         individual[DEFS[:observationType]][0].humanize
       else
         # Only one should have been matched — probably an ontology issue
-        raise "Too many matching units of measurement"
+        raise OntologyError, "Too many matching units of measurement"
       end
     end
 
@@ -61,7 +61,7 @@ module Transloader
         }
       else
         # Only one should have been matched — probably an ontology issue
-        raise "Too many matching observed properties"
+        raise OntologyError, "Too many matching observed properties"
       end
     end
 
@@ -80,7 +80,7 @@ module Transloader
         }
       else
         # Only one should have been matched — probably an ontology issue
-        raise "Too many matching units of measurement"
+        raise OntologyError, "Too many matching units of measurement"
       end
     end
 
