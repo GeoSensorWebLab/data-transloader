@@ -33,13 +33,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    it "raises an error if metadata source file cannot be downloaded" do
+    it "raises an error when the SWOB-ML file cannot be downloaded" do
       VCR.use_cassette("environment_canada/observations_not_found") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         expect {
           @station.download_metadata
-        }.to raise_error(RuntimeError)
+        }.to raise_error(RuntimeError, /SWOB-ML file not found/)
       end
     end
   end

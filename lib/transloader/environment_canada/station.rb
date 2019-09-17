@@ -338,9 +338,14 @@ module Transloader
       swobml_url = "#{url}/#{@id}-#{type}-swob.xml"
       response = @http_client.get(uri: swobml_url)
 
-      if response.code != '200'
-        logger.error "Error downloading station observation data"
-        raise
+      if response.code == "404"
+        error_message = "SWOB-ML file not found for station #{@id}; data may be unavailable for the specified interval."
+        logger.error error_message
+        raise error_message
+      elsif response.code != '200'
+        error_message = "Error downloading station observation data"
+        logger.error error_message
+        raise error_message
       end
       response.body
     end
