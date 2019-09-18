@@ -16,7 +16,6 @@ level = LOG_LEVELS.fetch(env_log_level, :info)
 
 SemanticLogger.default_level = level
 SemanticLogger.add_appender(io: $stdout)
-SemanticLogger.add_appender(io: $stderr, level: :error)
 
 $logger = SemanticLogger['Transload']
 
@@ -134,17 +133,31 @@ http_client = Transloader::HTTP.new(
   headers: options.http_headers
 )
 
-# Determine action
-if verb == :get && noun == :metadata
-  get_metadata(options, http_client)
-elsif verb == :put && noun == :metadata
-  put_metadata(options, http_client)
-elsif verb == :set && noun == :metadata
-  set_metadata(options)
-elsif verb == :show && noun == :metadata
-  show_metadata(options)
-elsif verb == :get && noun == :observations
-  get_observations(options, http_client)
-elsif verb == :put && noun == :observations
-  put_observations(options, http_client)
+begin
+  # Determine action
+  if verb == :get && noun == :metadata
+    get_metadata(options, http_client)
+  elsif verb == :put && noun == :metadata
+    put_metadata(options, http_client)
+  elsif verb == :set && noun == :metadata
+    set_metadata(options)
+  elsif verb == :show && noun == :metadata
+    show_metadata(options)
+  elsif verb == :get && noun == :observations
+    get_observations(options, http_client)
+  elsif verb == :put && noun == :observations
+    put_observations(options, http_client)
+  end
+rescue Transloader::HTTPError, SensorThings::HTTPError => e
+  $logger.fatal "#{e.message}"
+  $logger.fatal "#{e.response.uri}"
+  $logger.fatal "#{e.response.code} #{e.response.message}"
+  e.response.each_header do |header, value|
+    $logger.fatal "#{header}: #{value}"
+  end
+  $logger.fatal "#{e.response.body}"
+  exit 1
+rescue Transloader::Error, SensorThings::Error => e
+  $logger.fatal "#{e.message}"
+  exit 2
 end
