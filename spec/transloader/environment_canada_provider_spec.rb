@@ -30,7 +30,7 @@ RSpec.describe Transloader::EnvironmentCanadaProvider do
       provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
       expect {
         provider.stations
-      }.to raise_error("Error downloading station list")
+      }.to raise_error(Transloader::HTTPError, /Error downloading station list/)
     end
   end
 

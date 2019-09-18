@@ -232,8 +232,7 @@ module Transloader
       xml = get_observation_xml(interval)
 
       if xml.nil?
-        logger.error "Unable to download SWOB-ML"
-        raise
+        raise Error, "Unable to download SWOB-ML"
       end
 
       # Parse date from SWOB-ML
@@ -331,21 +330,16 @@ module Transloader
       when "MAN", "Manned"
         type = "MAN"
       else
-        logger.error "Error: unknown station type"
-        raise
+        raise Error, "Error: unknown station type"
       end
 
       swobml_url = "#{url}/#{@id}-#{type}-swob.xml"
       response = @http_client.get(uri: swobml_url)
 
       if response.code == "404"
-        error_message = "SWOB-ML file not found for station #{@id}; data may be unavailable for the specified interval."
-        logger.error error_message
-        raise error_message
+        raise HTTPError.new(response, "SWOB-ML file not found for station #{@id}; data may be unavailable for the specified interval.")
       elsif response.code != '200'
-        error_message = "Error downloading station observation data"
-        logger.error error_message
-        raise error_message
+        raise HTTPError.new(response, "Error downloading station observation data")
       end
       response.body
     end
@@ -368,8 +362,7 @@ module Transloader
     def upload_observations_array(observations, options = {})
       # Check for metadata
       if @metadata.empty?
-        logger.error "station metadata not loaded"
-        raise
+        raise Error, "station metadata not loaded"
       end
 
       datastreams = @metadata[:datastreams]

@@ -39,7 +39,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station = @provider.get_station(station_id: "CXCM")
         expect {
           @station.download_metadata
-        }.to raise_error(RuntimeError, /SWOB-ML file not found/)
+        }.to raise_error(Transloader::HTTPError, /SWOB-ML file not found/)
       end
     end
   end

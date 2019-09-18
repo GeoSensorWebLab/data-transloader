@@ -6,7 +6,7 @@ module SensorThings
   # Generic parent error class for this module
   class Error < StandardError; end
 
-  # Exception when a PATCH request fails
+  # Exception when an HTTP request fails
   class HTTPError < Error
 
     attr_reader :response

@@ -53,7 +53,9 @@ module Transloader
     def download_station_list
       response = @http_client.get(uri: METADATA_URL)
 
-      raise "Error downloading station list" if response.code != '200'
+      if response.code != "200"
+        raise HTTPError.new(response, "Error downloading station list from Environment Canada")
+      end
 
       # Data is encoded as ISO-8859-1 but has no encoding headers, so 
       # encoding must be manually applied. I then convert to UTF-8 for 
@@ -80,8 +82,7 @@ module Transloader
     def get_station_row(station_id)
       station_row = stations.detect { |row| row["IATA_ID"] == station_id }
       if station_row.nil?
-        logger.error "Station \"#{station_id}\" not found in list"
-        raise
+        raise Error, "Station \"#{station_id}\" not found in list"
       end
       station_row
     end

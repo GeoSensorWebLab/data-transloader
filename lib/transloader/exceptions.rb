@@ -7,4 +7,16 @@ module Transloader
 
   # Exceptions related to usage of the embedded Ontology
   class OntologyError < Error; end
+
+  # Exception when an HTTP request fails
+  class HTTPError < Error
+
+    attr_reader :response
+
+    # Store the response in the error for re-use
+    def initialize(response, msg = nil)
+      @response = response
+      super(msg)
+    end
+  end
 end
