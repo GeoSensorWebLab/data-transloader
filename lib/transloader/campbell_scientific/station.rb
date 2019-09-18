@@ -36,7 +36,7 @@ module Transloader
       data_urls = @properties[:data_urls]
 
       if data_urls.empty?
-        raise "No data URLs specified. Data URLs are required to download station metadata."
+        raise Error, "No data URLs specified. Data URLs are required to download station metadata."
       end
 
       data_files = []
@@ -49,7 +49,7 @@ module Transloader
         # Incorrect URLs triggers a 302 Found that redirects to the 404 
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
-          raise "Not Found: #{data_url}"
+          raise HTTPError.new(response, "Incorrect Data URL for Campbell Scientific station")
         end
 
         filedata = response.body
@@ -194,7 +194,7 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata[:latitude].nil? || @metadata[:longitude].nil?
-        raise "Station latitude or longitude is nil! Location entity cannot be created."
+        raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
       end
       
       # Create Location entity
@@ -497,8 +497,7 @@ module Transloader
     def upload_observations_array(observations, options = {})
       # Check for metadata
       if @metadata.empty?
-        logger.error "station metadata not loaded"
-        raise
+        raise Error, "station metadata not loaded"
       end
 
       # Filter Datastreams based on allowed/blocked lists.
@@ -537,8 +536,7 @@ module Transloader
           datastream_url = datastream[:'Datastream@iot.navigationLink']
 
           if datastream_url.nil?
-            logger.error "Datastream navigation URLs not cached"
-            raise
+            raise Error, "Datastream navigation URLs not cached"
           end
 
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
