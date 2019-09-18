@@ -80,7 +80,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         )
         expect {
           @station.download_metadata
-        }.to raise_error(RuntimeError, "Could not download station data")
+        }.to raise_error(Transloader::HTTPError, "Could not download station data")
       end
     end
   end

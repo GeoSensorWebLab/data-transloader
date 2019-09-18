@@ -244,7 +244,7 @@ module Transloader
       # LOCATION entity
       # Check if latitude or longitude are blank
       if @metadata[:latitude].nil? || @metadata[:longitude].nil?
-        raise <<-EOH
+        raise Error, <<-EOH
         Station latitude or longitude is nil!
         Location entity cannot be created. Exiting.
         EOH
@@ -543,7 +543,7 @@ module Transloader
       response = @http_client.get(uri: @base_path)
 
       if response.code != "200"
-        raise "Could not download station data"
+        raise HTTPError.new(response, "Could not download station data")
       end
 
       response.body
@@ -631,8 +631,7 @@ module Transloader
     def upload_observations_array(observations, options = {})
       # Check for metadata
       if @metadata.empty?
-        logger.error "station metadata not loaded"
-        raise
+        raise Error, "station metadata not loaded"
       end
 
       # Filter Datastreams based on allowed/blocked lists.
@@ -671,8 +670,7 @@ module Transloader
           datastream_url = datastream[:'Datastream@iot.navigationLink']
 
           if datastream_url.nil?
-            logger.error "Datastream navigation URLs not cached"
-            raise
+            raise Error, "Datastream navigation URLs not cached"
           end
 
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
