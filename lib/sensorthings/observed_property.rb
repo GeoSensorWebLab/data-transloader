@@ -35,7 +35,7 @@ module SensorThings
 
     def upload_to(url)
       upload_url = self.join_uris(url, "ObservedProperties")
-      filter     = "name eq '#{@name}' and description eq '#{@description}'"
+      filter     = "name eq '#{@name}'"
       response   = self.get(upload_url + "?$filter=#{filter}")
       body       = JSON.parse(response.body)
 
