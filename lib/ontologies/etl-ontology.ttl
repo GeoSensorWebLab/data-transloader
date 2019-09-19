@@ -893,7 +893,7 @@ etl-ontology:Property:Air_Temperature_12_hours_ago rdf:type owl:NamedIndividual 
 etl-ontology:Property:Average_10m_wind_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
                                                                            etl-ontology:ObservedProperty ;
                                                                   etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                                   rdfs:label "Average 10 meter wind speed over past 10 minutes" .
 
 
@@ -901,7 +901,7 @@ etl-ontology:Property:Average_10m_wind_speed_over_past_10_minutes rdf:type owl:N
 etl-ontology:Property:Average_10m_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                               rdfs:label "Average 10 meter wind speed over past 1 hour" .
 
 
@@ -909,7 +909,7 @@ etl-ontology:Property:Average_10m_wind_speed_over_past_1_hour rdf:type owl:Named
 etl-ontology:Property:Average_10m_wind_speed_over_past_2_minutes rdf:type owl:NamedIndividual ,
                                                                           etl-ontology:ObservedProperty ;
                                                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                                  rdfs:label "Average 10 meter wind speed over past 2 minutes" .
 
 
@@ -941,7 +941,7 @@ etl-ontology:Property:Average_wind_direction_at_10_meters_over_past_2_minutes rd
 etl-ontology:Property:Average_wind_speed_at_precipitation_gauge_over_past_10_minutes rdf:type owl:NamedIndividual ,
                                                                                               etl-ontology:ObservedProperty ;
                                                                                      etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                                     etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity." ;
+                                                                                     etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity." ;
                                                                                      rdfs:label "Average wind speed at precipitation gauge over past 10 minutes" .
 
 
@@ -1013,7 +1013,7 @@ etl-ontology:Property:Data_Availability rdf:type owl:NamedIndividual ,
 etl-ontology:Property:Datalogger_panel_temperature rdf:type owl:NamedIndividual ,
                                                             etl-ontology:ObservedProperty ;
                                                    etl-ontology:definition "http://mmisw.org/ont/secoora/parameter/enclosed_temperature"^^xsd:anyURI ;
-                                                   etl-ontology:description "Inside temperature of an enclosure or housing for sensor, system electronics, or battery that is recorded to monitor sensor health and data reliability. Some instruments may cease to operate or may perform poorly outside of manufacturer recommended operating temperatures."^^xsd:string ;
+                                                   etl-ontology:description "Inside temperature of an enclosure or housing for sensor, system electronics, or battery that is recorded to monitor sensor health and data reliability."^^xsd:string ;
                                                    rdfs:label "Datalogger panel temperature" .
 
 
@@ -1037,7 +1037,7 @@ etl-ontology:Property:Dew_Point_Temperature rdf:type owl:NamedIndividual ,
 etl-ontology:Property:Downwelling_shortwave_flux_in_air rdf:type owl:NamedIndividual ,
                                                                  etl-ontology:ObservedProperty ;
                                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/downwelling_shortwave_flux_in_air"^^xsd:anyURI ;
-                                                        etl-ontology:description "Downwelling radiation is radiation from above. It does not mean \"net downward\". The sign convention is that \"upwelling\" is positive upwards and \"downwelling\" is positive downwards. The term \"shortwave\" means shortwave radiation. When thought of as being incident on a surface, a radiative flux is sometimes called \"irradiance\". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called \"vector irradiance\". In accordance with common usage in geophysical disciplines, \"flux\" implies per unit area, called \"flux density\" in physics."^^xsd:string ;
+                                                        etl-ontology:description "Downwelling radiation is radiation from above. It does not mean \"net downward\". The sign convention is that \"upwelling\" is positive upwards and \"downwelling\" is positive downwards. The term \"shortwave\" means shortwave radiation."^^xsd:string ;
                                                         rdfs:label "Downwelling shortwave flux in air" .
 
 
@@ -1093,7 +1093,7 @@ etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp rdf:type owl:NamedInd
 etl-ontology:Property:Maximum_10m_peak_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                             etl-ontology:ObservedProperty ;
                                                                    etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                   etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                   etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                                    rdfs:label "Maximum 10 meter peak wind speed over past 1 hour" .
 
 
@@ -1101,7 +1101,7 @@ etl-ontology:Property:Maximum_10m_peak_wind_speed_over_past_1_hour rdf:type owl:
 etl-ontology:Property:Maximum_10m_wind_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
                                                                            etl-ontology:ObservedProperty ;
                                                                   etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                                   rdfs:label "Maximum 10 meter wind speed over past 10 minutes" .
 
 
@@ -1109,7 +1109,7 @@ etl-ontology:Property:Maximum_10m_wind_speed_over_past_10_minutes rdf:type owl:N
 etl-ontology:Property:Maximum_10m_wind_speed_over_past_1_hour rdf:type owl:NamedIndividual ,
                                                                        etl-ontology:ObservedProperty ;
                                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                                              etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                                               rdfs:label "Maximum 10 meter wind speed over past 1 hour" .
 
 
@@ -1165,7 +1165,7 @@ etl-ontology:Property:Maximum_visibility_over_past_10_minutes rdf:type owl:Named
 etl-ontology:Property:Mean_sea_level_pressure rdf:type owl:NamedIndividual ,
                                                        etl-ontology:ObservedProperty ;
                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure_at_mean_sea_level"^^xsd:anyURI ;
-                                              etl-ontology:description " Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation. \"Mean sea level\" means the time mean of sea surface elevation at a given location over an arbitrary period sufficient to eliminate the tidal signals."^^xsd:string ;
+                                              etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
                                               rdfs:label "Mean Sea Level Pressure" .
 
 
@@ -1389,7 +1389,7 @@ etl-ontology:Property:Wind_From_Direction rdf:type owl:NamedIndividual ,
 etl-ontology:Property:Wind_Speed rdf:type owl:NamedIndividual ,
                                           etl-ontology:ObservedProperty ;
                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
-                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity."^^xsd:string ;
+                                 etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                  rdfs:label "Wind Speed" .
 
 
@@ -1421,7 +1421,7 @@ etl-ontology:Property:Wind_direction_associated_with_the_past_10-minute_maximum_
 etl-ontology:Property:Wind_speed_of_gust rdf:type owl:NamedIndividual ,
                                                   etl-ontology:ObservedProperty ;
                                          etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed_of_gust"^^xsd:anyURI ;
-                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.) The wind speed is the magnitude of the wind velocity. A gust is a sudden brief period of high wind speed. In an observed timeseries of wind speed, the gust wind speed can be indicated by a cell_methods of maximum for the time-interval. In an atmospheric model which has a parametrised calculation of gustiness, the gust wind speed may be separately diagnosed from the wind speed." ;
+                                         etl-ontology:description "Speed is the magnitude of velocity. A gust is a sudden brief period of high wind speed." ;
                                          rdfs:label "Wind speed of gust" .
 
 
