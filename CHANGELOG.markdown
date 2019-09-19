@@ -1,5 +1,14 @@
 # Changelog for Data Transloader
 
+## Version 0.6.2 (2019-09-19)
+
+* Improve error handling when SWOB-ML files are unavailable from Environment Canada
+* Implement custom Error classes in SensorThings and Transloader modules
+* Add tests for some Ontology methods
+* Switch to error catching at high-level `transload` tool
+* Add warnings for long attributes in SensorThings API entities
+* Adjust descriptions in Ontology to be under 256 characters in length
+
 ## Version 0.6.1 (2019-09-05)
 
 * Support customizable log level from environment variable `LOG_LEVEL` for `transload` tool
