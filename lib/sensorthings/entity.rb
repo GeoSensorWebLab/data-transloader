@@ -2,8 +2,8 @@ require 'json'
 require 'uri'
 
 module SensorThings
-  # Base class for SensorThings API entities. Do not instantiate directly,
-  # instead use subclasses.
+  # Base class for SensorThings API entities. Do not instantiate 
+  # directly, instead use subclasses.
   class Entity
     include SemanticLogger::Loggable
 
@@ -11,11 +11,12 @@ module SensorThings
     attr_accessor :attributes, :id, :link
 
     def initialize(attributes, http_client)
-      @attributes = attributes
+      @attributes  = attributes
       @http_client = http_client
     end
 
-    # Override URI join function to handle OData style parenthesis properly
+    # Override URI join function to handle OData style parenthesis 
+    # properly
     def join_uris(*uris)
       uris.reduce("") do |memo, uri|
         if memo.to_s[-1] == ")"
@@ -33,7 +34,7 @@ module SensorThings
 
     def get(url)
       response = @http_client.get({
-        uri: url,
+        uri:          url,
         open_timeout: 1800,
         read_timeout: 1800
       })
@@ -85,7 +86,7 @@ module SensorThings
       end
 
       @link = response['Location']
-      @id = JSON.parse(response.body)['@iot.id']
+      @id   = JSON.parse(response.body)['@iot.id']
     end
 
     # PATCH/POST/PUT all use the same behaviour for sending data, so it
