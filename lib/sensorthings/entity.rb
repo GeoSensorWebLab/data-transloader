@@ -13,6 +13,8 @@ module SensorThings
     def initialize(attributes, http_client)
       @attributes  = attributes
       @http_client = http_client
+
+      warn_long_attributes(@attributes)
     end
 
     # Override URI join function to handle OData style parenthesis 
@@ -121,6 +123,16 @@ module SensorThings
     # See https://bugs.ruby-lang.org/issues/2567
     def fix_encoding(body)
       body.force_encoding('UTF-8')
+    end
+
+    # Print out warning for attributes that may be too long for some
+    # SensorThings API implementations.
+    def warn_long_attributes(attributes)
+      attributes.each do |key, value|
+        if value.is_a?(String) && value.length > 255
+          logger.warn %Q[The value for the "#{key}" attribute is longer than 255 characters, which may cause an error with some SensorThings API implementations.]
+        end
+      end
     end
   end
 end
