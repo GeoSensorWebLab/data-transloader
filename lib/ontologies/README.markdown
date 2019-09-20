@@ -26,6 +26,8 @@ The ontology is encoded in the [RDF Turtle format][Turtle]. I recommend using an
 
 Avoid using special characters for RDF Individual names, and try to use simple alpha-numeric characters instead to avoid parsing issues. For description and label strings, avoid exceeding 255 characters in length as this may conflict with some SensorThings API implementations.
 
+If a `definition` for a `Property` is an empty string, this will cause an error in SensorThings API.
+
 [Protege]: https://protege.stanford.edu
 [Turtle]: https://en.wikipedia.org/wiki/Turtle_(syntax)
 

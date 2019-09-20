@@ -1084,7 +1084,7 @@ etl-ontology:Property:High_Data_Rate_transmitter_reflected_power rdf:type owl:Na
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Max_wind_speed_past_1_hour_timestamp
 etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp rdf:type owl:NamedIndividual ,
                                                                     etl-ontology:ObservedProperty ;
-                                                           etl-ontology:definition ""^^xsd:anyURI ;
+                                                           etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
                                                            etl-ontology:description "Timestamp of maximum wind speed over past hour." ;
                                                            rdfs:label "Timestamp of maximum wind speed over past hour" .
 
