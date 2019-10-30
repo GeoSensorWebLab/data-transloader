@@ -34,6 +34,15 @@ RSpec.describe Transloader::EnvironmentCanadaProvider do
     end
   end
 
+  it "raises an error when stations metadata file has moved" do
+    VCR.use_cassette("environment_canada/stations_redirect") do
+      provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+      expect {
+        provider.stations
+      }.to raise_error(Transloader::HTTPError, /Error downloading station list/)
+    end
+  end
+
   it "does not make an HTTP request if data is already cached" do
     VCR.use_cassette("environment_canada/stations") do
       provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
