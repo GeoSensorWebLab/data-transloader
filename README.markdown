@@ -1,5 +1,7 @@
 # Arctic Sensor Web Data Transloader
 
+[![Build Status](https://travis-ci.org/GeoSensorWebLab/data-transloader.svg?branch=master)](https://travis-ci.org/GeoSensorWebLab/data-transloader)
+
 This tool downloads weather station data from multiple sources and uploads it to an [OGC SensorThings API][] service. This makes the data available using an open and interoperable API.
 
 [OGC SensorThings API]: http://docs.opengeospatial.org/is/15-078r6/15-078r6.html
