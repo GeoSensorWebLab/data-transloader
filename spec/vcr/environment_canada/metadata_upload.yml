@@ -6673,7 +6673,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Data%20Availability'%20and%20description%20eq%20'Data%20availability'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Data%20Availability'
     body:
       encoding: US-ASCII
       string: ''
@@ -6793,7 +6793,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Battery%20Voltage%20over%20past%201%20hour'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Battery%20Voltage%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -6914,7 +6914,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Minimum%20Battery%20Voltage%20Past%201%20Hour'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Minimum%20Battery%20Voltage%20Past%201%20Hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -7035,7 +7035,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20forward%20power'%20and%20description%20eq%20'High%20Data%20Rate%20transmitter%20forward%20power'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20forward%20power'
     body:
       encoding: US-ASCII
       string: ''
@@ -7156,7 +7156,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20reflected%20power'%20and%20description%20eq%20'High%20Data%20Rate%20transmitter%20reflected%20power'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20reflected%20power'
     body:
       encoding: US-ASCII
       string: ''
@@ -7277,7 +7277,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Header%20Supply%20Voltage'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Header%20Supply%20Voltage'
     body:
       encoding: US-ASCII
       string: ''
@@ -7398,7 +7398,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20oscillator%20drift'%20and%20description%20eq%20'High%20Data%20Rate%20transmitter%20oscillator%20drift'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'High%20Data%20Rate%20Transmitter%20oscillator%20drift'
     body:
       encoding: US-ASCII
       string: ''
@@ -7519,7 +7519,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Datalogger%20panel%20temperature'%20and%20description%20eq%20'Inside%20temperature%20of%20an%20enclosure%20or%20housing%20for%20sensor,%20system%20electronics,%20or%20battery%20that%20is%20recorded%20to%20monitor%20sensor%20health%20and%20data%20reliability.%20Some%20instruments%20may%20cease%20to%20operate%20or%20may%20perform%20poorly%20outside%20of%20manufacturer%20recommended%20operating%20temperatures.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Datalogger%20panel%20temperature'
     body:
       encoding: US-ASCII
       string: ''
@@ -7642,7 +7642,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'
     body:
       encoding: US-ASCII
       string: ''
@@ -7763,7 +7763,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'
     body:
       encoding: US-ASCII
       string: ''
@@ -7884,7 +7884,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20air%20temperature%20over%20past%201%20hour'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20air%20temperature%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8005,7 +8005,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%201%20hour'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8126,7 +8126,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Relative%20Humidity%20over%20past%201%20hour'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Relative%20Humidity%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8247,7 +8247,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%201%20hour'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8293,7 +8293,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Minimum%20Relative%20Humidity%20over%20past%201%20hour'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Minimum%20Relative%20Humidity%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8414,7 +8414,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%2010%20minutes'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%2010%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -8537,7 +8537,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Vectoral%20average%2010%20meter%20wind%20direction%20over%20past%2010%20minutes'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Vectoral%20average%2010%20meter%20wind%20direction%20over%20past%2010%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -8660,7 +8660,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%201%20hour'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8783,7 +8783,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Vector%20average%2010%20meter%20wind%20direction%20over%20past%201%20hour'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Vector%20average%2010%20meter%20wind%20direction%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -8906,7 +8906,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20wind%20speed%20over%20past%201%20hour'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20wind%20speed%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -9029,7 +9029,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Timestamp%20of%20maximum%20wind%20speed%20over%20past%20hour'%20and%20description%20eq%20'Timestamp%20of%20maximum%20wind%20speed%20over%20past%20hour.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Timestamp%20of%20maximum%20wind%20speed%20over%20past%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -9149,7 +9149,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20maximum%20wind%20speed%20at%2010%20meters%20over%20past%201%20hour'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20maximum%20wind%20speed%20at%2010%20meters%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -9273,7 +9273,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20wind%20speed%20over%20past%2010%20minutes'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20wind%20speed%20over%20past%2010%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -9396,7 +9396,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:36 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20maximum%20wind%20speed%20at%2010%20meters%20over%20past%2010%20minutes'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20maximum%20wind%20speed%20at%2010%20meters%20over%20past%2010%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -9520,7 +9520,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%202%20minutes'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%2010%20meter%20wind%20speed%20over%20past%202%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -9643,7 +9643,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20wind%20direction%20at%2010%20meters%20over%20past%202%20minutes'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20wind%20direction%20at%2010%20meters%20over%20past%202%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -9766,7 +9766,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20wind%20speed%20at%20precipitation%20gauge%20over%20past%2010%20minutes'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20wind%20speed%20at%20precipitation%20gauge%20over%20past%2010%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -9890,7 +9890,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Station%20Pressure'%20and%20description%20eq%20'Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Station%20Pressure'
     body:
       encoding: US-ASCII
       string: ''
@@ -10012,7 +10012,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'
     body:
       encoding: US-ASCII
       string: ''
@@ -10135,7 +10135,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20Amount%20over%20past%201%20hour'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20Amount%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -10258,7 +10258,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20snow%20depth%20over%20past%205%20minutes'%20and%20description%20eq%20'Average%20snow%20depth%20over%20past%205%20minutes.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Average%20snow%20depth%20over%20past%205%20minutes'
     body:
       encoding: US-ASCII
       string: ''
@@ -10378,7 +10378,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Rainfall%20amount%20over%20past%201%20hour'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Rainfall%20amount%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -10501,7 +10501,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Total%20global%20solar%20radiation%20over%20past%201%20hour'%20and%20description%20eq%20'Past%201-hour%20total%20global%20solar%20radiation'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Total%20global%20solar%20radiation%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -10622,7 +10622,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%206%20hours'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%206%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -10743,7 +10743,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20Amount%20since%20last%20synoptic%20hour'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20Amount%20since%20last%20synoptic%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -10866,7 +10866,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%203%20hours'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%203%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -10989,7 +10989,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%206%20hours'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%206%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -11112,7 +11112,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%206%20hours'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%206%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -11158,7 +11158,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%2024%20hours'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Precipitation%20amount%20over%20past%2024%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -11281,7 +11281,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%2024%20hours'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%2024%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -11402,7 +11402,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20peak%20wind%20speed%20over%20past%201%20hour'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%2010%20meter%20peak%20wind%20speed%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -11526,7 +11526,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20peak%20wind%20speed%20at%2010%20meters%20over%20past%201%20hour'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20direction%20associated%20with%20the%20peak%20wind%20speed%20at%2010%20meters%20over%20past%201%20hour'
     body:
       encoding: US-ASCII
       string: ''
@@ -11649,7 +11649,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'max_pk_wnd_tm_pst1hr'%20and%20description%20eq%20'max_pk_wnd_tm_pst1hr'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'max_pk_wnd_tm_pst1hr'
     body:
       encoding: US-ASCII
       string: ''
@@ -11768,7 +11768,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'3-hour%20pressure%20tendency%20characteristic'%20and%20description%20eq%20'%22tendency_of_X%22%20means%20derivative%20of%20X%20with%20respect%20to%20time.%20Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'3-hour%20pressure%20tendency%20characteristic'
     body:
       encoding: US-ASCII
       string: ''
@@ -11891,7 +11891,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%2024%20hours'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Maximum%20Air%20Temperature%20over%20past%2024%20hours'
     body:
       encoding: US-ASCII
       string: ''
@@ -11937,7 +11937,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'3-hour%20pressure%20tendency%20amount'%20and%20description%20eq%20'%22tendency_of_X%22%20means%20derivative%20of%20X%20with%20respect%20to%20time.%20Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'3-hour%20pressure%20tendency%20amount'
     body:
       encoding: US-ASCII
       string: ''
@@ -12060,7 +12060,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Derived%20peak%20wind%20remark'%20and%20description%20eq%20'Derived%20peak%20wind%20remark'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Derived%20peak%20wind%20remark'
     body:
       encoding: US-ASCII
       string: ''
@@ -12180,7 +12180,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Mean%20Sea%20Level%20Pressure'%20and%20description%20eq%20'%20Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.%20%22Mean%20sea%20level%22%20means%20the%20time%20mean%20of%20sea%20surface%20elevation%20at%20a%20given%20location%20over%20an%20arbitrary%20period%20sufficient%20to%20eliminate%20the%20tidal%20signals.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Mean%20Sea%20Level%20Pressure'
     body:
       encoding: US-ASCII
       string: ''
@@ -12304,7 +12304,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Dew%20Point%20Temperature'%20and%20description%20eq%20'Dew%20point%20temperature%20is%20the%20temperature%20at%20which%20a%20parcel%20of%20air%20reaches%20saturation%20upon%20being%20cooled%20at%20constant%20pressure%20and%20specific%20humidity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Dew%20Point%20Temperature'
     body:
       encoding: US-ASCII
       string: ''
@@ -12426,7 +12426,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wet-bulb%20Temperature'%20and%20description%20eq%20'The%20wet-bulb%20temperature%20is%20the%20temperature%20read%20by%20a%20thermometer%20covered%20in%20water-soaked%20cloth%20over%20which%20air%20is%20passed.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wet-bulb%20Temperature'
     body:
       encoding: US-ASCII
       string: ''
@@ -12547,7 +12547,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'
     body:
       encoding: US-ASCII
       string: ''
@@ -12593,7 +12593,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'
     body:
       encoding: US-ASCII
       string: ''
@@ -12639,7 +12639,7 @@ http_interactions:
   recorded_at: Fri, 26 Jul 2019 02:35:37 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'%20and%20description%20eq%20'The%20deposit%20of%20atmospheric%20moisture%20as%20rain,%20hail,%20sleet,%20snow,%20frost%20or%20dew.%20Precipition%20amount%20is%20often%20measured%20as%20depth%20of%20liquid%20equivalent%20moisture%20at%20a%20point%20but%20also%20can%20be%20expressed%20as%20liquid%20volume%20or%20mass%20per%20unit%20area.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'5-minute%20cumulative%20precipitation%20gauge%20filtered%20weight%20for%20minutes%2055%20to%2060'
     body:
       encoding: US-ASCII
       string: ''

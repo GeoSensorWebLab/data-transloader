@@ -1161,7 +1161,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Pressure'%20and%20description%20eq%20'Air%20pressure%20is%20the%20force%20per%20unit%20area%20which%20would%20be%20exerted%20when%20the%20moving%20gas%20molecules%20of%20which%20the%20air%20is%20composed%20strike%20a%20theoretical%20surface%20of%20any%20orientation.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Pressure'
     body:
       encoding: US-ASCII
       string: ''
@@ -1287,7 +1287,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20Speed'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20Speed'
     body:
       encoding: US-ASCII
       string: ''
@@ -1414,7 +1414,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20speed%20of%20gust'%20and%20description%20eq%20'Speed%20is%20the%20magnitude%20of%20velocity.%20Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20(Vertical%20motion%20in%20the%20atmosphere%20has%20the%20standard%20name%20upward_air_velocity.)%20The%20wind%20speed%20is%20the%20magnitude%20of%20the%20wind%20velocity.%20A%20gust%20is%20a%20sudden%20brief%20period%20of%20high%20wind%20speed.%20In%20an%20observed%20timeseries%20of%20wind%20speed,%20the%20gust%20wind%20speed%20can%20be%20indicated%20by%20a%20cell_methods%20of%20maximum%20for%20the%20time-interval.%20In%20an%20atmospheric%20model%20which%20has%20a%20parametrised%20calculation%20of%20gustiness,%20the%20gust%20wind%20speed%20may%20be%20separately%20diagnosed%20from%20the%20wind%20speed.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20speed%20of%20gust'
     body:
       encoding: US-ASCII
       string: ''
@@ -1545,7 +1545,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20From%20Direction'%20and%20description%20eq%20'Wind%20is%20defined%20as%20a%20two-dimensional%20(horizontal)%20air%20velocity%20vector,%20with%20no%20vertical%20component.%20%22from_direction%22%20is%20used%20in%20the%20construction%20X_from_direction%20and%20indicates%20the%20direction%20from%20which%20the%20velocity%20vector%20of%20X%20is%20coming.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Wind%20From%20Direction'
     body:
       encoding: US-ASCII
       string: ''
@@ -1672,7 +1672,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'%20and%20description%20eq%20'Air%20temperature%20is%20the%20bulk%20temperature%20of%20the%20air,%20not%20the%20surface%20(skin)%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Air%20Temperature'
     body:
       encoding: US-ASCII
       string: ''
@@ -1797,7 +1797,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'%20and%20description%20eq%20'Amount%20of%20moisture%20in%20the%20air%20as%20vapor%20relative%20to%20how%20much%20it%20can%20possibly%20hold%20at%20the%20same%20temperature.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Relative%20Humidity'
     body:
       encoding: US-ASCII
       string: ''
@@ -1922,7 +1922,7 @@ http_interactions:
   recorded_at: Tue, 27 Aug 2019 23:44:39 GMT
 - request:
     method: get
-    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Battery%20Voltage'%20and%20description%20eq%20'The%20battery%20voltage%20of%20a%20datalogger%20or%20sensing%20system,%20often%20recorded%20as%20an%20indicator%20of%20data%20reliability.'
+    uri: http://192.168.33.77:8080/FROST-Server/v1.0/ObservedProperties?$filter=name%20eq%20'Battery%20Voltage'
     body:
       encoding: US-ASCII
       string: ''
