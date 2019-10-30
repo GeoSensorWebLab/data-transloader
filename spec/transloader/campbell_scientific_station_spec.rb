@@ -39,6 +39,24 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
     end
 
+    it "follows a redirect to download the station metadata when saving the metadata" do
+      VCR.use_cassette("campbell_scientific/station_redirect") do
+        metadata_file = "#{$cache_dir}/campbell_scientific/metadata/606830.json"
+        expect(File.exist?(metadata_file)).to be false
+
+        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          station_id: "606830",
+          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+        )
+        @station.download_metadata
+
+        expect(WebMock).to have_requested(:get, 
+          "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
+        expect(File.exist?(metadata_file)).to be true
+      end
+    end
+
     it "stores the data file's HTTP response headers in the metadata" do
       VCR.use_cassette("campbell_scientific/station") do
         @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)

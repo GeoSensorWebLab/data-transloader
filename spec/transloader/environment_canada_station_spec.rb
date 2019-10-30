@@ -33,13 +33,25 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       end
     end
 
-    it "raises an error when the SWOB-ML file cannot be downloaded" do
+    it "raises an error when the SWOB-ML file cannot be found" do
       VCR.use_cassette("environment_canada/observations_not_found") do
         @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         expect {
           @station.download_metadata
         }.to raise_error(Transloader::HTTPError, /SWOB-ML file not found/)
+      end
+    end
+
+    it "follows a redirect when the SWOB-ML file has moved" do
+      VCR.use_cassette("environment_canada/observations_redirect") do
+        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(station_id: "CXCM")
+        @station.download_metadata
+        
+        expect(WebMock).to have_requested(:get, 
+          "http://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
+        expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be true
       end
     end
   end

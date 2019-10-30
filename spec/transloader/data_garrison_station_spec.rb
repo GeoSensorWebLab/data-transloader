@@ -83,6 +83,25 @@ RSpec.describe Transloader::DataGarrisonStation do
         }.to raise_error(Transloader::HTTPError, "Could not download station data")
       end
     end
+
+    it "follows redirects to download the station metadata" do
+      VCR.use_cassette("data_garrison/station_redirect") do
+        metadata_file = "#{$cache_dir}/data_garrison/metadata/300234063581640-300234065673960.json"
+        expect(File.exist?(metadata_file)).to be false
+
+        @provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
+        @station = @provider.get_station(
+          user_id: "300234063581640",
+          station_id: "300234065673960"
+        )
+        @station.download_metadata
+
+        expect(WebMock).to have_requested(:get, 
+          %r[https://datagarrison\.com/users/300234063581640/300234065673960/index\.php.+])
+          .times(1)
+        expect(File.exist?(metadata_file)).to be true
+      end
+    end
   end
 
   ##############

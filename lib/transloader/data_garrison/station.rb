@@ -542,7 +542,10 @@ module Transloader
     def get_station_data
       response = @http_client.get(uri: @base_path)
 
-      if response.code != "200"
+      if response.code == "301"
+        # Follow permanent redirects
+        response = @http_client.get(uri: response["Location"])
+      elsif response.code != "200"
         raise HTTPError.new(response, "Could not download station data")
       end
 

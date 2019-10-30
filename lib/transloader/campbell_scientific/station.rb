@@ -50,6 +50,9 @@ module Transloader
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
           raise HTTPError.new(response, "Incorrect Data URL for Campbell Scientific station")
+        elsif response.code == "301"
+          # Follow permanent redirects
+          response = @http_client.get(uri: response["Location"])
         end
 
         filedata = response.body

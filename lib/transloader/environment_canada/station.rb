@@ -338,9 +338,13 @@ module Transloader
 
       if response.code == "404"
         raise HTTPError.new(response, "SWOB-ML file not found for station #{@id}; data may be unavailable for the specified interval.")
-      elsif response.code != '200'
+      elsif response.code == "301"
+        # Follow redirects
+        response = @http_client.get(uri: response["Location"])
+      elsif response.code != "200"
         raise HTTPError.new(response, "Error downloading station observation data")
       end
+
       response.body
     end
 
