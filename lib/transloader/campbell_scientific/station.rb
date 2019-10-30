@@ -164,11 +164,11 @@ module Transloader
       datastreams = @metadata[:datastreams]
 
       if options[:allowed]
-        datastreams = datastreams.filter do |datastream|
+        datastreams = datastreams.select do |datastream|
           options[:allowed].include?(datastream[:name])
         end
       elsif options[:blocked]
-        datastreams = datastreams.filter do |datastream|
+        datastreams = datastreams.select do |datastream|
           !options[:blocked].include?(datastream[:name])
         end
       end
@@ -508,11 +508,11 @@ module Transloader
       datastreams = @metadata[:datastreams]
 
       if options[:allowed]
-        datastreams = datastreams.filter do |datastream|
+        datastreams = datastreams.select do |datastream|
           options[:allowed].include?(datastream[:name])
         end
       elsif options[:blocked]
-        datastreams = datastreams.filter do |datastream|
+        datastreams = datastreams.select do |datastream|
           !options[:blocked].include?(datastream[:name])
         end
       end
