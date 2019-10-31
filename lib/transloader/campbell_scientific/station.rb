@@ -536,7 +536,7 @@ module Transloader
 
         if datastream.nil?
           logger.warn "No datastream found for observation property: #{observation[:property]}"
-          return :unavailable
+          :unavailable
         else
           datastream_url = datastream[:'Datastream@iot.navigationLink']
 

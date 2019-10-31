@@ -50,7 +50,7 @@ module SensorThings
       # request is used to synchronize.
       if body["value"].length == 0
         self.post_to_path(upload_url)
-        return :created
+        :created
       else
         existing_entity = body["value"].first
         @link           = existing_entity['@iot.selfLink']
@@ -58,10 +58,10 @@ module SensorThings
 
         if same_as?(existing_entity)
           logger.debug "Re-using existing Observation entity."
-          return :reused
+          :reused
         else
           self.patch_to_path(@link)
-          return :updated
+          :updated
         end
       end
     end
