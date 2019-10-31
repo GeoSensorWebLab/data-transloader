@@ -6,7 +6,11 @@ set -e
 
 SCRIPT=transload
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
-INTERVAL="2019-07-17T00:00:00Z/2019-07-18T00:00:00Z"
+NOW=$(ruby -e "puts (Time.new).utc.strftime('%FT%T%z')")
+THEN=$(ruby -e "puts (Time.new - 3600).utc.strftime('%FT%T%z')")
+INTERVAL="$THEN/$NOW"
+
+echo "$INTERVAL"
 
 # Environment Canada Test Run
 ruby $SCRIPT get metadata \
