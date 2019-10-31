@@ -21,6 +21,10 @@ This tool should be runnable on Linux, MacOS, and Windows.
 [Bundler]: https://bundler.io
 [Ruby]: https://www.ruby-lang.org/en/
 
+## Docker
+
+The tool can also be ran inside a Docker container, without having to install Ruby at all. See the [Docker Instructions](DOCKER.markdown) for details.
+
 ## Usage
 
 This tool is meant to be scriptable using [cron][], a scheduling daemon, to automate imports on a schedule. This is done by passing in command line arguments to the tool that handle the sensor metadata and observation download/upload.
