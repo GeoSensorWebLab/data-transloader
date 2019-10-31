@@ -7,7 +7,7 @@ set -e
 SCRIPT=transload
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 NOW=$(ruby -e "puts (Time.new).utc.strftime('%FT%T%z')")
-THEN=$(ruby -e "puts (Time.new - 3600).utc.strftime('%FT%T%z')")
+THEN=$(ruby -e "puts (Time.new - (24*3600)).utc.strftime('%FT%T%z')")
 INTERVAL="$THEN/$NOW"
 
 echo "$INTERVAL"
