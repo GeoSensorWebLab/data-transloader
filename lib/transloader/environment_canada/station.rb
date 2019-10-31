@@ -13,7 +13,7 @@ module Transloader
       'po'    => 'http://dms.ec.gc.ca/schema/point-observation/2.0',
       'xlink' => 'http://www.w3.org/1999/xlink'
     }
-    OBSERVATIONS_URL = "http://dd.weather.gc.ca/observations/swob-ml"
+    OBSERVATIONS_URL = "https://dd.weather.gc.ca/observations/swob-ml"
 
     attr_accessor :id, :metadata, :properties, :provider
 

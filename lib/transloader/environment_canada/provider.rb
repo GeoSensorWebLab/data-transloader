@@ -10,7 +10,7 @@ module Transloader
     include SemanticLogger::Loggable
 
     PROVIDER_NAME = "environment_canada"
-    METADATA_URL = "http://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
+    METADATA_URL = "https://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
 
     attr_accessor :cache_path
 

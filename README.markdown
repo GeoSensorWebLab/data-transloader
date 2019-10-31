@@ -4,7 +4,7 @@
 
 This tool downloads weather station data from multiple sources and uploads it to an [OGC SensorThings API][] service. This makes the data available using an open and interoperable API.
 
-[OGC SensorThings API]: http://docs.opengeospatial.org/is/15-078r6/15-078r6.html
+[OGC SensorThings API]: https://docs.opengeospatial.org/is/15-078r6/15-078r6.html
 
 ## Setup Instructions
 
@@ -18,7 +18,7 @@ $ bundle install
 
 This tool should be runnable on Linux, MacOS, and Windows.
 
-[Bundler]: http://bundler.io
+[Bundler]: https://bundler.io
 [Ruby]: https://www.ruby-lang.org/en/
 
 ## Usage
@@ -34,7 +34,7 @@ Currently supported weather station sources:
 * Campbell Scientific
 
 [cron]: https://en.wikipedia.org/wiki/Cron
-[MSC]: http://dd.weather.gc.ca/about_dd_apropos.txt
+[MSC]: https://dd.weather.gc.ca/about_dd_apropos.txt
 
 ### Environment Canada
 
