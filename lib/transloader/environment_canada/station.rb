@@ -247,6 +247,8 @@ module Transloader
           unit: element.at_xpath("@uom", NAMESPACES).text
         }
       end
+
+      logger.info "Downloaded Observations: #{observations.count}"
       @data_store.store(observations)
     end
 
@@ -267,7 +269,7 @@ module Transloader
       get_metadata
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
-
+      logger.info "Uploading Observations: #{observations.count}"
       upload_observations_array(observations, options)
     end
 
@@ -386,13 +388,14 @@ module Transloader
       # * result
       # * property
       # * unit
-      observations.each do |observation|
+      responses = observations.collect do |observation|
         datastream = datastreams.find { |datastream|
           datastream[:name] == observation[:property]
         }
 
         if datastream.nil?
           logger.warn "No datastream found for observation property: #{observation[:property]}"
+          return :unavailable
         else
           datastream_url = datastream[:'Datastream@iot.navigationLink']
 
@@ -414,6 +417,9 @@ module Transloader
           observation.upload_to(datastream_url)
         end
       end
+
+      # output info on how many observations were created and so on
+      log_response_types(responses)
     end
   end
 end

@@ -20,6 +20,16 @@ module Transloader
       end
     end
 
+    # For an array of symbols returned from the HTTP SensorThings API
+    # module, print out how many entities were created, reused, updated,
+    # or unavailable.
+    def log_response_types(responses)
+      logger.info "Entities unavailable for upload: #{responses.count(:unavailable)}"
+      logger.info "Entities created for upload: #{responses.count(:created)}"
+      logger.info "Entities updated for upload: #{responses.count(:updated)}"
+      logger.info "Entities reused for upload: #{responses.count(:reused)}"
+    end
+
     # Determine the O&M observation type for the Datastream based on
     # the Observed Property (see Transloader::Ontology)
     def observation_type_for(property, ontology)
