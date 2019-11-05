@@ -30,7 +30,7 @@ module Transloader
       logger.info "Downloading metadata"
       @station.download_metadata(
         override_metadata: override_metadata,
-        overwrite: overwrite
+        overwrite:         overwrite
       )
     end
 
@@ -68,11 +68,11 @@ module Transloader
       when "Transloader::DataGarrisonProvider"
         provider.get_station(
           station_id: options[:station_id],
-          user_id: options[:user_id]
+          user_id:    options[:user_id]
         )
       when "Transloader::CampbellScientificProvider"
         provider.get_station(
-          data_urls: options[:data_urls],
+          data_urls:  options[:data_urls],
           station_id: options[:station_id]
         )
       else
