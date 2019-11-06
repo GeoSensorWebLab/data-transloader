@@ -54,19 +54,27 @@ module Transloader
           # Without a filename, the file cannot be downloaded as a TSV
           logger.debug "Skipping data file with missing filename (station #{@id})"
         else
-          file_index = href[/data_launch=(\d+)/, 1].rjust(3, '0')
-          url        = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{file_index}.txt"
+          # Data Garrison uses incremental indexes on data files each
+          # time the weather station is initialized.
+          file_index   = href[/data_launch=(\d+)/, 1]
+          fi_justified = file_index.rjust(3, '0')
+          datafile_url = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{fi_justified}.txt"
+
+          # Trigger an update using by accessing the download.php script
+          request_updated_data(file_index: file_index, filename: filename)
 
           # Issue HEAD request for data files
-          response = @http_client.head(uri: url)
+          response = @http_client.head(uri: datafile_url)
           last_modified = parse_last_modified(response["Last-Modified"])
 
           # Content-Length can be used here because there is no 
           # compression encoding.
           data_files.push(DataFile.new({
-            url:           url,
+            datafileindex: file_index,
+            datafilename:  filename,
             last_modified: to_iso8601(last_modified),
-            length:        response["Content-Length"]
+            length:        response["Content-Length"],
+            url:           datafile_url
           }).to_h)
         end
       end
@@ -460,6 +468,8 @@ module Transloader
     # metadata, which means metadata would not need to be manually 
     # edited.
     def download_observations_for_file(data_file)
+      request_updated_data(file_index: data_file[:datafileindex], filename: data_file[:datafilename])
+
       download = partial_download_url(
         url: data_file[:url],
         offset: data_file[:last_length])
@@ -615,6 +625,28 @@ module Transloader
       end
 
       readings
+    end
+
+    # For one of this station's data files, request the download.php
+    # script that updates the TSV file so we can download the newest
+    # observations later.
+    def request_updated_data(file_index:, filename:)
+      # The time at which to "start" the data files, in seconds of 
+      # UNIX Epoch time. We default to the year 2000.
+      data_start   = Time.utc(2000, 1, 1).to_i
+      # The time at which to "end" the data files, in seconds of 
+      # UNIX Epoch time. We default to "now".
+      data_end     = Time.now.to_i
+      base         = "https://datagarrison.com/users/#{@user_id}/#{@id}"
+      # type=2 updates the TSV file
+      download_url = "#{base}/download.php?data_launch=#{file_index}&data_start=#{data_start}&data_end=#{data_end}&data_desc=#{filename}&utc=0&type=2"
+
+      # Issue GET request to force-update the data files
+      update_response = @http_client.get(uri: download_url)
+
+      if update_response.code != "200"
+        raise HTTPError.new(update_response, "Error updating Data Garrison TSV file")
+      end
     end
 
     # Save the Station metadata to the metadata cache file

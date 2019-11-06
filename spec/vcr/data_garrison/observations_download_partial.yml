@@ -1,16 +1,18 @@
 ---
 http_interactions:
 - request:
-    method: head
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
+    method: get
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=MYC&data_end=1573003212&data_launch=1&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
     headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
+      - GeoSensorWebLab/data-transloader/0.6.2
       Host:
       - datagarrison.com
       Content-Type:
@@ -21,13 +23,134 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 27 Aug 2019 23:03:34 GMT
+      - Wed, 06 Nov 2019 01:20:12 GMT
+      Server:
+      - Apache
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Last-Modified:
+      - Wed, 06 Nov 2019 01:20:12 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      - post-check=0, pre-check=0
+      Set-Cookie:
+      - PHPSESSID=0npb1aadps9lf7u2597in8b6s6; path=/
+      Pragma:
+      - no-cache
+      Content-Length:
+      - '6446'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html>\n<head>\n\n<script
+        language=\"javascript\" src=\"../../../wctp/js/protoplasm.js\">\n</script>
+        \n\n<script language=\"javascript\"> // transform() calls can be chained together
+        \nProtoplasm.use('datepicker') \n.transform('input.datepicker') \n.transform('.datetimepicker',
+        { timePicker: true, timePickerAdjacent: true, use24hrs: true })\n.transform('input.datepicker_es',
+        { 'locale': 'es_AR' }); \n</script>\n\n\n<!-- Global site tag (gtag.js) -
+        Google Analytics -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-55239819-1\"></script>\n<script>\n
+        \ window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n
+        \ gtag('js', new Date());\n\n  gtag('config', 'UA-55239819-1');\n</script>\n\n<title>\n\n\tDataGarrison
+        Satellite Weather Station User Area: \n</title>\n<meta name=\"DataGarrison
+        Weather Station $this_page\" content=\"DataGarrison's weather station $this_page
+        user page.  Users access live environmental sensor data and reconfigure their
+        remote stations here.\">\n<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\">\n\n\n\n\n\n\n\n\n\n\n\n\t<script>\n\t\tvar
+        cal_start = '01-01-2000';\n\t\tvar cal_end = '06-11-2019';\n\t</script>\n\n\n<STYLE
+        type=\"text/css\">\n\na:link { \n\tcolor: #440000;\n\t}\na:visited { \n\tcolor:
+        #440000;\n\t}\na:hover { \n\tcolor: #BB0000;\n\n\ttext-decoration: none;\n\t}\na:active
+        { \n\tcolor: #333333;\n\t}\n\n\n<!--\nA { text-decoration:none }\n-->\n\n</STYLE>\n\n</head>\n\n<body>\n\n<table
+        style=\"border-collapse: collapse;\" width=\"1000\" border=\"0\" align=\"center\"
+        cellpadding=\"0\" cellspacing=\"0\">\n<tr><td>\n\t\n<table border=\"0\" width=\"0\"
+        align=\"left\" cellpadding=\"0\" cellspacing=\"0\">\n<tr><td valign=\"top\"
+        align=\"right\"><img valign='top' border=\"0\" src=\"\n\n../../images/user_area.gif\n\n\"></td>\n\n\n<td
+        width='780' valign='center' align='left' bgcolor=#bebdbd\n><font size='4'
+        face='arial'>\n\t  Unit 300234065673960</font></td>\n</tr>\n\n<tr><td valign=\"top\"
+        \n\nbgcolor=#bebdbd\n>\n\n<img src='../../images/under_user_area.gif'>\n\n</td>\n<td
+        width='550' valign='center' align='right' align='right' \n\nbgcolor=#bebdbd\n>\n\n<font
+        face='arial' size='2'>\n\n\t<a href='https://DataGarrison.com'>DataGarrison</a>&nbsp;&nbsp;
+        \t  \n\t \n\t \n\t \t <a href=\"../sites.php\">Remote Sites</a>&nbsp;&nbsp;
+        \n\t \t \n\t\n\t <a href=\"index.php\">Control Panel</a></b>&nbsp;&nbsp;\n\n\t\n\t
+        <a href=\"plots.php\">Plotting</a></b>&nbsp;&nbsp;\n\t \t <a href=\"../../../login/logout.php?pag_id=300234065673960\">Log
+        out</a>&nbsp;&nbsp;\n\t \n\n\t  \n\t  </font>\n\n</td>\n</tr>\n</table>\n\n</tr></td>\n\n\n\n<tr><td>\n\t
+        \ \n\t<table  height=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n
+        \   <tr> \n      <td width=\"150\" height=\"500\" valign=\"top\"\n\t  \n\t
+        \ \nbgcolor=#bebdbd\n\n>\n\t  <!--<td width=\"140\" height=\"500\" valign=\"top\"
+        bgcolor=\"#cac9c9\"> -->\n\t  \n        <table width=\"100%\" height=\"148\"
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n\t\t<td>\n\n\r\n<TR><TD><font
+        size='2' face='arial'>\r\n\t\r\n&nbsp;<b>Latest Conditions</b><br>&nbsp; 11/05/19
+        4:28 pm\t\r\n\t\r\n\t</font></TD></TR>\r\n\r\n\t<TR><TD>&nbsp;</TD></TR>\r\n\r\n<TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Pressure</b><br>&nbsp;1026.650 mbar</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Temperature</b><br>&nbsp;-22.575 <sup>o</sup>C</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>RH</b><br>&nbsp;85.600 %</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Backup Batteries</b><br>&nbsp;13.194 V</TD></TR><TR><TD>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>&nbsp;<b>Wind</b><br>&nbsp;Speed: 20.347 km/h<br>&nbsp;Gust:
+        23.856 km/h<br>&nbsp;Direction: WNW (300<sup>o</sup>)<br>&nbsp;</font></TD></TR><TR><TD><font
+        size='2' face='arial'>\r\n<br>&nbsp;<HR NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'>\r\n\r\n\r\n<P>&nbsp;<b>Station
+        Status</b><br>&nbsp;Trans: every 120 min.<br>&nbsp;Logging: every 15.0 min.<P>&nbsp;<b>Next
+        Update</b><br>&nbsp;\t<script language=\"JavaScript\">\r\n\r\n\r\n\tvar now
+        = new Date();\r\n\tvar j = now.getTime();\r\n\tj = j + 52000;\r\n// document.write(now);\r\n\tvar
+        now2 = new Date(j);\r\n\r\n/*\r\n*/\r\nvar hour = now2.getHours();\r\nvar
+        am_pm = \"PM\";\r\n\r\nif (hour < 12)\r\n{\r\n\tam_pm = \"AM\";\r\n}\t\r\n\r\nif
+        (hour < 10)\r\n{\r\n\thour = \"0\" + hour;\r\n}\r\n\r\nhour %= 12;\r\n\r\nif
+        (hour == 0)\r\n{\r\n\thour = 12;\r\n}\r\n\r\nvar minutes = now2.getMinutes();\r\nif
+        (minutes < 10)\r\n{\r\n\tminutes = \"0\" + minutes;\r\n}\r\n\r\n\r\nvar month
+        = now2.getMonth() + 1;\r\nif (month < 10)\r\n{\r\n\tmonth = \"0\" + month;\r\n}\r\n\r\nvar
+        day = now2.getDate();\r\nif (day < 10)\r\n{\r\n\tday = \"0\" + day;\r\n}\r\n\r\nvar
+        this_year = now2.getFullYear();\r\n\r\nvar count_down = month + \"/\" + day
+        + \"/\" + this_year + \" \" + hour + \":\" + minutes + \" \" + am_pm;\r\n//
+        document.write(count_down);\r\n\r\n\tTargetDate = count_down; //\"\";\r\n\tBackColor
+        = \"\";\r\n\tForeColor = \"\";\r\n\tCountActive = true;\r\n\tCountStepper
+        = -1;\r\n\tLeadingZero = true;\r\n\tDisplayFormat = \"%%H%% Hr %%M%% Min %%S%%
+        Sec\";\r\n\tFinishMessage = \"Any time now\";\r\n\t</script>\r\n\t<script
+        language=\"JavaScript\" src=\"https://datagarrison.com/javascript/countdown.js\"></script>\r\n\t<P>&nbsp;<b>7
+        sensors</b><br>&nbsp;Pressure<br>&nbsp;Wind Speed<br>&nbsp;Gust Speed<br>&nbsp;Wind
+        Direction<br>&nbsp;Temperature<br>&nbsp;RH<br>&nbsp;Backup Batteries&nbsp;<HR
+        NOSHADE WIDTH='100%' SIZE='1' ALIGN='LEFT'>&nbsp;<b><a href='index.php'><img
+        src='../../images/button_download.gif' alt='Download' border=0></a></b>\r\n\r\n<br><br>\r\n</font></TD></tr>\r\n\r\n</TR>\r\n\r\n\n\n\t</TD>\n\n
+        \   </table>\n        <p>&nbsp;</p>\n        <p>&nbsp;</p>\n        \n</td>\n\n\n<td
+        width=\"549\" valign=\"top\" bgcolor=\"#FFFFFF\"> \n        <div align=\"right\"></div>\n
+        \       <div align=\"center\"> \n\t\t          <table width=\"549\" border=\"0\"
+        align=\"left\" cellpadding=\"0\" cellspacing=\"3\">\n            <tr> \n              <td
+        width=\"536\" bgcolor=\"#FFFFFF\" valign=\"top\">\n\n<H3><FONT FACE='Arial'>MYC</H3><P>Data
+        from 01/01/00 to 11/06/19 in the file below.\n\n<P><table><tr><td><FONT FACE='Arial'></td><td><FONT
+        FACE='Arial'><a href=temp/MYC_001.txt>MYC_001.txt</a></td></td></table>\n\n\n</TABLE></td></tr>\n\n
+        \           </tr>\n          </table>\n\n\n\n<tr>\n\t<td ><table border=\"0\"
+        width='896' cellpadding=\"0\" cellspacing=\"0\"><tr>\n\t<td \n\n\tbgcolor=#cac9c9
+        \n align='left' valign='top' height='16'><img valign='top' border=\"0\" src=\"\n\t\n\t../../images/footer_swoosh.gif\n\n\">\n\t</td>\n\t<td
+        \n\t\n\tbgcolor=#cac9c9\n\t align='right' height='16'><font size=1 face=\"Verdana,
+        Arial, Helvetica, sans-serif\">\n\t \n\n&copy; 2004-2019 Upward Innovations
+        Inc. &nbsp;&nbsp;</font></td></tr>\n\t</table></td></tr>\n\t\n</table>\n\n</body>\n</html>\n\n\n\n"
+    http_version: 
+  recorded_at: Wed, 06 Nov 2019 01:20:12 GMT
+- request:
+    method: head
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - GeoSensorWebLab/data-transloader/0.6.2
+      Host:
+      - datagarrison.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 06 Nov 2019 01:20:12 GMT
       Server:
       - Apache
       Last-Modified:
-      - Mon, 26 Aug 2019 23:28:20 GMT
+      - Wed, 06 Nov 2019 01:20:12 GMT
       Etag:
-      - '"1cd2-5910d82e69690"'
+      - W/"1cd2-596a359b85a7b"
       Accept-Ranges:
       - bytes
       Content-Length:
@@ -38,7 +161,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:03:35 GMT
+  recorded_at: Wed, 06 Nov 2019 01:20:12 GMT
 - request:
     method: get
     uri: https://datagarrison.com/users/300234063581640/300234065673960/temp/MYC_001.txt
@@ -51,7 +174,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - GeoSensorWebLab/data-transloader/0.5.0
+      - GeoSensorWebLab/data-transloader/0.6.2
       Host:
       - datagarrison.com
       Content-Type:
@@ -64,13 +187,13 @@ http_interactions:
       message: Partial Content
     headers:
       Date:
-      - Tue, 27 Aug 2019 23:03:35 GMT
+      - Wed, 06 Nov 2019 01:20:13 GMT
       Server:
       - Apache
       Last-Modified:
-      - Mon, 26 Aug 2019 23:28:20 GMT
+      - Wed, 06 Nov 2019 01:20:12 GMT
       Etag:
-      - '"1cd2-5910d82e69690"'
+      - W/"1cd2-596a359b85a7b"
       Accept-Ranges:
       - bytes
       Content-Length:
@@ -177,5 +300,5 @@ http_interactions:
         08:14:13\t22.944\r\n02/09/18 08:24:13\t22.872\r\n02/09/18 08:34:13\t22.848\r\n02/09/18
         08:44:13\t23.064\r\n"
     http_version: 
-  recorded_at: Tue, 27 Aug 2019 23:03:35 GMT
+  recorded_at: Wed, 06 Nov 2019 01:20:12 GMT
 recorded_with: VCR 5.0.0
