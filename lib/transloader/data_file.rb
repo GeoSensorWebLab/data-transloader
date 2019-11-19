@@ -3,10 +3,12 @@ module Transloader
   # partial downloads. This is a class so that different providers will
   # use the same interface.
   class DataFile
-    attr_reader :data_url, :filename, :last_modified, :length
+    attr_reader :datafileindex, :datafilename, :data_url, :filename, :last_modified, :length
 
-    def initialize(url:, last_modified:, length:)
+    def initialize(datafileindex: nil, datafilename: nil, url:, last_modified:, length:)
       @data_url      = url
+      @datafileindex = datafileindex
+      @datafilename  = datafilename
       @filename      = File.basename(url)
       @last_modified = last_modified
       @length        = length
@@ -14,6 +16,8 @@ module Transloader
 
     def to_h
       {
+        datafileindex:  @datafileindex,
+        datafilename:   @datafilename,
         filename:       @filename,
         url:            @data_url,
         last_modified:  @last_modified,

@@ -48,6 +48,7 @@ GEM
       concurrent-ruby (~> 1.0)
     sxp (1.0.2)
       rdf (~> 3.0)
+    timecop (0.9.1)
     vcr (5.0.0)
     webmock (3.7.6)
       addressable (>= 2.3.6)
@@ -64,6 +65,7 @@ DEPENDENCIES
   rdf-turtle
   rspec
   semantic_logger
+  timecop
   vcr
   webmock
 

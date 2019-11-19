@@ -142,9 +142,9 @@ module Transloader
       #  uri: URL to get
       #  headers: Hash of HTTP headers to send with request
       def get(options = {})
-        options = default_options(options)
+        options       = default_options(options)
         options[:uri] = URI(options[:uri])
-        request = Net::HTTP::Get.new(options[:uri])
+        request       = Net::HTTP::Get.new(options[:uri])
         send_request(request, options)
       end
 
@@ -153,9 +153,9 @@ module Transloader
       #  uri: URL to get
       #  headers: Hash of HTTP headers to send with request
       def head(options = {})
-        options = default_options(options)
+        options       = default_options(options)
         options[:uri] = URI(options[:uri])
-        request = Net::HTTP::Head.new(options[:uri])
+        request       = Net::HTTP::Head.new(options[:uri])
         send_request(request, options)
       end
 
@@ -165,9 +165,9 @@ module Transloader
       #  uri: URL to get
       #  headers: Hash of HTTP headers to send with request
       def patch(options = {})
-        options = default_options(options)
+        options       = default_options(options)
         options[:uri] = URI(options[:uri])
-        request = Net::HTTP::Patch.new(options[:uri])
+        request       = Net::HTTP::Patch.new(options[:uri])
         send_request(request, options)
       end
 
@@ -177,9 +177,9 @@ module Transloader
       #  uri: URL to get
       #  headers: Hash of HTTP headers to send with request
       def post(options = {})
-        options = default_options(options)
+        options       = default_options(options)
         options[:uri] = URI(options[:uri])
-        request = Net::HTTP::Post.new(options[:uri])
+        request       = Net::HTTP::Post.new(options[:uri])
         send_request(request, options)
       end
 
@@ -189,9 +189,9 @@ module Transloader
       #  uri: URL to get
       #  headers: Hash of HTTP headers to send with request
       def put(options = {})
-        options = default_options(options)
+        options       = default_options(options)
         options[:uri] = URI(options[:uri])
-        request = Net::HTTP::Put.new(options[:uri])
+        request       = Net::HTTP::Put.new(options[:uri])
         send_request(request, options)
       end
 
