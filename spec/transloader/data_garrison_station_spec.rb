@@ -77,21 +77,21 @@ RSpec.describe Transloader::DataGarrisonStation do
           .times(1)
 
         expect(WebMock).to have_requested(:get, 
-          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=2&data_start=\d+&type=2&utc=0])
+          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=2&data_start=\d+&type=2&utc=0])
           .times(1)
         expect(WebMock).to have_requested(:head,
           "#{url_base}/temp/Test_Launch_002.txt")
           .times(1)
 
         expect(WebMock).to have_requested(:get, 
-          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=3&data_start=\d+&type=2&utc=0])
+          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=3&data_start=\d+&type=2&utc=0])
           .times(1)
         expect(WebMock).to have_requested(:head,
           "#{url_base}/temp/Test_Launch_003.txt")
           .times(1)
 
         expect(WebMock).to have_requested(:get, 
-          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=4&data_start=\d+&type=2&utc=0])
+          %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=4&data_start=\d+&type=2&utc=0])
           .times(1)
         expect(WebMock).to have_requested(:head,
           "#{url_base}/temp/Test_Launch_004.txt")
@@ -347,21 +347,21 @@ RSpec.describe Transloader::DataGarrisonStation do
             .with(headers: { 'Range' => '' }).times(2)
 
           expect(WebMock).to have_requested(:get, 
-            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=2&data_start=\d+&type=2&utc=0])
+            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=2&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get, 
             "#{url_base}/temp/Test_Launch_002.txt")
             .with(headers: { 'Range' => '' }).times(2)
           
           expect(WebMock).to have_requested(:get, 
-            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=3&data_start=\d+&type=2&utc=0])
+            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=3&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get, 
             "#{url_base}/temp/Test_Launch_003.txt")
             .with(headers: { 'Range' => '' }).times(2)
           
           expect(WebMock).to have_requested(:get, 
-            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test_Launch&data_end=\d+&data_launch=4&data_start=\d+&type=2&utc=0])
+            %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=4&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get, 
             "#{url_base}/temp/Test_Launch_004.txt")

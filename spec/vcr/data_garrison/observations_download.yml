@@ -173,7 +173,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=2&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=2&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
@@ -348,7 +348,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=3&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=3&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
@@ -527,7 +527,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=4&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=4&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
@@ -883,7 +883,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=2&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=2&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
@@ -1063,7 +1063,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=3&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=3&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''
@@ -1240,7 +1240,7 @@ http_interactions:
   recorded_at: Thu, 14 Nov 2019 17:36:57 GMT
 - request:
     method: get
-    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test_Launch&data_end=1573753017&data_launch=4&data_start=946684800&type=2&utc=0
+    uri: https://datagarrison.com/users/300234063581640/300234065673960/download.php?data_desc=Test%20Launch&data_end=1573753017&data_launch=4&data_start=946684800&type=2&utc=0
     body:
       encoding: US-ASCII
       string: ''

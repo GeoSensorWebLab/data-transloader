@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'set'
 require 'time'
 require 'transloader/station_methods'
+require 'uri'
 
 module Transloader
   class DataGarrisonStation
@@ -48,7 +49,8 @@ module Transloader
       # Parse download links into data files
       html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td[position()=2]/div[position()=2]/table/tr[position()=2]/td/table/tr/td/font/a').collect do |element|
         href       = element.attr('href')
-        filename   = element.text.to_s.sub(/ /, '_')
+        data_desc  = element.text.to_s
+        filename   = data_desc.sub(/ /, '_')
 
         if filename == ""
           # Without a filename, the file cannot be downloaded as a TSV
@@ -61,7 +63,7 @@ module Transloader
           datafile_url = "https://datagarrison.com/users/#{@user_id}/#{@id}/temp/#{filename}_#{fi_justified}.txt"
 
           # Trigger an update using by accessing the download.php script
-          request_updated_data(file_index: file_index, filename: filename)
+          request_updated_data(file_index: file_index, filename: data_desc)
 
           # Issue HEAD request for data files
           response = @http_client.head(uri: datafile_url)
@@ -71,7 +73,7 @@ module Transloader
           # compression encoding.
           data_files.push(DataFile.new({
             datafileindex: file_index,
-            datafilename:  filename,
+            datafilename:  data_desc,
             last_modified: to_iso8601(last_modified),
             length:        response["Content-Length"],
             url:           datafile_url
@@ -639,7 +641,7 @@ module Transloader
       data_end     = Time.now.to_i
       base         = "https://datagarrison.com/users/#{@user_id}/#{@id}"
       # type=2 updates the TSV file
-      download_url = "#{base}/download.php?data_launch=#{file_index}&data_start=#{data_start}&data_end=#{data_end}&data_desc=#{filename}&utc=0&type=2"
+      download_url = "#{base}/download.php?data_launch=#{file_index}&data_start=#{data_start}&data_end=#{data_end}&data_desc=#{URI::encode(filename)}&utc=0&type=2"
 
       # Issue GET request to force-update the data files
       update_response = @http_client.get(uri: download_url)
