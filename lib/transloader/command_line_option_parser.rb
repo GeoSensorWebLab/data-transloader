@@ -160,7 +160,7 @@ module Transloader
 
     # Options validation for "set metadata" command
     def validate_set_metadata(options)
-      require_options(options, [:provider, :station_id, :cache, :key, :value])
+      require_options(options, [:provider, :station_id, :cache, :keys, :value])
 
       case options.provider
       when "data_garrison"
@@ -170,7 +170,7 @@ module Transloader
 
     # Options validation for "show metadata" command
     def validate_show_metadata(options)
-      require_options(options, [:provider, :station_id, :cache, :key])
+      require_options(options, [:provider, :station_id, :cache, :keys])
 
       case options.provider
       when "data_garrison"

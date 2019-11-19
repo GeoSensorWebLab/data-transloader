@@ -84,8 +84,20 @@ def set_metadata(options)
     station: station_id
   }
   metadata_store = Transloader::MetadataStore.new(store_opts)
-  metadata_store.set(options.key.to_sym, value)
-  puts JSON.pretty_generate({ options.key => value })
+
+  # Work in reverse to convert an array of keys to a set of nested
+  # hashes
+  new_metadata = options.keys.reverse.reduce(nil) do |memo, key|
+    if memo.nil?
+      memo = { key.to_sym => value }
+    else
+      memo = { key.to_sym => memo }
+    end
+    memo
+  end
+
+  metadata_store.merge(new_metadata)
+  puts JSON.pretty_generate(metadata_store.metadata)
 end
 
 def show_metadata(options)
@@ -103,8 +115,8 @@ def show_metadata(options)
     station: station_id
   }
   metadata_store = Transloader::MetadataStore.new(store_opts)
-  value = metadata_store.get(options.key.to_sym)
-  puts JSON.pretty_generate({ options.key => value })
+  value = metadata_store.get(options.keys.first.to_sym)
+  puts JSON.pretty_generate({ options.keys.first => value })
 end
 
 def get_observations(options, http_client)

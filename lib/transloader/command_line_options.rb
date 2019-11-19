@@ -3,7 +3,7 @@ require 'uri'
 module Transloader
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
-                :destination, :http_auth, :http_headers, :key,
+                :destination, :http_auth, :http_headers, :keys,
                 :overwrite, :provider, :station_id, :user_id, :value
     # Set default values
     def initialize
@@ -15,7 +15,7 @@ module Transloader
       @destination  = nil
       @http_auth    = nil
       @http_headers = []
-      @key          = nil
+      @keys         = []
       @overwrite    = false
       @provider     = nil
       @station_id   = nil
@@ -168,8 +168,8 @@ module Transloader
     # Specify key for metadata show method
     def key_option(parser)
       parser.on("--key <KEY>",
-        "Specify key to lookup in metadata.") do |value|
-        @key = value
+        "Specify key to lookup in metadata. Use multiple times for sub-keys.") do |value|
+        @keys.push(value)
       end
     end
 
