@@ -40,17 +40,15 @@ Currently supported weather station sources:
 [cron]: https://en.wikipedia.org/wiki/Cron
 [MSC]: https://dd.weather.gc.ca/about_dd_apropos.txt
 
-### Environment Canada
+### Instructions by Data Provider
 
-For detailed instructions, see [docs/ENVIRONMENT_CANADA.md](docs/ENVIRONMENT_CANADA.md).
+Different source data providers have moderately different implementations and usage. Please see the detailed documentation for an explanation of the source-to-SensorThings API mappings.
 
-### Data Garrison
-
-For detailed instructions, see [docs/DATA_GARRISON.md](docs/DATA_GARRISON.md).
-
-### Campbell Scientific
-
-For detailed instructions, see [docs/CAMPBELL_SCIENTIFIC.md](docs/CAMPBELL_SCIENTIFIC.md).
+* [Campbell Scientific Weather Stations](docs/CAMPBELL_SCIENTIFIC.md)
+* [Data Garrison Weather Stations](docs/DATA_GARRISON.md)
+* [Environment Canada Weather Stations](docs/ENVIRONMENT_CANADA.md)
+* Kluane Lake Research Station Historical Energy Usage Data
+* Kluane Lake Research Station Historical Weather Data
 
 ## Development Instructions
 
