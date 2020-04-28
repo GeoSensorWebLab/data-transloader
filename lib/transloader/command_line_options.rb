@@ -2,14 +2,15 @@ require 'uri'
 
 module Transloader
   class CommandLineOptions
-    attr_reader :allowed, :blocked, :cache, :data_urls, :date, 
-                :destination, :http_auth, :http_headers, :keys,
+    attr_reader :allowed, :blocked, :cache, :data_paths, :data_urls,
+                :date, :destination, :http_auth, :http_headers, :keys,
                 :overwrite, :provider, :station_id, :user_id, :value
     # Set default values
     def initialize
       @allowed      = nil
       @blocked      = nil
       @cache        = nil
+      @data_paths   = []
       @data_urls    = []
       @date         = nil
       @destination  = nil
@@ -40,6 +41,7 @@ module Transloader
       allowed_option(parser)
       blocked_option(parser)
       cache_directory_option(parser)
+      data_path_option(parser)
       data_url_option(parser)
       date_interval_option(parser)
       destination_option(parser)
@@ -98,6 +100,21 @@ module Transloader
         
         if !Dir.exist?(value)
           puts %Q[ERROR: Directory "#{value}" does not exist.]
+          puts parser
+          exit 1
+        end
+      end
+    end
+
+    # Parse local Data Paths.
+    # Specifying multiple times will add each item to an array.
+    def data_path_option(parser)
+      parser.on("--data_path [PATH]", 
+        "Data file to parse for data/metadata.") do |value|
+        @data_paths.push(value)
+        
+        if !File.exists?(value)
+          puts %Q[ERROR: Path "#{value}" is not a valid file.]
           puts parser
           exit 1
         end
@@ -186,10 +203,11 @@ module Transloader
     # Determines which Provider and Station classes are used.
     def provider_option(parser)
       parser.on("--provider [PROVIDER]",
-        "Data provider to use: environment_canada, data_garrison, campbell_scientific.") do |value|
+        "Data provider to use: environment_canada, data_garrison, campbell_scientific, klrs_h_weather.") do |value|
         @provider = value
         
-        if !["environment_canada", "data_garrison", "campbell_scientific"].include?(value)
+        if !["environment_canada", "data_garrison", 
+             "campbell_scientific", "klrs_h_weather"].include?(value)
           puts %Q[ERROR: Provider "#{value}" is not a valid provider.]
           puts parser
           exit 1

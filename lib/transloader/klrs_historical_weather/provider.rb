@@ -12,7 +12,7 @@ module Transloader
     end
 
     # Create a new Station object based on the station ID
-    def get_station(station_id:)
+    def get_station(station_id:, data_paths: [])
       store_opts = {
         cache_path: @cache_path,
         provider:   PROVIDER_NAME,
@@ -26,7 +26,7 @@ module Transloader
         http_client:    @http_client,
         id:             station_id,
         metadata_store: metadata_store,
-        properties:     {},
+        properties:     { data_paths: data_paths },
         provider:       self
       )
     end

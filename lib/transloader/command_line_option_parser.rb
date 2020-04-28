@@ -123,6 +123,8 @@ module Transloader
       case options.provider
       when "campbell_scientific"
         require_options(options, [:data_urls])
+      when "klrs_historical_weather"
+        require_options(options, [:data_paths])
       when "data_garrison"
         require_options(options, [:user_id])
       end

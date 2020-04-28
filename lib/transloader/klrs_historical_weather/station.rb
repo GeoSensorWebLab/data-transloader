@@ -28,6 +28,7 @@ module Transloader
     # existing metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
       # TODO
+      raise "Unimplemented Method"
     end
 
     # Upload metadata to SensorThings API.
@@ -42,6 +43,7 @@ module Transloader
     # ignored.
     def upload_metadata(server_url, options = {})
       # TODO
+      raise "Unimplemented Method"
     end
 
     # Convert the observations from the source data files and serialize
@@ -49,6 +51,7 @@ module Transloader
     # An interval may be specified to limit the parsing of data.
     def download_observations(interval = nil)
       # TODO
+      raise "Unimplemented Method"
     end
 
     # Collect all the observation files in the date interval, and upload
@@ -67,6 +70,7 @@ module Transloader
     # ignored.
     def upload_observations(destination, interval, options = {})
       # TODO
+      raise "Unimplemented Method"
     end
 
 

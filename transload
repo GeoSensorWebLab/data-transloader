@@ -45,6 +45,14 @@ def get_station(options, http_client)
       provider:    "campbell_scientific",
       station_id:  options.station_id
     })
+  when "klrs_h_weather"
+    Transloader::Station.new({
+      cache:       options.cache,
+      data_files:  options.data_paths,
+      http_client: http_client,
+      provider:    "klrs_historical_weather",
+      station_id:  options.station_id
+    })
   end
 end
 

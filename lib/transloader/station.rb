@@ -75,6 +75,11 @@ module Transloader
           data_urls:  options[:data_urls],
           station_id: options[:station_id]
         )
+      when "Transloader::KLRSHistoricalWeatherProvider"
+        provider.get_station(
+          data_paths: options[:data_paths],
+          station_id: options[:station_id]
+        )
       else
         raise Error, "Unhandled provider class: #{provider.class}"
       end
@@ -86,6 +91,7 @@ module Transloader
       when "environment_canada" then EnvironmentCanadaProvider
       when "data_garrison" then DataGarrisonProvider
       when "campbell_scientific" then CampbellScientificProvider
+      when "klrs_historical_weather" then KLRSHistoricalWeatherProvider
       else raise Error, "Unknown provider name: #{provider_name}"
       end
     end
