@@ -47,9 +47,7 @@ module Transloader
           next
         end
 
-        # Important: Encoding must be set before opening the file. Here
-        # we convert to UTF-8 as that is what our database will expect.
-        data = CSV.read(path, { encoding: "windows-1252:utf-8" })
+        data = read_csv_file(path)
 
         # Store CSV file metadata
         data_files.push(DataFile.new({
@@ -343,6 +341,43 @@ module Transloader
     # "NAN" usage here is specific to Campbell Scientific loggers.
     def parse_reading(reading)
       reading == "NAN" ? "null" : reading.to_f
+    end
+
+    # Parse a CSV/TSV file into an array of arrays.
+    # Will apply character encoding fix from windows-1252 to utf-8,
+    # and automatically detect if file is tab-separated or comma
+    # separated.
+    def read_csv_file(path)
+      data      = []
+      separator = ","
+
+      # Peek first line to determine if it is tabs or commas. The 
+      # heuristic is whether there are more commas or tabs.
+      File.open(path, { encoding: "windows-1252:utf-8" }) do |f|
+        first_line = ""
+        char       = ""
+        # The line endings might be Windows or Unix, so we need to
+        # handle both.
+        while (char != "\r" && char != "\n") do
+          char        = f.getc
+          first_line += char
+        end
+
+        commas_count = first_line.count(",")
+        tabs_count   = first_line.count("\t")
+        separator    = tabs_count > commas_count ? "\t" : ","
+      end
+
+      begin
+        data = CSV.read(path, {
+          encoding: "windows-1252:utf-8",
+          col_sep:  separator
+        })
+      rescue CSV::MalformedCSVError => e
+        logger.error "Cannot parse #{path} as CSV file: #{e}"
+        exit 1
+      end
+      data
     end
 
     # Save the Station metadata to the metadata cache file
