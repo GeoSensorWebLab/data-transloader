@@ -21,9 +21,8 @@ ruby $SCRIPT get metadata \
     --station_id $STATION_ID \
     --data_path "tmp/klrs-weather/2012/September/TOA5_5264.FiveMin.dat" \
     --data_path "tmp/klrs-weather/2013/July/TOA5_5264.FiveMin.dat" \
-    --cache $DATASTORE
-
-read -p "Edit station metadata and press [enter] to continue..."
+    --cache $DATASTORE \
+    --overwrite
 
 ruby $SCRIPT put metadata \
     --provider $PROVIDER \
