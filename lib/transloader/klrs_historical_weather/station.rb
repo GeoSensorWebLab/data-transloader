@@ -139,8 +139,159 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
-      # TODO
-      raise "Unimplemented Method"
+      get_metadata
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      # TODO: extract this to shared method
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.select do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.select do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
+
+      # THING entity
+      # Create Thing entity
+      thing = @entity_factory.new_thing({
+        name:        @metadata[:name],
+        description: @metadata[:description],
+        properties:  {
+          provider:              'Campbell Scientific',
+          station_id:            @id,
+          station_model_name:    @metadata[:properties][:station_model_name],
+          station_serial_number: @metadata[:properties][:station_serial_number],
+          station_program:       @metadata[:properties][:station_program]
+        }
+      })
+
+      # Upload entity and parse response
+      thing.upload_to(server_url)
+
+      # Cache URL
+      @metadata[:"Thing@iot.navigationLink"] = thing.link
+      save_metadata
+
+      # LOCATION entity
+      # Check if latitude or longitude are blank
+      if @metadata[:latitude].nil? || @metadata[:longitude].nil?
+        raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
+      end
+      
+      # Create Location entity
+      location = @entity_factory.new_location({
+        name:         @metadata[:name],
+        description:  @metadata[:description],
+        encodingType: 'application/vnd.geo+json',
+        location: {
+          type:        'Point',
+          coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
+        }
+      })
+
+      # Upload entity and parse response
+      location.upload_to(thing.link)
+
+      # Cache URL
+      @metadata[:"Location@iot.navigationLink"] = location.link
+      save_metadata
+
+      # SENSOR entities
+      datastreams.each do |stream|
+        # Create Sensor entities
+        sensor = @entity_factory.new_sensor({
+          name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
+          description: "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
+          # This encoding type is a lie, because there are only two types in
+          # the spec and none apply here. Implementations are strict about those
+          # two types, so we have to pretend.
+          # More discussion on specification that could change this:
+          # https://github.com/opengeospatial/sensorthings/issues/39
+          encodingType: 'application/pdf',
+          metadata:     @metadata[:procedure] || "http://example.org/unknown"
+        })
+
+        # Upload entity and parse response
+        sensor.upload_to(server_url)
+
+        # Cache URL and ID
+        stream[:"Sensor@iot.navigationLink"] = sensor.link
+        stream[:"Sensor@iot.id"] = sensor.id
+      end
+
+      save_metadata
+
+      # OBSERVED PROPERTY entities
+      datastreams.each do |stream|
+        # Look up entity in ontology;
+        # if nil, then use default attributes
+        entity = @ontology.observed_property(stream[:name])
+
+        if entity.nil?
+          logger.warn "No Observed Property found in Ontology for CampbellScientific:#{stream[:name]}"
+          entity = {
+            name:        stream[:name],
+            definition:  "http://example.org/#{stream[:name]}",
+            description: stream[:name]
+          }
+        end
+
+        observed_property = @entity_factory.new_observed_property(entity)
+
+        # Upload entity and parse response
+        observed_property.upload_to(server_url)
+
+        # Cache URL
+        stream[:"ObservedProperty@iot.navigationLink"] = observed_property.link
+        stream[:"ObservedProperty@iot.id"] = observed_property.id
+      end
+
+      save_metadata
+
+      # DATASTREAM entities
+      datastreams.each do |stream|
+        # Look up UOM, observationType in ontology;
+        # if nil, then use default attributes
+        uom = @ontology.unit_of_measurement(stream[:name])
+
+        if uom.nil?
+          logger.warn "No Unit of Measurement found in Ontology for CampbellScientific:#{stream[:name]} (#{stream[:uom]})"
+          uom = {
+            name:       stream[:Units] || "",
+            symbol:     stream[:Units] || "",
+            definition: ''
+          }
+        end
+
+        observation_type = observation_type_for(stream[:name], @ontology)
+
+        datastream = @entity_factory.new_datastream({
+          name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
+          description: "Campbell Scientific Station #{@id} #{stream[:name]}",
+          unitOfMeasurement: uom,
+          observationType: observation_type,
+          Sensor: {
+            '@iot.id' => stream[:'Sensor@iot.id']
+          },
+          ObservedProperty: {
+            '@iot.id' => stream[:'ObservedProperty@iot.id']
+          }
+        })
+
+        # Upload entity and parse response
+        datastream.upload_to(thing.link)
+
+        # Cache URL
+        stream[:"Datastream@iot.navigationLink"] = datastream.link
+        stream[:"Datastream@iot.id"] = datastream.id
+      end
+
+      save_metadata
     end
 
     # Convert the observations from the source data files and serialize
