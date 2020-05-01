@@ -362,8 +362,12 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
-      # TODO
-      raise "Unimplemented Method"
+      get_metadata
+
+      time_interval = Transloader::TimeInterval.new(interval)
+      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
+      logger.info "Uploading Observations: #{observations.count}"
+      upload_observations_array(observations, options)
     end
 
 
@@ -482,6 +486,80 @@ module Transloader
     # Save the Station metadata to the metadata cache file
     def save_metadata
       @metadata_store.merge(@metadata)
+    end
+
+    # Upload all observations in an array.
+    # * observations: Array of DataStore observations
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    # 
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_array(observations, options = {})
+      # Check for metadata
+      if @metadata.empty?
+        raise Error, "station metadata not loaded"
+      end
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = @metadata[:datastreams]
+
+      if options[:allowed]
+        datastreams = datastreams.select do |datastream|
+          options[:allowed].include?(datastream[:name])
+        end
+      elsif options[:blocked]
+        datastreams = datastreams.select do |datastream|
+          !options[:blocked].include?(datastream[:name])
+        end
+      end
+
+      # Create hash map of observed properties to datastream URLs.
+      # This is used to determine where Observation entities are 
+      # uploaded.
+      datastream_hash = datastreams.reduce({}) do |memo, datastream|
+        memo[datastream[:name]] = datastream
+        memo
+      end
+
+      # Observation from DataStore:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      responses = observations.collect do |observation|
+        datastream = datastream_hash[observation[:property]]
+
+        if datastream.nil?
+          logger.warn "No datastream found for observation property: #{observation[:property]}"
+          :unavailable
+        else
+          datastream_url = datastream[:'Datastream@iot.navigationLink']
+
+          if datastream_url.nil?
+            raise Error, "Datastream navigation URLs not cached"
+          end
+
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          result = coerce_result(observation[:result], observation_type_for(datastream[:name], @ontology))
+
+          observation = @entity_factory.new_observation({
+            phenomenonTime: phenomenonTime,
+            result: result,
+            resultTime: phenomenonTime
+          })
+
+          # Upload entity and parse response
+          observation.upload_to(datastream_url)
+        end
+      end
+
+      # output info on how many observations were created and so on
+      log_response_types(responses)
     end
   end
 end
