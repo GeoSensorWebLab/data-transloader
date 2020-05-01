@@ -9,11 +9,6 @@ PROVIDER="klrs_h_weather"
 STATION_ID="KLRS_5264"
 DATASTORE="datastore/weather"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
-NOW=$(ruby -e "puts (Time.new).utc.strftime('%FT%T%z')")
-THEN=$(ruby -e "puts (Time.new - (24*3600)).utc.strftime('%FT%T%z')")
-INTERVAL="$THEN/$NOW"
-
-echo "$INTERVAL"
 
 # KLRS Historical Weather Dadta Test Run
 ruby $SCRIPT get metadata \
@@ -35,9 +30,12 @@ ruby $SCRIPT get observations \
     --station_id $STATION_ID \
     --cache $DATASTORE
 
+# Upload partial 2012 observations only to save time (approx 4600).
+# (For a local SensorThings API instance, 250,000 observations takes 
+# about 45 minutes to upload.)
 ruby $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \
-    --date $INTERVAL \
+    --date "2012-08-01T00:00:00Z/2012-08-07T00:00:00Z" \
     --destination $DESTINATION
