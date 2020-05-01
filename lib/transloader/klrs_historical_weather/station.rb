@@ -8,6 +8,9 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
+    NAME      = "KLRS Weather Station"
+    LONG_NAME = "KLRS Historical Weather Station"
+
     attr_accessor :data_store, :id, :metadata, :properties, :provider
 
     def initialize(options = {})
@@ -106,8 +109,8 @@ module Transloader
 
       # Convert to Hash
       @metadata = {
-        name:            "KLRS Weather Station #{@id}",
-        description:     "KLRS Historical Weather Station #{@id}",
+        name:            "#{NAME} #{@id}",
+        description:     "#{LONG_NAME} #{@id}",
         latitude:        61.02741,
         longitude:       -138.41071,
         elevation:       nil,
@@ -160,7 +163,7 @@ module Transloader
         name:        @metadata[:name],
         description: @metadata[:description],
         properties:  {
-          provider:              'Campbell Scientific',
+          provider:              LONG_NAME,
           station_id:            @id,
           station_model_name:    @metadata[:properties][:station_model_name],
           station_serial_number: @metadata[:properties][:station_serial_number],
@@ -203,8 +206,8 @@ module Transloader
       datastreams.each do |stream|
         # Create Sensor entities
         sensor = @entity_factory.new_sensor({
-          name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
-          description: "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
+          name:        "#{LONG_NAME} #{@id} #{stream[:name]} Sensor",
+          description: "#{LONG_NAME} #{@id} #{stream[:name]} Sensor",
           # This encoding type is a lie, because there are only two types in
           # the spec and none apply here. Implementations are strict about those
           # two types, so we have to pretend.
@@ -231,7 +234,7 @@ module Transloader
         entity = @ontology.observed_property(stream[:name])
 
         if entity.nil?
-          logger.warn "No Observed Property found in Ontology for CampbellScientific:#{stream[:name]}"
+          logger.warn "No Observed Property found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]}"
           entity = {
             name:        stream[:name],
             definition:  "http://example.org/#{stream[:name]}",
@@ -258,7 +261,7 @@ module Transloader
         uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for CampbellScientific:#{stream[:name]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:Units] || "",
             symbol:     stream[:Units] || "",
@@ -269,8 +272,8 @@ module Transloader
         observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({
-          name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
-          description: "Campbell Scientific Station #{@id} #{stream[:name]}",
+          name:        "#{LONG_NAME} #{@id} #{stream[:name]}",
+          description: "#{LONG_NAME} #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
           observationType: observation_type,
           Sensor: {

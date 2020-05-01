@@ -2,6 +2,7 @@ require 'transloader/klrs_historical_weather/station'
 
 module Transloader
   class KLRSHistoricalWeatherProvider
+    PROVIDER_ID   = "KLRSHistoricalWeather"
     PROVIDER_NAME = "klrs_historical_weather"
 
     attr_accessor :cache_path

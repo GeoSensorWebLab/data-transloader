@@ -87,12 +87,17 @@ module Transloader
 
     # Select the correct Provider class from the name parameter
     def provider_class(provider_name)
-      case provider_name
-      when "environment_canada" then EnvironmentCanadaProvider
-      when "data_garrison" then DataGarrisonProvider
-      when "campbell_scientific" then CampbellScientificProvider
-      when "klrs_historical_weather" then KLRSHistoricalWeatherProvider
-      else raise Error, "Unknown provider name: #{provider_name}"
+      provider_klass = [
+        EnvironmentCanadaProvider,
+        DataGarrisonProvider,
+        CampbellScientificProvider,
+        KLRSHistoricalWeatherProvider
+      ].find { |klass| klass::PROVIDER_NAME == provider_name }
+      
+      if provider_klass.nil?
+        raise Error, "Unknown provider name: #{provider_name}"
+      else
+        provider_klass
       end
     end
   end
