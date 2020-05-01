@@ -296,8 +296,54 @@ module Transloader
     # into the data store.
     # An interval may be specified to limit the parsing of data.
     def download_observations(interval = nil)
-      # TODO
-      raise "Unimplemented Method"
+      get_metadata
+
+      @metadata[:data_files].each do |data_file|
+        data_filename = data_file[:filename]
+        all_observations = load_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
+
+        # Filter observations by interval, if one is set
+        if !interval.nil?
+          puts "Applying interval filter: #{all_observations.length}"
+          all_observations = all_observations.filter do |observation|
+            timestamp = observation[0]
+            timestamp >= interval.start && timestamp <= interval.end
+          end
+          puts "Reduced to #{all_observations.length}"
+        end
+
+        # Store Observations in DataStore.
+        # Convert to new store format first:
+        # * timestamp
+        # * result
+        # * property
+        # * unit
+        observations = all_observations.collect do |observation_set|
+          timestamp = Time.parse(observation_set[0])
+          # observation:
+          # * name (property)
+          # * reading (result)
+          observation_set[1].collect do |observation|
+            datastream = @metadata[:datastreams].find do |datastream|
+              datastream[:name] == observation[:name]
+            end
+
+            if datastream
+              {
+                timestamp: timestamp,
+                result: observation[:reading],
+                property: observation[:name],
+                unit: datastream[:units]
+              }
+            else
+              nil
+            end
+          end
+        end
+        observations.flatten! && observations.compact!
+        logger.info "Loaded Observations: #{observations.count}"
+        @data_store.store(observations)
+      end
     end
 
     # Collect all the observation files in the date interval, and upload
@@ -323,6 +369,58 @@ module Transloader
 
     # For parsing functionality specific to this data provider
     private
+
+    # Load observations from a local file
+    # 
+    # Return an array of observation rows:
+    # [
+    #   ["2019-03-05T17:00:00.000Z", {
+    #     name: "TEMPERATURE_Avg",
+    #     reading: 5.479
+    #   }, {
+    #     name: "WIND_SPEED",
+    #     reading: 12.02
+    #   }],
+    #   ["2019-03-05T18:00:00.000Z", {
+    #   ...
+    #   }]
+    # ]
+    def load_observations_for_file(data_file)
+      observations = []
+      data = read_csv_file(data_file[:url])
+      # Parse column headers from second row for observed properties
+      # (Uses slice to skip first column with timestamp)
+      column_headers = data[1].slice(1..-1)
+
+      # Omit the file header rows from the next step
+      data.slice!(0..3)
+
+      # Parse observations from CSV
+      data.each do |row|
+        # Add seconds to the timestamp, if they are missing.
+        time = row[0]
+        if time =~ /^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}$/
+          logger.trace "Adding missing seconds to timestamp"
+          time += ":00"
+        end
+
+        # Transform dates into ISO8601 in UTC.
+        # This will make it simpler to group them by day and to simplify
+        # timezones for multiple stations.
+        timestamp = parse_toa5_timestamp(time, @metadata[:timezone_offset])
+        utc_time = to_iso8601(timestamp)
+        observations.push([utc_time, 
+          row[1..-1].map.with_index { |x, i|
+            {
+              name: column_headers[i],
+              reading: parse_reading(x)
+            }
+          }
+        ])
+      end
+      
+      observations
+    end
 
     # Load the metadata for a station.
     # If the station data is already cached, use that. If not, download
