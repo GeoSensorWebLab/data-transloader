@@ -55,9 +55,9 @@ module Transloader
         object_uri = solutions.first[:object]
         individual = reduce_solutions(get_all_by_subject(object_uri))
         {
-          definition:  individual[DEFS[:definition]][0].humanize,
-          description: individual[DEFS[:description]][0].humanize,
-          name:        individual[RDF::RDFS.label][0].humanize
+          definition:  definition_for_individual(individual),
+          description: description_for_individual(individual),
+          name:        name_for_individual(individual)
         }
       else
         # Only one should have been matched — probably an ontology issue
@@ -74,9 +74,9 @@ module Transloader
         object_uri = solutions.first[:object]
         individual = reduce_solutions(get_all_by_subject(object_uri))
         {
-          definition:  individual[DEFS[:definition]][0].humanize,
-          symbol:      individual[DEFS[:symbol]][0].humanize,
-          name:        individual[RDF::RDFS.label][0].humanize
+          definition:  definition_for_individual(individual),
+          symbol:      symbol_for_individual(individual),
+          name:        name_for_individual(individual)
         }
       else
         # Only one should have been matched — probably an ontology issue
@@ -85,6 +85,30 @@ module Transloader
     end
 
     private
+
+    # Retrieve the definition for an RDF individual, and convert to
+    # a human-readable string. Will raise an `OntologyError` if the
+    # definition is nil.
+    def definition_for_individual(individual)
+      definition = individual[DEFS[:definition]]
+      if definition.nil?
+        raise OntologyError, "Missing definition for individual: #{individual}"
+      else
+        definition[0].humanize
+      end
+    end
+
+    # Retrieve the description for an RDF individual, and convert to
+    # a human-readable string. Will raise an `OntologyError` if the
+    # description is nil.
+    def description_for_individual(individual)
+      description = individual[DEFS[:description]]
+      if description.nil?
+        raise OntologyError, "Missing description for individual: #{individual}"
+      else
+        description[0].humanize
+      end
+    end
 
     # Convert a string for compatibility with URLs.
     # Replaces spaces with underscores.
@@ -104,6 +128,18 @@ module Transloader
         .filter(predicate: DEFS[:matchesUnitOfMeasurement])
     end
 
+    # Retrieve the label for an RDF individual, and convert to
+    # a human-readable string. Will raise an `OntologyError` if the
+    # label is nil.
+    def name_for_individual(individual)
+      name = individual[RDF::RDFS.label]
+      if name.nil?
+        raise OntologyError, "Missing label for individual: #{individual}"
+      else
+        name[0].humanize
+      end
+    end
+
     # Reduce the solutions array to a Hash with predicates as keys, and
     # an array of objects as values.
     def reduce_solutions(solutions)
@@ -111,6 +147,18 @@ module Transloader
         memo[solution[:predicate]] ||= []
         memo[solution[:predicate]].push(solution[:object])
         memo
+      end
+    end
+
+    # Retrieve the symbol for an RDF individual, and convert to
+    # a human-readable string. Will raise an `OntologyError` if the
+    # symbol is nil.
+    def symbol_for_individual(individual)
+      symbol = individual[DEFS[:symbol]]
+      if symbol.nil?
+        raise OntologyError, "Missing symbol for individual: #{individual}"
+      else
+        symbol[0].humanize
       end
     end
 
