@@ -865,6 +865,130 @@ etl-ontology:EnvironmentCanada:wnd_dir_10m_pst1hr_pk_spd rdf:type owl:NamedIndiv
                                                          etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:AirTC_Avg
+etl-ontology:KLRSHistoricalWeather:AirTC_Avg rdf:type owl:NamedIndividual ,
+                                                      etl-ontology:SourceProperty ;
+                                             etl-ontology:matchesObservedProperty etl-ontology:Property:Air_Temperature ;
+                                             etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Batt_Volt_Avg
+etl-ontology:KLRSHistoricalWeather:Batt_Volt_Avg rdf:type owl:NamedIndividual ,
+                                                          etl-ontology:SourceProperty ;
+                                                 etl-ontology:matchesObservedProperty etl-ontology:Property:Average_Battery_Voltage ;
+                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Batt_Volt_Max
+etl-ontology:KLRSHistoricalWeather:Batt_Volt_Max rdf:type owl:NamedIndividual ,
+                                                          etl-ontology:SourceProperty ;
+                                                 etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_Battery_Voltage ;
+                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Batt_Volt_Min
+etl-ontology:KLRSHistoricalWeather:Batt_Volt_Min rdf:type owl:NamedIndividual ,
+                                                          etl-ontology:SourceProperty ;
+                                                 etl-ontology:matchesObservedProperty etl-ontology:Property:Minimum_Battery_Voltage ;
+                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Batt_Volt_TMn
+etl-ontology:KLRSHistoricalWeather:Batt_Volt_TMn rdf:type owl:NamedIndividual ,
+                                                          etl-ontology:SourceProperty ;
+                                                 etl-ontology:matchesObservedProperty etl-ontology:Property:Minimum_Battery_Voltage_Timestamp ;
+                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:timestamp .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:NR_Wm2_Avg
+etl-ontology:KLRSHistoricalWeather:NR_Wm2_Avg rdf:type owl:NamedIndividual ,
+                                                       etl-ontology:SourceProperty ;
+                                              etl-ontology:matchesObservedProperty etl-ontology:Property:Net_Radiation_Average ;
+                                              etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:watt_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Panel_Temp_Avg
+etl-ontology:KLRSHistoricalWeather:Panel_Temp_Avg rdf:type owl:NamedIndividual ,
+                                                           etl-ontology:SourceProperty ;
+                                                  etl-ontology:matchesObservedProperty etl-ontology:Property:Solar_Panel_Temperature_Average ;
+                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Panel_Temp_Max
+etl-ontology:KLRSHistoricalWeather:Panel_Temp_Max rdf:type owl:NamedIndividual ,
+                                                           etl-ontology:SourceProperty ;
+                                                  etl-ontology:matchesObservedProperty etl-ontology:Property:Solar_Panel_Temperature_Maximum ;
+                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Panel_Temp_Min
+etl-ontology:KLRSHistoricalWeather:Panel_Temp_Min rdf:type owl:NamedIndividual ,
+                                                           etl-ontology:SourceProperty ;
+                                                  etl-ontology:matchesObservedProperty etl-ontology:Property:Solar_Panel_Temperature_Minimum ;
+                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:Panel_Temp_TMx
+etl-ontology:KLRSHistoricalWeather:Panel_Temp_TMx rdf:type owl:NamedIndividual ,
+                                                           etl-ontology:SourceProperty ;
+                                                  etl-ontology:matchesObservedProperty etl-ontology:Property:Solar_Panel_Temperature_Maximum_Timestamp ;
+                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:timestamp .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:RECORD
+etl-ontology:KLRSHistoricalWeather:RECORD rdf:type owl:NamedIndividual ,
+                                                   etl-ontology:SourceProperty .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:RH_Avg
+etl-ontology:KLRSHistoricalWeather:RH_Avg rdf:type owl:NamedIndividual ,
+                                                   etl-ontology:SourceProperty ;
+                                          etl-ontology:matchesObservedProperty etl-ontology:Property:Relative_Humidity ;
+                                          etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:percent .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:SWin_Wm2_Avg
+etl-ontology:KLRSHistoricalWeather:SWin_Wm2_Avg rdf:type owl:NamedIndividual ,
+                                                         etl-ontology:SourceProperty ;
+                                                etl-ontology:matchesObservedProperty etl-ontology:Property:Shortwave_Incoming_Radiation_Average ;
+                                                etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:watt_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:SWout_Wm2_Avg
+etl-ontology:KLRSHistoricalWeather:SWout_Wm2_Avg rdf:type owl:NamedIndividual ,
+                                                          etl-ontology:SourceProperty ;
+                                                 etl-ontology:matchesObservedProperty etl-ontology:Property:Shortwave_Outgoing_Radiation_Average ;
+                                                 etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:watt_per_square_meter .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:WS_ms_Max
+etl-ontology:KLRSHistoricalWeather:WS_ms_Max rdf:type owl:NamedIndividual ,
+                                                      etl-ontology:SourceProperty ;
+                                             etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_Speed_Maximum ;
+                                             etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:meter_per_second .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:WS_ms_S_WVT
+etl-ontology:KLRSHistoricalWeather:WS_ms_S_WVT rdf:type owl:NamedIndividual ,
+                                                        etl-ontology:SourceProperty ;
+                                               etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_Speed_Average ;
+                                               etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:meter_per_second .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:WindDir_D1_WVT
+etl-ontology:KLRSHistoricalWeather:WindDir_D1_WVT rdf:type owl:NamedIndividual ,
+                                                           etl-ontology:SourceProperty ;
+                                                  etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_Direction_Average ;
+                                                  etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#KLRSHistoricalWeather:WindDir_SD1_WVT
+etl-ontology:KLRSHistoricalWeather:WindDir_SD1_WVT rdf:type owl:NamedIndividual ,
+                                                            etl-ontology:SourceProperty ;
+                                                   etl-ontology:matchesObservedProperty etl-ontology:Property:Wind_Direction_Standard_Deviation ;
+                                                   etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Air_Pressure
 etl-ontology:Property:Air_Pressure rdf:type owl:NamedIndividual ,
                                             etl-ontology:ObservedProperty ;
@@ -919,6 +1043,14 @@ etl-ontology:Property:Average_Air_Temperature_over_past_1_hour rdf:type owl:Name
                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
                                                                rdfs:label "Average air temperature over past 1 hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_Battery_Voltage
+etl-ontology:Property:Average_Battery_Voltage rdf:type owl:NamedIndividual ,
+                                                       etl-ontology:ObservedProperty ;
+                                              etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                              etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                              rdfs:label "Average Battery Voltage over an interval"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Average_snow_depth_over_past_5_minutes
@@ -1137,6 +1269,14 @@ etl-ontology:Property:Maximum_Air_Temperature_over_past_6_hours rdf:type owl:Nam
                                                                 rdfs:label "Maximum Air Temperature over past 6 hours" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Battery_Voltage
+etl-ontology:Property:Maximum_Battery_Voltage rdf:type owl:NamedIndividual ,
+                                                       etl-ontology:ObservedProperty ;
+                                              etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                              etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                              rdfs:label "Maximum Battery Voltage over an interval"^^xsd:string .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Battery_Voltage_Past_1_Hour
 etl-ontology:Property:Maximum_Battery_Voltage_Past_1_Hour rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:ObservedProperty ;
@@ -1169,12 +1309,28 @@ etl-ontology:Property:Mean_sea_level_pressure rdf:type owl:NamedIndividual ,
                                               rdfs:label "Mean Sea Level Pressure" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Battery_Voltage
+etl-ontology:Property:Minimum_Battery_Voltage rdf:type owl:NamedIndividual ,
+                                                       etl-ontology:ObservedProperty ;
+                                              etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                              etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                              rdfs:label "Minimum Battery Voltage over an interval"^^xsd:string .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Battery_Voltage_Past_1_Hour
 etl-ontology:Property:Minimum_Battery_Voltage_Past_1_Hour rdf:type owl:NamedIndividual ,
                                                                    etl-ontology:ObservedProperty ;
                                                           etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
                                                           etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
                                                           rdfs:label "Minimum Battery Voltage Past 1 Hour" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Battery_Voltage_Timestamp
+etl-ontology:Property:Minimum_Battery_Voltage_Timestamp rdf:type owl:NamedIndividual ,
+                                                                 etl-ontology:ObservedProperty ;
+                                                        etl-ontology:definition "http://mmisw.org/ont/CUAHSI/WaterQualityCore2/batteryVoltage"^^xsd:anyURI ;
+                                                        etl-ontology:description "The battery voltage of a datalogger or sensing system, often recorded as an indicator of data reliability."^^xsd:string ;
+                                                        rdfs:label "Timestamp of Minimum Battery Voltage over an interval"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Relative_Humidity_over_past_1_hour
@@ -1207,6 +1363,14 @@ etl-ontology:Property:Mole_fraction_of_water_vapor_in_air rdf:type owl:NamedIndi
                                                           etl-ontology:definition "http://mmisw.org/ont/cf/parameter/mole_fraction_of_water_vapor_in_air"^^xsd:anyURI ;
                                                           etl-ontology:description "Mole fraction is used in the construction mole_fraction_of_X_in_Y, where X is a material constituent of Y. The chemical formula of water vapor is H2O."^^xsd:string ;
                                                           rdfs:label "Mole fraction of water vapor in air" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Net_Radiation_Average
+etl-ontology:Property:Net_Radiation_Average rdf:type owl:NamedIndividual ,
+                                                     etl-ontology:ObservedProperty ;
+                                            etl-ontology:definition "" ;
+                                            etl-ontology:description "" ;
+                                            rdfs:label "Average of Net (Total) Radiation over an interval"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Non-cumulative_cloud_cover_or_amount_layer_1
@@ -1305,12 +1469,60 @@ etl-ontology:Property:Relative_Humidity rdf:type owl:NamedIndividual ,
                                         rdfs:label "Relative Humidity" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Shortwave_Incoming_Radiation_Average
+etl-ontology:Property:Shortwave_Incoming_Radiation_Average rdf:type owl:NamedIndividual ,
+                                                                    etl-ontology:ObservedProperty ;
+                                                           etl-ontology:definition "https://mmisw.org/ont/ioos/parameter/downward_shortwave_radiation" ;
+                                                           etl-ontology:description "Downward solar insolation. Positive is downward." ;
+                                                           rdfs:label "Average Shortwave Incoming Radiation over an interval"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Shortwave_Outgoing_Radiation_Average
+etl-ontology:Property:Shortwave_Outgoing_Radiation_Average rdf:type owl:NamedIndividual ,
+                                                                    etl-ontology:ObservedProperty ;
+                                                           etl-ontology:definition "" ;
+                                                           etl-ontology:description "" ;
+                                                           rdfs:label "Average Shortwave Outgoing Radiation over an interval"^^xsd:string .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Snow_Depth
 etl-ontology:Property:Snow_Depth rdf:type owl:NamedIndividual ,
                                           etl-ontology:ObservedProperty ;
                                  etl-ontology:definition "http://mmisw.org/ont/ioos_test/parameters_regional_web_services/snowdepth"^^xsd:anyURI ;
                                  etl-ontology:description "Snow Depth"^^xsd:string ;
                                  rdfs:label "Snow Depth"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Solar_Panel_Temperature_Average
+etl-ontology:Property:Solar_Panel_Temperature_Average rdf:type owl:NamedIndividual ,
+                                                               etl-ontology:ObservedProperty ;
+                                                      etl-ontology:definition "https://mmisw.org/ont/ioos/core_variable/temperature" ;
+                                                      etl-ontology:description "Temperature of object" ;
+                                                      rdfs:label "Average Solar Panel Temperature over an interval"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Solar_Panel_Temperature_Maximum
+etl-ontology:Property:Solar_Panel_Temperature_Maximum rdf:type owl:NamedIndividual ,
+                                                               etl-ontology:ObservedProperty ;
+                                                      etl-ontology:definition "https://mmisw.org/ont/ioos/core_variable/temperature" ;
+                                                      etl-ontology:description "Temperature of object" ;
+                                                      rdfs:label "Maximum Solar Panel Temperature over an interval"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Solar_Panel_Temperature_Maximum_Timestamp
+etl-ontology:Property:Solar_Panel_Temperature_Maximum_Timestamp rdf:type owl:NamedIndividual ,
+                                                                         etl-ontology:ObservedProperty ;
+                                                                etl-ontology:definition "https://mmisw.org/ont/ioos/core_variable/temperature" ;
+                                                                etl-ontology:description "Temperature of object" ;
+                                                                rdfs:label "Timestamp of maximum Solar Panel Temperature over an interval"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Solar_Panel_Temperature_Minimum
+etl-ontology:Property:Solar_Panel_Temperature_Minimum rdf:type owl:NamedIndividual ,
+                                                               etl-ontology:ObservedProperty ;
+                                                      etl-ontology:definition "https://mmisw.org/ont/ioos/core_variable/temperature" ;
+                                                      etl-ontology:description "Temperature of object" ;
+                                                      rdfs:label "Minimum Solar Panel Temperature over an interval"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Station_Pressure
@@ -1377,6 +1589,22 @@ etl-ontology:Property:Wet_bulb_temperature rdf:type owl:NamedIndividual ,
                                            rdfs:label "Wet-bulb Temperature" .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Direction_Average
+etl-ontology:Property:Wind_Direction_Average rdf:type owl:NamedIndividual ,
+                                                      etl-ontology:ObservedProperty ;
+                                             etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction" ;
+                                             etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming." ;
+                                             rdfs:label "Average wind direction over an interval" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Direction_Standard_Deviation
+etl-ontology:Property:Wind_Direction_Standard_Deviation rdf:type owl:NamedIndividual ,
+                                                                 etl-ontology:ObservedProperty ;
+                                                        etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_from_direction" ;
+                                                        etl-ontology:description "Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. \"from_direction\" is used in the construction X_from_direction and indicates the direction from which the velocity vector of X is coming." ;
+                                                        rdfs:label "Standard deviation of wind direction over an interval" .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_From_Direction
 etl-ontology:Property:Wind_From_Direction rdf:type owl:NamedIndividual ,
                                                    etl-ontology:ObservedProperty ;
@@ -1391,6 +1619,22 @@ etl-ontology:Property:Wind_Speed rdf:type owl:NamedIndividual ,
                                  etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed"^^xsd:anyURI ;
                                  etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity."^^xsd:string ;
                                  rdfs:label "Wind Speed" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Speed_Average
+etl-ontology:Property:Wind_Speed_Average rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed" ;
+                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity." ;
+                                         rdfs:label "Average wind speed over an interval" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_Speed_Maximum
+etl-ontology:Property:Wind_Speed_Maximum rdf:type owl:NamedIndividual ,
+                                                  etl-ontology:ObservedProperty ;
+                                         etl-ontology:definition "http://mmisw.org/ont/cf/parameter/wind_speed" ;
+                                         etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity." ;
+                                         rdfs:label "Maximum wind speed over an interval" .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Wind_direction_associated_with_the_past_1-hour_maximum_wind_speed_at_10m
@@ -1616,6 +1860,15 @@ etl-ontology:Unit:meter rdf:type owl:NamedIndividual ,
                         rdfs:label "meter"^^xsd:string .
 
 
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:meter_per_second
+etl-ontology:Unit:meter_per_second rdf:type owl:NamedIndividual ,
+                                            etl-ontology:UnitOfMeasurement ;
+                                   etl-ontology:definition "http://purl.obolibrary.org/obo/UO_0000094" ;
+                                   etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement" ;
+                                   etl-ontology:symbol "m/s" ;
+                                   rdfs:label "meter per second"^^xsd:string .
+
+
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:micromol_per_mol
 etl-ontology:Unit:micromol_per_mol rdf:type owl:NamedIndividual ,
                                             etl-ontology:UnitOfMeasurement ;
@@ -1677,6 +1930,15 @@ etl-ontology:Unit:tendency_characteristic rdf:type owl:NamedIndividual ,
                                           etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"^^xsd:anyURI ;
                                           etl-ontology:symbol ""^^xsd:string ;
                                           rdfs:label "tendency_characteristic"^^xsd:string .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Unit:timestamp
+etl-ontology:Unit:timestamp rdf:type owl:NamedIndividual ,
+                                     etl-ontology:UnitOfMeasurement ;
+                            etl-ontology:definition ""^^xsd:anyURI ;
+                            etl-ontology:observationType "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TemporalObservation"^^xsd:anyURI ;
+                            etl-ontology:symbol ""^^xsd:string ;
+                            rdfs:label "A timestamp of an event"^^xsd:string .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Unit:timestamp_hour_minute
