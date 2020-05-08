@@ -14,8 +14,8 @@ module SensorThings
       @description = attributes[:description]
       @name        = attributes[:name]
 
-      [@definition, @description, @name].each do |attr|
-        if attr.nil? || attr.empty?
+      [:definition, :description, :name].each do |attr|
+        if attributes[attr].nil? || attributes[attr].empty?
           logger.warn %Q[Warning: "#{attr}" attribute for Observed Property is nil or empty. This may cause an error in SensorThings API.]
         end
       end
