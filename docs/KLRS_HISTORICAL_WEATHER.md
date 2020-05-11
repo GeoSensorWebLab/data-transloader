@@ -32,13 +32,11 @@ Inside the `KLRS_5264.json` file the sensor metadata will be stored. Editing the
 
 **Please Note**
 
-For the KLRS historical weather station data, you **must** manually edit the metadata cache file to add the latitude and longitude of the station. Adding the `elevation` (in metres above mean sea level) is optional.
+For the KLRS historical weather station data, you *may* add the `elevation` (in metres above mean sea level), but it is optional.
 
-The local timezone offset for the station **must** also be added. Use ISO 8601 compatible time offsets for the time zone; e.g. `-07:00`, `+01:00`, `+03:00`, `Z`.
+The latitude, longitude, and time zone offset are hard-coded for this ETL module. This means you do not need to manually update them in the metadata file.
 
-* Add Latitude and Longitude
 * Edit any mis-named sensors
-* Add time zone offset
 * Optional: add elevation
 
 ### Step 2: Uploading Sensor Metadata to OGC SensorThings API
@@ -88,9 +86,9 @@ $ transload get observations \
 
 In this example, the weather station with the ID `KLRS_5264` will have its observations parsed and converted into the `datastore/weather/klrs_h_weather/KLRS_5264` directory.
 
-For each data file defined in the station metadata cache file, a subdirectory is created using the filename. When the observation rows are parsed from the source data file, they are adjusted into UTC timestamps and separated by day into their own cache files.
+When the observation rows are parsed from the source data file, they are adjusted into UTC timestamps and separated by day into their own cache files.
 
-A sample observation cache file directory: `datastore/weather/klrs_h_weather/KLRS_5264/TOA5_5264.FiveMin.dat/2013/05/26.csv`
+A sample observation cache file directory: `datastore/weather/klrs_h_weather/KLRS_5264/2013/05/26.csv`
 
 Observations are separated into files by day to avoid one very-large observations file.
 
@@ -154,7 +152,7 @@ The above items will be stored as metadata under the `properties` attribute for 
 
 The next headers in the source data files delineate the Observed Properties and Units of Measurement. These will be parsed into Datastreams as well for the Thing entity.
 
-There is no latitude/longitude or location information, nor is there any timezone information. These must be manually added to the metadata cache file. A timezone is necessary as the data files use timestamps *without* timezones or timezone offsets.
+There is no latitude/longitude or location information, nor is there any timezone information. Normally these need to be manually added to the metadata cache file, but as this module is designed for a *specific* station, the values have been hard-coded instead.
 
 ### SensorThings API Entities
 
