@@ -75,6 +75,11 @@ module Transloader
           data_urls:  options[:data_urls],
           station_id: options[:station_id]
         )
+      when "Transloader::KLRSHistoricalEnergyProvider"
+        provider.get_station(
+          data_paths: options[:data_paths],
+          station_id: options[:station_id]
+        )
       when "Transloader::KLRSHistoricalWeatherProvider"
         provider.get_station(
           data_paths: options[:data_paths],
@@ -91,6 +96,7 @@ module Transloader
         EnvironmentCanadaProvider,
         DataGarrisonProvider,
         CampbellScientificProvider,
+        KLRSHistoricalEnergyProvider,
         KLRSHistoricalWeatherProvider
       ].find { |klass| klass::PROVIDER_NAME == provider_name }
       
