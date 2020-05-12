@@ -56,8 +56,10 @@ module SensorThings
     # not support deep merge.
     def upload_to(url, skip_matching_upload = false)
       upload_url = self.join_uris(url, "Datastreams")
-      filter     = "name eq '#{@name}' and description eq '#{@description}'"
-      response   = self.get(upload_url + "?$filter=#{filter}")
+      check_url = self.build_url(upload_url, {
+        "$filter" => "name eq '#{@name}' and description eq '#{@description}'"
+      })
+      response   = self.get(check_url)
       body       = JSON.parse(response.body)
 
       # Look for matching existing entities. If no entities match, use 

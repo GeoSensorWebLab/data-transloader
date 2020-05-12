@@ -38,8 +38,10 @@ module SensorThings
 
     def upload_to(url)
       upload_url = self.join_uris(url, "Sensors")
-      filter     = "name eq '#{@name}' and description eq '#{@description}'"
-      response   = self.get(upload_url + "?$filter=#{filter}")
+      check_url = self.build_url(upload_url, {
+        "$filter" => "name eq '#{@name}' and description eq '#{@description}'"
+      })
+      response   = self.get(check_url)
       body       = JSON.parse(response.body)
 
       # Look for matching existing entities. If no entities match, use 

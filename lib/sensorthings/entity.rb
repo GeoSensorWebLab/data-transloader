@@ -1,3 +1,4 @@
+require 'cgi'
 require 'json'
 require 'uri'
 
@@ -15,6 +16,17 @@ module SensorThings
       @http_client = http_client
 
       warn_long_attributes(@attributes)
+    end
+
+    # Combine a URL (`uris` string or array) and path components with 
+    # query parameters, using URL encoding for special characters.
+    def build_url(uris, parameters)
+      if uris.is_a? Array
+        uris = self.join_uris(*uris)
+      end
+
+      escaped_params = URI.encode_www_form(parameters.to_a)
+      uris.to_s + "?" + escaped_params
     end
 
     # Override URI join function to handle OData style parenthesis 
