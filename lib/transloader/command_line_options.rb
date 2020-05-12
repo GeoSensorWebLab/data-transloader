@@ -203,11 +203,12 @@ module Transloader
     # Determines which Provider and Station classes are used.
     def provider_option(parser)
       parser.on("--provider [PROVIDER]",
-        "Data provider to use: environment_canada, data_garrison, campbell_scientific, klrs_h_weather.") do |value|
+        "Data provider to use: environment_canada, data_garrison, campbell_scientific, klrs_h_energy, klrs_h_weather.") do |value|
         @provider = value
         
         if !["environment_canada", "data_garrison", 
-             "campbell_scientific", "klrs_h_weather"].include?(value)
+             "campbell_scientific", "klrs_h_energy",
+             "klrs_h_weather"].include?(value)
           puts %Q[ERROR: Provider "#{value}" is not a valid provider.]
           puts parser
           exit 1
