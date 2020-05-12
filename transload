@@ -45,6 +45,14 @@ def get_station(options, http_client)
       provider:    "campbell_scientific",
       station_id:  options.station_id
     })
+  when "klrs_h_energy"
+    Transloader::Station.new({
+      cache:       options.cache,
+      data_paths:  options.data_paths,
+      http_client: http_client,
+      provider:    "klrs_historical_energy",
+      station_id:  options.station_id
+    })
   when "klrs_h_weather"
     Transloader::Station.new({
       cache:       options.cache,
@@ -73,6 +81,8 @@ end
 def set_metadata(options)
   $logger.debug "Editing metadata"
 
+  # Data Garrison requires additional namespacing as both user id and
+  # station id are needed.
   if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
     station_id = "#{options.user_id}-#{options.station_id}"
   else
@@ -111,6 +121,8 @@ end
 def show_metadata(options)
   $logger.debug "Showing metadata"
 
+  # Data Garrison requires additional namespacing as both user id and
+  # station id are needed.
   if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
     station_id = "#{options.user_id}-#{options.station_id}"
   else
