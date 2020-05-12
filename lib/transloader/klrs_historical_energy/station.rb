@@ -1,6 +1,7 @@
-require 'time'
-require 'transloader/data_file'
-require 'transloader/station_methods'
+require "spreadsheet"
+require "time"
+require "transloader/data_file"
+require "transloader/station_methods"
 
 module Transloader
   class KLRSHistoricalEnergyStation
@@ -43,20 +44,73 @@ module Transloader
       datastreams = []
 
       data_paths.each do |path|
+        logger.info "Attempting to parse '#{path}'"
         # Open file for reading. If it does not exist, skip it.
         if !File.exists?(path)
           logger.warn "Cannot load data from path: '#{path}'"
           next
         end
 
-        raise MethodNotImplemented
+        # Store Excel file metadata
+        data_files.push(DataFile.new({
+          url:           File.absolute_path(path),
+          last_modified: to_iso8601(File.mtime(path)),
+          length:        File.size(path)
+        }).to_h)
 
-        # Parse "Configuration"
+        # Parse "Configuration". The following metadata is extracted for
+        # the properties on the `Thing` entity. Note that parsing 
+        # multiple data files will cause this data to be overwritten 
+        # with the contents of the last parsed data file.
+        raw_config = read_excel_file(path, "Configuration")
+        @properties[:configuration] = {
+          "Session Name"                  => raw_config.row(3)[1],
+          "Electrical hook-up"            => raw_config.row(12)[1],
+          "Nominal frequency mode"        => raw_config.row(13)[1],
+          "Serial number"                 => raw_config.row(16)[1],
+          "PEL name"                      => raw_config.row(17)[1],
+          "PEL location"                  => raw_config.row(18)[1],
+          "DSP firmware version"          => raw_config.row(20)[1],
+          "Hardware version"              => raw_config.row(21)[1],
+          "Current sensor 1"              => raw_config.row(25)[1],
+          "Current sensor 2"              => raw_config.row(26)[1],
+          "Primary nominal current"       => raw_config.row(27)[1],
+          "Secondary nominal current"     => raw_config.row(28)[1],
+          "Nominal current (BNC Adapter)" => raw_config.row(36)[1],
+          "Output voltage (BNC Adapter)"  => raw_config.row(37)[1]
+        }
+
+        # Add datastreams for "Event Log". Parsing is not necessary as
+        # we do not get any data at this point.
+        datastreams.push({
+          name:  "event log",
+          units: "",
+          type:  "value"
+        })
+        datastreams.push({
+          name:  "event codes",
+          units: "",
+          type:  "value"
+        })
         
-        # Parse "Event Log"
+        # Parse "Summary" sheet headers for datastreams and units
+        raw_summary = read_excel_file(path, "Summary")
         
-        # Parse "Summary"
+        # Only the first two rows are needed. Here we merge the rows
+        # together to form pairs for the datastream name and the unit of
+        # measurement.
+        headers = raw_summary.rows[0].zip(raw_summary.rows[1])
         
+        # We skip the first two date and time columns
+        headers.slice!(0, 2)
+        
+        headers.each do |name, unit|
+          datastreams.push({
+            name:  name,
+            units: unit,
+            type:  nil
+          })
+        end
       end
 
       # Reduce datastreams to unique entries, as multiple data files 
@@ -126,12 +180,8 @@ module Transloader
         description: @metadata[:description],
         properties:  {
           provider:              LONG_NAME,
-          station_id:            @id,
-          # TODO: Change these for energy monitor metadata
-          station_model_name:    @metadata[:properties][:station_model_name],
-          station_serial_number: @metadata[:properties][:station_serial_number],
-          station_program:       @metadata[:properties][:station_program]
-        }
+          station_id:            @id
+        }.merge(@metadata[:properties][:configuration])
       })
 
       # Upload entity and parse response
@@ -151,9 +201,9 @@ module Transloader
       location = @entity_factory.new_location({
         name:         @metadata[:name],
         description:  @metadata[:description],
-        encodingType: 'application/vnd.geo+json',
+        encodingType: "application/vnd.geo+json",
         location: {
-          type:        'Point',
+          type:        "Point",
           coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
         }
       })
@@ -176,7 +226,7 @@ module Transloader
           # two types, so we have to pretend.
           # More discussion on specification that could change this:
           # https://github.com/opengeospatial/sensorthings/issues/39
-          encodingType: 'application/pdf',
+          encodingType: "application/pdf",
           metadata:     @metadata[:procedure] || "http://example.org/unknown"
         })
 
@@ -228,7 +278,7 @@ module Transloader
           uom = {
             name:       stream[:Units] || "",
             symbol:     stream[:Units] || "",
-            definition: ''
+            definition: ""
           }
         end
 
@@ -240,10 +290,10 @@ module Transloader
           unitOfMeasurement: uom,
           observationType: observation_type,
           Sensor: {
-            '@iot.id' => stream[:'Sensor@iot.id']
+            "@iot.id" => stream[:"Sensor@iot.id"]
           },
           ObservedProperty: {
-            '@iot.id' => stream[:'ObservedProperty@iot.id']
+            "@iot.id" => stream[:"ObservedProperty@iot.id"]
           }
         })
 
@@ -382,16 +432,19 @@ module Transloader
       reading == "NAN" ? "null" : reading.to_f
     end
 
-    # Open the Excel file and convert all the data in `sheet` into an 
-    # array of arrays.
+    # Open the Excel file and return all the data in `sheet` as a `Row`
+    # class. This class has additional formatting metadata compared to
+    # an array, see
+    # https://github.com/zdavatz/spreadsheet/blob/master/lib/spreadsheet/row.rb
+    # for more details.
     def read_excel_file(path, sheet)
       data = []
 
-      raise MethodNotImplemented
-
       begin
-        data = ""
-      rescue
+        Spreadsheet.client_encoding = "UTF-8"
+        book = Spreadsheet.open(path)
+        data = book.worksheet(sheet)
+      rescue Exception => e
         logger.error "Cannot parse #{path} as Excel file: #{e}"
         exit 1
       end
@@ -453,7 +506,7 @@ module Transloader
           logger.warn "No datastream found for observation property: #{observation[:property]}"
           :unavailable
         else
-          datastream_url = datastream[:'Datastream@iot.navigationLink']
+          datastream_url = datastream[:"Datastream@iot.navigationLink"]
 
           if datastream_url.nil?
             raise Error, "Datastream navigation URLs not cached"
