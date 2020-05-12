@@ -58,11 +58,14 @@ module Transloader
           length:        File.size(path)
         }).to_h)
 
+        Spreadsheet.client_encoding = "UTF-8"
+        book = Spreadsheet.open(path)
+
         # Parse "Configuration". The following metadata is extracted for
         # the properties on the `Thing` entity. Note that parsing 
         # multiple data files will cause this data to be overwritten 
         # with the contents of the last parsed data file.
-        raw_config = read_excel_file(path, "Configuration")
+        raw_config = book.worksheet("Configuration")
         @properties[:configuration] = {
           "Session Name"                  => raw_config.row(3)[1],
           "Electrical hook-up"            => raw_config.row(12)[1],
@@ -94,7 +97,7 @@ module Transloader
         })
         
         # Parse "Summary" sheet headers for datastreams and units
-        raw_summary = read_excel_file(path, "Summary")
+        raw_summary = book.worksheet("Summary")
         
         # Only the first two rows are needed. Here we merge the rows
         # together to form pairs for the datastream name and the unit of
@@ -430,25 +433,6 @@ module Transloader
     # "NAN" usage here is specific to Campbell Scientific loggers.
     def parse_reading(reading)
       reading == "NAN" ? "null" : reading.to_f
-    end
-
-    # Open the Excel file and return all the data in `sheet` as a `Row`
-    # class. This class has additional formatting metadata compared to
-    # an array, see
-    # https://github.com/zdavatz/spreadsheet/blob/master/lib/spreadsheet/row.rb
-    # for more details.
-    def read_excel_file(path, sheet)
-      data = []
-
-      begin
-        Spreadsheet.client_encoding = "UTF-8"
-        book = Spreadsheet.open(path)
-        data = book.worksheet(sheet)
-      rescue Exception => e
-        logger.error "Cannot parse #{path} as Excel file: #{e}"
-        exit 1
-      end
-      data
     end
 
     # Save the Station metadata to the metadata cache file
