@@ -10,12 +10,21 @@ STATION_ID="KLRS_5264"
 DATASTORE="datastore/weather"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 
-# KLRS Historical Weather Dadta Test Run
+# KLRS Historical Weather Data Test Run
 ruby $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --data_path "tmp/klrs-weather/2012/September/TOA5_5264.FiveMin.dat" \
     --data_path "tmp/klrs-weather/2013/July/TOA5_5264.FiveMin.dat" \
+    --data_path "tmp/klrs-weather/2013/July/TOA5_5264.Health.dat" \
+    --data_path "tmp/klrs-weather/2013/May/TOA5_5264.FiveMin.dat" \
+    --data_path "tmp/klrs-weather/2013/May/TOA5_5264.Health.dat" \
+    --data_path "tmp/klrs-weather/2014/July/TOA5_5264.FiveMin.dat" \
+    --data_path "tmp/klrs-weather/2014/July/TOA5_5264.Health.dat" \
+    --data_path "tmp/klrs-weather/2014/May/TOA5_5264.FiveMin.dat" \
+    --data_path "tmp/klrs-weather/2014/May/TOA5_5264.Health.dat" \
+    --data_path "tmp/klrs-weather/2014/September/TOA5_5264.FiveMin.dat" \
+    --data_path "tmp/klrs-weather/2014/September/TOA5_5264.Health.dat" \
     --cache $DATASTORE \
     --overwrite
 
