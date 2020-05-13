@@ -410,9 +410,45 @@ module Transloader
     #   }]
     # ]
     def load_observations_for_file(data_file)
+      logger.info "Parsing observations from #{data_file[:url]}"
       observations = []
 
-      raise MethodNotImplemented
+      # Open file
+      Spreadsheet.client_encoding = "UTF-8"
+      book = Spreadsheet.open(data_file[:url])
+      
+      # Parse "Summary" worksheet
+      raw_summary = book.worksheet("Summary")
+
+      # Grab the headers so we can map the readings to a datastream
+      column_headers = raw_summary.rows[0]
+      
+      # Omit the file header rows from the next step
+      rows = raw_summary.rows[2..-1]
+
+      # Parse observations from rows
+      rows.each do |row|
+        # Transform dates into ISO8601 in UTC.
+        # Sample date: "4/27/2014"
+        # Sample time: "7:48:00 PM"
+        date      = row[0]
+        time      = row[1]
+        timestamp = Time.strptime("#{date} #{time} #{@metadata[:timezone_offset]}",
+          "%m/%e/%Y %I:%M:%S %p %z")
+        utc_time  = to_iso8601(timestamp)
+        
+        # Note that "row" must be converted to an array for the range to
+        # work correctly.
+        observations.push([utc_time,
+          row.to_a[2..-1].map.with_index { |x, i|
+            {
+              name:    column_headers[i],
+              reading: parse_reading(x)
+            }
+          }
+        ])
+      end
+
       observations
     end
 
@@ -427,12 +463,13 @@ module Transloader
       end
     end
 
-    # Parse an observation reading from the data source, converting a
-    # string to a float or if null (i.e. "NAN") then use STA compatible
-    # "null" string.
-    # "NAN" usage here is specific to Campbell Scientific loggers.
+    # Parse an observation reading from the data source, and use STA 
+    # compatible "null" string for "missing" values.
+    # This function *does not* try to convert to Floats as some values
+    # may be strings.
+    # "- - -" usage here is specific to these loggers.
     def parse_reading(reading)
-      reading == "NAN" ? "null" : reading.to_f
+      reading == "- - -" ? "null" : reading
     end
 
     # Save the Station metadata to the metadata cache file
