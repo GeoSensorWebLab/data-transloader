@@ -150,18 +150,19 @@ module Transloader
 
       # DATASTREAM entities
       datastreams.each do |stream|
-        uom              = uom_for_datastream(stream[:name], stream[:uom])
-        observation_type = observation_type_for(stream[:name], @ontology)
+        datastream_name  = stream[:name]
+        uom              = uom_for_datastream(datastream_name, stream[:uom])
+        observation_type = observation_type_for(datastream_name, @ontology)
 
         datastream = @entity_factory.new_datastream({
-          name:        "Station #{@id} #{stream[:name]}",
-          description: "#{NAME} #{@id} #{stream[:name]}",
+          name:              "Station #{@id} #{datastream_name}",
+          description:       "#{NAME} #{@id} #{datastream_name}",
           unitOfMeasurement: uom,
-          observationType: observation_type,
-          Sensor: {
+          observationType:   observation_type,
+          Sensor:            {
             '@iot.id' => stream[:'Sensor@iot.id']
           },
-          ObservedProperty: {
+          ObservedProperty:  {
             '@iot.id' => stream[:'ObservedProperty@iot.id']
           }
         })
