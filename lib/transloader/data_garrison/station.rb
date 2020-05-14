@@ -299,19 +299,7 @@ module Transloader
 
       # DATASTREAM entities
       datastreams.each do |stream|
-        # Look up UOM, observationType in ontology;
-        # if nil, then use default attributes
-        uom = @ontology.unit_of_measurement(stream[:name])
-
-        if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]} (#{stream[:uom]})"
-          uom = {
-            name:       stream[:Units] || "",
-            symbol:     stream[:Units] || "",
-            definition: ''
-          }
-        end
-
+        uom              = uom_for_datastream(stream[:name], stream[:Units])
         observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({

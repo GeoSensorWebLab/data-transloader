@@ -243,5 +243,24 @@ module Transloader
     def to_utc_iso8601(iso8601)
       to_iso8601(Time.iso8601(iso8601))
     end
+
+    # Use the Ontology to look up the unit of measurement attributes.
+    # If unavailable in the Ontology, then use `source_units`.
+    def uom_for_datastream(datastream_name, source_units)
+      # Look up UOM, observationType in ontology;
+      # if nil, then use default attributes
+      uom = @ontology.unit_of_measurement(datastream_name)
+
+      if uom.nil?
+        logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{datastream_name} (#{source_units})"
+        uom = {
+          name:       source_units,
+          symbol:     source_units,
+          definition: ''
+        }
+      else
+        uom
+      end
+    end
   end
 end
