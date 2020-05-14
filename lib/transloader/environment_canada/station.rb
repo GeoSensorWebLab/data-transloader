@@ -105,15 +105,7 @@ module Transloader
 
       # LOCATION entity
       # Create Location entity
-      location = @entity_factory.new_location({
-        name:         @metadata[:name],
-        description:  @metadata[:description],
-        encodingType: 'application/vnd.geo+json',
-        location: {
-          type:        'Point',
-          coordinates: [@metadata[:properties][:Longitude].to_f, @metadata[:properties][:Latitude].to_f]
-        }
-      })
+      location = build_location()
 
       # Upload entity and parse response
       location.upload_to(thing.link)

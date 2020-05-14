@@ -5,6 +5,20 @@ module Transloader
   module StationMethods
     include SemanticLogger::Loggable
 
+    # Create a `Location` entity for SensorThings API based on this
+    # station's metadata.
+    def build_location
+      @entity_factory.new_location({
+        name:         @metadata[:name],
+        description:  @metadata[:description],
+        encodingType: "application/vnd.geo+json",
+        location: {
+          type:        "Point",
+          coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
+        }
+      })
+    end
+
     # Create a `Thing` entity for SensorThings API based on this station
     # and add custom properties.
     def build_thing(properties)
