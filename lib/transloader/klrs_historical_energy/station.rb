@@ -4,6 +4,13 @@ require "transloader/data_file"
 require "transloader/station_methods"
 
 module Transloader
+  # Class for downloading and uploading metadata and observation data
+  # from historical Kluane Lake Research Station (KLRS) energy 
+  # monitoring data sets. The data is read from local files instead of
+  # over HTTP, and the data has a custom format in Excel spreadsheet
+  # files.
+  # 
+  # This class is called by the main Transloader::Station class.
   class KLRSHistoricalEnergyStation
     include SemanticLogger::Loggable
     include Transloader::StationMethods

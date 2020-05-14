@@ -6,6 +6,10 @@ require 'transloader/metadata_store'
 require 'transloader/environment_canada/station'
 
 module Transloader
+  # Provider is used for initializing stations with the correct
+  # provider-specific logic. Environment Canada stations requires extra
+  # logic here to download the official list of stations and retrieve
+  # additional station metadata (e.g. latitude/longitude).
   class EnvironmentCanadaProvider
     include SemanticLogger::Loggable
 

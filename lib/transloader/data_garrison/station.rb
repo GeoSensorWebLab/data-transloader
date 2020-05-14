@@ -5,6 +5,13 @@ require 'transloader/station_methods'
 require 'uri'
 
 module Transloader
+  # Class for downloading and uploading metadata and observation data
+  # from Data Garrison's online weather station data portal. The data is
+  # downloaded over HTTP, and the data has a custom format. As the site
+  # has no REST API, custom endpoints must be called to force an update
+  # of the data files to download.
+  # 
+  # This class is called by the main Transloader::Station class.
   class DataGarrisonStation
     include SemanticLogger::Loggable
     include Transloader::StationMethods

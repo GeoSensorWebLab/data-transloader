@@ -4,6 +4,11 @@ require 'transloader/data_file'
 require 'transloader/station_methods'
 
 module Transloader
+  # Class for downloading and uploading metadata and observation data
+  # from Campbell Scientific's sensor data portal. The data is
+  # downloaded over HTTP, and the data use the TOA5 format.
+  # 
+  # This class is called by the main Transloader::Station class.
   class CampbellScientificStation
     include SemanticLogger::Loggable
     include Transloader::StationMethods

@@ -12,5 +12,9 @@ require 'sensorthings/thing'
 require 'sensorthings/version'
 require 'transloader/http'
 
+# Library for uploading data to SensorThings API over HTTP/HTTPS.
+# Classes will try to re-use existing matching entities on the remote
+# service if possible, and changes to some properties will update remote
+# entities in-place.
 module SensorThings
 end

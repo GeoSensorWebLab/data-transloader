@@ -1,6 +1,9 @@
 require 'transloader/klrs_historical_energy/station'
 
 module Transloader
+  # Provider is used for initializing stations with the correct
+  # provider-specific logic. KLRS Historical Energy data stations
+  # require local data file paths.
   class KLRSHistoricalEnergyProvider
     PROVIDER_ID   = "KLRSHistoricalEnergy"
     PROVIDER_NAME = "klrs_historical_energy"

@@ -5,6 +5,9 @@ require 'transloader/metadata_store'
 require 'transloader/campbell_scientific/station'
 
 module Transloader
+  # Provider is used for initializing stations with the correct
+  # provider-specific logic. Campbell Scientific stations require URLs
+  # to online data files to download.
   class CampbellScientificProvider
     PROVIDER_NAME = "campbell_scientific"
 

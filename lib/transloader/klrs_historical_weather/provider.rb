@@ -1,6 +1,9 @@
 require 'transloader/klrs_historical_weather/station'
 
 module Transloader
+  # Provider is used for initializing stations with the correct
+  # provider-specific logic. KLRS Historical Weather data stations
+  # require local data file paths.
   class KLRSHistoricalWeatherProvider
     PROVIDER_ID   = "KLRSHistoricalWeather"
     PROVIDER_NAME = "klrs_historical_weather"

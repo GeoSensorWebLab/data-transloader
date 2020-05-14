@@ -1,6 +1,9 @@
 require 'transloader/data_garrison/station'
 
 module Transloader
+  # Provider is used for initializing stations with the correct
+  # provider-specific logic. Data Garrison stations require user ids in
+  # addition to station ids.
   class DataGarrisonProvider
     PROVIDER_NAME = "data_garrison"
 

@@ -1,6 +1,8 @@
 require 'uri'
 
 module Transloader
+  # Specify which command line options are passed from the command line
+  # to the library, as well as the descriptive help messages.
   class CommandLineOptions
     attr_reader :allowed, :blocked, :cache, :data_paths, :data_urls,
                 :date, :destination, :http_auth, :http_headers, :keys,

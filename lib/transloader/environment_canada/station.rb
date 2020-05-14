@@ -3,6 +3,11 @@ require 'time'
 require 'transloader/station_methods'
 
 module Transloader
+  # Class for downloading and uploading metadata and observation data
+  # from Environment Canada Data Mart. The data is downloaded over HTTP,
+  # and uses the Surface Weather Observation XML encoding.
+  # 
+  # This class is called by the main Transloader::Station class.
   class EnvironmentCanadaStation
     include SemanticLogger::Loggable
     include Transloader::StationMethods

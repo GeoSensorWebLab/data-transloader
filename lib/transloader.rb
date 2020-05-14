@@ -29,5 +29,7 @@ require 'transloader/station_methods'
 require 'transloader/time_interval'
 require 'transloader/version'
 
+# Library for parsing sensor data from different sources and prepare it
+# for upload into SensorThings API.
 module Transloader
 end
