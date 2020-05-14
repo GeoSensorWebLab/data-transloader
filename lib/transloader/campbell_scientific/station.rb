@@ -204,17 +204,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = @entity_factory.new_sensor({
-          name:        "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
-          description: "Campbell Scientific Station #{@id} #{stream[:name]} Sensor",
-          # This encoding type is a lie, because there are only two types in
-          # the spec and none apply here. Implementations are strict about those
-          # two types, so we have to pretend.
-          # More discussion on specification that could change this:
-          # https://github.com/opengeospatial/sensorthings/issues/39
-          encodingType: 'application/pdf',
-          metadata:     @metadata[:procedure] || "http://example.org/unknown"
-        })
+        sensor = build_sensor("Campbell Scientific Station #{@id} #{stream[:name]} Sensor")
 
         # Upload entity and parse response
         sensor.upload_to(server_url)

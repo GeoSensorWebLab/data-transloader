@@ -19,6 +19,23 @@ module Transloader
       })
     end
 
+    # Create a `Sensor` entity for SensorThings API based on this
+    # station's metadata. If `sensor_description` is nil, then 
+    # `sensor_name` will be re-used.
+    def build_sensor(sensor_name, sensor_description = nil)
+      @entity_factory.new_sensor({
+        name:        sensor_name,
+        description: sensor_description || sensor_name,
+        # This encoding type is a lie, because there are only two types in
+        # the spec and none apply here. Implementations are strict about those
+        # two types, so we have to pretend.
+        # More discussion on specification that could change this:
+        # https://github.com/opengeospatial/sensorthings/issues/39
+        encodingType: 'application/pdf',
+        metadata:     @metadata[:procedure] || "http://example.org/unknown"
+      })
+    end
+
     # Create a `Thing` entity for SensorThings API based on this station
     # and add custom properties.
     def build_thing(properties)
