@@ -20,6 +20,23 @@ module Transloader
       end
     end
 
+    # Filter the datastreams array by only keeping the items in the
+    # `allowed` array. If `allowed` is empty or nil, then remove items
+    # that are in the `blocked` array.
+    def filter_datastreams(datastreams, allowed, blocked)
+      if allowed
+        datastreams.select do |datastream|
+          allowed.include?(datastream[:name])
+        end
+      elsif blocked
+        datastreams.select do |datastream|
+          !blocked.include?(datastream[:name])
+        end
+      else
+        datastreams
+      end
+    end
+
     # For an array of symbols returned from the HTTP SensorThings API
     # module, print out how many entities were created, reused, updated,
     # or unavailable.

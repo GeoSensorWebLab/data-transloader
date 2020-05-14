@@ -150,18 +150,7 @@ module Transloader
 
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
-      # TODO: extract this to shared method
-      datastreams = @metadata[:datastreams]
-
-      if options[:allowed]
-        datastreams = datastreams.select do |datastream|
-          options[:allowed].include?(datastream[:name])
-        end
-      elsif options[:blocked]
-        datastreams = datastreams.select do |datastream|
-          !options[:blocked].include?(datastream[:name])
-        end
-      end
+      datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
 
       # THING entity
       # Create Thing entity
