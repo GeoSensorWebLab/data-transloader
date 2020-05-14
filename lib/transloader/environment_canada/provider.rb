@@ -13,6 +13,7 @@ module Transloader
   class EnvironmentCanadaProvider
     include SemanticLogger::Loggable
 
+    PROVIDER_ID   = "EnvironmentCanada"
     PROVIDER_NAME = "environment_canada"
     METADATA_URL = "https://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
 

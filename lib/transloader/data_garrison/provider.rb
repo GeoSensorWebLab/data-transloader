@@ -5,6 +5,7 @@ module Transloader
   # provider-specific logic. Data Garrison stations require user ids in
   # addition to station ids.
   class DataGarrisonProvider
+    PROVIDER_ID   = "DataGarrison"
     PROVIDER_NAME = "data_garrison"
 
     attr_accessor :cache_path

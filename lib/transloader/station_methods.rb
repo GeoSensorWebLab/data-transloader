@@ -19,6 +19,27 @@ module Transloader
       })
     end
 
+    # Create an `Observed Property` entity for SensorThings API based
+    # on this station's metadata and this datastream's name. A lookup
+    # in the Ontology will be performed, and any match will be used
+    # for the entity attributes. If no Ontology match is found, then
+    # a warning will be printed and the original source property name
+    # will be used.
+    def build_observed_property(property_name)
+      entity = @ontology.observed_property(property_name)
+
+      if entity.nil?
+        logger.warn "No Observed Property found in Ontology for #{@provider.class::PROVIDER_ID}:#{property_name}"
+        entity = {
+          name:        property_name,
+          definition:  "http://example.org/#{property_name}",
+          description: property_name
+        }
+      end
+
+      @entity_factory.new_observed_property(entity)
+    end
+
     # Create a `Sensor` entity for SensorThings API based on this
     # station's metadata. If `sensor_description` is nil, then 
     # `sensor_name` will be re-used.

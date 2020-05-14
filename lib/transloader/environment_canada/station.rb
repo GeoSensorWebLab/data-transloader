@@ -12,6 +12,9 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
+    NAME      = "Environment Canada Station"
+    LONG_NAME = "Environment Canada Weather Station"
+
     NAMESPACES = {
       'gml'   => 'http://www.opengis.net/gml',
       'om'    => 'http://www.opengis.net/om/1.0',
@@ -59,8 +62,8 @@ module Transloader
 
       # Convert to Hash
       @metadata = {
-        name:        "Environment Canada Station #{@id}",
-        description: "Environment Canada Weather Station #{@properties["Name"]}",
+        name:        "#{NAME} #{@id}",
+        description: "#{LONG_NAME} #{@properties["Name"]}",
         elevation:   xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
         updated_at:  Time.now,
         datastreams: datastreams,
@@ -117,7 +120,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = build_sensor("Station #{@id} #{stream[:name]} Sensor", "Environment Canada Station #{@id} #{stream[:name]} Sensor")
+        sensor = build_sensor("Station #{@id} #{stream[:name]} Sensor", "#{NAME} #{@id} #{stream[:name]} Sensor")
 
         # Upload entity and parse response
         sensor.upload_to(server_url)
@@ -131,20 +134,9 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       datastreams.each do |stream|
-        # Look up entity in ontology;
-        # if nil, then use default attributes
-        entity = @ontology.observed_property(stream[:name])
-
-        if entity.nil?
-          logger.warn "No Observed Property found in Ontology for EnvironmentCanada:#{stream[:name]}"
-          entity = {
-            name:        stream[:name],
-            definition:  "http://example.org/#{stream[:name]}",
-            description: stream[:name]
-          }
-        end
-
-        observed_property = @entity_factory.new_observed_property(entity)
+        # Create an Observed Property based on the datastream, using the
+        # Ontology if available.
+        observed_property = build_observed_property(stream[:name])
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -163,7 +155,7 @@ module Transloader
         uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for EnvironmentCanada:#{stream[:name]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:uom],
             symbol:     '',
@@ -175,7 +167,7 @@ module Transloader
 
         datastream = @entity_factory.new_datastream({
           name:        "Station #{@id} #{stream[:name]}",
-          description: "Environment Canada Station #{@id} #{stream[:name]}",
+          description: "#{NAME} #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
           observationType: observation_type,
           Sensor: {

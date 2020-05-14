@@ -13,6 +13,9 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
+    NAME      = "Campbell Scientific Station"
+    LONG_NAME = "Campbell Scientific Weather Station"
+
     attr_accessor :data_store, :id, :metadata, :properties, :provider
 
     def initialize(options = {})
@@ -54,7 +57,7 @@ module Transloader
         # Incorrect URLs triggers a 302 Found that redirects to the 404 
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
-          raise HTTPError.new(response, "Incorrect Data URL for Campbell Scientific station")
+          raise HTTPError.new(response, "Incorrect Data URL for #{NAME}")
         elsif response.code == "301"
           # Follow permanent redirects
           response = @http_client.get(uri: response["Location"])
@@ -131,8 +134,8 @@ module Transloader
 
       # Convert to Hash
       @metadata = {
-        name:            "Campbell Scientific Station #{@id}",
-        description:     "Campbell Scientific Weather Station #{@id}",
+        name:            "#{NAME} #{@id}",
+        description:     "#{LONG_NAME} #{@id}",
         latitude:        nil,
         longitude:       nil,
         elevation:       nil,
@@ -204,7 +207,7 @@ module Transloader
       # SENSOR entities
       datastreams.each do |stream|
         # Create Sensor entities
-        sensor = build_sensor("Campbell Scientific Station #{@id} #{stream[:name]} Sensor")
+        sensor = build_sensor("#{NAME} #{@id} #{stream[:name]} Sensor")
 
         # Upload entity and parse response
         sensor.upload_to(server_url)
@@ -218,20 +221,9 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       datastreams.each do |stream|
-        # Look up entity in ontology;
-        # if nil, then use default attributes
-        entity = @ontology.observed_property(stream[:name])
-
-        if entity.nil?
-          logger.warn "No Observed Property found in Ontology for CampbellScientific:#{stream[:name]}"
-          entity = {
-            name:        stream[:name],
-            definition:  "http://example.org/#{stream[:name]}",
-            description: stream[:name]
-          }
-        end
-
-        observed_property = @entity_factory.new_observed_property(entity)
+        # Create an Observed Property based on the datastream, using the
+        # Ontology if available.
+        observed_property = build_observed_property(stream[:name])
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)
@@ -250,7 +242,7 @@ module Transloader
         uom = @ontology.unit_of_measurement(stream[:name])
 
         if uom.nil?
-          logger.warn "No Unit of Measurement found in Ontology for CampbellScientific:#{stream[:name]} (#{stream[:uom]})"
+          logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]} (#{stream[:uom]})"
           uom = {
             name:       stream[:Units] || "",
             symbol:     stream[:Units] || "",
@@ -261,8 +253,8 @@ module Transloader
         observation_type = observation_type_for(stream[:name], @ontology)
 
         datastream = @entity_factory.new_datastream({
-          name:        "Campbell Scientific Station #{@id} #{stream[:name]}",
-          description: "Campbell Scientific Station #{@id} #{stream[:name]}",
+          name:        "#{NAME} #{@id} #{stream[:name]}",
+          description: "#{NAME} #{@id} #{stream[:name]}",
           unitOfMeasurement: uom,
           observationType: observation_type,
           Sensor: {

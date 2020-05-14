@@ -219,20 +219,9 @@ module Transloader
 
       # OBSERVED PROPERTY entities
       datastreams.each do |stream|
-        # Look up entity in ontology;
-        # if nil, then use default attributes
-        entity = @ontology.observed_property(stream[:name])
-
-        if entity.nil?
-          logger.warn "No Observed Property found in Ontology for #{@provider.class::PROVIDER_ID}:#{stream[:name]}"
-          entity = {
-            name:        stream[:name],
-            definition:  "http://example.org/#{stream[:name]}",
-            description: stream[:name]
-          }
-        end
-
-        observed_property = @entity_factory.new_observed_property(entity)
+        # Create an Observed Property based on the datastream, using the
+        # Ontology if available.
+        observed_property = build_observed_property(stream[:name])
 
         # Upload entity and parse response
         observed_property.upload_to(server_url)

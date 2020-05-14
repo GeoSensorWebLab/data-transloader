@@ -9,6 +9,7 @@ module Transloader
   # provider-specific logic. Campbell Scientific stations require URLs
   # to online data files to download.
   class CampbellScientificProvider
+    PROVIDER_ID   = "CampbellScientific"
     PROVIDER_NAME = "campbell_scientific"
 
     attr_accessor :cache_path
