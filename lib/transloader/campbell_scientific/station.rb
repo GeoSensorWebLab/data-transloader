@@ -238,14 +238,12 @@ module Transloader
       # DATASTREAM entities
       datastreams.each do |stream|
         datastream_name  = stream[:name]
-        uom              = uom_for_datastream(datastream_name, stream[:Units])
-        observation_type = observation_type_for(datastream_name, @ontology)
 
         datastream = @entity_factory.new_datastream({
           name:              "#{NAME} #{@id} #{datastream_name}",
           description:       "#{NAME} #{@id} #{datastream_name}",
-          unitOfMeasurement: uom,
-          observationType:   observation_type,
+          unitOfMeasurement: uom_for_datastream(datastream_name, stream[:Units]),
+          observationType:   observation_type_for(datastream_name),
           Sensor:            {
             '@iot.id' => stream[:'Sensor@iot.id']
           },
@@ -489,7 +487,7 @@ module Transloader
           end
 
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
-          result = coerce_result(observation[:result], observation_type_for(datastream[:name], @ontology))
+          result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
           observation = @entity_factory.new_observation({
             phenomenonTime: phenomenonTime,
