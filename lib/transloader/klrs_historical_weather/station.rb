@@ -154,16 +154,12 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = @entity_factory.new_thing({
-        name:        @metadata[:name],
-        description: @metadata[:description],
-        properties:  {
-          provider:              LONG_NAME,
-          station_id:            @id,
-          station_model_name:    @metadata[:properties][:station_model_name],
-          station_serial_number: @metadata[:properties][:station_serial_number],
-          station_program:       @metadata[:properties][:station_program]
-        }
+      thing = build_thing({
+        provider:              LONG_NAME,
+        station_id:            @id,
+        station_model_name:    @metadata[:properties][:station_model_name],
+        station_serial_number: @metadata[:properties][:station_serial_number],
+        station_program:       @metadata[:properties][:station_program]
       })
 
       # Upload entity and parse response
@@ -174,8 +170,10 @@ module Transloader
       save_metadata
 
       # LOCATION entity
+      latitude  = @metadata[:latitude]
+      longitude = @metadata[:longitude]
       # Check if latitude or longitude are blank
-      if @metadata[:latitude].nil? || @metadata[:longitude].nil?
+      if latitude.nil? || longitude.nil?
         raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
       end
       
@@ -186,7 +184,7 @@ module Transloader
         encodingType: 'application/vnd.geo+json',
         location: {
           type:        'Point',
-          coordinates: [@metadata[:longitude].to_f, @metadata[:latitude].to_f]
+          coordinates: [longitude.to_f, latitude.to_f]
         }
       })
 

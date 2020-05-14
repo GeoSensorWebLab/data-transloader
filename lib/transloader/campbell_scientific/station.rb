@@ -170,16 +170,12 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = @entity_factory.new_thing({
-        name:        @metadata[:name],
-        description: @metadata[:description],
-        properties:  {
-          provider:              'Campbell Scientific',
-          station_id:            @id,
-          station_model_name:    @metadata[:properties][:station_model_name],
-          station_serial_number: @metadata[:properties][:station_serial_number],
-          station_program:       @metadata[:properties][:station_program]
-        }
+      thing = build_thing({
+        provider:              'Campbell Scientific',
+        station_id:            @id,
+        station_model_name:    @metadata[:properties][:station_model_name],
+        station_serial_number: @metadata[:properties][:station_serial_number],
+        station_program:       @metadata[:properties][:station_program]
       })
 
       # Upload entity and parse response

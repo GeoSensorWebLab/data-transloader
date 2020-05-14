@@ -5,6 +5,16 @@ module Transloader
   module StationMethods
     include SemanticLogger::Loggable
 
+    # Create a `Thing` entity for SensorThings API based on this station
+    # and add custom properties.
+    def build_thing(properties)
+      @entity_factory.new_thing({
+        name:        @metadata[:name],
+        description: @metadata[:description],
+        properties:  properties
+      })
+    end
+
     # Use the observation_type to convert result to float, int, or 
     # string. This is used to use the most appropriate data type when
     # converting results to JSON.

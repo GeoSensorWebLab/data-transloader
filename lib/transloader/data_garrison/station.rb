@@ -228,17 +228,13 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = @entity_factory.new_thing({
-        name:        @metadata[:name],
-        description: @metadata[:description],
-        properties:  {
-          logger:      @metadata[:logger],
-          provider:    "Data Garrison",
-          station_id:  @id,
-          station_url: @base_path,
-          transceiver: @metadata[:transceiver],
-          user_id:     @user_id
-        }
+      thing = build_thing({
+        logger:      @metadata[:logger],
+        provider:    "Data Garrison",
+        station_id:  @id,
+        station_url: @base_path,
+        transceiver: @metadata[:transceiver],
+        user_id:     @user_id
       })
 
       # Upload entity and parse response

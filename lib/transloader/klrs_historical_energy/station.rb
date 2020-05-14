@@ -174,14 +174,10 @@ module Transloader
 
       # THING entity
       # Create Thing entity
-      thing = @entity_factory.new_thing({
-        name:        @metadata[:name],
-        description: @metadata[:description],
-        properties:  {
-          provider:              LONG_NAME,
-          station_id:            @id
-        }.merge(@metadata[:properties][:configuration])
-      })
+      thing = build_thing({
+        provider:   LONG_NAME,
+        station_id: @id
+      }.merge(@metadata[:properties][:configuration]))
 
       # Upload entity and parse response
       thing.upload_to(server_url)
