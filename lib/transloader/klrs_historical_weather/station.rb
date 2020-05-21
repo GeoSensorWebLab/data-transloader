@@ -56,7 +56,7 @@ module Transloader
           next
         end
 
-        data = read_csv_file(path)
+        doc = read_toa5_file(path)
 
         # Store CSV file metadata
         data_files.push(DataFile.new({
@@ -81,25 +81,14 @@ module Transloader
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
         # different between data files.
-        @properties[:station_model_name]    = data[0][2]
-        @properties[:station_serial_number] = data[0][3]
-        @properties[:station_program]       = data[0][5]
+        @properties[:station_model_name]    = doc.metadata(:station_name)
+        @properties[:station_serial_number] = doc.metadata(:datalogger_serial_number)
+        @properties[:station_program]       = doc.metadata(:datalogger_program_name)
 
-        # Parse CSV column headers for datastreams, units
-        # 
-        # Row 2:
-        # 1. Timestamp
-        # 2+ (Observed Property)
-        # Row 3:
-        # Unit or Data Type
-        # Row 4:
-        # Observation Type (peak value, average value)
-        data[1].slice(1..-1).each_with_index do |col, index|
-          datastreams.push({
-            name: col,
-            units: data[2][1+index],
-            type: data[3][1+index]
-          })
+        # Create datastreams from column headers.
+        # Skip the first column header for timestamp.
+        doc.headers.slice(1..-1).each do |header|
+          datastreams.push(header)
         end
       end
 
@@ -345,17 +334,12 @@ module Transloader
     #   }]
     # ]
     def load_observations_for_file(data_file)
-      observations = []
-      data = read_csv_file(data_file[:url])
-      # Parse column headers from second row for observed properties
-      # (Uses slice to skip first column with timestamp)
-      column_headers = data[1].slice(1..-1)
-
-      # Omit the file header rows from the next step
-      data.slice!(0..3)
+      observations   = []
+      doc            = read_toa5_file(data_file[:url])
+      column_headers = doc.headers.slice(1..-1)
 
       # Parse observations from CSV
-      data.each do |row|
+      doc.rows.each do |row|
         # Add seconds to the timestamp, if they are missing.
         time = row[0]
         if time =~ /^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}$/
@@ -369,9 +353,9 @@ module Transloader
         timestamp = parse_toa5_timestamp(time, @metadata[:timezone_offset])
         utc_time = to_iso8601(timestamp)
         observations.push([utc_time, 
-          row[1..-1].map.with_index { |x, i|
+          row[1..-1].map.with_index { |x, index|
             {
-              name: column_headers[i],
+              name:    column_headers[index][:name],
               reading: parse_reading(x)
             }
           }
@@ -400,13 +384,13 @@ module Transloader
       reading == "NAN" ? "null" : reading.to_f
     end
 
-    # Parse a CSV/TSV file into an array of arrays.
+    # Parse a TOA5 ASCII data file into an array of arrays.
     # Will apply character encoding fix from windows-1252 to utf-8,
     # and automatically detect if file is tab-separated or comma
     # separated.
-    def read_csv_file(path)
-      data      = []
-      separator = ","
+    def read_toa5_file(path)
+      data_document = nil
+      separator     = ","
 
       # Peek first line to determine if it is tabs or commas. The 
       # heuristic is whether there are more commas or tabs.
@@ -426,15 +410,16 @@ module Transloader
       end
 
       begin
-        data = CSV.read(path, {
+        document = IO.read(path, encoding: "windows-1252")
+        data_document = Transloader::TOA5Document.new(document, {
           encoding: "windows-1252:utf-8",
-          col_sep:  separator
+          col_sep: separator
         })
       rescue CSV::MalformedCSVError => e
         logger.error "Cannot parse #{path} as CSV file: #{e}"
         exit 1
       end
-      data
+      data_document
     end
 
     # Save the Station metadata to the metadata cache file
