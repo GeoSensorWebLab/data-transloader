@@ -1,6 +1,6 @@
 # Changelog for Data Transloader
 
-## Version 0.7.0 (Unreleased)
+## Version 0.7.0 (2020-05-22)
 
 * Add warnings for empty ObservedProperty attributes in the Ontologies
 * Follow redirects when stations list is moved to a new URL

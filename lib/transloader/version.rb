@@ -1,5 +1,5 @@
 module Transloader
   def self.version
-    '0.6.2'
+    '0.7.0'
   end
 end
