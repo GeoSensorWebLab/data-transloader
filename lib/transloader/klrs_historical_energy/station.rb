@@ -273,13 +273,7 @@ module Transloader
 
         # Filter observations by interval, if one is set
         if !interval.nil?
-          time_interval = Transloader::TimeInterval.new(interval)
-          puts "Applying interval filter: #{all_observations.length}"
-          all_observations = all_observations.filter do |observation|
-            timestamp = observation[0]
-            timestamp >= time_interval.start && timestamp <= time_interval.end
-          end
-          puts "Reduced to #{all_observations.length}"
+          all_observations = filter_observations(all_observations, interval)
         end
 
         # Store Observations in DataStore.

@@ -99,6 +99,18 @@ module Transloader
       end
     end
 
+    # Reduce the set of observations to those in `interval` string.
+    def filter_observations(observations, interval)
+      time_interval = Transloader::TimeInterval.new(interval)
+      puts "Applying interval filter: #{observations.length}"
+      observations = observations.filter do |observation|
+        timestamp = observation[0]
+        timestamp >= time_interval.start && timestamp <= time_interval.end
+      end
+      puts "Reduced to #{observations.length}"
+      observations
+    end
+
     # For an array of symbols returned from the HTTP SensorThings API
     # module, print out how many entities were created, reused, updated,
     # or unavailable.
