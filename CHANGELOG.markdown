@@ -1,5 +1,27 @@
 # Changelog for Data Transloader
 
+## Version 0.7.0 (Unreleased)
+
+* Add warnings for empty ObservedProperty attributes in the Ontologies
+* Follow redirects when stations list is moved to a new URL
+* Add Travis CI configuration file
+* Use "#select" instead of "#filter" for Ruby 2.4 compatibility
+* Update to use HTTPS URLs (Environment Canada data sources now use HTTPS)
+* Improve logging of STA interactions, which can be graphed by Munin
+* Fix early exit bug that caused some entities to not be uploaded
+* Add Docker deployment option
+* Add timecop gem for rspec consistency
+* Force update Data Garrison observations before downloading from their remote server
+* Add sub-key editing of metadata from CLI
+* Add instructions for working with historical KLRS weather data
+* Add module for importing historical KLRS weather data files into STA
+* Add instructions for working with historical KLRS energy usage data
+* Add module for importing historical KLRS energy usage data files into STA
+* Extract reusable creation of STA entities
+* Simplify shared ontology lookup function
+* Add TOA5 Document class for shared parsing code
+* Extract shared time interval method
+
 ## Version 0.6.2 (2019-09-19)
 
 * Improve error handling when SWOB-ML files are unavailable from Environment Canada
