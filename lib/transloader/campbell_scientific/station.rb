@@ -64,7 +64,7 @@ module Transloader
         end
 
         filedata = response.body
-        data = CSV.parse(filedata)
+        doc      = Transloader::TOA5Document.new(filedata)
         
         # Store CSV file metadata
         # 
@@ -94,26 +94,14 @@ module Transloader
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
         # different between data files.
-        @properties[:station_model_name]    = data[0][2]
-        @properties[:station_serial_number] = data[0][3]
-        @properties[:station_program]       = data[0][5]
+        @properties[:station_model_name]    = doc.metadata(:station_name)
+        @properties[:station_serial_number] = doc.metadata(:datalogger_serial_number)
+        @properties[:station_program]       = doc.metadata(:datalogger_program_name)
 
-        # Parse CSV column headers for datastreams, units
-        # 
-        # Row 2:
-        # 1. Timestamp
-        # 2+ (Observed Property)
-        # Row 3:
-        # Unit or Data Type
-        # Row 4:
-        # Observation Type (peak value, average value)
-        # (WVc is Wind Vector Cell, probably)
-        data[1].slice(1..-1).each_with_index do |col, index|
-          datastreams.push({
-            name: col,
-            units: data[2][1+index],
-            type: data[3][1+index]
-          })
+        # Create datastreams from column headers.
+        # Skip the first column header for timestamp.
+        doc.headers.slice(1..-1).each do |header|
+          datastreams.push(header)
         end
       end
 
@@ -360,31 +348,26 @@ module Transloader
         url: data_file[:url],
         offset: data_file[:last_length])
 
-      data         = []
+      doc          = nil
       observations = []
 
       # If full file was downloaded, parse from beginning. Otherwise
       # only parse extract of file.
       if download[:body] && download[:full_file]
-        data = CSV.parse(download[:body])
-        # Parse column headers for observed properties
-        # (Skip first column with timestamp)
-        column_headers = data[1].slice(1..-1)
+        doc = Transloader::TOA5Document.new(download[:body])
+        column_headers = doc.headers.slice(1..-1).map do |x|
+          x[:name]
+        end
 
         # Store column names in station metadata cache file, as 
         # partial requests later will not be able to know the column
         # headers.
         data_file[:headers] = column_headers
         save_metadata
-
-        # Omit the file header rows from the next step, as the next
-        # step may run from a partial file that doesn't know any
-        # headers.
-        data.slice!(0..3)
       elsif download[:body]
         # TODO: Improve parsing by excluding partial rows
         begin
-          data = CSV.parse(download[:body])
+          doc = Transloader::TOA5Document.new(download[:body])
         rescue CSV::MalformedCSVError => e
           logger.error "Could not parse partial response data.", e
         end
@@ -397,7 +380,7 @@ module Transloader
       save_metadata
 
       # Parse observations from CSV
-      data.each do |row|
+      doc && doc.rows.each do |row|
         # Transform dates into ISO8601 in UTC.
         # This will make it simpler to group them by day and to simplify
         # timezones for multiple stations.
