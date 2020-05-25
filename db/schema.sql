@@ -1,0 +1,1 @@
+# TODO: Write table and index schema in SQL
