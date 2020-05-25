@@ -89,7 +89,7 @@ def set_metadata(options)
     provider: options.provider,
     station: station_id
   }
-  metadata_store = Transloader::MetadataStore.new(store_opts)
+  metadata_store = Transloader::FileMetadataStore.new(store_opts)
 
   # Work in reverse to convert an array of keys to a set of nested
   # hashes
@@ -122,7 +122,7 @@ def show_metadata(options)
     provider: options.provider,
     station: station_id
   }
-  metadata_store = Transloader::MetadataStore.new(store_opts)
+  metadata_store = Transloader::FileMetadataStore.new(store_opts)
   value = metadata_store.get(options.keys.first.to_sym)
   puts JSON.pretty_generate({ options.keys.first => value })
 end

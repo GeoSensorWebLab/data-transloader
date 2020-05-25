@@ -27,7 +27,7 @@ module Transloader
         station: station_id
       }
       data_store     = FileDataStore.new(store_opts)
-      metadata_store = MetadataStore.new(store_opts)
+      metadata_store = FileMetadataStore.new(store_opts)
       
       CampbellScientificStation.new(
         data_store: data_store,

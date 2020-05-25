@@ -5,7 +5,7 @@ require 'json'
 require 'rspec'
 require 'time'
 
-RSpec.describe Transloader::MetadataStore do
+RSpec.describe Transloader::FileMetadataStore do
   before(:each) do
     reset_cache($cache_dir)
   end
@@ -13,7 +13,7 @@ RSpec.describe Transloader::MetadataStore do
   it "creates the storage path on initialization" do
     expect(Dir.exists?("#{$cache_dir}/test/metadata")).to be false
 
-    Transloader::MetadataStore.new(
+    Transloader::FileMetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -22,7 +22,7 @@ RSpec.describe Transloader::MetadataStore do
   end
 
   it "returns empty metadata if the cache is empty" do
-    store = Transloader::MetadataStore.new(
+    store = Transloader::FileMetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -31,7 +31,7 @@ RSpec.describe Transloader::MetadataStore do
   end
 
   it "will store metadata in the file cache" do
-    store = Transloader::MetadataStore.new(
+    store = Transloader::FileMetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -42,7 +42,7 @@ RSpec.describe Transloader::MetadataStore do
   end
 
   it "returns metadata from the file cache" do
-    store = Transloader::MetadataStore.new(
+    store = Transloader::FileMetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -52,7 +52,7 @@ RSpec.describe Transloader::MetadataStore do
   end
 
   it "supports deep merging metadata attributes" do
-    store = Transloader::MetadataStore.new(
+    store = Transloader::FileMetadataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
