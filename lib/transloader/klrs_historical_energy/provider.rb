@@ -22,7 +22,7 @@ module Transloader
         provider:   PROVIDER_NAME,
         station:    station_id
       }
-      data_store     = DataStore.new(store_opts)
+      data_store     = FileDataStore.new(store_opts)
       metadata_store = MetadataStore.new(store_opts)
 
       KLRSHistoricalEnergyStation.new(

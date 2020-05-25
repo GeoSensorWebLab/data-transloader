@@ -5,7 +5,7 @@ require 'json'
 require 'rspec'
 require 'time'
 
-RSpec.describe Transloader::DataStore do
+RSpec.describe Transloader::FileDataStore do
   before(:each) do
     reset_cache($cache_dir)
   end
@@ -13,7 +13,7 @@ RSpec.describe Transloader::DataStore do
   it "creates the storage path on initialization" do
     expect(Dir.exists?("#{$cache_dir}/test/unique")).to be false
 
-    Transloader::DataStore.new(
+    Transloader::FileDataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -22,7 +22,7 @@ RSpec.describe Transloader::DataStore do
   end
 
   it "returns an empty set of observations if the cache is empty" do
-    store = Transloader::DataStore.new(
+    store = Transloader::FileDataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -31,7 +31,7 @@ RSpec.describe Transloader::DataStore do
   end
 
   it "will store an empty set of observations" do
-    store = Transloader::DataStore.new(
+    store = Transloader::FileDataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -42,7 +42,7 @@ RSpec.describe Transloader::DataStore do
   end
 
   it "will store observations in the file cache" do
-    store = Transloader::DataStore.new(
+    store = Transloader::FileDataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")
@@ -59,7 +59,7 @@ RSpec.describe Transloader::DataStore do
   end
 
   it "returns observations from the file cache" do
-    store = Transloader::DataStore.new(
+    store = Transloader::FileDataStore.new(
       cache_path: $cache_dir,
       provider: "test",
       station: "unique")

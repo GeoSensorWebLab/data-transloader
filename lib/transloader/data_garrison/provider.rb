@@ -22,7 +22,7 @@ module Transloader
         provider: PROVIDER_NAME,
         station: "#{user_id}-#{station_id}"
       }
-      data_store     = DataStore.new(store_opts)
+      data_store     = FileDataStore.new(store_opts)
       metadata_store = MetadataStore.new(store_opts)
 
       DataGarrisonStation.new(
