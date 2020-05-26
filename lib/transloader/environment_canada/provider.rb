@@ -38,13 +38,20 @@ module Transloader
       }
       data_store     = FileDataStore.new(store_opts)
       metadata_store = FileMetadataStore.new(store_opts)
-      EnvironmentCanadaStation.new(
+      store          = StationStore.new({
+        provider:       PROVIDER_NAME,
+        station:        station_id,
         data_store:     data_store,
-        http_client:    @http_client,
-        id:             station_id,
-        metadata_store: metadata_store,
-        properties:     station_row.to_hash,
-        provider:       self)
+        metadata_store: metadata_store
+      })
+
+      EnvironmentCanadaStation.new(
+        http_client: @http_client,
+        id:          station_id,
+        properties:  station_row.to_hash,
+        provider:    self,
+        store:       store
+      )
     end
 
     def stations

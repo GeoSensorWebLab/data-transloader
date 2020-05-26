@@ -26,17 +26,16 @@ module Transloader
     attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
-      @data_store     = options[:data_store]
       @http_client    = options[:http_client]
       @id             = options[:id]
-      @metadata_store = options[:metadata_store]
       @provider       = options[:provider]
       @properties     = options[:properties].merge({
         provider: "Environment Canada"
       })
-      @metadata          = {}
-      @ontology          = EnvironmentCanadaOntology.new
-      @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
+      @store          = options[:store]
+      @metadata       = {}
+      @ontology       = EnvironmentCanadaOntology.new
+      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -44,7 +43,7 @@ module Transloader
     # If `override_metadata` is specified, it is merged on top of the 
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
-      if (@metadata_store.metadata != {} && !overwrite)
+      if (@store.metadata != {} && !overwrite)
         logger.warn "Existing metadata found, will not overwrite."
         return false
       end
@@ -201,7 +200,7 @@ module Transloader
       end
 
       logger.info "Downloaded Observations: #{observations.count}"
-      @data_store.store(observations)
+      @store.store_data(observations)
     end
 
     # Collect all the observation files in the date interval, and upload
@@ -220,7 +219,7 @@ module Transloader
     def upload_observations(destination, interval, options = {})
       get_metadata
       time_interval = Transloader::TimeInterval.new(interval)
-      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
+      observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.count}"
       upload_observations_array(observations, options)
     end
@@ -234,7 +233,7 @@ module Transloader
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
     def get_metadata
-      @metadata = @metadata_store.metadata
+      @metadata = @store.metadata
       if (@metadata == {})
         @metadata = download_metadata
         save_metadata
@@ -304,7 +303,7 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      @metadata_store.merge(@metadata)
+      @store.merge_metadata(@metadata)
     end
 
     # Upload all observations in an array.
