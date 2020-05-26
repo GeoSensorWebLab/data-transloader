@@ -24,14 +24,20 @@ module Transloader
       }
       data_store     = FileDataStore.new(store_opts)
       metadata_store = FileMetadataStore.new(store_opts)
+      store          = StationStore.new({
+        provider:       PROVIDER_NAME,
+        station:        "#{user_id}-#{station_id}",
+        data_store:     data_store,
+        metadata_store: metadata_store
+      })
 
       DataGarrisonStation.new(
-        data_store: data_store,
         http_client: @http_client,
-        id: station_id,
-        metadata_store: metadata_store,
-        properties: { user_id: user_id },
-        provider: self)
+        id:          station_id,
+        properties:  { user_id: user_id },
+        provider:    self,
+        store:       store
+      )
     end
   end
 end

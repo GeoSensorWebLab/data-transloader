@@ -19,20 +19,19 @@ module Transloader
     NAME      = "Data Garrison Station"
     LONG_NAME = "Data Garrison Weather Station"
 
-    attr_accessor :data_store, :id, :metadata, :properties, :provider
+    attr_accessor :id, :metadata, :properties, :provider
 
     def initialize(options = {})
-      @data_store        = options[:data_store]
-      @http_client       = options[:http_client]
-      @id                = options[:id]
-      @metadata_store    = options[:metadata_store]
-      @provider          = options[:provider]
-      @properties        = options[:properties]
-      @user_id           = @properties[:user_id]
-      @metadata          = {}
-      @base_path         = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
-      @ontology          = DataGarrisonOntology.new
-      @entity_factory    = SensorThings::EntityFactory.new(http_client: @http_client)
+      @http_client    = options[:http_client]
+      @id             = options[:id]
+      @provider       = options[:provider]
+      @properties     = options[:properties]
+      @user_id        = @properties[:user_id]
+      @store          = options[:store]
+      @metadata       = {}
+      @base_path      = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
+      @ontology       = DataGarrisonOntology.new
+      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Download and extract metadata from HTML, use to build metadata 
@@ -40,7 +39,7 @@ module Transloader
     # If `override_metadata` is specified, it is merged on top of the 
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: nil, overwrite: false)
-      if (@metadata_store.metadata != {} && !overwrite)
+      if (@store.metadata != {} && !overwrite)
         logger.warn "Existing metadata found, will not overwrite."
         return false
       end
@@ -372,7 +371,7 @@ module Transloader
         end
         observations.flatten! && observations.compact!
         logger.info "Downloaded Observations: #{observations.count}"
-        @data_store.store(observations)
+        @store.store_data(observations)
       end
     end
 
@@ -393,7 +392,7 @@ module Transloader
       get_metadata
 
       time_interval = Transloader::TimeInterval.new(interval)
-      observations  = @data_store.get_all_in_range(time_interval.start, time_interval.end)
+      observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.count}"
       upload_observations_array(observations, options)
     end
@@ -497,7 +496,7 @@ module Transloader
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
     def get_metadata
-      @metadata = @metadata_store.metadata
+      @metadata = @store.metadata
       if (@metadata == {})
         @metadata = download_metadata
         save_metadata
@@ -607,7 +606,7 @@ module Transloader
 
     # Save the Station metadata to the metadata cache file
     def save_metadata
-      @metadata_store.merge(@metadata)
+      @store.merge_metadata(@metadata)
     end
 
     # Upload all observations in an array.
