@@ -5,9 +5,10 @@
 # * Update `Content-Length` header to match body length for non-HEAD
 #   requests
 #
-# USAGE: ruby cassette_cleaner.rb [-i] cassette.yml [-o output.yml]
+# USAGE: ruby cassette_cleaner.rb [-it] cassette.yml [-o output.yml]
 # 
 # * -i: update YAML file in-place (overwrite)
+# * -t: truncate body responses to 10KB
 # * -o: output updated YAML in new file
 # 
 # These options are exclusive and cannot be used together.
@@ -18,11 +19,15 @@ require 'psych'
 # Parse the command line options to adjust the output
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: cassette_cleaner.rb [-i] cassette.yml [-o output.yml]"
+  opts.banner = "Usage: cassette_cleaner.rb [-it] cassette.yml [-o output.yml]"
 
   opts.on("-i", "--inplace", "Update in-place") do
     options[:output] = nil
     options[:inplace] = true
+  end
+
+  opts.on("-t", "--truncate", "Truncate body sizes") do
+    options[:truncate] = true
   end
 
   opts.on("-o", "--output FILE", "Output to file") do |output|
@@ -51,6 +56,14 @@ input_doc = Psych.load_file(input_file)
 input_doc["http_interactions"].select { |http|
   http["request"]["method"] != "head"
 }.each { |http|
+  # If truncation is enabled, then reduce the body to the first 10KB.
+  if options[:truncate]
+    limit = 10 * 1024
+    truncated = http["response"]["body"]["string"][0..limit]
+    http["response"]["body"]["string"] = truncated
+    puts "Truncation applied. Please check YAML file output."
+  end
+
   # Get the *bytesize* of the body, and update the "Content-Length"
   # header to match. If there is no Content-Length header, skip.
   if http["response"]["headers"].keys.include?("Content-Length")
