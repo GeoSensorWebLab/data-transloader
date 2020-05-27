@@ -319,9 +319,9 @@ RSpec.describe Transloader::DataGarrisonStation do
     it "converts downloaded observations and stores in DataStore" do
       VCR.use_cassette("data_garrison/observations_download") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to eq(0)
+          expect(@station.store.get_data_in_range(Time.new(2000), Time.now).length).to eq(0)
           @station.download_observations
-          expect(@station.data_store.get_all_in_range(Time.new(2000), Time.now).length).to_not eq(0)
+          expect(@station.store.get_data_in_range(Time.new(2000), Time.now).length).to_not eq(0)
         end
       end
     end
@@ -490,7 +490,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             @station.download_observations
           end
 
-          observations = @station.data_store.get_all_in_range(Time.new(2000), Time.new(2019, 9, 1))
+          observations = @station.store.get_data_in_range(Time.new(2000), Time.new(2019, 9, 1))
           expect(observations.length).to_not eq(0)
         end
       end

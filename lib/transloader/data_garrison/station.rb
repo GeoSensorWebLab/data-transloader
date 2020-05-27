@@ -20,6 +20,7 @@ module Transloader
     LONG_NAME = "Data Garrison Weather Station"
 
     attr_accessor :id, :metadata, :properties, :provider
+    attr_reader :store
 
     def initialize(options = {})
       @http_client    = options[:http_client]
