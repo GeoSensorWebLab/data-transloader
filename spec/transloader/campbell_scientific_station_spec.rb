@@ -333,11 +333,18 @@ RSpec.describe Transloader::CampbellScientificStation do
           "xh2o_cp_Avg",
           "mfc_Avg"
         ]
+
+        # Requests that use VCR in this block should be checking the
+        # headers as well, as the Range header is significant
+        @vcr_options = {
+          match_requests_on: [:method, :uri, :headers]
+        }
       end
 
       it "executes a HEAD request for the updated Content-Length" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
-          @station.metadata[:data_files][0][:last_length] = 1
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
+          @station.metadata[:data_files][0][:last_length] = 0
           @station.download_observations
 
           expect(WebMock).to have_requested(:head,
@@ -347,7 +354,8 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
 
       it "redownloads the entire data file if Content-Length is shorter than expected" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
           @station.metadata[:data_files][0][:last_length] = 999999999
           @station.download_observations
 
@@ -362,8 +370,9 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
 
       it "executes no GET request when the Content-Length is equal" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
-          @station.metadata[:data_files][0][:last_length] = 205808
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
+          @station.metadata[:data_files][0][:last_length] = 2233
           @station.download_observations
 
           expect(WebMock).to have_requested(:head,
@@ -377,8 +386,9 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
 
       it "executes a partial GET when the Content-Length has increased" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
-          @station.metadata[:data_files][0][:last_length] = 102904
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
+          @station.metadata[:data_files][0][:last_length] = 1980
           @station.download_observations
 
           expect(WebMock).to have_requested(:head,
@@ -386,13 +396,14 @@ RSpec.describe Transloader::CampbellScientificStation do
             .times(1)
           expect(WebMock).to have_requested(:get,
             "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
-            .with(headers: { 'Range' => 'bytes=102904-' })
+            .with(headers: { 'Range' => 'bytes=1980-' })
             .times(1)
         end
       end
 
       it "returns new observations when the server responds 206" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
           @station.metadata[:data_files][0][:last_length] = 0
           @station.download_observations
           observations = @station.store.get_data_in_range(Time.new(2000), Time.new(2019, 9, 1))
@@ -401,7 +412,8 @@ RSpec.describe Transloader::CampbellScientificStation do
       end
 
       it "updates the last_modified and last_length after a download" do
-        VCR.use_cassette("campbell_scientific/observations_download_partial") do
+        VCR.use_cassette("campbell_scientific/observations_download_partial",
+          @vcr_options) do
           @station.metadata[:data_files][0][:last_length] = 0
           @station.download_observations
           

@@ -165,7 +165,7 @@ module Transloader
     # * last_modified: HTTP Last-Modified date for file (as `Time`)
     # * content_length: Full Content-Length of the file
     # * full_file: Boolean if file was completely downloaded and may 
-    #              still include headers.
+    #              still include data file CSV headers.
     def partial_download_url(url:, offset:)
       logger.info "Executing partial download for #{url}"
       logger.debug "Using byte offset #{offset}"
