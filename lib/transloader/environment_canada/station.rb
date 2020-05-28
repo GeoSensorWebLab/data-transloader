@@ -25,12 +25,11 @@ module Transloader
     }
     OBSERVATIONS_URL = "https://dd.weather.gc.ca/observations/swob-ml"
 
-    attr_accessor :id, :metadata, :properties, :provider
+    attr_accessor :id, :metadata, :properties
 
     def initialize(options = {})
       @http_client    = options[:http_client]
       @id             = options[:id]
-      @provider       = options[:provider]
       @properties     = options[:properties].merge({
         provider: "Environment Canada"
       })

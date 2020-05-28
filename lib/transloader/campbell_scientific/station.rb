@@ -18,13 +18,12 @@ module Transloader
     PROVIDER_ID   = "CampbellScientific"
     PROVIDER_NAME = "campbell_scientific"
 
-    attr_accessor :id, :metadata, :properties, :provider
+    attr_accessor :id, :metadata, :properties
     attr_reader :store
 
     def initialize(options = {})
       @http_client    = options[:http_client]
       @id             = options[:id]
-      @provider       = options[:provider]
       @properties     = options[:properties]
       @store          = StationStore.new({
         provider:     PROVIDER_NAME,

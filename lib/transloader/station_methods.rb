@@ -29,7 +29,7 @@ module Transloader
       entity = @ontology.observed_property(property_name)
 
       if entity.nil?
-        logger.warn "No Observed Property found in Ontology for #{@provider.class::PROVIDER_ID}:#{property_name}"
+        logger.warn "No Observed Property found in Ontology for #{self.class::PROVIDER_ID}:#{property_name}"
         entity = {
           name:        property_name,
           definition:  "http://example.org/#{property_name}",
@@ -264,7 +264,7 @@ module Transloader
       uom = @ontology.unit_of_measurement(datastream_name)
 
       if uom.nil?
-        logger.warn "No Unit of Measurement found in Ontology for #{@provider.class::PROVIDER_ID}:#{datastream_name} (#{source_units})"
+        logger.warn "No Unit of Measurement found in Ontology for #{self.class::PROVIDER_ID}:#{datastream_name} (#{source_units})"
         uom = {
           name:       source_units,
           symbol:     source_units,

@@ -26,28 +26,32 @@ def get_station(options, http_client)
     provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
     provider.get_station(station_id: options.station_id)
   when "data_garrison"
-    provider = Transloader::DataGarrisonProvider.new(options.cache, http_client)
-    provider.get_station(
-      station_id: options.station_id,
-      user_id:    options.user_id
-    )
+    Transloader::DataGarrisonStation.new(
+        database_url: options.cache,
+        http_client:  http_client,
+        id:           options.station_id,
+        properties:   { user_id: options.user_id }
+      )
   when "campbell_scientific"
-    provider = Transloader::CampbellScientificProvider.new(options.cache, http_client)
-    provider.get_station(
-      data_urls:  options.data_urls,
-      station_id: options.station_id
+    Transloader::CampbellScientificStation.new(
+      database_url: options.cache,
+      http_client:  http_client,
+      id:           options.station_id,
+      properties:   { data_urls: options.data_urls }
     )
   when "klrs_h_energy"
-    provider = Transloader::KLRSHistoricalEnergyProvider.new(options.cache, http_client)
-    provider.get_station(
-      data_paths: options.data_paths,
-      station_id: options.station_id
+    Transloader::KLRSHistoricalEnergyStation.new(
+      database_url: options.cache,
+      http_client:  http_client,
+      id:           options.station_id,
+      properties:   { data_paths: options.data_paths }
     )
   when "klrs_h_weather"
-    provider = Transloader::KLRSHistoricalWeatherProvider.new(options.cache, http_client)
-    station = provider.get_station(
-      data_paths: options.data_paths,
-      station_id: options.station_id
+    Transloader::KLRSHistoricalWeatherStation.new(
+      database_url: options.cache,
+      http_client:  http_client,
+      id:           options.station_id,
+      properties:   { data_paths: options.data_paths }
     )
   end
 end

@@ -21,13 +21,12 @@ module Transloader
     PROVIDER_ID   = "DataGarrison"
     PROVIDER_NAME = "data_garrison"
 
-    attr_accessor :id, :metadata, :properties, :provider
+    attr_accessor :id, :metadata, :properties
     attr_reader :store
 
     def initialize(options = {})
       @http_client    = options[:http_client]
       @id             = options[:id]
-      @provider       = options[:provider]
       @properties     = options[:properties]
       @user_id        = @properties[:user_id]
       @store          = StationStore.new({
