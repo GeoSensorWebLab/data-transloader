@@ -7,7 +7,7 @@ set -e
 SCRIPT=transload
 PROVIDER="environment_canada"
 STATION_ID="CXCM"
-DATASTORE="/Volumes/ramdisk/datastore/weather"
+DATASTORE="file:///Volumes/ramdisk/datastore/weather"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 NOW=$(ruby -e "puts (Time.new).utc.strftime('%FT%T%z')")
 THEN=$(ruby -e "puts (Time.new - (24*3600)).utc.strftime('%FT%T%z')")
@@ -17,23 +17,23 @@ INTERVAL="$THEN/$NOW"
 time ruby $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
-    --cache $DATASTORE \
+    --database_url $DATASTORE \
     --overwrite
 
 time ruby $SCRIPT put metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
-    --cache $DATASTORE \
+    --database_url $DATASTORE \
     --destination $DESTINATION
 
 time ruby $SCRIPT get observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
-    --cache $DATASTORE
+    --database_url $DATASTORE
 
 time ruby $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
-    --cache $DATASTORE \
+    --database_url $DATASTORE \
     --date "$INTERVAL" \
     --destination $DESTINATION

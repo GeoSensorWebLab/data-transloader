@@ -4,14 +4,16 @@ module Transloader
   # Specify which command line options are passed from the command line
   # to the library, as well as the descriptive help messages.
   class CommandLineOptions
-    attr_reader :allowed, :blocked, :cache, :data_paths, :data_urls,
-                :date, :destination, :http_auth, :http_headers, :keys,
-                :overwrite, :provider, :station_id, :user_id, :value
+    attr_reader :allowed, :blocked, :database_url, :data_paths,
+                :data_urls, :date, :destination, :http_auth,
+                :http_headers, :keys, :overwrite, :provider,
+                :station_id, :user_id, :value
+    
     # Set default values
     def initialize
       @allowed      = nil
       @blocked      = nil
-      @cache        = nil
+      @database_url = nil
       @data_paths   = []
       @data_urls    = []
       @date         = nil
@@ -42,7 +44,7 @@ module Transloader
 
       allowed_option(parser)
       blocked_option(parser)
-      cache_directory_option(parser)
+      database_url_option(parser)
       data_path_option(parser)
       data_url_option(parser)
       date_interval_option(parser)
@@ -94,17 +96,11 @@ module Transloader
       end
     end
 
-    # Parse Cache Directory Path
-    def cache_directory_option(parser)
-      parser.on("--cache [PATH]",
-        "Path to data and metadata cache directory.") do |value|
-        @cache = value
-        
-        if !Dir.exist?(value)
-          puts %Q[ERROR: Directory "#{value}" does not exist.]
-          puts parser
-          exit 1
-        end
+    # Parse Database URL
+    def database_url_option(parser)
+      parser.on("--database_url [URL]",
+        "URL for file or database for local storage.") do |value|
+        @database_url = value
       end
     end
 

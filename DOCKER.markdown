@@ -34,7 +34,7 @@ $ docker run -it --rm \
     data-transloader:latest \
     get metadata --provider environment_canada \
     --station_id CXCM \
-    --cache /srv/data
+    --database_url file:///srv/data
 
 $ docker run -it --rm \
     --mount source=etl-data,target=/srv/data \
@@ -42,7 +42,7 @@ $ docker run -it --rm \
     get observations \
     --provider environment_canada \
     --station_id CXCM \
-    --cache /srv/data
+    --database_url file:///srv/data
 ```
 
 For more detailed usage, please see the detailed instructions for each data provider:

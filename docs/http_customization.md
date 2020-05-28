@@ -12,7 +12,7 @@ Use the `--user` command line option, specifying the username and password separ
 $ ruby transload put metadata \
     --provider campbell_scientific \
     --station_id 606830 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination $DESTINATION \
     --user 'username:password'
 ```
@@ -27,7 +27,7 @@ One or more custom HTTP headers can be added to requests, for servers that use h
 ruby $SCRIPT put metadata \
     --provider campbell_scientific \
     --station_id 606830 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination $DESTINATION \
     --header "St-P-Access-Token: asdf"
 ```

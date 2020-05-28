@@ -9,13 +9,13 @@ $ psql -c 'CREATE DATABASE station_data;'
 $ psql station_data -f db/schema.sql
 ```
 
-The datastore can then be used by specifying `postgresql://` for the `--cache` option in the command line interface, like so:
+The datastore can then be used by specifying `postgresql://` for the `--database_url` option in the command line interface, like so:
 
 ```
 $ transload get metadata \
     --provider environment_canada \
     --station_id CXCM \
-    --cache postgresql://localhost:5432/station_data
+    --database_url postgresql://localhost:5432/station_data
 ```
 
 This "URL" follows the [PostgreSQL connection string format](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).

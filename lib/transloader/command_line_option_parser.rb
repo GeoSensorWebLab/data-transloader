@@ -118,7 +118,7 @@ module Transloader
 
     # Options validation for "get metadata" command
     def validate_get_metadata(options)
-      require_options(options, [:provider, :station_id, :cache])
+      require_options(options, [:provider, :station_id, :database_url])
 
       case options.provider
       when "campbell_scientific"
@@ -132,7 +132,7 @@ module Transloader
 
     # Options validation for "get observations" command
     def validate_get_observations(options)
-      require_options(options, [:provider, :station_id, :cache])
+      require_options(options, [:provider, :station_id, :database_url])
 
       case options.provider
       when "data_garrison"
@@ -142,7 +142,7 @@ module Transloader
 
     # Options validation for "put metadata" command
     def validate_put_metadata(options)
-      require_options(options, [:provider, :station_id, :cache, :destination])
+      require_options(options, [:provider, :station_id, :database_url, :destination])
 
       case options.provider
       when "data_garrison"
@@ -152,7 +152,7 @@ module Transloader
 
     # Options validation for "put observations" command
     def validate_put_observations(options)
-      require_options(options, [:provider, :station_id, :cache, :date, :destination])
+      require_options(options, [:provider, :station_id, :database_url, :date, :destination])
 
       case options.provider
       when "data_garrison"
@@ -162,7 +162,7 @@ module Transloader
 
     # Options validation for "set metadata" command
     def validate_set_metadata(options)
-      require_options(options, [:provider, :station_id, :cache, :keys, :value])
+      require_options(options, [:provider, :station_id, :database_url, :keys, :value])
 
       case options.provider
       when "data_garrison"
@@ -172,7 +172,7 @@ module Transloader
 
     # Options validation for "show metadata" command
     def validate_show_metadata(options)
-      require_options(options, [:provider, :station_id, :cache, :keys])
+      require_options(options, [:provider, :station_id, :database_url, :keys])
 
       case options.provider
       when "data_garrison"

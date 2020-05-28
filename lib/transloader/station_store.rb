@@ -14,8 +14,8 @@ module Transloader
         provider:   @provider,
         station:    @station_id
       }
-      @data_store     = FileDataStore.new(store_opts)
-      @metadata_store = FileMetadataStore.new(store_opts)
+      @data_store     = data_store_for_url(database_url)
+      @metadata_store = metadata_store_for_url(database_url)
     end
 
     # Retrieve all Observations in the data store for the given interval
@@ -37,6 +37,43 @@ module Transloader
     # Store a set of Observations in the data store
     def store_data(observations)
       @data_store.store(observations)
+    end
+
+    private
+
+    # Select the correct DataStore sub-class based on the database URL.
+    # * `file://` will return an instance of FileDataStore
+    def data_store_for_url(url)
+      store_opts = {
+        cache_path: url,
+        provider:   @provider,
+        station:    @station_id
+      }
+
+      case url
+      when /^file:\/\//
+        FileDataStore.new(store_opts)
+      else
+        raise Exception, "Invalid cache/database URL. Must start with 'file://'."
+      end
+    end
+
+    # Select the correct MetadataStore sub-class based on the database
+    # URL.
+    # * `file://` will return an instance of FileMetadataStore
+    def metadata_store_for_url(url)
+      store_opts = {
+        cache_path: url,
+        provider:   @provider,
+        station:    @station_id
+      }
+
+      case url
+      when /^file:\/\//
+        FileMetadataStore.new(store_opts)
+      else
+        raise Exception, "Invalid cache/database URL. Must start with 'file://'."
+      end
     end
   end
 end

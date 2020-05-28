@@ -17,7 +17,7 @@ $ transload get metadata \
     --provider klrs_h_weather \
     --station_id KLRS_5264 \
     --data_path "data/TOA5_5264.FiveMin.dat" \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 This will parse the sensor metadata from the source and store the metadata in a JSON file in the `datastore/weather` directory. The string "KLRS_5264" is an arbitary identification string for *this* station; changing this will create a separate set of entities in OGC SensorThings API.
@@ -59,7 +59,7 @@ To execute the upload, the tool has a put command:
 $ transload put metadata \
     --provider klrs_h_weather \
     --station_id KLRS_5264 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination https://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
@@ -81,7 +81,7 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations \
     --provider klrs_h_weather \
     --station_id KLRS_5264 \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 In this example, the weather station with the ID `KLRS_5264` will have its observations parsed and converted into the `datastore/weather/klrs_h_weather/KLRS_5264` directory.
@@ -110,7 +110,7 @@ The `FeatureOfInterest` for the `Observation` will be automatically generated on
 $ transload put observations \
     --provider klrs_h_weather \
     --station_id KLRS_5264 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```

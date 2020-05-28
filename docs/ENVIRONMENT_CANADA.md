@@ -12,7 +12,7 @@ To conform to the OGC SensorThings API entity model, the `Thing`, `Location`, `S
 $ transload get metadata \
     --provider environment_canada \
     --station_id CXCM \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 This will download the sensor metadata from the Environment Canada source for the station with the identifier `CXCM` (Cambridge Bay), and store the metadata in a JSON file in the `datastore/weather` directory.
@@ -43,7 +43,7 @@ To execute the upload, the tool has a put command:
 $ transload put metadata \
     --provider environment_canada \
     --station_id CXCM \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
@@ -65,7 +65,7 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations \
     --provider environment_canada \
     --station_id CXCM \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 In this example, observations for the Environment Canada station `CXCM` (Cambridge Bay) are downloaded to a local cache in the `datastore/weather/environment_canada/CXCM/YYYY/MM/DD/HHMMSS+0000.xml` file. The year/month/day and hour/minute/second/time zone offset are parsed from the observation file provided by the data source.
@@ -84,7 +84,7 @@ Once a `Feature of Interest` has been created or found, it is linked to a new `O
 $ transload put observations \
     --provider environment_canada \
     --station_id CXCM \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```

@@ -34,7 +34,7 @@ $ transload get metadata \
     --provider campbell_scientific \
     --station_id 606830 \
     --data_url "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat" \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 This will download the sensor metadata from the Campbell Scientific source for the station with the ID `606830`, monitor the given data URL for observation updates, and store the metadata in a JSON file in the `datastore/weather` directory.
@@ -78,7 +78,7 @@ To execute the upload, the tool has a put command:
 $ transload put metadata \
     --provider campbell_scientific \
     --station_id 606830 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
@@ -100,7 +100,7 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations \
     --provider campbell_scientific \
     --station_id 606830 \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 In this example, the Campbell Scientific weather station with the ID `606830` will have its observations downloaded into the `datastore/weather/campbell_scientific/606830` directory.
@@ -131,7 +131,7 @@ The `FeatureOfInterest` for the `Observation` will be automatically generated on
 $ transload put observations \
     --provider campbell_scientific \
     --station_id 606830 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```

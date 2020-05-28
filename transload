@@ -23,32 +23,32 @@ def get_station(options, http_client)
   $logger.debug "Creating station instance for #{options.provider}"
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.cache, http_client)
+    provider = Transloader::EnvironmentCanadaProvider.new(options.database_url, http_client)
     provider.get_station(station_id: options.station_id)
   when "data_garrison"
     Transloader::DataGarrisonStation.new(
-        database_url: options.cache,
+        database_url: options.database_url,
         http_client:  http_client,
         id:           options.station_id,
         properties:   { user_id: options.user_id }
       )
   when "campbell_scientific"
     Transloader::CampbellScientificStation.new(
-      database_url: options.cache,
+      database_url: options.database_url,
       http_client:  http_client,
       id:           options.station_id,
       properties:   { data_urls: options.data_urls }
     )
   when "klrs_h_energy"
     Transloader::KLRSHistoricalEnergyStation.new(
-      database_url: options.cache,
+      database_url: options.database_url,
       http_client:  http_client,
       id:           options.station_id,
       properties:   { data_paths: options.data_paths }
     )
   when "klrs_h_weather"
     Transloader::KLRSHistoricalWeatherStation.new(
-      database_url: options.cache,
+      database_url: options.database_url,
       http_client:  http_client,
       id:           options.station_id,
       properties:   { data_paths: options.data_paths }
@@ -70,6 +70,7 @@ def put_metadata(options, http_client)
     blocked: options.blocked)
 end
 
+# TODO: Use Station to do this so that other store types can be used
 def set_metadata(options)
   $logger.debug "Editing metadata"
 
@@ -89,7 +90,7 @@ def set_metadata(options)
   end
 
   store_opts = {
-    cache_path: options.cache,
+    cache_path: options.database_url,
     provider: options.provider,
     station: station_id
   }
@@ -122,7 +123,7 @@ def show_metadata(options)
   end
 
   store_opts = {
-    cache_path: options.cache,
+    cache_path: options.database_url,
     provider: options.provider,
     station: station_id
   }

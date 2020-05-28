@@ -17,7 +17,8 @@ module Transloader
     # * provider:   string for provider name, used to keep provider 
     #               metadata separate.
     def initialize(cache_path:, provider:, station:)
-      @cache_path = cache_path
+      # Cut "file://" from beginning of URL
+      @cache_path = cache_path.delete_prefix("file://")
       @provider   = provider
       @station    = station
       @path       = "#{@cache_path}/#{@provider}/metadata/#{@station}.json"

@@ -13,7 +13,7 @@ $ transload get metadata \
     --provider data_garrison \
     --user_id 300234063581640 \
     --station_id 300234065673960 \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 This will download the sensor metadata from the Data Garrison source for the user with ID `300234063581640` and station with the identifier `300234065673960`, and store the metadata in a JSON file in the `datastore/weather` directory.
@@ -56,7 +56,7 @@ $ transload put metadata \
     --provider data_garrison \
     --user_id 300234063581640 \
     --station_id 300234065673960 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
@@ -81,7 +81,7 @@ $ transload get observations \
     --provider data_garrison \
     --user_id 300234063581640 \
     --station_id 300234065673960 \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 In this example, the observations from the data files listed on the page for the Data Garrison weather station with the ID `300234065673960` for the user with ID `300234063581640` are downloaded to a local cache.
@@ -99,7 +99,7 @@ $ transload put observations \
     --provider data_garrison \
     --user_id 300234063581640 \
     --station_id 300234065673960 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --date 2018-05-01T00:00:00Z/2018-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```

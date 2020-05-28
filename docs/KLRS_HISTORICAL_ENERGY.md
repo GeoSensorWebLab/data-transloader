@@ -16,7 +16,7 @@ $ transload get metadata \
     --station_id KLRS_Office_Energy \
     --data_path "data/gen_april.xls" \
     --data_path "data/gen_may.xls" \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 This will parse the sensor metadata from the source and store the metadata in a JSON file in the `datastore/weather` directory. The string "KLRS_Office_Energy" is an arbitary identification string for *this* station; changing this after uploading will create a separate set of entities in OGC SensorThings API on the next upload.
@@ -58,7 +58,7 @@ To execute the upload, the tool has a put command:
 $ transload put metadata \
     --provider klrs_h_energy \
     --station_id KLRS_Office_Energy \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --destination https://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```
 
@@ -80,7 +80,7 @@ After the base entities have been created in the OGC SensorThings API service, t
 $ transload get observations \
     --provider klrs_h_energy \
     --station_id KLRS_Office_Energy \
-    --cache datastore/weather
+    --database_url file://datastore/weather
 ```
 
 In this example, the "Thing" with the ID `KLRS_Office_Energy` will have its observations parsed and converted into the `datastore/weather/klrs_h_energy/KLRS_Office_Energy` directory.
@@ -109,7 +109,7 @@ The `FeatureOfInterest` for the `Observation` will be automatically generated on
 $ transload put observations \
     --provider klrs_h_energy \
     --station_id KLRS_Office_Energy \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --date 2014-05-01T00:00:00Z/2014-05-02T00:00:00Z \
     --destination http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
 ```

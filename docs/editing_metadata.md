@@ -11,7 +11,7 @@ $ ruby transload set metadata \
     --provider data_garrison \
     --station_id 300234063588720 \
     --user_id 300234063581640 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --key latitude \
     --value 68.5948
 ```
@@ -39,7 +39,7 @@ $ ruby transload set metadata \
     --provider data_garrison \
     --station_id 300234063588720 \
     --user_id 300234063581640 \
-    --cache datastore/weather \
+    --database_url file://datastore/weather \
     --key properties \
     --key operation_interval \
     --value "April through September"

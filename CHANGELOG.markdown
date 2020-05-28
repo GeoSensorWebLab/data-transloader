@@ -1,5 +1,10 @@
 # Changelog for Data Transloader
 
+## Version 0.8.0 (Unreleased)
+
+* **Breaking Change**: The command line option `--cache` has been replaced with `--database_url`
+* **Breaking Change**: Using a local file-based cache requires `file://` at the start of the path
+
 ## Version 0.7.0 (2020-05-22)
 
 * Add warnings for empty ObservedProperty attributes in the Ontologies
