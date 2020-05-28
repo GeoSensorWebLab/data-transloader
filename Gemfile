@@ -2,8 +2,10 @@
 
 source "https://rubygems.org"
 
+gem "activerecord"
 gem "deep_merge"
 gem "nokogiri"
+gem "pg"
 gem "pry"
 gem "rdf-turtle"
 gem "rspec"
