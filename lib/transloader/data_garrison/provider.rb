@@ -17,18 +17,10 @@ module Transloader
 
     # Create a new Station object based on the station ID
     def get_station(user_id:, station_id:)
-      store_opts = {
-        cache_path: @cache_path,
-        provider: PROVIDER_NAME,
-        station: "#{user_id}-#{station_id}"
-      }
-      data_store     = FileDataStore.new(store_opts)
-      metadata_store = FileMetadataStore.new(store_opts)
-      store          = StationStore.new({
-        provider:       PROVIDER_NAME,
-        station:        "#{user_id}-#{station_id}",
-        data_store:     data_store,
-        metadata_store: metadata_store
+      store = StationStore.new({
+        provider:     PROVIDER_NAME,
+        station:      "#{user_id}-#{station_id}",
+        database_url: @cache_path
       })
 
       DataGarrisonStation.new(

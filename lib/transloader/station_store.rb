@@ -4,14 +4,18 @@ module Transloader
   class StationStore
     # Create a new StationStore.
     # Must be initialized with a `provider` and `station` to scope
-    # queries for data and metadata. The `data_store` and
-    # `metadata_store` are passed in to be able to share them with other
-    # StationStore instances.
-    def initialize(provider:, station:, data_store:, metadata_store:)
+    # queries for data and metadata. The `database_url` will determine
+    # the type of DataStore or MetadataStore used internally.
+    def initialize(provider:, station:, database_url:)
       @provider       = provider
       @station_id     = station
-      @data_store     = data_store
-      @metadata_store = metadata_store
+      store_opts      = {
+        cache_path: database_url,
+        provider:   @provider,
+        station:    @station_id
+      }
+      @data_store     = FileDataStore.new(store_opts)
+      @metadata_store = FileMetadataStore.new(store_opts)
     end
 
     # Retrieve all Observations in the data store for the given interval
