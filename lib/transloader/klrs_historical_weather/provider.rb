@@ -17,18 +17,12 @@ module Transloader
 
     # Create a new Station object based on the station ID
     def get_station(station_id:, data_paths: [])
-      store = StationStore.new({
-        provider:     PROVIDER_NAME,
-        station:      station_id,
-        database_url: @cache_path
-      })
-
       KLRSHistoricalWeatherStation.new(
-        http_client: @http_client,
-        id:          station_id,
-        properties:  { data_paths: data_paths },
-        provider:    self,
-        store:       store
+        database_url: @cache_path,
+        http_client:  @http_client,
+        id:           station_id,
+        properties:   { data_paths: data_paths },
+        provider:     self
       )
     end
   end

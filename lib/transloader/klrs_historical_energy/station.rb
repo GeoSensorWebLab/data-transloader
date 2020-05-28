@@ -15,8 +15,10 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
-    NAME      = "KLRS Energy Usage"
-    LONG_NAME = "KLRS Historical Energy Usage"
+    LONG_NAME     = "KLRS Historical Energy Usage"
+    NAME          = "KLRS Energy Usage"
+    PROVIDER_ID   = "KLRSHistoricalEnergy"
+    PROVIDER_NAME = "klrs_historical_energy"
 
     attr_accessor :id, :metadata, :properties, :provider
 
@@ -25,7 +27,11 @@ module Transloader
       @id             = options[:id]
       @provider       = options[:provider]
       @properties     = options[:properties]
-      @store          = options[:store]
+      @store          = StationStore.new({
+        provider:     PROVIDER_NAME,
+        station:      options[:id],
+        database_url: options[:database_url]
+      })
       @metadata       = {}
       @ontology       = KLRSHistoricalEnergyOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)

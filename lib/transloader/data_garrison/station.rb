@@ -16,8 +16,10 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
-    NAME      = "Data Garrison Station"
-    LONG_NAME = "Data Garrison Weather Station"
+    LONG_NAME     = "Data Garrison Weather Station"
+    NAME          = "Data Garrison Station"
+    PROVIDER_ID   = "DataGarrison"
+    PROVIDER_NAME = "data_garrison"
 
     attr_accessor :id, :metadata, :properties, :provider
     attr_reader :store
@@ -28,7 +30,11 @@ module Transloader
       @provider       = options[:provider]
       @properties     = options[:properties]
       @user_id        = @properties[:user_id]
-      @store          = options[:store]
+      @store          = StationStore.new({
+        provider:     PROVIDER_NAME,
+        station:      "#{@user_id}-#{options[:id]}",
+        database_url: options[:database_url]
+      })
       @metadata       = {}
       @base_path      = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
       @ontology       = DataGarrisonOntology.new

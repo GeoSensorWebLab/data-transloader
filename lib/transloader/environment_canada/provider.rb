@@ -31,18 +31,12 @@ module Transloader
     # Does not load any metadata.
     def get_station(station_id:)
       station_row = get_station_row(station_id)
-      store       = StationStore.new({
-        provider:     PROVIDER_NAME,
-        station:      station_id,
-        database_url: @cache_path
-      })
-
       EnvironmentCanadaStation.new(
-        http_client: @http_client,
-        id:          station_id,
-        properties:  station_row.to_hash,
-        provider:    self,
-        store:       store
+        database_url: @cache_path,
+        http_client:  @http_client,
+        id:           station_id,
+        properties:   station_row.to_hash,
+        provider:     self
       )
     end
 

@@ -12,8 +12,10 @@ module Transloader
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
-    NAME      = "Environment Canada Station"
-    LONG_NAME = "Environment Canada Weather Station"
+    LONG_NAME     = "Environment Canada Weather Station"
+    NAME          = "Environment Canada Station"
+    PROVIDER_ID   = "EnvironmentCanada"
+    PROVIDER_NAME = "environment_canada"
 
     NAMESPACES = {
       'gml'   => 'http://www.opengis.net/gml',
@@ -32,7 +34,11 @@ module Transloader
       @properties     = options[:properties].merge({
         provider: "Environment Canada"
       })
-      @store          = options[:store]
+      @store          = StationStore.new({
+        provider:     PROVIDER_NAME,
+        station:      options[:id],
+        database_url: options[:database_url]
+      })
       @metadata       = {}
       @ontology       = EnvironmentCanadaOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
