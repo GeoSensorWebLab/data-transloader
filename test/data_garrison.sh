@@ -15,7 +15,7 @@ THEN=$(ruby -e "puts (Time.new - (24*3600)).utc.strftime('%FT%T%z')")
 INTERVAL="$THEN/$NOW"
 
 # Data Garrison Test Run
-ruby $SCRIPT get metadata \
+time ruby $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --user_id $USER_ID \
@@ -28,7 +28,7 @@ ruby $SCRIPT set metadata \
     --user_id $USER_ID \
     --cache $DATASTORE \
     --key "latitude" \
-    --value "69.158"
+    --value "69.158" > /dev/null
 
 ruby $SCRIPT set metadata \
     --provider $PROVIDER \
@@ -36,7 +36,7 @@ ruby $SCRIPT set metadata \
     --user_id $USER_ID \
     --cache $DATASTORE \
     --key "longitude" \
-    --value "-107.0403"
+    --value "-107.0403" > /dev/null
 
 ruby $SCRIPT set metadata \
     --provider $PROVIDER \
@@ -44,22 +44,22 @@ ruby $SCRIPT set metadata \
     --user_id $USER_ID \
     --cache $DATASTORE \
     --key "timezone_offset" \
-    --value "-06:00"
+    --value "-06:00" > /dev/null
 
-ruby $SCRIPT put metadata \
+time ruby $SCRIPT put metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --user_id $USER_ID \
     --cache $DATASTORE \
     --destination $DESTINATION
 
-ruby $SCRIPT get observations \
+time ruby $SCRIPT get observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --user_id $USER_ID \
     --cache $DATASTORE
 
-ruby $SCRIPT put observations \
+time ruby $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --user_id $USER_ID \

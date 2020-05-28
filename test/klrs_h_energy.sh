@@ -11,7 +11,7 @@ DATASTORE="/Volumes/ramdisk/datastore/weather"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 
 # KLRS Historical Energy Usage Data Test Run
-ruby $SCRIPT get metadata \
+time ruby $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --data_path "tmp/klrs-energy/gen_april.xls" \
@@ -23,20 +23,20 @@ ruby $SCRIPT get metadata \
     --cache $DATASTORE \
     --overwrite
 
-ruby $SCRIPT put metadata \
+time ruby $SCRIPT put metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \
     --destination $DESTINATION
 
-ruby $SCRIPT get observations \
+time ruby $SCRIPT get observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE
 
 # A limited interval is used to prevent this from taking too long during
 # a test.
-ruby $SCRIPT put observations \
+time ruby $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \

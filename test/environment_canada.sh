@@ -14,24 +14,24 @@ THEN=$(ruby -e "puts (Time.new - (24*3600)).utc.strftime('%FT%T%z')")
 INTERVAL="$THEN/$NOW"
 
 # Environment Canada Test Run
-ruby $SCRIPT get metadata \
+time ruby $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \
     --overwrite
 
-ruby $SCRIPT put metadata \
+time ruby $SCRIPT put metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \
     --destination $DESTINATION
 
-ruby $SCRIPT get observations \
+time ruby $SCRIPT get observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE
 
-ruby $SCRIPT put observations \
+time ruby $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --cache $DATASTORE \
