@@ -1,19 +1,18 @@
-require "fileutils"
 require "json"
 require "transloader/data_store"
 
 module Transloader
-  # Store station metadata and observation data in a JSON flat-file
-  # database on disk.
+  # Store station metadata and observation data in a PostgreSQL
+  # database.
   # 
   # Sample Observation Hash:
   # * timestamp
   # * result
   # * property
   # * unit
-  class FileDataStore < DataStore
+  class PostgresDataStore < DataStore
     # Schema version for handling schema upgrades
-    SCHEMA_VERSION = 2
+    SCHEMA_VERSION = 3
 
     # Create a new DataStore.
     # * database_url: Path to directory where metadata is stored
@@ -21,12 +20,9 @@ module Transloader
     # * provider_key: string for provider name, used to keep provider 
     #                 metadata separate.
     def initialize(database_url:, provider_key:, station_key:)
-      # Cut "file://" from beginning of URL
-      @database_url = database_url.delete_prefix("file://")
+      @database_url = database_url
       @provider_key = provider_key
       @station_key  = station_key
-      @path         = "#{@database_url}/#{@provider_key}/#{@station_key}"
-      FileUtils.mkdir_p(@path)
     end
 
     # Retrieve all observations in the time interval

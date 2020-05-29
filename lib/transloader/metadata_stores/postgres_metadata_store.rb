@@ -1,29 +1,29 @@
 require "deep_merge"
-require "fileutils"
-require "json"
 require "transloader/metadata_store"
 
 module Transloader
-  # Class for abstracting away filesystem storage for station metadata.
-  class FileMetadataStore < MetadataStore
+  # Class for storing station metadata in a PostgreSQL database.
+  class PostgresMetadataStore < MetadataStore
     # Schema version for handling schema upgrades
-    SCHEMA_VERSION = 2
+    SCHEMA_VERSION = 3
 
     attr_reader :metadata
 
     # Create a new MetadataStore.
-    # * database_url: Path to directory where metadata is stored
+    # * database_url: Ignored as a connection is established by
+    #                 StationStore.
     # * station_key:  unique key for this station
     # * provider_key: string for provider name, used to keep provider 
     #                 metadata separate.
     def initialize(database_url:, provider_key:, station_key:)
-      # Cut "file://" from beginning of URL
-      @database_url = database_url.delete_prefix("file://")
-      @provider_key   = provider_key
-      @station_key    = station_key
-      @path       = "#{@database_url}/#{@provider_key}/metadata/#{@station_key}.json"
-      @metadata   = read()
-      FileUtils.mkdir_p("#{@database_url}/#{@provider_key}/metadata")
+      @station = ARModels::Station.find_or_create_by(
+        station_key:  station_key,
+        provider_key: provider_key
+      )
+      # The database stores the keys as strings, but this Ruby library
+      # uses symbols to access the keys. A HashWithIndifferentAccess
+      # lets these co-exist.
+      @metadata = ActiveSupport::HashWithIndifferentAccess.new(@station.metadata || {})
     end
 
     # Retrieve a value for a given key from the metadata store.
@@ -54,20 +54,7 @@ module Transloader
 
     # Dump the current contents of the metadata hash to a file.
     def commit
-      IO.write(@path, JSON.pretty_generate({
-        metadata: @metadata,
-        schema_version: SCHEMA_VERSION
-      }))
-    end
-
-    def read
-      if (File.exists?(@path))
-        data = JSON.parse(IO.read(@path), symbolize_names: true)
-        check_schema(data)
-        data[:metadata]
-      else
-        {}
-      end
+      @station.update(metadata: @metadata)
     end
   end
 end

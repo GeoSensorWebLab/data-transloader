@@ -2,6 +2,8 @@ module Transloader
   # This class provides a single interface for storing and retrieving
   # metadata and data for a Station instance.
   class StationStore
+    include SemanticLogger::Loggable
+
     # Create a new StationStore.
     # Must be initialized with a `provider` and `station` to scope
     # queries for data and metadata. The `database_url` will determine
@@ -9,11 +11,8 @@ module Transloader
     def initialize(provider:, station:, database_url:)
       @provider       = provider
       @station_id     = station
-      store_opts      = {
-        cache_path: database_url,
-        provider:   @provider,
-        station:    @station_id
-      }
+
+      establish_connection(database_url)
       @data_store     = data_store_for_url(database_url)
       @metadata_store = metadata_store_for_url(database_url)
     end
@@ -45,16 +44,28 @@ module Transloader
     # * `file://` will return an instance of FileDataStore
     def data_store_for_url(url)
       store_opts = {
-        cache_path: url,
-        provider:   @provider,
-        station:    @station_id
+        database_url: url,
+        provider_key: @provider,
+        station_key:  @station_id
       }
 
       case url
       when /^file:\/\//
         FileDataStore.new(store_opts)
+      when /^postgres:\/\// 
+        PostgresDataStore.new(store_opts)
       else
         raise Exception, "Invalid cache/database URL. Must start with 'file://'."
+      end
+    end
+
+    # If `database_url` looks like a PostgreSQL connection URL, then
+    # open a connection using ActiveRecord.
+    def establish_connection(url)
+      case url
+      when /^postgres:\/\//
+        logger.info "Opening connection to PostgreSQL"
+        ActiveRecord::Base.establish_connection(url)
       end
     end
 
@@ -63,14 +74,16 @@ module Transloader
     # * `file://` will return an instance of FileMetadataStore
     def metadata_store_for_url(url)
       store_opts = {
-        cache_path: url,
-        provider:   @provider,
-        station:    @station_id
+        database_url: url,
+        provider_key: @provider,
+        station_key:  @station_id
       }
 
       case url
       when /^file:\/\//
         FileMetadataStore.new(store_opts)
+      when /^postgres:\/\// 
+        PostgresMetadataStore.new(store_opts)
       else
         raise Exception, "Invalid cache/database URL. Must start with 'file://'."
       end

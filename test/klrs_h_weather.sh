@@ -7,7 +7,8 @@ set -e
 SCRIPT=transload
 PROVIDER="klrs_h_weather"
 STATION_ID="KLRS_5264"
-DATASTORE="file:///Volumes/ramdisk/datastore/weather"
+DATASTORE="postgres://localhost:5432/etl"
+# DATASTORE="file:///Volumes/ramdisk/datastore/weather"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 
 # KLRS Historical Weather Data Test Run
