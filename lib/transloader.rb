@@ -1,6 +1,7 @@
 require 'semantic_logger'
 
 require 'sensorthings'
+require 'transloader/ar_models/observation'
 require 'transloader/ar_models/station'
 require 'transloader/campbell_scientific/ontology'
 require 'transloader/campbell_scientific/provider'

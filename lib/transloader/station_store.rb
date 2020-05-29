@@ -17,7 +17,13 @@ module Transloader
       @metadata_store = metadata_store_for_url(database_url)
     end
 
-    # Retrieve all Observations in the data store for the given interval
+    # Retrieve all Observations in the data store for the given
+    # interval.
+    # 
+    # * `interval_start`: String with ISO8601 format
+    # * `interval_end`: String with ISO8601 format
+    # 
+    # Dates must include a time zone offset (e.g. "-06:00").
     def get_data_in_range(interval_start, interval_end)
       @data_store.get_all_in_range(interval_start, interval_end)
     end

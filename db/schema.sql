@@ -22,5 +22,9 @@ CREATE TABLE IF NOT EXISTS "observations" (
 	phenomenon_time timestamp with time zone NOT NULL,
 	result text,
 	property text NOT NULL,
-	metadata jsonb
+	metadata jsonb,
+	-- In SensorThings API, a Datastream (defined with station_id and
+	-- property) can only have a single Observation for a single
+	-- phenomenon time.
+	UNIQUE (station_id, property, phenomenon_time)
 );
