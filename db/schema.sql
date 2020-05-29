@@ -28,3 +28,6 @@ CREATE TABLE IF NOT EXISTS "observations" (
 	-- phenomenon time.
 	UNIQUE (station_id, property, phenomenon_time)
 );
+
+CREATE UNIQUE INDEX observations_idx ON "observations"
+	(station_id, property, phenomenon_time);
