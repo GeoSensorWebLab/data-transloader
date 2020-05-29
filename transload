@@ -2,7 +2,7 @@
 require 'transloader'
 require 'pry'
 
-# Adjust the logging level based on the "LOG_LEVEL" environment 
+# Adjust the logging level based on the "LOG_LEVEL" environment
 # variable.
 LOG_LEVELS = {
   "ERROR" => :error,
@@ -89,12 +89,11 @@ def set_metadata(options)
     value = options.value
   end
 
-  store_opts = {
-    cache_path: options.database_url,
-    provider: options.provider,
-    station: station_id
-  }
-  metadata_store = Transloader::FileMetadataStore.new(store_opts)
+  store = Transloader::StationStore.new({
+    provider:     options.provider,
+    station:      station_id,
+    database_url: options.database_url
+  })
 
   # Work in reverse to convert an array of keys to a set of nested
   # hashes
@@ -107,8 +106,8 @@ def set_metadata(options)
     memo
   end
 
-  metadata_store.merge(new_metadata)
-  puts JSON.pretty_generate(metadata_store.metadata)
+  store.merge_metadata(new_metadata)
+  puts JSON.pretty_generate(store.metadata)
 end
 
 def show_metadata(options)
@@ -122,13 +121,13 @@ def show_metadata(options)
     station_id = options.station_id
   end
 
-  store_opts = {
-    cache_path: options.database_url,
-    provider: options.provider,
-    station: station_id
-  }
-  metadata_store = Transloader::FileMetadataStore.new(store_opts)
-  value = metadata_store.get(options.keys.first.to_sym)
+  store = Transloader::StationStore.new({
+    provider:     options.provider,
+    station:      station_id,
+    database_url: options.database_url
+  })
+
+  value = store.metadata.get(options.keys.first.to_sym)
   puts JSON.pretty_generate({ options.keys.first => value })
 end
 
