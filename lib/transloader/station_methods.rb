@@ -26,7 +26,7 @@ module Transloader
     # a warning will be printed and the original source property name
     # will be used.
     def build_observed_property(property_name)
-      entity = @ontology.observed_property(property_name)
+      entity = ontology.observed_property(property_name)
 
       if entity.nil?
         logger.warn "No Observed Property found in Ontology for #{self.class::PROVIDER_ID}:#{property_name}"
@@ -41,7 +41,7 @@ module Transloader
     end
 
     # Create a `Sensor` entity for SensorThings API based on this
-    # station's metadata. If `sensor_description` is nil, then 
+    # station's metadata. If `sensor_description` is nil, then
     # `sensor_name` will be re-used.
     def build_sensor(sensor_name, sensor_description = nil)
       @entity_factory.new_sensor({
@@ -67,7 +67,7 @@ module Transloader
       })
     end
 
-    # Use the observation_type to convert result to float, int, or 
+    # Use the observation_type to convert result to float, int, or
     # string. This is used to use the most appropriate data type when
     # converting results to JSON.
     def coerce_result(result, observation_type)
@@ -124,8 +124,14 @@ module Transloader
     # Determine the O&M observation type for the Datastream based on
     # the Observed Property (see Transloader::Ontology)
     def observation_type_for(property)
-      @ontology.observation_type(property) ||
+      ontology.observation_type(property) ||
       "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Observation"
+    end
+
+    # Lazy-load the Ontology instance, waiting until it is actually
+    # needed.
+    def ontology
+      @ontology ||= Ontology.new(self.class::PROVIDER_ID.to_sym)
     end
 
     # Convert Last-Modified header String to Time object.
@@ -149,22 +155,22 @@ module Transloader
     # Download the file from `url`, using HTTP Ranges to try to download
     # from the `offset` in bytes. If `offset` is `nil`, then a full
     # download will be used.
-    # 
+    #
     # Will first issue a HEAD request for the Content-Length. If it is
     # less than `offset`, the file will be re-downloaded in full.
     # If it is equal to `offset`, no download will occur.
     # If it is greater than `offset`, then only the part of the file
     # after `offset` will be downloaded.
-    # 
+    #
     # This method does not handle parsing of the content, and the
     # implementer should be careful of partial files that may not fully
     # parse.
-    # 
+    #
     # Returns a Hash with the following data:
     # * body: String contents of response body
     # * last_modified: HTTP Last-Modified date for file (as `Time`)
     # * content_length: Full Content-Length of the file
-    # * full_file: Boolean if file was completely downloaded and may 
+    # * full_file: Boolean if file was completely downloaded and may
     #              still include data file CSV headers.
     def partial_download_url(url:, offset:)
       logger.info "Executing partial download for #{url}"
@@ -184,9 +190,9 @@ module Transloader
         # Download part of file; do not use gzip compression
         redownload = false
 
-        # Check if content-length is smaller than expected 
+        # Check if content-length is smaller than expected
         # (offset). If it is smaller, that means the file was
-        # probably truncated and the file should be re-downloaded 
+        # probably truncated and the file should be re-downloaded
         # instead.
         response = @http_client.head(uri: url)
 
@@ -223,7 +229,7 @@ module Transloader
           end
         end
       end
-        
+
       if redownload
         logger.debug "Downloading entire data file."
         # Download entire file; can use gzip compression
@@ -261,7 +267,7 @@ module Transloader
     def uom_for_datastream(datastream_name, source_units)
       # Look up UOM, observationType in ontology;
       # if nil, then use default attributes
-      uom = @ontology.unit_of_measurement(datastream_name)
+      uom = ontology.unit_of_measurement(datastream_name)
 
       if uom.nil?
         logger.warn "No Unit of Measurement found in Ontology for #{self.class::PROVIDER_ID}:#{datastream_name} (#{source_units})"

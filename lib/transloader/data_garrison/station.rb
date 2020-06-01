@@ -10,7 +10,7 @@ module Transloader
   # downloaded over HTTP, and the data has a custom format. As the site
   # has no REST API, custom endpoints must be called to force an update
   # of the data files to download.
-  # 
+  #
   # This class is called by the main Transloader::Station class.
   class DataGarrisonStation
     include SemanticLogger::Loggable
@@ -36,13 +36,12 @@ module Transloader
       })
       @metadata       = {}
       @base_path      = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
-      @ontology       = DataGarrisonOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
-    # Download and extract metadata from HTML, use to build metadata 
+    # Download and extract metadata from HTML, use to build metadata
     # needed for Sensor/Observed Property/Datastream.
-    # If `override_metadata` is specified, it is merged on top of the 
+    # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: nil, overwrite: false)
       if (@store.metadata != {} && !overwrite)
@@ -84,7 +83,7 @@ module Transloader
           response = @http_client.head(uri: datafile_url)
           last_modified = parse_last_modified(response["Last-Modified"])
 
-          # Content-Length can be used here because there is no 
+          # Content-Length can be used here because there is no
           # compression encoding.
           data_files.push(DataFile.new({
             datafileindex: file_index,
@@ -224,7 +223,7 @@ module Transloader
     #              uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
@@ -260,7 +259,7 @@ module Transloader
         Location entity cannot be created. Exiting.
         EOH
       end
-      
+
       # Create Location entity
       location = build_location()
 
@@ -339,13 +338,13 @@ module Transloader
       end
 
       get_metadata
-      
+
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
         all_observations = download_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
 
         # Store Observations in DataStore.
-        # 
+        #
         # Convert to new store format first:
         # * timestamp
         # * result
@@ -357,7 +356,7 @@ module Transloader
           # * name (property)
           # * reading (result)
           observation_set[1].collect do |observation|
-            # For HOBO Weather Station data, the TSV file headers 
+            # For HOBO Weather Station data, the TSV file headers
             # include the Datastream names as a substring.
             datastream = @metadata[:datastreams].find do |datastream|
               observation[:name].include?(datastream[:name])
@@ -383,7 +382,7 @@ module Transloader
 
     # Collect all the observation files in the date interval, and upload
     # them.
-    # 
+    #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
     # * options: Hash
@@ -391,7 +390,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
@@ -410,7 +409,7 @@ module Transloader
 
     # Connect to data provider and download Observations for a specific
     # data_file entry.
-    # 
+    #
     # Return an array of observation rows:
     # [
     #   ["2019-03-05T17:00:00.000Z", {
@@ -424,9 +423,9 @@ module Transloader
     #   ...
     #   }]
     # ]
-    # 
-    # TODO: Parse time zone offsets for each data file and store in 
-    # metadata, which means metadata would not need to be manually 
+    #
+    # TODO: Parse time zone offsets for each data file and store in
+    # metadata, which means metadata would not need to be manually
     # edited.
     def download_observations_for_file(data_file)
       request_updated_data(file_index: data_file[:datafileindex], filename: data_file[:datafilename])
@@ -447,7 +446,7 @@ module Transloader
         # We use slice to skip the first column with "Date_Time"
         column_headers = data[2].slice(1..-1)
 
-        # Store column names in station metadata cache file, as 
+        # Store column names in station metadata cache file, as
         # partial requests later will not be able to know the column
         # headers.
         data_file[:headers] = column_headers.compact!
@@ -479,10 +478,10 @@ module Transloader
         # timezones for multiple stations.
         # HOBO Weather Station Example: "08/12/18 10:58:07"
         begin
-          timestamp = Time.strptime(row[0] + @metadata[:timezone_offset], 
+          timestamp = Time.strptime(row[0] + @metadata[:timezone_offset],
             "%m/%d/%y %H:%M:%S%z")
           utc_time = to_iso8601(timestamp)
-          observations.push([utc_time, 
+          observations.push([utc_time,
             row[1..-1].map.with_index { |x, i|
               {
                 name: data_file[:headers][i],
@@ -494,7 +493,7 @@ module Transloader
           logger.warn "Skipping parsing of line: #{e}"
         end
       end
-      
+
       observations
     end
 
@@ -509,7 +508,7 @@ module Transloader
       end
     end
 
-    # Use the HTTP wrapper to fetch the base path and return the 
+    # Use the HTTP wrapper to fetch the base path and return the
     # response body.
     def get_station_data
       response = @http_client.get(uri: @base_path)
@@ -547,7 +546,7 @@ module Transloader
     def parse_readings_from_html(html)
       readings = []
       html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td/table/tr').each_with_index do |element, i|
-        # Skip empty elements, "Latest Conditions" element, and "Station 
+        # Skip empty elements, "Latest Conditions" element, and "Station
         # Status" element. They all start with a blank line.
         text = element.text
         if !text.match?(/^\W$/)
@@ -592,10 +591,10 @@ module Transloader
     # script that updates the TSV file so we can download the newest
     # observations later.
     def request_updated_data(file_index:, filename:)
-      # The time at which to "start" the data files, in seconds of 
+      # The time at which to "start" the data files, in seconds of
       # UNIX Epoch time. We default to the year 2000.
       data_start   = Time.utc(2000, 1, 1).to_i
-      # The time at which to "end" the data files, in seconds of 
+      # The time at which to "end" the data files, in seconds of
       # UNIX Epoch time. We default to "now".
       data_end     = Time.now.to_i
       base         = "https://datagarrison.com/users/#{@user_id}/#{@id}"
@@ -622,7 +621,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations_array(observations, options = {})
@@ -636,7 +635,7 @@ module Transloader
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
 
       # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
+      # This is used to determine where Observation entities are
       # uploaded.
       datastream_hash = datastreams.reduce({}) do |memo, datastream|
         memo[datastream[:name]] = datastream

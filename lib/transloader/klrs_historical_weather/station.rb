@@ -8,7 +8,7 @@ module Transloader
   # from historical Kluane Lake Research Station (KLRS) data sets. The
   # data is read from local files instead of over HTTP, and the data
   # has the same format as Campbell Scientific weather stations.
-  # 
+  #
   # This class is called by the main Transloader::Station class.
   class KLRSHistoricalWeatherStation
     include SemanticLogger::Loggable
@@ -31,13 +31,12 @@ module Transloader
         database_url: options[:database_url]
       })
       @metadata       = {}
-      @ontology       = KLRSHistoricalWeatherOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Extract metadata from one or more local data files, use to build
     # metadata needed for Sensor/Observed Property/Datastream.
-    # If `override_metadata` is specified, it is merged on top of the 
+    # If `override_metadata` is specified, it is merged on top of the
     # existing metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
       if (@store.metadata != {} && !overwrite)
@@ -70,7 +69,7 @@ module Transloader
         }).to_h)
 
         # Parse CSV headers for station metadata
-        # 
+        #
         # Row 1:
         # 1. File Type
         # 2. Station Name
@@ -80,7 +79,7 @@ module Transloader
         # 6. Logger Program
         # 7. Logger Program Signature
         # 8. Table Name
-        # 
+        #
         # Note: It is possible that different files may have different
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
@@ -96,7 +95,7 @@ module Transloader
         end
       end
 
-      # Reduce datastreams to unique entries, as multiple data files 
+      # Reduce datastreams to unique entries, as multiple data files
       # *may* share the same properties
       datastreams.uniq! do |datastream|
         datastream[:name]
@@ -135,7 +134,7 @@ module Transloader
     #              uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
@@ -169,7 +168,7 @@ module Transloader
       if latitude.nil? || longitude.nil?
         raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
       end
-      
+
       # Create Location entity
       location = build_location()
 
@@ -291,7 +290,7 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    # 
+    #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
     # * options: Hash
@@ -299,7 +298,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
@@ -317,7 +316,7 @@ module Transloader
     private
 
     # Load observations from a local file
-    # 
+    #
     # Return an array of observation rows:
     # [
     #   ["2019-03-05T17:00:00.000Z", {
@@ -350,7 +349,7 @@ module Transloader
         # timezones for multiple stations.
         timestamp = parse_toa5_timestamp(time, @metadata[:timezone_offset])
         utc_time = to_iso8601(timestamp)
-        observations.push([utc_time, 
+        observations.push([utc_time,
           row[1..-1].map.with_index { |x, index|
             {
               name:    column_headers[index][:name],
@@ -359,7 +358,7 @@ module Transloader
           }
         ])
       end
-      
+
       observations
     end
 
@@ -390,7 +389,7 @@ module Transloader
       data_document = nil
       separator     = ","
 
-      # Peek first line to determine if it is tabs or commas. The 
+      # Peek first line to determine if it is tabs or commas. The
       # heuristic is whether there are more commas or tabs.
       File.open(path, { encoding: "windows-1252:utf-8" }) do |f|
         first_line = ""
@@ -432,7 +431,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations_array(observations, options = {})
@@ -456,7 +455,7 @@ module Transloader
       end
 
       # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
+      # This is used to determine where Observation entities are
       # uploaded.
       datastream_hash = datastreams.reduce({}) do |memo, datastream|
         memo[datastream[:name]] = datastream

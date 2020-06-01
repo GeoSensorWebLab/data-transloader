@@ -7,7 +7,7 @@ module Transloader
   # Class for downloading and uploading metadata and observation data
   # from Campbell Scientific's sensor data portal. The data is
   # downloaded over HTTP, and the data use the TOA5 format.
-  # 
+  #
   # This class is called by the main Transloader::Station class.
   class CampbellScientificStation
     include SemanticLogger::Loggable
@@ -31,13 +31,12 @@ module Transloader
         database_url: options[:database_url]
       })
       @metadata       = {}
-      @ontology       = CampbellScientificOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
-    # Download and extract metadata from HTML, use to build metadata 
+    # Download and extract metadata from HTML, use to build metadata
     # needed for Sensor/Observed Property/Datastream.
-    # If `override_metadata` is specified, it is merged on top of the 
+    # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
       if (@store.metadata != {} && !overwrite)
@@ -59,7 +58,7 @@ module Transloader
         # Download CSV
         response = @http_client.get(uri: data_url)
 
-        # Incorrect URLs triggers a 302 Found that redirects to the 404 
+        # Incorrect URLs triggers a 302 Found that redirects to the 404
         # page, we need to catch that here.
         if response["Location"] == "http://dataservices.campbellsci.ca/404.html"
           raise HTTPError.new(response, "Incorrect Data URL for #{NAME}")
@@ -70,11 +69,11 @@ module Transloader
 
         filedata = response.body
         doc      = Transloader::TOA5Document.new(filedata)
-        
+
         # Store CSV file metadata
-        # 
+        #
         # Cannot use "Content-Length" here as the request has been
-        # encoded by gzip, which is enabled by default for Ruby 
+        # encoded by gzip, which is enabled by default for Ruby
         # net/http.
         last_modified = parse_last_modified(response["Last-Modified"])
         data_files.push(DataFile.new({
@@ -84,7 +83,7 @@ module Transloader
         }).to_h)
 
         # Parse CSV headers for station metadata
-        # 
+        #
         # Row 1:
         # 1. File Type
         # 2. Station Name
@@ -94,7 +93,7 @@ module Transloader
         # 6. Logger Program
         # 7. Logger Program Signature
         # 8. Table Name
-        # 
+        #
         # Note: It is possible that different files may have different
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
@@ -110,7 +109,7 @@ module Transloader
         end
       end
 
-      # Reduce datastreams to unique entries, as multiple data files 
+      # Reduce datastreams to unique entries, as multiple data files
       # *may* share the same properties
       datastreams.uniq! do |datastream|
         datastream[:name]
@@ -154,7 +153,7 @@ module Transloader
     #              uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
@@ -186,7 +185,7 @@ module Transloader
       if @metadata[:latitude].nil? || @metadata[:longitude].nil?
         raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
       end
-      
+
       # Create Location entity
       location = build_location()
 
@@ -307,7 +306,7 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    # 
+    #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
     # * options: Hash
@@ -315,7 +314,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
@@ -334,7 +333,7 @@ module Transloader
 
     # Connect to data provider and download Observations for a specific
     # data_file entry.
-    # 
+    #
     # Return an array of observation rows:
     # [
     #   ["2019-03-05T17:00:00.000Z", {
@@ -364,7 +363,7 @@ module Transloader
           x[:name]
         end
 
-        # Store column names in station metadata cache file, as 
+        # Store column names in station metadata cache file, as
         # partial requests later will not be able to know the column
         # headers.
         data_file[:headers] = column_headers
@@ -391,7 +390,7 @@ module Transloader
         # timezones for multiple stations.
         timestamp = parse_toa5_timestamp(row[0], @metadata[:timezone_offset])
         utc_time = to_iso8601(timestamp)
-        observations.push([utc_time, 
+        observations.push([utc_time,
           row[1..-1].map.with_index { |x, i|
             {
               name: data_file[:headers][i],
@@ -400,7 +399,7 @@ module Transloader
           }
         ])
       end
-      
+
       observations
     end
 
@@ -435,7 +434,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations_array(observations, options = {})
@@ -449,7 +448,7 @@ module Transloader
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
 
       # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
+      # This is used to determine where Observation entities are
       # uploaded.
       datastream_hash = datastreams.reduce({}) do |memo, datastream|
         memo[datastream[:name]] = datastream

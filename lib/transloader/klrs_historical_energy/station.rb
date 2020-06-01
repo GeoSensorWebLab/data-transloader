@@ -5,11 +5,11 @@ require "transloader/station_methods"
 
 module Transloader
   # Class for downloading and uploading metadata and observation data
-  # from historical Kluane Lake Research Station (KLRS) energy 
+  # from historical Kluane Lake Research Station (KLRS) energy
   # monitoring data sets. The data is read from local files instead of
   # over HTTP, and the data has a custom format in Excel spreadsheet
   # files.
-  # 
+  #
   # This class is called by the main Transloader::Station class.
   class KLRSHistoricalEnergyStation
     include SemanticLogger::Loggable
@@ -32,13 +32,12 @@ module Transloader
         database_url: options[:database_url]
       })
       @metadata       = {}
-      @ontology       = KLRSHistoricalEnergyOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Extract metadata from one or more local data files, use to build
     # metadata needed for Sensor/Observed Property/Datastream.
-    # If `override_metadata` is specified, it is merged on top of the 
+    # If `override_metadata` is specified, it is merged on top of the
     # existing metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
       if (@store.metadata != {} && !overwrite)
@@ -73,8 +72,8 @@ module Transloader
         book = Spreadsheet.open(path)
 
         # Parse "Configuration". The following metadata is extracted for
-        # the properties on the `Thing` entity. Note that parsing 
-        # multiple data files will cause this data to be overwritten 
+        # the properties on the `Thing` entity. Note that parsing
+        # multiple data files will cause this data to be overwritten
         # with the contents of the last parsed data file.
         raw_config = book.worksheet("Configuration")
         @properties[:configuration] = {
@@ -106,18 +105,18 @@ module Transloader
           units: "",
           type:  "value"
         })
-        
+
         # Parse "Summary" sheet headers for datastreams and units
         raw_summary = book.worksheet("Summary")
-        
+
         # Only the first two rows are needed. Here we merge the rows
         # together to form pairs for the datastream name and the unit of
         # measurement.
         headers = raw_summary.rows[0].zip(raw_summary.rows[1])
-        
+
         # We skip the first two date and time columns
         headers.slice!(0, 2)
-        
+
         headers.each do |name, unit|
           datastreams.push({
             name:  name,
@@ -127,7 +126,7 @@ module Transloader
         end
       end
 
-      # Reduce datastreams to unique entries, as multiple data files 
+      # Reduce datastreams to unique entries, as multiple data files
       # *may* share the same properties
       datastreams.uniq! do |datastream|
         datastream[:name]
@@ -166,7 +165,7 @@ module Transloader
     #              uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
@@ -195,7 +194,7 @@ module Transloader
       if @metadata[:latitude].nil? || @metadata[:longitude].nil?
         raise Error, "Station latitude or longitude is nil! Location entity cannot be created."
       end
-      
+
       # Create Location entity
       location = build_location()
 
@@ -317,7 +316,7 @@ module Transloader
     # Collect all the observation files in the date interval, and upload
     # them.
     # (Kind of wish I had a database here.)
-    # 
+    #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
     # * options: Hash
@@ -325,7 +324,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
@@ -343,7 +342,7 @@ module Transloader
     private
 
     # Load observations from a local file
-    # 
+    #
     # Return an array of observation rows:
     # [
     #   ["2019-03-05T17:00:00.000Z", {
@@ -364,13 +363,13 @@ module Transloader
       # Open file
       Spreadsheet.client_encoding = "UTF-8"
       book = Spreadsheet.open(data_file[:url])
-      
+
       # Parse "Summary" worksheet
       raw_summary = book.worksheet("Summary")
 
       # Grab the headers so we can map the readings to a datastream
       column_headers = raw_summary.rows[0]
-      
+
       # Omit the file header rows from the next step
       rows = raw_summary.rows[2..-1]
 
@@ -384,7 +383,7 @@ module Transloader
         timestamp = Time.strptime("#{date} #{time} #{@metadata[:timezone_offset]}",
           "%m/%e/%Y %I:%M:%S %p %z")
         utc_time  = to_iso8601(timestamp)
-        
+
         # Note that "row" must be converted to an array for the range to
         # work correctly.
         observations.push([utc_time,
@@ -411,7 +410,7 @@ module Transloader
       end
     end
 
-    # Parse an observation reading from the data source, and use STA 
+    # Parse an observation reading from the data source, and use STA
     # compatible "null" string for "missing" values.
     # This function *does not* try to convert to Floats as some values
     # may be strings.
@@ -432,7 +431,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations_array(observations, options = {})
@@ -446,7 +445,7 @@ module Transloader
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
 
       # Create hash map of observed properties to datastream URLs.
-      # This is used to determine where Observation entities are 
+      # This is used to determine where Observation entities are
       # uploaded.
       datastream_hash = datastreams.reduce({}) do |memo, datastream|
         memo[datastream[:name]] = datastream

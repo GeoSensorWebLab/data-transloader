@@ -6,7 +6,7 @@ module Transloader
   # Class for downloading and uploading metadata and observation data
   # from Environment Canada Data Mart. The data is downloaded over HTTP,
   # and uses the Surface Weather Observation XML encoding.
-  # 
+  #
   # This class is called by the main Transloader::Station class.
   class EnvironmentCanadaStation
     include SemanticLogger::Loggable
@@ -39,13 +39,12 @@ module Transloader
         database_url: options[:database_url]
       })
       @metadata       = {}
-      @ontology       = EnvironmentCanadaOntology.new
       @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
     # metadata hash.
-    # If `override_metadata` is specified, it is merged on top of the 
+    # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
       if (@store.metadata != {} && !overwrite)
@@ -89,7 +88,7 @@ module Transloader
     #              uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
@@ -210,7 +209,7 @@ module Transloader
 
     # Collect all the observation files in the date interval, and upload
     # them.
-    # 
+    #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
     # * options: Hash
@@ -218,7 +217,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
@@ -256,16 +255,16 @@ module Transloader
     end
 
     # Connect to Environment Canada and download the SWOB-ML data that
-    # is closest to `timestamp`. If `timestamp` is `nil`, then the 
+    # is closest to `timestamp`. If `timestamp` is `nil`, then the
     # latest SWOB-ML will be used. Otherwise, the SWOB-ML closest to the
     # timestamp will be returned. If the SWOB-ML is unavailable, `nil`
     # is returned.
-    # 
+    #
     # Note that SWOB-ML files may be delayed in reporting, so trying to
     # get 0900 would fail as it may be at 0905 instead. To solve this,
     # this method will try to get the next closest SWOB-ML file after
     # `timestamp`.
-    # 
+    #
     # Note 2: Minutely SWOB-ML files are currently **not used**.
     def get_swob_data(timestamp = nil)
       if timestamp.nil?
@@ -318,7 +317,7 @@ module Transloader
     #              observations uploaded to STA.
     #   * blocked: Array of strings, only non-matching properties will
     #              have observations be uploaded to STA.
-    # 
+    #
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations_array(observations, options = {})
