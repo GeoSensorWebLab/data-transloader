@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby -Ilib
 require 'transloader'
-require 'pry'
 
 # Adjust the logging level based on the "LOG_LEVEL" environment
 # variable.

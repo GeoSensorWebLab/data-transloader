@@ -60,6 +60,7 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
     ruby-ole (1.2.12.2)
+    ruby-prof (1.4.1)
     safe_yaml (1.0.5)
     semantic_logger (4.5.0)
       concurrent-ruby (~> 1.0)
@@ -90,6 +91,7 @@ DEPENDENCIES
   pry
   rdf-turtle
   rspec
+  ruby-prof
   semantic_logger
   spreadsheet
   timecop
@@ -97,4 +99,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
