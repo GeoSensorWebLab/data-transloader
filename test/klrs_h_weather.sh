@@ -4,7 +4,8 @@ set -e
 # This is a very simple bash script for testing the command line
 # interface with a local SensorThings API server.
 
-SCRIPT=transload
+RUBY="ruby -Ilib"
+SCRIPT="transload"
 PROVIDER="klrs_h_weather"
 STATION_ID="KLRS_5264"
 DATASTORE="postgres://localhost:5432/etl"
@@ -12,7 +13,7 @@ DATASTORE="postgres://localhost:5432/etl"
 DESTINATION="http://192.168.33.77:8080/FROST-Server/v1.0/"
 
 # KLRS Historical Weather Data Test Run
-time ruby $SCRIPT get metadata \
+time $RUBY $SCRIPT get metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --data_path "tmp/klrs-weather/2012/September/TOA5_5264.FiveMin.dat" \
@@ -29,13 +30,13 @@ time ruby $SCRIPT get metadata \
     --database_url $DATASTORE \
     --overwrite
 
-time ruby $SCRIPT put metadata \
+time $RUBY $SCRIPT put metadata \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --database_url $DATASTORE \
     --destination $DESTINATION
 
-time ruby $SCRIPT get observations \
+time $RUBY $SCRIPT get observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --database_url $DATASTORE
@@ -43,7 +44,7 @@ time ruby $SCRIPT get observations \
 # Upload partial 2012 observations only to save time (approx 4600).
 # (For a local SensorThings API instance, 250,000 observations takes 
 # about 45 minutes to upload.)
-time ruby $SCRIPT put observations \
+time $RUBY $SCRIPT put observations \
     --provider $PROVIDER \
     --station_id $STATION_ID \
     --database_url $DATASTORE \
