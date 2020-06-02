@@ -66,8 +66,7 @@ module Transloader
           station_id:      station.id,
           phenomenon_time: observation[:timestamp],
           result:          observation[:result],
-          property:        observation[:property],
-          metadata:        {}
+          property:        observation[:property]
         }
       end
 

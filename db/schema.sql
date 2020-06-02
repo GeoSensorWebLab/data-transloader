@@ -17,12 +17,10 @@ CREATE TABLE IF NOT EXISTS "stations" (
 -- Observation model contains data and metadata needed to construct
 -- SensorThings API Observation entities.
 CREATE TABLE IF NOT EXISTS "observations" (
-	id bigserial primary key,
-	station_id bigint NOT NULL REFERENCES stations(id) ON DELETE CASCADE,
+	station_id int NOT NULL REFERENCES stations(id) ON DELETE CASCADE,
 	phenomenon_time timestamp with time zone NOT NULL,
 	result text,
 	property text NOT NULL,
-	metadata jsonb,
 	-- In SensorThings API, a Datastream (defined with station_id and
 	-- property) can only have a single Observation for a single
 	-- phenomenon time.
