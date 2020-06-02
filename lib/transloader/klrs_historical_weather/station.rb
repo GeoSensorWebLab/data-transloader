@@ -1,4 +1,5 @@
 require "csv"
+require "set"
 require "time"
 
 require_relative "../data_file"
@@ -254,6 +255,13 @@ module Transloader
           all_observations = filter_observations(all_observations.sort { |a,b| a[0] <=> b[0] }, interval)
         end
 
+        # Collect datastream names for comparisons.
+        # A Set is used for fast lookups and unique values.
+        datastream_names = @metadata[:datastreams].reduce(Set.new()) { |memo, datastream|
+          memo.add(datastream[:name])
+          memo
+        }
+
         # Store Observations in DataStore.
         # Convert to new store format first:
         # * timestamp (Time)
@@ -265,11 +273,7 @@ module Transloader
           # * name (property)
           # * reading (result)
           observation_set[1].collect do |observation|
-            datastream = @metadata[:datastreams].find do |datastream|
-              datastream[:name] == observation[:name]
-            end
-
-            if datastream
+            if datastream_names.include?(observation[:name])
               {
                 timestamp: timestamp,
                 result: observation[:reading],

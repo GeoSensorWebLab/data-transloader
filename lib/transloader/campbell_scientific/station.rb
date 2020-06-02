@@ -270,22 +270,25 @@ module Transloader
         data_filename = data_file[:filename]
         all_observations = download_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
 
+        # Collect datastream names for comparisons.
+        # A Set is used for fast lookups and unique values.
+        datastream_names = @metadata[:datastreams].reduce(Set.new()) { |memo, datastream|
+          memo.add(datastream[:name])
+          memo
+        }
+
         # Store Observations in DataStore.
         # Convert to new store format first:
-        # * timestamp
-        # * result
-        # * property
+        # * timestamp (Time)
+        # * result (String/Float)
+        # * property (String)
         observations = all_observations.collect do |observation_set|
           timestamp = Time.strptime(observation_set[0], "%FT%T.%N%z")
           # observation:
           # * name (property)
           # * reading (result)
           observation_set[1].collect do |observation|
-            datastream = @metadata[:datastreams].find do |datastream|
-              datastream[:name] == observation[:name]
-            end
-
-            if datastream
+            if datastream_names.include?(observation[:name])
               {
                 timestamp: timestamp,
                 result: observation[:reading],
@@ -297,7 +300,7 @@ module Transloader
           end
         end
         observations.flatten! && observations.compact!
-        logger.info "Downloaded Observations: #{observations.count}"
+        logger.info "Loaded Observations: #{observations.count}"
         @store.store_data(observations)
       end
     end
