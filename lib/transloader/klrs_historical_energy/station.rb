@@ -308,9 +308,10 @@ module Transloader
             end
           end
         end
-        observations.compact!
-        logger.info "Loaded Observations: #{observations.length}"
-        @store.store_data(observations)
+      end
+      observations.compact!
+      logger.info "Loaded Observations: #{observations.length}"
+      @store.store_data(observations)
     end
 
     # Collect all the observation files in the date interval, and upload
