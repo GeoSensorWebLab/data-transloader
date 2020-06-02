@@ -10,7 +10,6 @@ module Transloader
   # * timestamp
   # * result
   # * property
-  # * unit
   class PostgresDataStore < DataStore
     include SemanticLogger::Loggable
 
@@ -48,8 +47,7 @@ module Transloader
         {
           timestamp: observation.phenomenon_time.iso8601,
           result:    observation.result,
-          property:  observation.property,
-          unit:      nil # FIXME: Is this even used?
+          property:  observation.property
         }
       end
     end
@@ -60,7 +58,6 @@ module Transloader
     # * timestamp
     # * result
     # * property
-    # * unit
     def store(observations)
       station = ARModels::Station.find_by(provider_key: @provider_key, station_key: @station_key)
 

@@ -11,7 +11,6 @@ module Transloader
   # * timestamp
   # * result
   # * property
-  # * unit
   class FileDataStore < DataStore
     # Schema version for handling schema upgrades
     SCHEMA_VERSION = 2

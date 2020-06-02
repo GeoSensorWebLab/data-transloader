@@ -351,7 +351,6 @@ module Transloader
         # * timestamp
         # * result
         # * property
-        # * unit
         observations = all_observations.collect do |observation_set|
           timestamp = Time.strptime(observation_set[0], "%FT%T.%N%z")
           # observation:
@@ -368,8 +367,7 @@ module Transloader
               {
                 timestamp: timestamp,
                 result: observation[:reading],
-                property: datastream[:name],
-                unit: datastream[:units]
+                property: datastream[:name]
               }
             else
               nil

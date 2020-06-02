@@ -199,8 +199,7 @@ module Transloader
         {
           timestamp: timestamp,
           result: element.at_xpath("@value", NAMESPACES).text,
-          property: element.at_xpath("@name", NAMESPACES).text,
-          unit: element.at_xpath("@uom", NAMESPACES).text
+          property: element.at_xpath("@name", NAMESPACES).text
         }
       end
 
@@ -343,7 +342,6 @@ module Transloader
       # * timestamp
       # * result
       # * property
-      # * unit
       responses = observations.collect do |observation|
         datastream = datastreams.find { |datastream|
           datastream[:name] == observation[:property]

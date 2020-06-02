@@ -256,10 +256,9 @@ module Transloader
 
         # Store Observations in DataStore.
         # Convert to new store format first:
-        # * timestamp
-        # * result
-        # * property
-        # * unit
+        # * timestamp (Time)
+        # * result (String/Float)
+        # * property (String)
         observations = all_observations.collect do |observation_set|
           timestamp = Time.strptime(observation_set[0], "%FT%T.%N%z")
           # observation:
@@ -274,8 +273,7 @@ module Transloader
               {
                 timestamp: timestamp,
                 result: observation[:reading],
-                property: observation[:name],
-                unit: datastream[:units]
+                property: observation[:name]
               }
             else
               nil
@@ -466,7 +464,6 @@ module Transloader
       # * timestamp
       # * result
       # * property
-      # * unit
       responses = observations.collect do |observation|
         datastream = datastream_hash[observation[:property]]
 
