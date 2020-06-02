@@ -260,27 +260,7 @@ module Transloader
         datastream_names = datastream_names_set(@metadata[:datastreams])
 
         # Store Observations in DataStore.
-        # Convert to new store format first:
-        # * timestamp (Time)
-        # * result (String/Float)
-        # * property (String)
-        observations = all_observations.flat_map do |observation_set|
-          # observation:
-          # * name (property)
-          # * reading (result)
-          observation_set[1].collect do |observation|
-            if datastream_names.include?(observation[:name])
-              {
-                timestamp: Time.strptime(observation_set[0], "%FT%T.%N%z"),
-                result: observation[:reading],
-                property: observation[:name]
-              }
-            else
-              nil
-            end
-          end
-        end
-        observations.compact!
+        observations = convert_to_store_observations(all_observations, datastream_names)
         logger.info "Loaded Observations: #{observations.length}"
         @store.store_data(observations)
       end

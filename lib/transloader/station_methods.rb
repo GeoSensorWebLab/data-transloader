@@ -67,6 +67,33 @@ module Transloader
       })
     end
 
+    # Converts an array of observations (from loading a file/http file)
+    # to an array of observations for the DataStore class. Observations
+    # must have a property that matches in the `datastream_names` set.
+    # Array is automatically flattened and compacted.
+    #
+    # * observations: Array of input observations
+    # * datastream_names: Set of datastream names that observations must
+    #                     match.
+    def convert_to_store_observations(observations, datastream_names)
+      observations.flat_map do |observation_set|
+        # observation:
+        # * name (property)
+        # * reading (result)
+        observation_set[1].collect do |observation|
+          if datastream_names.include?(observation[:name])
+            {
+              timestamp: Time.strptime(observation_set[0], "%FT%T.%N%z"),
+              result:    observation[:reading],
+              property:  observation[:name]
+            }
+          else
+            nil
+          end
+        end
+      end.compact
+    end
+
     # Generate a Set containing the names from the datastreams.
     # Useful for fast lookups. Assumes names are under the `:name` key.
     def datastream_names_set(datastreams)
