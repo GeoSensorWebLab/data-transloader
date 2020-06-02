@@ -268,7 +268,7 @@ module Transloader
 
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
-        all_observations = download_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
+        all_observations = download_observations_for_file(data_file).sort_by { |obs| obs[0] }
 
         # Collect datastream names for comparisons.
         # A Set is used for fast lookups and unique values.

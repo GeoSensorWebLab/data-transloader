@@ -252,7 +252,7 @@ module Transloader
 
         # Filter observations by interval, if one is set
         if !interval.nil?
-          all_observations = filter_observations(all_observations.sort { |a,b| a[0] <=> b[0] }, interval)
+          all_observations = filter_observations(all_observations.sort_by { |obs| obs[0] }, interval)
         end
 
         # Collect datastream names for comparisons.
