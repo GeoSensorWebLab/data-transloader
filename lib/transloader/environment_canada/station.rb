@@ -326,17 +326,9 @@ module Transloader
         raise Error, "station metadata not loaded"
       end
 
-      datastreams = @metadata[:datastreams]
-
-      if options[:allowed]
-        datastreams = datastreams.select do |datastream|
-          options[:allowed].include?(datastream[:name])
-        end
-      elsif options[:blocked]
-        datastreams = datastreams.select do |datastream|
-          !options[:blocked].include?(datastream[:name])
-        end
-      end
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
 
       # Observation from DataStore:
       # * timestamp
