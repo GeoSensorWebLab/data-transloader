@@ -261,7 +261,7 @@ module Transloader
         # * property
         # * unit
         observations = all_observations.collect do |observation_set|
-          timestamp = Time.parse(observation_set[0])
+          timestamp = Time.strptime(observation_set[0], "%FT%T.%N%z")
           # observation:
           # * name (property)
           # * reading (result)
@@ -481,7 +481,7 @@ module Transloader
             raise Error, "Datastream navigation URLs not cached"
           end
 
-          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          phenomenonTime = Time.strptime(observation[:timestamp], "%FT%T.%N%z").iso8601(3)
           result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
           observation = @entity_factory.new_observation({

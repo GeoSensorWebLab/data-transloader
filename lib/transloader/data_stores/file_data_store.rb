@@ -5,7 +5,7 @@ require "transloader/data_store"
 module Transloader
   # Store station metadata and observation data in a JSON flat-file
   # database on disk.
-  # 
+  #
   # Sample Observation Hash:
   # * timestamp
   # * result
@@ -18,7 +18,7 @@ module Transloader
     # Create a new DataStore.
     # * database_url: Path to directory where metadata is stored
     # * station_key:  unique key for this station
-    # * provider_key: string for provider name, used to keep provider 
+    # * provider_key: string for provider name, used to keep provider
     #                 metadata separate.
     def initialize(database_url:, provider_key:, station_key:)
       # Cut "file://" from beginning of URL
@@ -37,7 +37,7 @@ module Transloader
       while (day <= end_time)
         cache = read_cache(day.strftime("%Y/%m/%d"))
         observations.concat(cache.values.select { |observation|
-          t = Time.parse(observation[:timestamp])
+          t = Time.strptime(observation[:timestamp], "%FT%T.%N%z")
           t >= start_time && t <= end_time
         })
         day += 86400
@@ -56,7 +56,7 @@ module Transloader
       day_groups.each do |day, observations|
         # Open existing cache file
         existing = read_cache(day)
-        
+
         # Merge in new values
         merged = observations.reduce(existing) do |memo, observation|
           key = "#{observation[:timestamp].to_s}-#{observation[:property]}"

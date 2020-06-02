@@ -17,7 +17,7 @@ module Transloader
       @end   = nil
 
       dates = interval.split("/").collect do |time|
-        Time.parse(time)
+        Time.strptime(time, "%FT%T%z")
       end
 
       if dates.length != 2
