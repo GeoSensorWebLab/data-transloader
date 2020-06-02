@@ -292,15 +292,14 @@ module Transloader
         # * timestamp (Time)
         # * result (String/Float)
         # * property (String)
-        observations = all_observations.collect do |observation_set|
-          timestamp = Time.strptime(observation_set[0], "%FT%T.%N%z")
+        observations = all_observations.flat_map do |observation_set|
           # observation:
           # * name (property)
           # * reading (result)
           observation_set[1].collect do |observation|
             if datastream_names.include?(observation[:name])
               {
-                timestamp: timestamp,
+                timestamp: Time.strptime(observation_set[0], "%FT%T.%N%z"),
                 result: observation[:reading],
                 property: observation[:name]
               }
@@ -309,10 +308,9 @@ module Transloader
             end
           end
         end
-        observations.flatten! && observations.compact!
+        observations.compact!
         logger.info "Loaded Observations: #{observations.length}"
         @store.store_data(observations)
-      end
     end
 
     # Collect all the observation files in the date interval, and upload
