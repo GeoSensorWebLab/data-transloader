@@ -247,11 +247,11 @@ module Transloader
 
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
-        all_observations = load_observations_for_file(data_file).sort { |a,b| a[0] <=> b[0] }
+        all_observations = load_observations_for_file(data_file)
 
         # Filter observations by interval, if one is set
         if !interval.nil?
-          all_observations = filter_observations(all_observations, interval)
+          all_observations = filter_observations(all_observations.sort { |a,b| a[0] <=> b[0] }, interval)
         end
 
         # Store Observations in DataStore.
