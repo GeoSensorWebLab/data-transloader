@@ -1,16 +1,16 @@
 require "semantic_logger"
 
-require "sensorthings/entity"
-require "sensorthings/entity_factory"
-require "sensorthings/datastream"
-require "sensorthings/exceptions"
-require "sensorthings/location"
-require "sensorthings/observation"
-require "sensorthings/observed_property"
-require "sensorthings/sensor"
-require "sensorthings/thing"
-require "sensorthings/version"
-require "transloader/http"
+require_relative "sensorthings/entity"
+require_relative "sensorthings/entity_factory"
+require_relative "sensorthings/datastream"
+require_relative "sensorthings/exceptions"
+require_relative "sensorthings/location"
+require_relative "sensorthings/observation"
+require_relative "sensorthings/observed_property"
+require_relative "sensorthings/sensor"
+require_relative "sensorthings/thing"
+require_relative "sensorthings/version"
+require_relative "transloader/http"
 
 # Library for uploading data to SensorThings API over HTTP/HTTPS.
 # Classes will try to re-use existing matching entities on the remote

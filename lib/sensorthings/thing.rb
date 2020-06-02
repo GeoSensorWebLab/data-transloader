@@ -1,6 +1,6 @@
 require "json"
 
-require "sensorthings/entity"
+require_relative "entity"
 
 module SensorThings
   # Thing entity class.

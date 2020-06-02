@@ -1,7 +1,7 @@
 require "csv"
 require "fileutils"
 
-require "transloader/environment_canada/station"
+require_relative "station"
 
 module Transloader
   # Provider is used for initializing stations with the correct

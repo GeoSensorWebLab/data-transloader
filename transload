@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby -Ilib
-require 'transloader'
+#!/usr/bin/env ruby
+require_relative 'lib/transloader'
 
 # Adjust the logging level based on the "LOG_LEVEL" environment
 # variable.

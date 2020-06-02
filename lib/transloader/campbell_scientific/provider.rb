@@ -1,6 +1,6 @@
 require "fileutils"
 
-require "transloader/campbell_scientific/station"
+require_relative "station"
 
 module Transloader
   # Provider is used for initializing stations with the correct

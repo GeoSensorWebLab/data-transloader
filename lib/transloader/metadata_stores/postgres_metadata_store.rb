@@ -1,6 +1,6 @@
 require "deep_merge"
 
-require "transloader/metadata_store"
+require_relative "../metadata_store"
 
 module Transloader
   # Class for storing station metadata in a PostgreSQL database.

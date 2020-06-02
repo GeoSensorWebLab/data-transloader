@@ -1,8 +1,8 @@
 require "spreadsheet"
 require "time"
 
-require "transloader/data_file"
-require "transloader/station_methods"
+require_relative "../data_file"
+require_relative "../station_methods"
 
 module Transloader
   # Class for downloading and uploading metadata and observation data

@@ -1,6 +1,7 @@
 require "fileutils"
 require "json"
-require "transloader/data_store"
+
+require_relative "../data_store"
 
 module Transloader
   # Store station metadata and observation data in a JSON flat-file

@@ -1,7 +1,7 @@
 require "nokogiri"
 require "time"
 
-require "transloader/station_methods"
+require_relative "../station_methods"
 
 module Transloader
   # Class for downloading and uploading metadata and observation data

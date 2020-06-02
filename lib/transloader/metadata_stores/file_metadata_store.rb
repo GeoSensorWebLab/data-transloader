@@ -2,7 +2,7 @@ require "deep_merge"
 require "fileutils"
 require "json"
 
-require "transloader/metadata_store"
+require_relative "../metadata_store"
 
 module Transloader
   # Class for abstracting away filesystem storage for station metadata.

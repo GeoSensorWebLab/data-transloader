@@ -1,4 +1,4 @@
-require "transloader/klrs_historical_energy/station"
+require_relative "station"
 
 module Transloader
   # Provider is used for initializing stations with the correct
