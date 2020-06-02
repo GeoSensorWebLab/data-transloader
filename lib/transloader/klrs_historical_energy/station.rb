@@ -316,7 +316,6 @@ module Transloader
 
     # Collect all the observation files in the date interval, and upload
     # them.
-    # (Kind of wish I had a database here.)
     #
     # * destination: URL endpoint of SensorThings API
     # * interval: ISO8601 <start>/<end> interval
