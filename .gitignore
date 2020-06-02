@@ -1,5 +1,5 @@
 .DS_Store
-
+.bundle
 /spec/examples.txt
 /datastore
 /tmp
