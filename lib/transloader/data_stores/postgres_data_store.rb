@@ -71,7 +71,7 @@ module Transloader
         }
       end
 
-      logger.info "Upserting #{db_observations.count} observations"
+      logger.info "Upserting #{db_observations.length} observations"
 
       # Number of threads to use, based on "NUM_JOBS" environment
       # variable. If unset, defaults to 2.

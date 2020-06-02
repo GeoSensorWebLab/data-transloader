@@ -131,7 +131,7 @@ module Transloader
 
       # Print warning if multiple sensors have the same ID
       sensor_ids = station_metadata.collect { |i| i[:name] }
-      if sensor_ids.count != sensor_ids.uniq.count
+      if sensor_ids.length != sensor_ids.uniq.length
         # Use a Set to find which ones are duplicates
         s = Set.new
         list = sensor_ids.find_all { |e| !s.add?(e) }.join(", ")
@@ -375,7 +375,7 @@ module Transloader
           end
         end
         observations.flatten! && observations.compact!
-        logger.info "Loaded Observations: #{observations.count}"
+        logger.info "Loaded Observations: #{observations.length}"
         @store.store_data(observations)
       end
     end
@@ -398,7 +398,7 @@ module Transloader
 
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
-      logger.info "Uploading Observations: #{observations.count}"
+      logger.info "Uploading Observations: #{observations.length}"
       upload_observations_array(observations, options)
     end
 

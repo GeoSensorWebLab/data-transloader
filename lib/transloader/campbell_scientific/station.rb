@@ -300,7 +300,7 @@ module Transloader
           end
         end
         observations.flatten! && observations.compact!
-        logger.info "Loaded Observations: #{observations.count}"
+        logger.info "Loaded Observations: #{observations.length}"
         @store.store_data(observations)
       end
     end
@@ -323,7 +323,7 @@ module Transloader
 
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
-      logger.info "Uploading Observations: #{observations.count}"
+      logger.info "Uploading Observations: #{observations.length}"
       upload_observations_array(observations, options)
     end
 

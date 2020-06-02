@@ -203,7 +203,7 @@ module Transloader
         }
       end
 
-      logger.info "Downloaded Observations: #{observations.count}"
+      logger.info "Downloaded Observations: #{observations.length}"
       @store.store_data(observations)
     end
 
@@ -224,7 +224,7 @@ module Transloader
       get_metadata
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
-      logger.info "Uploading Observations: #{observations.count}"
+      logger.info "Uploading Observations: #{observations.length}"
       upload_observations_array(observations, options)
     end
 

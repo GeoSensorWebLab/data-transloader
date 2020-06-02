@@ -1,10 +1,10 @@
 require "rdf/turtle"
 
 module Transloader
-  # Class for taking a source property from a data provider and 
+  # Class for taking a source property from a data provider and
   # returning normalized Observed Property, Unit of Measurement, and
   # Observation Type for SensorThings API.
-  # 
+  #
   # The data is sourced from the RDF ontology embedded in this library.
   class Ontology
     ONTOLOGY_PATH = "../../ontologies/etl-ontology.ttl"
@@ -20,7 +20,7 @@ module Transloader
     }
 
     # Create an Ontology instance.
-    # 
+    #
     # * `provider`: The data provider as a CamelCased symbol
     def initialize(provider)
       @provider = provider.to_s
@@ -32,7 +32,7 @@ module Transloader
 
       if solutions.empty?
         nil
-      elsif solutions.count == 1
+      elsif solutions.length == 1
         object_uri = solutions.first[:object]
         individual = reduce_solutions(get_all_by_subject(object_uri))
         individual[DEFS[:observationType]][0].humanize
@@ -42,8 +42,8 @@ module Transloader
       end
     end
 
-    # Return a Hash representing the canonical ObservedProperty for a 
-    # given source property. If no matches are available, `nil` is 
+    # Return a Hash representing the canonical ObservedProperty for a
+    # given source property. If no matches are available, `nil` is
     # returned.
     def observed_property(property)
       solutions = get_all_by_subject(RDF::URI(uri_for(encode(property))))
@@ -51,7 +51,7 @@ module Transloader
 
       if solutions.empty?
         nil
-      elsif solutions.count == 1
+      elsif solutions.length == 1
         object_uri = solutions.first[:object]
         individual = reduce_solutions(get_all_by_subject(object_uri))
         {
@@ -70,7 +70,7 @@ module Transloader
 
       if solutions.empty?
         nil
-      elsif solutions.count == 1
+      elsif solutions.length == 1
         object_uri = solutions.first[:object]
         individual = reduce_solutions(get_all_by_subject(object_uri))
         {
