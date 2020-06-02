@@ -477,7 +477,7 @@ module Transloader
         # timezones for multiple stations.
         # HOBO Weather Station Example: "08/12/18 10:58:07"
         begin
-          timestamp = Time.strptime(row[0] + @metadata[:timezone_offset],
+          timestamp = Time.strptime("#{row[0]}#{@metadata[:timezone_offset]}",
             "%m/%d/%y %H:%M:%S%z")
           utc_time = to_iso8601(timestamp)
           observations.push([utc_time,

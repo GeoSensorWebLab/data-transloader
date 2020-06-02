@@ -149,7 +149,7 @@ module Transloader
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
       logger.trace %Q[Converting TOA5 timestamp "#{time}" with offset "#{zone_offset}"]
-      Time.strptime(time + "#{zone_offset}", "%F %T%z").utc
+      Time.strptime("#{time}#{zone_offset}", "%F %T%z").utc
     end
 
     # Download the file from `url`, using HTTP Ranges to try to download
