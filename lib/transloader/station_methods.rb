@@ -1,4 +1,4 @@
-require 'time'
+require "time"
 
 module Transloader
   # Shared methods for multiple station classes
@@ -52,7 +52,7 @@ module Transloader
         # two types, so we have to pretend.
         # More discussion on specification that could change this:
         # https://github.com/opengeospatial/sensorthings/issues/39
-        encodingType: 'application/pdf',
+        encodingType: "application/pdf",
         metadata:     @metadata[:procedure] || "http://example.org/unknown"
       })
     end
@@ -210,8 +210,8 @@ module Transloader
           response = @http_client.get({
             uri: url,
             headers: {
-              'Accept-Encoding' => '',
-              'Range'           => "bytes=#{offset}-"
+              "Accept-Encoding" => "",
+              "Range"           => "bytes=#{offset}-"
             }
           })
 
@@ -235,7 +235,7 @@ module Transloader
         # Download entire file; can use gzip compression
         response = @http_client.get(
           uri: url,
-          headers: { 'Range' => '' }
+          headers: { "Range" => "" }
         )
 
         body           = response.body
@@ -274,7 +274,7 @@ module Transloader
         uom = {
           name:       source_units,
           symbol:     source_units,
-          definition: ''
+          definition: ""
         }
       else
         uom

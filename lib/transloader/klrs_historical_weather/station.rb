@@ -1,7 +1,8 @@
-require 'csv'
-require 'time'
-require 'transloader/data_file'
-require 'transloader/station_methods'
+require "csv"
+require "time"
+
+require "transloader/data_file"
+require "transloader/station_methods"
 
 module Transloader
   # Class for downloading and uploading metadata and observation data

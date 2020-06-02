@@ -1,9 +1,7 @@
-require 'csv'
-require 'fileutils'
+require "csv"
+require "fileutils"
 
-require 'transloader/data_store'
-require 'transloader/metadata_store'
-require 'transloader/environment_canada/station'
+require "transloader/environment_canada/station"
 
 module Transloader
   # Provider is used for initializing stations with the correct
@@ -46,7 +44,7 @@ module Transloader
 
     private
 
-    # Download the station list from Environment Canada and return the 
+    # Download the station list from Environment Canada and return the
     # body string
     def download_station_list
       response = @http_client.get(uri: METADATA_URL)
@@ -55,14 +53,14 @@ module Transloader
         raise HTTPError.new(response, "Error downloading station list from Environment Canada")
       end
 
-      # Data is encoded as ISO-8859-1 but has no encoding headers, so 
-      # encoding must be manually applied. I then convert to UTF-8 for 
+      # Data is encoded as ISO-8859-1 but has no encoding headers, so
+      # encoding must be manually applied. I then convert to UTF-8 for
       # re-use later.
       body = response.body.force_encoding(Encoding::ISO_8859_1)
       body = body.encode(Encoding::UTF_8)
     end
 
-    # Download list of stations from Environment Canada. If cache file 
+    # Download list of stations from Environment Canada. If cache file
     # exists, re-use that instead.
     def get_stations_list
       if File.exist?(@station_list_path)

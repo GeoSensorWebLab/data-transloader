@@ -1,9 +1,9 @@
-require 'cgi'
-require 'json'
-require 'uri'
+require "cgi"
+require "json"
+require "uri"
 
 module SensorThings
-  # Base class for SensorThings API entities. Do not instantiate 
+  # Base class for SensorThings API entities. Do not instantiate
   # directly, instead use subclasses.
   class Entity
     include SemanticLogger::Loggable
@@ -18,7 +18,7 @@ module SensorThings
       warn_long_attributes(@attributes)
     end
 
-    # Combine a URL (`uris` string or array) and path components with 
+    # Combine a URL (`uris` string or array) and path components with
     # query parameters, using URL encoding for special characters.
     def build_url(uris, parameters)
       if uris.is_a? Array
@@ -29,12 +29,12 @@ module SensorThings
       uris.to_s + "?" + escaped_params
     end
 
-    # Override URI join function to handle OData style parenthesis 
+    # Override URI join function to handle OData style parenthesis
     # properly
     def join_uris(*uris)
       uris.reduce("") do |memo, uri|
         if memo.to_s[-1] == ")"
-          URI.join(memo.to_s + '/', uri)
+          URI.join(memo.to_s + "/", uri)
         else
           URI.join(memo, uri)
         end
@@ -75,21 +75,21 @@ module SensorThings
       entity = nil
 
       # Some STA implementations return an empty body, others return the
-      # entity. If the response body is nil, then we need to fetch the 
+      # entity. If the response body is nil, then we need to fetch the
       # entity to get its true self link and id.
       if response.body.empty?
-        if response['Location'].empty?
+        if response["Location"].empty?
           raise HTTPError.new(response, "Cannot retrieve entity details without body or Location")
         end
 
-        response = get(response['Location'])
+        response = get(response["Location"])
         entity = JSON.parse(response.body)
       else
         entity = JSON.parse(response.body)
       end
 
-      @link = entity['@iot.selfLink']
-      @id = entity['@iot.id']
+      @link = entity["@iot.selfLink"]
+      @id = entity["@iot.id"]
     end
 
     def put_to_path(url)
@@ -99,8 +99,8 @@ module SensorThings
         raise HTTPError.new(response, "Error: Could not PUT entity.")
       end
 
-      @link = response['Location']
-      @id   = JSON.parse(response.body)['@iot.id']
+      @link = response["Location"]
+      @id   = JSON.parse(response.body)["@iot.id"]
     end
 
     # PATCH/POST/PUT all use the same behaviour for sending data, so it
@@ -134,7 +134,7 @@ module SensorThings
     # Force encoding on response body
     # See https://bugs.ruby-lang.org/issues/2567
     def fix_encoding(body)
-      body.force_encoding('UTF-8')
+      body.force_encoding("UTF-8")
     end
 
     # Print out warning for attributes that may be too long for some

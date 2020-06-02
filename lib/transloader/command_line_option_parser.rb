@@ -1,8 +1,8 @@
-require 'optparse'
+require "optparse"
 
 module Transloader
   # Parse commands and options from ARGV.
-  # 
+  #
   # Parsing of options is passed to CommandLineOptions class, and this
   # class will handle determining if the correct options have been
   # specified for the commands.
@@ -21,7 +21,7 @@ module Transloader
     end
 
     # Parse noun from args.
-    # Noun may be `metadata` or `observations`; if missing then an 
+    # Noun may be `metadata` or `observations`; if missing then an
     # error is raised.
     def parse_noun(args)
       if args.nil? || args[1].nil?
@@ -57,7 +57,7 @@ module Transloader
     end
 
     # Parse verb from args.
-    # Verb may be `get`, `put`, `set`, or `show`; if missing then an 
+    # Verb may be `get`, `put`, `set`, or `show`; if missing then an
     # error is raised.
     def parse_verb(args)
       if args.nil? || args[0].nil?
@@ -96,7 +96,7 @@ module Transloader
     end
 
     # Validate that the required options are available for the verb and
-    # noun. Exits if options are invalid, otherwise returns an array 
+    # noun. Exits if options are invalid, otherwise returns an array
     # of [verb, noun, options].
     def validate(verb, noun, options)
       if verb == :get && noun == :metadata

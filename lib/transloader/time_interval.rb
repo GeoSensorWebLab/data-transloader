@@ -1,7 +1,7 @@
-require 'time'
+require "time"
 
 module Transloader
-  # Parse an ISO8601 time interval in "<start>/<end>" format into two 
+  # Parse an ISO8601 time interval in "<start>/<end>" format into two
   # `Time` instances.
   class TimeInterval
     include SemanticLogger::Loggable

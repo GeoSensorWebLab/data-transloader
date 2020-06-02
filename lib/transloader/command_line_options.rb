@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 module Transloader
   # Specify which command line options are passed from the command line
@@ -8,7 +8,7 @@ module Transloader
                 :data_urls, :date, :destination, :http_auth,
                 :http_headers, :keys, :overwrite, :provider,
                 :station_id, :user_id, :value
-    
+
     # Set default values
     def initialize
       @allowed      = nil
@@ -54,7 +54,7 @@ module Transloader
       key_option(parser)
       overwrite_option(parser)
       provider_option(parser)
-      station_id_option(parser)      
+      station_id_option(parser)
       user_id_option(parser)
       value_option(parser)
 
@@ -76,7 +76,7 @@ module Transloader
     def allowed_option(parser)
       parser.on("--allowed [A,B,C]",
         <<-EOH
-        Comma separated list of exclusive properties for upload. 
+        Comma separated list of exclusive properties for upload.
         Exact matches only. Use quotes for spaces/special characters.
         EOH
         ) do |value|
@@ -88,7 +88,7 @@ module Transloader
     def blocked_option(parser)
       parser.on("--blocked [D,E,F]",
         <<-EOH
-        Comma separated list of properties to omit on upload. 
+        Comma separated list of properties to omit on upload.
         Exact matches only. Use quotes for spaces/special characters.
         EOH
         ) do |value|
@@ -107,10 +107,10 @@ module Transloader
     # Parse local Data Paths.
     # Specifying multiple times will add each item to an array.
     def data_path_option(parser)
-      parser.on("--data_path [PATH]", 
+      parser.on("--data_path [PATH]",
         "Data file to parse for data/metadata.") do |value|
         @data_paths.push(value)
-        
+
         if !File.exists?(value)
           puts %Q[ERROR: Path "#{value}" is not a valid file.]
           puts parser
@@ -122,10 +122,10 @@ module Transloader
     # Parse Data URLs.
     # Specifying multiple times will add each item to an array.
     def data_url_option(parser)
-      parser.on("--data_url [URL]", 
+      parser.on("--data_url [URL]",
         "Data URL to monitor for observations.") do |value|
         @data_urls.push(value)
-        
+
         if !(value =~ /\A#{URI::regexp(["http", "https"])}\z/)
           puts %Q[ERROR: Data URL "#{value}" is not a valid URL.]
           puts parser
@@ -139,7 +139,7 @@ module Transloader
       parser.on("--date [DATE INTERVAL]",
         "ISO8601 date interval for observation upload.") do |value|
         @date = value
-        
+
         begin
           Transloader::TimeInterval.new(value)
         rescue
@@ -155,7 +155,7 @@ module Transloader
       parser.on("--destination [URL]",
         "SensorThings API Service base URL.") do |value|
         @destination = value
-        
+
         if !(value =~ /\A#{URI::regexp(["http", "https"])}\z/)
           puts %Q[ERROR: Destination URL "#{value}" is not a valid URL.]
           puts parser
@@ -203,8 +203,8 @@ module Transloader
       parser.on("--provider [PROVIDER]",
         "Data provider to use: environment_canada, data_garrison, campbell_scientific, klrs_h_energy, klrs_h_weather.") do |value|
         @provider = value
-        
-        if !["environment_canada", "data_garrison", 
+
+        if !["environment_canada", "data_garrison",
              "campbell_scientific", "klrs_h_energy",
              "klrs_h_weather"].include?(value)
           puts %Q[ERROR: Provider "#{value}" is not a valid provider.]

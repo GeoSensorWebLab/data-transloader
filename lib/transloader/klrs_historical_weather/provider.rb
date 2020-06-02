@@ -1,4 +1,4 @@
-require 'transloader/klrs_historical_weather/station'
+require "transloader/klrs_historical_weather/station"
 
 module Transloader
   # Provider is used for initializing stations with the correct

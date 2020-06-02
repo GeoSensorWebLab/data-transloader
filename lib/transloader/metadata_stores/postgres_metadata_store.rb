@@ -1,4 +1,5 @@
 require "deep_merge"
+
 require "transloader/metadata_store"
 
 module Transloader
@@ -13,7 +14,7 @@ module Transloader
     # * database_url: Ignored as a connection is established by
     #                 StationStore.
     # * station_key:  unique key for this station
-    # * provider_key: string for provider name, used to keep provider 
+    # * provider_key: string for provider name, used to keep provider
     #                 metadata separate.
     def initialize(database_url:, provider_key:, station_key:)
       @station = ARModels::Station.find_or_create_by(

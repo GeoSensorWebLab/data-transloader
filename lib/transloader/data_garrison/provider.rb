@@ -1,4 +1,4 @@
-require 'transloader/data_garrison/station'
+require "transloader/data_garrison/station"
 
 module Transloader
   # Provider is used for initializing stations with the correct

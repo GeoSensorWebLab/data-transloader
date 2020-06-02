@@ -1,7 +1,7 @@
-require 'base64'
-require 'deep_merge'
-require 'net/http'
-require 'uri'
+require "base64"
+require "deep_merge"
+require "net/http"
+require "uri"
 
 module Transloader
   # Wrapper class for delegating HTTP request/response logic to either
@@ -109,7 +109,7 @@ module Transloader
       logger.debug ''
     end
 
-    # Most of the requests have the same methods, so we can re-use 
+    # Most of the requests have the same methods, so we can re-use
     # them here.
     def send_request(request, options)
       options[:headers].each do |header, value|
@@ -219,7 +219,7 @@ module Transloader
         logger.debug ''
       end
 
-      # Most of the requests have the same methods, so we can re-use 
+      # Most of the requests have the same methods, so we can re-use
       # them here.
       def send_request(request, options)
         options[:headers].each do |header, value|

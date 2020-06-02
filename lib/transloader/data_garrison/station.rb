@@ -1,8 +1,9 @@
-require 'nokogiri'
-require 'set'
-require 'time'
-require 'transloader/station_methods'
-require 'uri'
+require "nokogiri"
+require "set"
+require "time"
+require "uri"
+
+require "transloader/station_methods"
 
 module Transloader
   # Class for downloading and uploading metadata and observation data

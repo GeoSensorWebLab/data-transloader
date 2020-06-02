@@ -1,8 +1,6 @@
-require 'fileutils'
+require "fileutils"
 
-require 'transloader/data_store'
-require 'transloader/metadata_store'
-require 'transloader/campbell_scientific/station'
+require "transloader/campbell_scientific/station"
 
 module Transloader
   # Provider is used for initializing stations with the correct

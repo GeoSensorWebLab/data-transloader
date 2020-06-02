@@ -1,4 +1,4 @@
-require 'transloader/ontology'
+require "transloader/ontology"
 
 module Transloader
   # Convenience class that has the data provider pre-set.

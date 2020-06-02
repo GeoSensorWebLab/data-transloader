@@ -1,19 +1,19 @@
-require 'csv'
+require "csv"
 
 module Transloader
   # Parse a TOA5 sensor data document and return the sensor metadata,
   # data columns (i.e. Observed Properties, units), and data rows
   # (Observations).
-  # 
+  #
   # If initialized with a complete TOA5 document, then the metadata and
   # column headers will be available. **If a partial document** is used,
   # then only the data rows will be available. The latter case means
   # that you will need to have the metadata and headers cached elsewhere
   # to create SensorThings API entities.
-  # 
+  #
   # `options` can be used to pass configuration to the CSV library, such
   # as the column separator or file encoding.
-  # 
+  #
   # Currently the class will check if the first cell is "TOA5" to
   # determine if it is a full document. If you try to access metadata
   # or headers while only providing a partial document, an Exception
@@ -42,7 +42,7 @@ module Transloader
     # * datalogger_program_name
     # * datalogger_program_signature
     # * table_name
-    # 
+    #
     # Note: If a partial document is being used, then an Exception is
     # raised.
     def metadata(key = nil)
@@ -61,7 +61,7 @@ module Transloader
     # Return an array of column headers. Each item will be a Hash with
     # the property name, units, and measurement type. Some of the values
     # *may* be blank.
-    # 
+    #
     # Note: If a partial document is being used, then an Exception is
     # raised.
     def headers
@@ -90,7 +90,7 @@ module Transloader
     end
 
     # Parse CSV column headers for datastreams, units
-    # 
+    #
     # Row 2:
     # 1. Timestamp
     # 2+ (Observed Property)

@@ -1,6 +1,7 @@
 require "deep_merge"
 require "fileutils"
 require "json"
+
 require "transloader/metadata_store"
 
 module Transloader
@@ -14,7 +15,7 @@ module Transloader
     # Create a new MetadataStore.
     # * database_url: Path to directory where metadata is stored
     # * station_key:  unique key for this station
-    # * provider_key: string for provider name, used to keep provider 
+    # * provider_key: string for provider name, used to keep provider
     #                 metadata separate.
     def initialize(database_url:, provider_key:, station_key:)
       # Cut "file://" from beginning of URL
