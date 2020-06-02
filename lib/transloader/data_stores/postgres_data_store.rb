@@ -78,13 +78,13 @@ module Transloader
 
       # Number of threads to use, based on "NUM_JOBS" environment
       # variable. If unset, defaults to 2.
-      # num_threads = ENV["NUM_JOBS"].to_i
-      # num_threads = 2 if num_threads == 0
-      # logger.info "Using #{num_threads} threads for PostgreSQL"
+      num_threads = ENV["NUM_JOBS"].to_i
+      num_threads = 2 if num_threads == 0
+      logger.info "Using #{num_threads} threads for PostgreSQL"
 
       # Slice observations into batches of at most 1000, then use
       # threads to upsert each batch in one transaction.
-      Parallel.each(db_observations.each_slice(1000).to_a, in_threads: 1) do |batch|
+      Parallel.each(db_observations.each_slice(1000).to_a, in_threads: num_threads) do |batch|
         ActiveRecord::Base.connection_pool.with_connection do
           ActiveRecord::Base.transaction do
             # Use "upsert" to update existing observation records with new
