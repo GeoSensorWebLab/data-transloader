@@ -447,7 +447,7 @@ module Transloader
             raise Error, "Datastream navigation URLs not cached"
           end
 
-          phenomenonTime = Time.strptime(observation[:timestamp], "%FT%T.%N%z").iso8601(3)
+          phenomenonTime = Time.strptime(observation[:timestamp], "%FT%T%z").iso8601(3)
           result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
           observation = @entity_factory.new_observation({
