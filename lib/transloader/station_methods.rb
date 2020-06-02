@@ -67,6 +67,15 @@ module Transloader
       })
     end
 
+    # Generate a Set containing the names from the datastreams.
+    # Useful for fast lookups. Assumes names are under the `:name` key.
+    def datastream_names_set(datastreams)
+      datastreams.reduce(Set.new()) do |memo, datastream|
+        memo.add(datastream[:name])
+        memo
+      end
+    end
+
     # Use the observation_type to convert result to float, int, or
     # string. This is used to use the most appropriate data type when
     # converting results to JSON.

@@ -272,10 +272,7 @@ module Transloader
 
         # Collect datastream names for comparisons.
         # A Set is used for fast lookups and unique values.
-        datastream_names = @metadata[:datastreams].reduce(Set.new()) { |memo, datastream|
-          memo.add(datastream[:name])
-          memo
-        }
+        datastream_names = datastream_names_set(@metadata[:datastreams])
 
         # Store Observations in DataStore.
         # Convert to new store format first:
