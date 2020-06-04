@@ -83,7 +83,7 @@ module Transloader
         observation_set[1].collect do |observation|
           if datastream_names.include?(observation[:name])
             {
-              timestamp: Time.strptime(observation_set[0], "%FT%T.%N%z"),
+              timestamp: Time.parse(observation_set[0]),
               result:    observation[:reading],
               property:  observation[:name]
             }
@@ -185,7 +185,7 @@ module Transloader
     # An ISO8601 time zone offset (e.g. "-07:00") is required.
     def parse_toa5_timestamp(time, zone_offset)
       logger.trace %Q[Converting TOA5 timestamp "#{time}" with offset "#{zone_offset}"]
-      Time.strptime("#{time}#{zone_offset}", "%F %T%z").utc
+      Time.parse("#{time}#{zone_offset}").utc
     end
 
     # Download the file from `url`, using HTTP Ranges to try to download

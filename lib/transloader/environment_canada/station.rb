@@ -350,7 +350,7 @@ module Transloader
             raise
           end
 
-          phenomenonTime = Time.strptime(observation[:timestamp], "%FT%T.%N%z").iso8601(3)
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
           result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
           observation = @entity_factory.new_observation({
