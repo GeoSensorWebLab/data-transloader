@@ -36,6 +36,7 @@ Currently supported weather station sources:
 * Data Garrison
 * [Environment Canada][MSC]
 * Campbell Scientific
+* Historical weather and energy usage data from the Arctic Institute of North America's research stations
 
 [cron]: https://en.wikipedia.org/wiki/Cron
 [MSC]: https://dd.weather.gc.ca/about_dd_apropos.txt
@@ -47,12 +48,16 @@ Different source data providers have moderately different implementations and us
 * [Campbell Scientific Weather Stations](docs/CAMPBELL_SCIENTIFIC.md)
 * [Data Garrison Weather Stations](docs/DATA_GARRISON.md)
 * [Environment Canada Weather Stations](docs/ENVIRONMENT_CANADA.md)
-* Kluane Lake Research Station Historical Energy Usage Data
-* Kluane Lake Research Station Historical Weather Data
+* [Kluane Lake Research Station Historical Energy Usage Data](docs/KLRS_HISTORICAL_ENERGY.md)
+* [Kluane Lake Research Station Historical Weather Data](docs/KLRS_HISTORICAL_WEATHER.md)
 
 ## Development Instructions
 
-This tool can be modified and extended by editing its source files. There are no special requirements for development after following the "Setup Instructions" section above.
+This tool can be modified and extended by editing its source files. In this environment, you must tell Bundler to also install the "test" group gems:
+
+```
+$ bundle install --with test
+```
 
 ## Authors
 
