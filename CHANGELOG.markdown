@@ -5,6 +5,12 @@
 * **Breaking Change**: The command line option `--cache` has been replaced with `--database_url`
 * **Breaking Change**: Using a local file-based cache requires `file://` at the start of the path
 
+* PostgreSQL may be used as an alternative to a directory of JSON files for storing intermediary data
+* Testing scripts have been added for different providers to test the tool with a local SensorThings API instance
+* Add truncation feature for cassette cleaner (testing tool)
+* Add option for multi-threading requests to PostgreSQL data store
+* Multiple minor performance improvements to remove code that does not always need to run
+
 ## Version 0.7.0 (2020-05-22)
 
 * Add warnings for empty ObservedProperty attributes in the Ontologies
