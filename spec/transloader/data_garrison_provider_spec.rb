@@ -6,12 +6,13 @@ require 'vcr'
 RSpec.describe Transloader::DataGarrisonProvider do
   before(:each) do
     reset_cache($cache_dir)
+    @database_url = "file://#{$cache_dir}"
     @http_client = Transloader::HTTP.new
   end
 
   it "initializes a new station without loading any metadata" do
     VCR.use_cassette("data_garrison/station") do
-      provider = Transloader::DataGarrisonProvider.new($cache_dir, @http_client)
+      provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
       station = provider.get_station(
         user_id: "300234063581640",
         station_id: "300234065673960"

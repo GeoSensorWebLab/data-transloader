@@ -6,11 +6,14 @@ require 'time'
 require 'vcr'
 
 RSpec.describe Transloader::CampbellScientificStation do
+  before(:each) do
+    @database_url = "file://#{$cache_dir}"
+  end
 
   ##############
   # Get Metadata
   ##############
-  
+
   context "Downloading Metadata" do
     before(:each) do
       reset_cache($cache_dir)
@@ -26,14 +29,14 @@ RSpec.describe Transloader::CampbellScientificStation do
         metadata_file = "#{$cache_dir}/campbell_scientific/metadata/606830.json"
         expect(File.exist?(metadata_file)).to be false
 
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         @station.download_metadata
 
-        expect(WebMock).to have_requested(:get, 
+        expect(WebMock).to have_requested(:get,
           "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
         expect(File.exist?(metadata_file)).to be true
       end
@@ -44,14 +47,14 @@ RSpec.describe Transloader::CampbellScientificStation do
         metadata_file = "#{$cache_dir}/campbell_scientific/metadata/606830.json"
         expect(File.exist?(metadata_file)).to be false
 
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
         )
         @station.download_metadata
 
-        expect(WebMock).to have_requested(:get, 
+        expect(WebMock).to have_requested(:get,
           "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
         expect(File.exist?(metadata_file)).to be true
       end
@@ -59,7 +62,7 @@ RSpec.describe Transloader::CampbellScientificStation do
 
     it "stores the data file's HTTP response headers in the metadata" do
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
@@ -77,7 +80,7 @@ RSpec.describe Transloader::CampbellScientificStation do
 
     it "parses the datastreams from the data file headers" do
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
@@ -92,7 +95,7 @@ RSpec.describe Transloader::CampbellScientificStation do
 
     it "removes duplicate datastreams for multiple data files" do
       VCR.use_cassette("campbell_scientific/station_two") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: [
@@ -110,7 +113,7 @@ RSpec.describe Transloader::CampbellScientificStation do
   ##############
   # Put Metadata
   ##############
-  
+
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
@@ -120,7 +123,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       @station = nil
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
@@ -140,7 +143,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           "#{@sensorthings_url}Things").once
         expect(@station.metadata[:"Thing@iot.navigationLink"]).to_not be_empty
       end
@@ -150,7 +153,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Locations]).once
         expect(@station.metadata[:"Location@iot.navigationLink"]).to_not be_empty
       end
@@ -160,7 +163,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Sensors]).at_least_once
         expect(@station.metadata[:datastreams][0][:"Sensor@iot.navigationLink"]).to_not be_empty
       end
@@ -170,7 +173,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}ObservedProperties]).at_least_once
         expect(@station.metadata[:datastreams][0][:"ObservedProperty@iot.navigationLink"]).to_not be_empty
       end
@@ -181,7 +184,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a label from the ontology is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}ObservedProperties])
           .with(body: /Air Temperature/).at_least_once
       end
@@ -191,7 +194,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams]).at_least_once
         expect(@station.metadata[:datastreams][0][:"Datastream@iot.navigationLink"]).to_not be_empty
       end
@@ -202,7 +205,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a non-default observation type is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .with(body: /OM_Measurement/).at_least_once
       end
@@ -213,7 +216,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a definition from the ontology is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .with(body: /UO_0000027/).at_least_once
       end
@@ -224,7 +227,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url, allowed: ["BP_Avg"])
 
         # Only a single Datastream should be created
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .once
       end
@@ -235,7 +238,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         @station.upload_metadata(@sensorthings_url, blocked: ["BP_Avg"])
 
         # Only a single Datastream should be created
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .times(21)
       end
@@ -245,7 +248,7 @@ RSpec.describe Transloader::CampbellScientificStation do
   ##################
   # Get Observations
   ##################
-  
+
   context "Downloading Observations" do
     # pre-create the station for this context block
     before(:each) do
@@ -256,7 +259,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
@@ -278,7 +281,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/observations_download") do
         expect(@station.store.get_data_in_range(Time.new(2000), Time.now).length).to eq(0)
         @station.download_observations
-        expect(@station.store.get_data_in_range(Time.new(2000), Time.now).length).to_not eq(0)        
+        expect(@station.store.get_data_in_range(Time.new(2000), Time.now).length).to_not eq(0)
       end
     end
 
@@ -291,7 +294,7 @@ RSpec.describe Transloader::CampbellScientificStation do
         VCR.use_cassette("campbell_scientific/observations_download") do
           @station.download_observations
 
-          expect(WebMock).to have_requested(:get, 
+          expect(WebMock).to have_requested(:get,
             "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat")
             .with(headers: { 'Range' => '' })
             .times(1)
@@ -416,7 +419,7 @@ RSpec.describe Transloader::CampbellScientificStation do
           @vcr_options) do
           @station.metadata[:data_files][0][:last_length] = 0
           @station.download_observations
-          
+
           expect(@station.metadata[:data_files][0][:last_length]).to_not eq(0)
           expect(@station.metadata[:data_files][0][:last_modified]).to_not be_nil
         end
@@ -427,7 +430,7 @@ RSpec.describe Transloader::CampbellScientificStation do
   ##################
   # Put Observations
   ##################
-  
+
   context "Uploading Observations" do
     # pre-create the station for this context block
     before(:each) do
@@ -438,7 +441,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new($cache_dir, @http_client)
+        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
         @station = @provider.get_station(
           station_id: "606830",
           data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
@@ -464,7 +467,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/observation_upload_interval_allowed") do
         @station.upload_observations(@sensorthings_url, "2019-06-28T14:00:00Z/2019-06-28T15:00:00Z", allowed: ["BP_Avg"])
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(2)
       end
     end
@@ -473,7 +476,7 @@ RSpec.describe Transloader::CampbellScientificStation do
       VCR.use_cassette("campbell_scientific/observation_upload_interval_blocked") do
         @station.upload_observations(@sensorthings_url, "2019-06-28T16:00:00Z/2019-06-28T17:00:00Z", blocked: ["BP_Avg"])
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(42)
       end
     end

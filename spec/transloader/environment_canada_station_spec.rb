@@ -5,10 +5,14 @@ require 'vcr'
 
 RSpec.describe Transloader::EnvironmentCanadaStation do
 
+  before(:each) do
+    @database_url = "file://#{$cache_dir}"
+  end
+
   ##############
   # Get Metadata
   ##############
-  
+
   context "Downloading Metadata" do
     before(:each) do
       reset_cache($cache_dir)
@@ -23,11 +27,11 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/stations") do
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be false
 
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
 
-        expect(WebMock).to have_requested(:get, 
+        expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be true
       end
@@ -35,7 +39,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "raises an error when the SWOB-ML file cannot be found" do
       VCR.use_cassette("environment_canada/observations_not_found") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         expect {
           @station.download_metadata
@@ -45,11 +49,11 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "follows a redirect when the SWOB-ML file has moved" do
       VCR.use_cassette("environment_canada/observations_redirect") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
-        
-        expect(WebMock).to have_requested(:get, 
+
+        expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be true
       end
@@ -59,7 +63,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   ##############
   # Put Metadata
   ##############
-  
+
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
@@ -69,7 +73,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       @station = nil
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
       end
@@ -81,7 +85,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           "#{@sensorthings_url}Things").once
         expect(@station.metadata[:"Thing@iot.navigationLink"]).to_not be_empty
       end
@@ -91,7 +95,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Locations]).once
         expect(@station.metadata[:"Location@iot.navigationLink"]).to_not be_empty
       end
@@ -101,7 +105,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Sensors]).at_least_once
         expect(@station.metadata[:datastreams][0][:"Sensor@iot.navigationLink"]).to_not be_empty
       end
@@ -111,7 +115,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}ObservedProperties]).at_least_once
         expect(@station.metadata[:datastreams][0][:"ObservedProperty@iot.navigationLink"]).to_not be_empty
       end
@@ -122,7 +126,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a label from the ontology is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}ObservedProperties])
           .with(body: /Data Availability/).at_least_once
       end
@@ -132,7 +136,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       VCR.use_cassette("environment_canada/metadata_upload") do
         @station.upload_metadata(@sensorthings_url)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams]).at_least_once
         expect(@station.metadata[:datastreams][0][:"Datastream@iot.navigationLink"]).to_not be_empty
       end
@@ -143,7 +147,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a non-default observation type is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .with(body: /OM_Measurement/).at_least_once
       end
@@ -154,7 +158,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_metadata(@sensorthings_url)
 
         # Check that a definition from the ontology is used
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .with(body: /UO_0000187/).at_least_once
       end
@@ -165,7 +169,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_metadata(@sensorthings_url, allowed: ["data_avail"])
 
         # Only a single Datastream should be created
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .times(1)
       end
@@ -176,7 +180,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_metadata(@sensorthings_url, blocked: ["data_avail"])
 
         # Only a single Datastream should be created
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Things\(\d+\)/Datastreams])
           .times(52)
       end
@@ -186,7 +190,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   ##################
   # Get Observations
   ##################
-  
+
   context "Downloading Observations" do
     # pre-create the station for this context block
     before(:each) do
@@ -197,7 +201,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
       end
@@ -209,13 +213,13 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "downloads the latest data by default" do
       VCR.use_cassette("environment_canada/stations") do
-        expect(WebMock).to have_requested(:get, 
+        expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml")
           .times(1)
 
         @station.download_observations
 
-        expect(WebMock).to have_requested(:get, 
+        expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml")
           .times(2)
       end
@@ -228,7 +232,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   ##################
   # Put Observations
   ##################
-  
+
   # SPECIAL NOTE
   # When re-recording these "VCR" interactions, the testing STA server
   # MUST have a blank slate! This applies to each test in this context
@@ -246,7 +250,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "uploads observations for a time range" do
       VCR.use_cassette("environment_canada/observations_upload_interval") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
@@ -254,30 +258,30 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
         @station.upload_observations(@sensorthings_url, @interval)
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
       end
     end
 
     it "filters entities uploaded in an interval according to an allow list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_allowed") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
         @station.download_observations
 
-        @station.upload_observations(@sensorthings_url, @interval, 
+        @station.upload_observations(@sensorthings_url, @interval,
           allowed: ["min_batry_volt_pst1hr"])
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(1)
       end
     end
 
     it "filters entities uploaded in an interval according to a block list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_blocked") do
-        @provider = Transloader::EnvironmentCanadaProvider.new($cache_dir, @http_client)
+        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
         @station = @provider.get_station(station_id: "CXCM")
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
@@ -286,7 +290,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
         @station.upload_observations(@sensorthings_url, @interval,
           blocked: ["min_batry_volt_pst1hr"])
 
-        expect(WebMock).to have_requested(:post, 
+        expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(52)
       end
     end
