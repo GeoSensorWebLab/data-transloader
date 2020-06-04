@@ -37,7 +37,7 @@ module Transloader
       while (day <= end_time)
         cache = read_cache(day.strftime("%Y/%m/%d"))
         observations.concat(cache.values.select { |observation|
-          t = Time.strptime(observation[:timestamp], "%FT%T.%N%z")
+          t = Time.strptime(observation[:timestamp], "%F %T %z")
           t >= start_time && t <= end_time
         })
         day += 86400

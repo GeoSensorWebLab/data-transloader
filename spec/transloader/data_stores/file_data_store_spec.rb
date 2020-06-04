@@ -8,44 +8,45 @@ require 'time'
 RSpec.describe Transloader::FileDataStore do
   before(:each) do
     reset_cache($cache_dir)
+    @database_url = "file://#{$cache_dir}"
   end
 
   it "creates the storage path on initialization" do
     expect(Dir.exists?("#{$cache_dir}/test/unique")).to be false
 
     Transloader::FileDataStore.new(
-      cache_path: $cache_dir,
-      provider: "test",
-      station: "unique")
+      database_url: @database_url,
+      provider_key: "test",
+      station_key: "unique")
 
     expect(Dir.exists?("#{$cache_dir}/test/unique")).to be true
   end
 
   it "returns an empty set of observations if the cache is empty" do
     store = Transloader::FileDataStore.new(
-      cache_path: $cache_dir,
-      provider: "test",
-      station: "unique")
+      database_url: @database_url,
+      provider_key: "test",
+      station_key: "unique")
 
     expect(store.get_all_in_range(Time.new(2000), Time.now)).to be_empty
   end
 
   it "will store an empty set of observations" do
     store = Transloader::FileDataStore.new(
-      cache_path: $cache_dir,
-      provider: "test",
-      station: "unique")
+      database_url: @database_url,
+      provider_key: "test",
+      station_key: "unique")
 
     expect {
-      store.store([])  
+      store.store([])
     }.to_not raise_error
   end
 
   it "will store observations in the file cache" do
     store = Transloader::FileDataStore.new(
-      cache_path: $cache_dir,
-      provider: "test",
-      station: "unique")
+      database_url: @database_url,
+      provider_key: "test",
+      station_key: "unique")
     observation = {
       timestamp: Time.new(2000, 1, 1),
       result: 15,
@@ -60,9 +61,9 @@ RSpec.describe Transloader::FileDataStore do
 
   it "returns observations from the file cache" do
     store = Transloader::FileDataStore.new(
-      cache_path: $cache_dir,
-      provider: "test",
-      station: "unique")
+      database_url: @database_url,
+      provider_key: "test",
+      station_key: "unique")
     observation = {
       timestamp: Time.new(2000, 1, 1),
       result: 15,
