@@ -1,3 +1,5 @@
+require "parallel"
+
 require_relative "../data_store"
 
 module Transloader
@@ -70,16 +72,27 @@ module Transloader
 
       logger.info "Upserting #{db_observations.length} observations"
 
-      # Slice observations into batches of at most 5000.
-      db_observations.each_slice(5000) do |batch|
-        # Use "upsert" to update existing observation records with new
-        # results. Observation records are unique based on the
-        # station_id, property name, and timestamp as SensorThings API
-        # should not have multiple Observation entities with the same
-        # phenomenonTime (when scoped to the same Datastream entity).
-        station.observations.upsert_all(batch,
-          unique_by: %i[station_id property phenomenon_time],
-          returning: false)
+      # Number of threads to use, based on "NUM_JOBS" environment
+      # variable. If unset, defaults to 2.
+      num_threads = ENV["NUM_JOBS"].to_i
+      num_threads = 2 if num_threads == 0
+      logger.info "Using #{num_threads} threads for PostgreSQL"
+
+      # Slice observations into batches of at most 1000, then use
+      # threads to upsert each batch in one transaction.
+      Parallel.each(db_observations.each_slice(1000).to_a, in_threads: num_threads) do |batch|
+        ActiveRecord::Base.connection_pool.with_connection do
+          ActiveRecord::Base.transaction do
+            # Use "upsert" to update existing observation records with new
+            # results. Observation records are unique based on the
+            # station_id, property name, and timestamp as SensorThings API
+            # should not have multiple Observation entities with the same
+            # phenomenonTime (when scoped to the same Datastream entity).
+            station.observations.upsert_all(batch,
+              unique_by: %i[station_id property phenomenon_time],
+              returning: false)
+          end
+        end
       end
     end
   end
