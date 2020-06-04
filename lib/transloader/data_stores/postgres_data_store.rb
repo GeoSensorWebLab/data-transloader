@@ -72,10 +72,14 @@ module Transloader
 
       logger.info "Upserting #{db_observations.length} observations"
 
-      # Number of threads to use, based on "NUM_JOBS" environment
-      # variable. If unset, defaults to 2.
-      num_threads = ENV["NUM_JOBS"].to_i
-      num_threads = 2 if num_threads == 0
+      # Number of threads to use, based on "NUM_THREADS" environment
+      # variable. More threads generally gives a bit better performance
+      # when waiting for Postgres queries to finish, especially as the
+      # number of batches increases.
+      # If unset, "0" threads will be used. If "1", then "0" threads is
+      # also used as "0" has better performance than "1".
+      num_threads = ENV["NUM_THREADS"].to_i
+      num_threads = 0 if num_threads < 2
       logger.info "Using #{num_threads} threads for PostgreSQL"
 
       # Slice observations into batches of at most 1000, then use
