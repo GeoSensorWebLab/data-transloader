@@ -21,8 +21,13 @@ module Transloader
       @cache_path  = cache_path
       @http_client = http_client
 
-      FileUtils.mkdir_p("#{@cache_path}/#{PROVIDER_NAME}")
-      @station_list_path = "#{@cache_path}/#{PROVIDER_NAME}/stations_list.csv"
+      if @cache_path.starts_with?("postgres://")
+        raise Error, "EnvironmentCanada module is not compatible with PostgresDataStore"
+      end
+
+      base_path = @cache_path.delete_prefix("file://")
+      FileUtils.mkdir_p("#{base_path}/#{PROVIDER_NAME}")
+      @station_list_path = "#{base_path}/#{PROVIDER_NAME}/stations_list.csv"
     end
 
     # Create a new Station object based on the station ID.
