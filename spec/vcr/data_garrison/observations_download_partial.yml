@@ -15,8 +15,6 @@ http_interactions:
       - GeoSensorWebLab/data-transloader/0.6.2
       Host:
       - datagarrison.com
-      Content-Type:
-      - application/json
   response:
     status:
       code: 200
@@ -136,8 +134,6 @@ http_interactions:
       - GeoSensorWebLab/data-transloader/0.6.2
       Host:
       - datagarrison.com
-      Content-Type:
-      - application/json
   response:
     status:
       code: 200
@@ -177,8 +173,6 @@ http_interactions:
       - GeoSensorWebLab/data-transloader/0.6.2
       Host:
       - datagarrison.com
-      Content-Type:
-      - application/json
       Range:
       - bytes=1-
   response:
