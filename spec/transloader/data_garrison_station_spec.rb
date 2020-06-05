@@ -511,34 +511,34 @@ RSpec.describe Transloader::DataGarrisonStation do
     end
 
     it "uploads observations for a single time range" do
+
+      # re-use earlier cassette
+      VCR.use_cassette("data_garrison/station") do |cassette|
+        Timecop.freeze(cassette.originally_recorded_at || Time.now) do
+          @station = build_station()
+          @station.download_metadata
+          # These values must be fixed before uploading to STA.
+          @station.metadata[:datastreams].last[:name] = "Backup Batteries"
+          @station.download_metadata(override_metadata: {
+            latitude:        69.158,
+            longitude:       -107.0403,
+            timezone_offset: "-06:00",
+            datastreams:     @station.metadata[:datastreams]
+          }, overwrite: true)
+        end
+      end
+
+      # re-use earlier cassette
+      VCR.use_cassette("data_garrison/observations_download") do |cassette|
+        Timecop.freeze(cassette.originally_recorded_at || Time.now) do
+          @station.download_observations
+        end
+      end
+
       VCR.use_cassette("data_garrison/observations_upload") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
 
-          # re-use earlier cassette
-          VCR.use_cassette("data_garrison/station") do |cassette|
-            Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              @station = build_station()
-              @station.download_metadata
-              # These values must be fixed before uploading to STA.
-              @station.metadata[:datastreams].last[:name] = "Backup Batteries"
-              @station.download_metadata(override_metadata: {
-                latitude:        69.158,
-                longitude:       -107.0403,
-                timezone_offset: "-06:00",
-                datastreams:     @station.metadata[:datastreams]
-              }, overwrite: true)
-            end
-          end
-
           @station.upload_metadata(@sensorthings_url)
-
-          # re-use earlier cassette
-          VCR.use_cassette("data_garrison/observations_download") do |cassette|
-            Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              @station.download_observations
-            end
-          end
-
           @station.upload_observations(@sensorthings_url, "2018-08-12T16:58:10Z/2018-08-12T17:58:10Z")
 
           expect(WebMock).to have_requested(:post,

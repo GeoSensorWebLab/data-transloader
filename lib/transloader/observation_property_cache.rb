@@ -28,5 +28,12 @@ module Transloader
     def has_match?(property_name)
       !@matches[property_name].nil?
     end
+
+    # Using an observation property name, look up if a match exists in
+    # the datastream names. Assumes you have already called
+    # `#cache_observation_property` for the observation property name.
+    def [](property_name)
+      @matches[property_name]
+    end
   end
 end

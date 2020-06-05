@@ -618,14 +618,24 @@ module Transloader
         memo
       end
 
+      # Collect datastream names for comparisons.
+      # A Set is used for fast lookups and unique values.
+      datastream_names = datastream_names_set(datastreams)
+
+      # Use ObservationPropertyCache to store matches between
+      # Observation property names and datastream names, as this is
+      # faster than doing a "find" for the matches on every Observation.
+      property_matches = ObservationPropertyCache.new(datastream_names)
+
       # Observation from DataStore:
       # * timestamp
       # * result
       # * property
       # * unit
       responses = observations.collect do |observation|
-        # TODO: Use ObservationPropertyCache here instead
-        datastream = datastream_hash[observation[:property]]
+        property_matches.cache_observation_property(observation[:property])
+        datastream_name = property_matches[observation[:property]]
+        datastream      = datastream_hash[datastream_name]
 
         if datastream.nil?
           logger.warn "No datastream found for observation property: #{observation[:property]}"
