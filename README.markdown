@@ -8,7 +8,7 @@ This tool downloads weather station data from multiple sources and uploads it to
 
 ## Setup Instructions
 
-This tool requires [Ruby][] 2.4 or newer. Once Ruby is installed, you will need to install [Bundler][] to install the library dependencies.
+This tool requires [Ruby][] 2.6 or newer. Once Ruby is installed, you will need to install [Bundler][] to install the library dependencies.
 
 ```
 $ cd data-transloader

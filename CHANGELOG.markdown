@@ -4,6 +4,7 @@
 
 * **Breaking Change**: The command line option `--cache` has been replaced with `--database_url`
 * **Breaking Change**: Using a local file-based cache requires `file://` at the start of the path
+* **Breaking Change**: Ruby 2.6 or newer is now required.
 
 * PostgreSQL may be used as an alternative to a directory of JSON files for storing intermediary data
 * Testing scripts have been added for different providers to test the tool with a local SensorThings API instance
