@@ -624,6 +624,7 @@ module Transloader
       # * property
       # * unit
       responses = observations.collect do |observation|
+        # TODO: Use ObservationPropertyCache here instead
         datastream = datastream_hash[observation[:property]]
 
         if datastream.nil?

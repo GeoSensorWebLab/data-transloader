@@ -76,12 +76,10 @@ module Transloader
     # * datastream_names: Set of datastream names that observations must
     #                     match.
     def convert_to_store_observations(observations, datastream_names)
-      # Use a Hash to store matches between Observation property names
-      # and datastream names, as this is faster than doing a "find" for
-      # the matches. A "find" is still necessary to make the first
-      # match. If no match to a datastream name is found, then "nil" is
-      # stored.
-      matches = {}
+      # Use ObservationPropertyCache to store matches between
+      # Observation property names and datastream names, as this is
+      # faster than doing a "find" for the matches on every Observation.
+      matches = ObservationPropertyCache.new(datastream_names)
 
       observations.flat_map do |observation_set|
         # observation:
@@ -89,15 +87,9 @@ module Transloader
         # * reading (result)
         observation_set[1].collect do |observation|
           # Check if match has already been made
-          if !matches.key?(observation[:name])
-            matching_datastream = datastream_names.find do |datastream|
-              observation[:name].include?(datastream)
-            end
+          matches.cache_observation_property(observation[:name])
 
-            matches[observation[:name]] = matching_datastream
-          end
-
-          if !matches[observation[:name]].nil?
+          if matches.has_match?(observation[:name])
             # This observation property name has been matched to a
             # datastream name.
             {
