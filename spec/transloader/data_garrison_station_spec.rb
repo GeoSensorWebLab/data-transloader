@@ -1,10 +1,10 @@
-require 'transloader'
+require "transloader"
 
-require 'fileutils'
-require 'rspec'
-require 'time'
-require 'timecop'
-require 'vcr'
+require "fileutils"
+require "rspec"
+require "time"
+require "timecop"
+require "vcr"
 
 # TimeCop is a library for "freezing" the time used in a test. It is
 # needed here as the TSV data files from Data Garrison are only updated
@@ -16,6 +16,17 @@ RSpec.describe Transloader::DataGarrisonStation do
 
   before(:each) do
     @database_url = "file://#{$cache_dir}"
+    @user_id      = "300234063581640"
+    @station_id   = "300234065673960"
+  end
+
+  def build_station
+    Transloader::DataGarrisonStation.new(
+      database_url: @database_url,
+      http_client:  @http_client,
+      id:           @station_id,
+      properties:   { user_id: @user_id }
+    )
   end
 
   ##############
@@ -28,7 +39,6 @@ RSpec.describe Transloader::DataGarrisonStation do
 
       # Use instance variables to avoid scope issues with VCR
       @http_client = Transloader::HTTP.new
-      @provider = nil
       @station = nil
     end
 
@@ -38,11 +48,7 @@ RSpec.describe Transloader::DataGarrisonStation do
         expect(File.exist?(metadata_file)).to be false
 
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           @station.download_metadata
         end
 
@@ -56,11 +62,7 @@ RSpec.describe Transloader::DataGarrisonStation do
     it "downloads information about data files" do
       VCR.use_cassette("data_garrison/station") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           @station.download_metadata
         end
 
@@ -109,11 +111,7 @@ RSpec.describe Transloader::DataGarrisonStation do
     it "raises an error if metadata source file cannot be downloaded" do
       VCR.use_cassette("data_garrison/station_not_found") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           expect {
             @station.download_metadata
           }.to raise_error(Transloader::HTTPError, "Could not download station data")
@@ -127,11 +125,7 @@ RSpec.describe Transloader::DataGarrisonStation do
 
       VCR.use_cassette("data_garrison/station_redirect") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           @station.download_metadata
         end
 
@@ -152,16 +146,11 @@ RSpec.describe Transloader::DataGarrisonStation do
     before(:each) do
       reset_cache($cache_dir)
       @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @station     = nil
 
       VCR.use_cassette("data_garrison/station") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id:    "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           @station.download_metadata
           # These values must be fixed before uploading to STA.
           @station.metadata[:datastreams].last[:name] = "Backup Batteries"
@@ -291,26 +280,21 @@ RSpec.describe Transloader::DataGarrisonStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @http_client      = Transloader::HTTP.new
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("data_garrison/station") do |cassette|
         Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-          @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-          @station = @provider.get_station(
-            user_id: "300234063581640",
-            station_id: "300234065673960"
-          )
+          @station = build_station()
           @station.download_metadata
           # These values must be fixed before uploading to STA.
           @station.metadata[:datastreams].last[:name] = "Backup Batteries"
           @station.download_metadata(override_metadata: {
-            latitude: 69.158,
-            longitude: -107.0403,
+            latitude:        69.158,
+            longitude:       -107.0403,
             timezone_offset: "-06:00",
-            datastreams: @station.metadata[:datastreams]
+            datastreams:     @station.metadata[:datastreams]
           }, overwrite: true)
         end
       end
@@ -348,28 +332,28 @@ RSpec.describe Transloader::DataGarrisonStation do
             .times(4)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/MYC_001.txt")
-            .with(headers: { 'Range' => '' }).times(2)
+            .with(headers: { "Range" => "" }).times(2)
 
           expect(WebMock).to have_requested(:get,
             %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=2&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/Test_Launch_002.txt")
-            .with(headers: { 'Range' => '' }).times(2)
+            .with(headers: { "Range" => "" }).times(2)
 
           expect(WebMock).to have_requested(:get,
             %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=3&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/Test_Launch_003.txt")
-            .with(headers: { 'Range' => '' }).times(2)
+            .with(headers: { "Range" => "" }).times(2)
 
           expect(WebMock).to have_requested(:get,
             %r[#{Regexp.escape(url_base)}\/download\.php\?data_desc=Test%20Launch&data_end=\d+&data_launch=4&data_start=\d+&type=2&utc=0])
             .times(4)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/Test_Launch_004.txt")
-            .with(headers: { 'Range' => '' }).times(2)
+            .with(headers: { "Range" => "" }).times(2)
         end
       end
 
@@ -438,7 +422,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             .times(3)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/MYC_001.txt")
-            .with(headers: { 'Range' => '' })
+            .with(headers: { "Range" => "" })
             .times(1)
         end
       end
@@ -460,7 +444,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             .times(3)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/MYC_001.txt")
-            .with(headers: { 'Range' => '' })
+            .with(headers: { "Range" => "" })
             .times(0)
         end
       end
@@ -482,7 +466,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             .times(3)
           expect(WebMock).to have_requested(:get,
             "#{url_base}/temp/MYC_001.txt")
-            .with(headers: { 'Range' => 'bytes=100-' })
+            .with(headers: { "Range" => "bytes=100-" })
             .times(1)
         end
       end
@@ -521,9 +505,8 @@ RSpec.describe Transloader::DataGarrisonStation do
     # pre-create the station for this context block
     before(:each) do
       reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @http_client      = Transloader::HTTP.new
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
     end
 
@@ -534,19 +517,15 @@ RSpec.describe Transloader::DataGarrisonStation do
           # re-use earlier cassette
           VCR.use_cassette("data_garrison/station") do |cassette|
             Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-              @station = @provider.get_station(
-                user_id: "300234063581640",
-                station_id: "300234065673960"
-              )
+              @station = build_station()
               @station.download_metadata
               # These values must be fixed before uploading to STA.
               @station.metadata[:datastreams].last[:name] = "Backup Batteries"
               @station.download_metadata(override_metadata: {
-                latitude: 69.158,
-                longitude: -107.0403,
+                latitude:        69.158,
+                longitude:       -107.0403,
                 timezone_offset: "-06:00",
-                datastreams: @station.metadata[:datastreams]
+                datastreams:     @station.metadata[:datastreams]
               }, overwrite: true)
             end
           end
@@ -575,19 +554,15 @@ RSpec.describe Transloader::DataGarrisonStation do
           # re-use earlier cassette
           VCR.use_cassette("data_garrison/station") do |cassette|
             Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-              @station = @provider.get_station(
-                user_id: "300234063581640",
-                station_id: "300234065673960"
-              )
+              @station = build_station()
               @station.download_metadata
               # These values must be fixed before uploading to STA.
               @station.metadata[:datastreams].last[:name] = "Backup Batteries"
               @station.download_metadata(override_metadata: {
-                latitude: 69.158,
-                longitude: -107.0403,
+                latitude:        69.158,
+                longitude:       -107.0403,
                 timezone_offset: "-06:00",
-                datastreams: @station.metadata[:datastreams]
+                datastreams:     @station.metadata[:datastreams]
               }, overwrite: true)
             end
           end
@@ -616,19 +591,15 @@ RSpec.describe Transloader::DataGarrisonStation do
           # re-use earlier cassette
           VCR.use_cassette("data_garrison/station") do |cassette|
             Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              @provider = Transloader::DataGarrisonProvider.new(@database_url, @http_client)
-              @station = @provider.get_station(
-                user_id: "300234063581640",
-                station_id: "300234065673960"
-              )
+              @station = build_station()
               @station.download_metadata
               # These values must be fixed before uploading to STA.
               @station.metadata[:datastreams].last[:name] = "Backup Batteries"
               @station.download_metadata(override_metadata: {
-                latitude: 69.158,
-                longitude: -107.0403,
+                latitude:        69.158,
+                longitude:       -107.0403,
                 timezone_offset: "-06:00",
-                datastreams: @station.metadata[:datastreams]
+                datastreams:     @station.metadata[:datastreams]
               }, overwrite: true)
             end
           end
