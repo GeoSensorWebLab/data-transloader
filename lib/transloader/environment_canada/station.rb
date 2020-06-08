@@ -14,6 +14,7 @@ module Transloader
     include Transloader::StationMethods
 
     LONG_NAME     = "Environment Canada Weather Station"
+    METADATA_URL  = "https://dd.weather.gc.ca/observations/doc/swob-xml_station_list.csv"
     NAME          = "Environment Canada Station"
     PROVIDER_ID   = "EnvironmentCanada"
     PROVIDER_NAME = "environment_canada"
@@ -31,9 +32,8 @@ module Transloader
     def initialize(options = {})
       @http_client    = options[:http_client]
       @id             = options[:id]
-      @properties     = options[:properties].merge({
-        provider: "Environment Canada"
-      })
+      @properties     = options[:properties] || {}
+      @properties[:provider] = "Environment Canada"
       @store          = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
@@ -53,7 +53,13 @@ module Transloader
         return false
       end
 
-      xml = get_observation_xml
+      # Download additional station metadata from a CSV file. This
+      # contains information used to generate the URL for the main
+      # SWOB-ML data file.
+      stations_list_metadata = get_station_row(@id)
+      @properties = @properties.merge(stations_list_metadata.to_hash)
+
+      xml = get_observation_xml()
 
       # Extract results from XML, use to build metadata needed for Sensor/
       # Observed Property/Datastream
@@ -233,6 +239,22 @@ module Transloader
 
     private
 
+    # Download the station list from Environment Canada and return the
+    # body string
+    def download_station_list
+      response = @http_client.get(uri: METADATA_URL)
+
+      if response.code != "200"
+        raise HTTPError.new(response, "Error downloading station list from Environment Canada")
+      end
+
+      # Data is encoded as ISO-8859-1 but has no encoding headers, so
+      # encoding must be manually applied. I then convert to UTF-8 for
+      # re-use later.
+      body = response.body.force_encoding(Encoding::ISO_8859_1)
+      body.encode(Encoding::UTF_8)
+    end
+
     # Load the metadata for a station.
     # If the station data is already cached, use that. If not, download and
     # save to a cache file.
@@ -305,6 +327,17 @@ module Transloader
       response.body
     end
 
+    def get_station_row(station_id)
+      body = download_station_list()
+      parsed_stations = CSV.parse(body, headers: :first_row)
+      validate_stations(parsed_stations)
+      station_row = parsed_stations.detect { |row| row["IATA_ID"] == station_id }
+      if station_row.nil?
+        raise Error, "Station \"#{station_id}\" not found in list"
+      end
+      station_row
+    end
+
     # Save the Station metadata to the metadata cache file
     def save_metadata
       @store.merge_metadata(@metadata)
@@ -366,6 +399,15 @@ module Transloader
 
       # output info on how many observations were created and so on
       log_response_types(responses)
+    end
+
+    # Validate the format of the stations.
+    # If they have changed, then the code will probably fail to update
+    # and a warning should be emitted.
+    def validate_stations(stations)
+      if stations.headers.join(",") != "IATA_ID,Name,WMO_ID,MSC_ID,Latitude,Longitude,Elevation(m),Data_Provider,Dataset/Network,AUTO/MAN,Province/Territory"
+        logger.warn "Environment Canada stations source file headers have changed. Parsing may fail."
+      end
     end
   end
 end

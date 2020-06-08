@@ -6,7 +6,18 @@ require 'vcr'
 RSpec.describe Transloader::EnvironmentCanadaStation do
 
   before(:each) do
+    reset_cache($cache_dir)
     @database_url = "file://#{$cache_dir}"
+    @http_client  = Transloader::HTTP.new
+    @station_id   = "CXCM"
+  end
+
+  def build_station
+    Transloader::EnvironmentCanadaStation.new(
+      database_url: @database_url,
+      http_client:  @http_client,
+      id:           @station_id
+    )
   end
 
   ##############
@@ -14,22 +25,41 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   ##############
 
   context "Downloading Metadata" do
-    before(:each) do
-      reset_cache($cache_dir)
+    it "downloads the stations list" do
+      VCR.use_cassette("environment_canada/stations") do
+        station = build_station()
+        station.download_metadata
 
-      # Use instance variables to avoid scope issues with VCR
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+        expect(WebMock).to have_requested(:get,
+          Transloader::EnvironmentCanadaStation::METADATA_URL).times(1)
+      end
+    end
+
+    it "raises an error when the stations list cannot be downloaded" do
+      VCR.use_cassette("environment_canada/stations_not_found") do
+        station = build_station()
+
+        expect {
+          station.download_metadata
+        }.to raise_error(Transloader::HTTPError, /Error downloading station list/)
+      end
+    end
+
+    it "raises an error when the stations list file has moved" do
+      VCR.use_cassette("environment_canada/stations_redirect") do
+      station = build_station()
+      expect {
+        station.download_metadata
+      }.to raise_error(Transloader::HTTPError, /Error downloading station list/)
+    end
     end
 
     it "downloads the station metadata when saving the metadata" do
       VCR.use_cassette("environment_canada/stations") do
         expect(File.exist?("#{$cache_dir}/environment_canada/metadata/CXCM.json")).to be false
 
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
-        @station.download_metadata
+        station = build_station()
+        station.download_metadata
 
         expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
@@ -39,19 +69,18 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "raises an error when the SWOB-ML file cannot be found" do
       VCR.use_cassette("environment_canada/observations_not_found") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        station = build_station()
+
         expect {
-          @station.download_metadata
+          station.download_metadata
         }.to raise_error(Transloader::HTTPError, /SWOB-ML file not found/)
       end
     end
 
     it "follows a redirect when the SWOB-ML file has moved" do
       VCR.use_cassette("environment_canada/observations_redirect") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
-        @station.download_metadata
+        station = build_station()
+        station.download_metadata
 
         expect(WebMock).to have_requested(:get,
           "https://dd.weather.gc.ca/observations/swob-ml/latest/CXCM-AUTO-swob.xml").times(1)
@@ -67,14 +96,10 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
       @station = nil
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        @station = build_station()
         @station.download_metadata
       end
 
@@ -194,15 +219,11 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   context "Downloading Observations" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("environment_canada/stations") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        @station = build_station()
         @station.download_metadata
       end
 
@@ -240,18 +261,14 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
   context "Uploading Observations" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
-      @interval = "2019-10-31T20:00:00Z/2019-10-31T22:00:00Z"
+      @interval         = "2019-10-31T20:00:00Z/2019-10-31T22:00:00Z"
     end
 
     it "uploads observations for a time range" do
       VCR.use_cassette("environment_canada/observations_upload_interval") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        @station = build_station()
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
         @station.download_observations
@@ -265,8 +282,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "filters entities uploaded in an interval according to an allow list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_allowed") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        @station = build_station()
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
         @station.download_observations
@@ -281,8 +297,7 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "filters entities uploaded in an interval according to a block list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_blocked") do
-        @provider = Transloader::EnvironmentCanadaProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(station_id: "CXCM")
+        @station = build_station()
         @station.download_metadata
         @station.upload_metadata(@sensorthings_url)
         @station.download_observations
