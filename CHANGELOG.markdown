@@ -5,12 +5,14 @@
 * **Breaking Change**: The command line option `--cache` has been replaced with `--database_url`
 * **Breaking Change**: Using a local file-based cache requires `file://` at the start of the path
 * **Breaking Change**: Ruby 2.6 or newer is now required.
+* **Breaking Change**: All "Provider" classes have been removed. "Station" classes should instead be created directly.
 
 * PostgreSQL may be used as an alternative to a directory of JSON files for storing intermediary data
 * Testing scripts have been added for different providers to test the tool with a local SensorThings API instance
 * Add truncation feature for cassette cleaner (testing tool)
 * Add option for multi-threading requests to PostgreSQL data store
 * Multiple minor performance improvements to remove code that does not always need to run
+* Removal of "Provider" classes to move all metadata-gathering methods into the Station classes, and to be fully compatible with the Postgres-based stores
 
 ## Version 0.7.0 (2020-05-22)
 

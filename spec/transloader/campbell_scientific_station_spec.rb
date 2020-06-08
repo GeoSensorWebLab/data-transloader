@@ -7,7 +7,21 @@ require 'vcr'
 
 RSpec.describe Transloader::CampbellScientificStation do
   before(:each) do
+    reset_cache($cache_dir)
     @database_url = "file://#{$cache_dir}"
+    @http_client  = Transloader::HTTP.new
+    @station_id   = "606830"
+    @data_urls    = ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
+  end
+
+  def build_station(data_urls = nil)
+    data_urls = @data_urls if data_urls.nil?
+    Transloader::CampbellScientificStation.new(
+      database_url: @database_url,
+      http_client:  @http_client,
+      id:           @station_id,
+      properties:   { data_urls: data_urls }
+    )
   end
 
   ##############
@@ -15,26 +29,13 @@ RSpec.describe Transloader::CampbellScientificStation do
   ##############
 
   context "Downloading Metadata" do
-    before(:each) do
-      reset_cache($cache_dir)
-
-      # Use instance variables to avoid scope issues with VCR
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
-    end
-
     it "downloads the station metadata when saving the metadata" do
       VCR.use_cassette("campbell_scientific/station") do
         metadata_file = "#{$cache_dir}/campbell_scientific/metadata/606830.json"
         expect(File.exist?(metadata_file)).to be false
 
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
-        @station.download_metadata
+        station = build_station()
+        station.download_metadata
 
         expect(WebMock).to have_requested(:get,
           "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
@@ -47,12 +48,8 @@ RSpec.describe Transloader::CampbellScientificStation do
         metadata_file = "#{$cache_dir}/campbell_scientific/metadata/606830.json"
         expect(File.exist?(metadata_file)).to be false
 
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
-        @station.download_metadata
+        station = build_station()
+        station.download_metadata
 
         expect(WebMock).to have_requested(:get,
           "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat").times(1)
@@ -62,50 +59,38 @@ RSpec.describe Transloader::CampbellScientificStation do
 
     it "stores the data file's HTTP response headers in the metadata" do
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
-        expect(@station.metadata[:data_files]).to eq(nil)
+        station = build_station()
+        expect(station.metadata[:data_files]).to eq(nil)
 
-        @station.download_metadata
+        station.download_metadata
 
         # These may need to be updated if the VCR recording is updated
-        expect(@station.metadata[:data_files][0][:last_modified]).to eq("2019-07-02T20:06:09.000Z")
-        expect(@station.metadata[:data_files][0][:initial_length]).to eq(205208)
-        expect(@station.metadata[:data_files][0][:last_length]).to eq(nil)
+        expect(station.metadata[:data_files][0][:last_modified]).to eq("2019-07-02T20:06:09.000Z")
+        expect(station.metadata[:data_files][0][:initial_length]).to eq(205208)
+        expect(station.metadata[:data_files][0][:last_length]).to eq(nil)
       end
     end
 
     it "parses the datastreams from the data file headers" do
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
-        expect(@station.metadata[:datastreams]).to eq(nil)
+        station = build_station()
+        expect(station.metadata[:datastreams]).to eq(nil)
 
-        @station.download_metadata
+        station.download_metadata
 
-        expect(@station.metadata[:datastreams].length).to eq(22)
+        expect(station.metadata[:datastreams].length).to eq(22)
       end
     end
 
     it "removes duplicate datastreams for multiple data files" do
       VCR.use_cassette("campbell_scientific/station_two") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: [
+        station = build_station([
             "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat",
             "http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR-Archive_2018-08-05%2015-04-05.dat"
-          ]
-        )
-        @station.download_metadata
+        ])
+        station.download_metadata
 
-        expect(@station.metadata[:datastreams].length).to eq(22)
+        expect(station.metadata[:datastreams].length).to eq(22)
       end
     end
   end
@@ -117,21 +102,14 @@ RSpec.describe Transloader::CampbellScientificStation do
   context "Uploading Metadata" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
       @station = nil
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
+        @station = build_station()
         # These values must be fixed before uploading to STA.
         @station.download_metadata(override_metadata: {
-          latitude: 68.983639,
-          longitude: -105.835833,
+          latitude:        68.983639,
+          longitude:       -105.835833,
           timezone_offset: "-06:00"
         }, overwrite: true)
       end
@@ -252,22 +230,15 @@ RSpec.describe Transloader::CampbellScientificStation do
   context "Downloading Observations" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
+        @station = build_station()
         # These values must be fixed before uploading to STA.
         @station.download_metadata(override_metadata: {
-          latitude: 68.983639,
-          longitude: -105.835833,
+          latitude:        68.983639,
+          longitude:       -105.835833,
           timezone_offset: "-06:00"
         }, overwrite: true)
       end
@@ -434,22 +405,15 @@ RSpec.describe Transloader::CampbellScientificStation do
   context "Uploading Observations" do
     # pre-create the station for this context block
     before(:each) do
-      reset_cache($cache_dir)
-      @http_client = Transloader::HTTP.new
-      @provider = nil
-      @station = nil
+      @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
 
       VCR.use_cassette("campbell_scientific/station") do
-        @provider = Transloader::CampbellScientificProvider.new(@database_url, @http_client)
-        @station = @provider.get_station(
-          station_id: "606830",
-          data_urls: ["http://dataservices.campbellsci.ca/sbd/606830/data/CBAY_MET_1HR.dat"]
-        )
+        @station = build_station()
         # These values must be fixed before uploading to STA.
         @station.download_metadata(override_metadata: {
-          latitude: 68.983639,
-          longitude: -105.835833,
+          latitude:        68.983639,
+          longitude:       -105.835833,
           timezone_offset: "-06:00"
         }, overwrite: true)
       end

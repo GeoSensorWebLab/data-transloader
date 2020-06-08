@@ -198,7 +198,7 @@ module Transloader
     end
 
     # Parser Data Provider.
-    # Determines which Provider and Station classes are used.
+    # Determines which Station class is used.
     def provider_option(parser)
       parser.on("--provider [PROVIDER]",
         "Data provider to use: environment_canada, data_garrison, campbell_scientific, klrs_h_energy, klrs_h_weather.") do |value|

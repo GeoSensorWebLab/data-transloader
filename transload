@@ -22,8 +22,11 @@ def get_station(options, http_client)
   $logger.debug "Creating station instance for #{options.provider}"
   case options.provider
   when "environment_canada"
-    provider = Transloader::EnvironmentCanadaProvider.new(options.database_url, http_client)
-    provider.get_station(station_id: options.station_id)
+    Transloader::EnvironmentCanadaStation.new(
+      database_url: options.database_url,
+      http_client:  http_client,
+      id:           options.station_id
+    )
   when "data_garrison"
     Transloader::DataGarrisonStation.new(
         database_url: options.database_url,
@@ -75,7 +78,7 @@ def set_metadata(options)
 
   # Data Garrison requires additional namespacing as both user id and
   # station id are needed.
-  if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
+  if options.provider == Transloader::DataGarrisonStation::PROVIDER_NAME
     station_id = "#{options.user_id}-#{options.station_id}"
   else
     station_id = options.station_id
@@ -114,7 +117,7 @@ def show_metadata(options)
 
   # Data Garrison requires additional namespacing as both user id and
   # station id are needed.
-  if options.provider == Transloader::DataGarrisonProvider::PROVIDER_NAME
+  if options.provider == Transloader::DataGarrisonStation::PROVIDER_NAME
     station_id = "#{options.user_id}-#{options.station_id}"
   else
     station_id = options.station_id
