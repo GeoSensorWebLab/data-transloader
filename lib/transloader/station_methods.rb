@@ -328,5 +328,80 @@ module Transloader
         uom
       end
     end
+
+    # Upload all observations in an array.
+    # * observations: Array of DataStore observations
+    # * options: Hash
+    #   * allowed: Array of strings, only matching properties will have
+    #              observations uploaded to STA.
+    #   * blocked: Array of strings, only non-matching properties will
+    #              have observations be uploaded to STA.
+    #
+    # If `allowed` and `blocked` are both defined, then `blocked` is
+    # ignored.
+    def upload_observations_array(observations, options = {})
+      # Check for metadata
+      if @metadata.empty?
+        raise Error, "station metadata not loaded"
+      end
+
+      # Filter Datastreams based on allowed/blocked lists.
+      # If both are blank, no filtering will be applied.
+      datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
+
+      # Create hash map of observed properties to datastream URLs.
+      # This is used to determine where Observation entities are
+      # uploaded.
+      datastream_hash = datastreams.reduce({}) do |memo, datastream|
+        memo[datastream[:name]] = datastream
+        memo
+      end
+
+      # Collect datastream names for comparisons.
+      # A Set is used for fast lookups and unique values.
+      datastream_names = datastream_names_set(datastreams)
+
+      # Use ObservationPropertyCache to store matches between
+      # Observation property names and datastream names, as this is
+      # faster than doing a "find" for the matches on every Observation.
+      property_matches = ObservationPropertyCache.new(datastream_names)
+
+      # Observation from DataStore:
+      # * timestamp
+      # * result
+      # * property
+      # * unit
+      responses = observations.collect do |observation|
+        property_matches.cache_observation_property(observation[:property])
+        datastream_name = property_matches[observation[:property]]
+        datastream      = datastream_hash[datastream_name]
+
+        if datastream.nil?
+          logger.warn "No datastream found for observation property: #{observation[:property]}"
+          :unavailable
+        else
+          datastream_url = datastream[:'Datastream@iot.navigationLink']
+
+          if datastream_url.nil?
+            raise Error, "Datastream navigation URLs not cached"
+          end
+
+          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
+          result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
+
+          observation = @entity_factory.new_observation({
+            phenomenonTime: phenomenonTime,
+            result: result,
+            resultTime: phenomenonTime
+          })
+
+          # Upload entity and parse response
+          observation.upload_to(datastream_url)
+        end
+      end
+
+      # output info on how many observations were created and so on
+      log_response_types(responses)
+    end
   end
 end

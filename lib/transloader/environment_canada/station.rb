@@ -343,64 +343,6 @@ module Transloader
       @store.merge_metadata(@metadata)
     end
 
-    # Upload all observations in an array.
-    # * observations: Array of DataStore observations
-    # * options: Hash
-    #   * allowed: Array of strings, only matching properties will have
-    #              observations uploaded to STA.
-    #   * blocked: Array of strings, only non-matching properties will
-    #              have observations be uploaded to STA.
-    #
-    # If `allowed` and `blocked` are both defined, then `blocked` is
-    # ignored.
-    def upload_observations_array(observations, options = {})
-      # Check for metadata
-      if @metadata.empty?
-        raise Error, "station metadata not loaded"
-      end
-
-      # Filter Datastreams based on allowed/blocked lists.
-      # If both are blank, no filtering will be applied.
-      datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
-
-      # Observation from DataStore:
-      # * timestamp
-      # * result
-      # * property
-      responses = observations.collect do |observation|
-        datastream = datastreams.find { |datastream|
-          datastream[:name] == observation[:property]
-        }
-
-        if datastream.nil?
-          logger.warn "No datastream found for observation property: #{observation[:property]}"
-          :unavailable
-        else
-          datastream_url = datastream[:'Datastream@iot.navigationLink']
-
-          if datastream_url.nil?
-            logger.error "Datastream navigation URLs not cached"
-            raise
-          end
-
-          phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
-          result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
-
-          observation = @entity_factory.new_observation({
-            phenomenonTime: phenomenonTime,
-            result: result,
-            resultTime: phenomenonTime
-          })
-
-          # Upload entity and parse response
-          observation.upload_to(datastream_url)
-        end
-      end
-
-      # output info on how many observations were created and so on
-      log_response_types(responses)
-    end
-
     # Validate the format of the stations.
     # If they have changed, then the code will probably fail to update
     # and a warning should be emitted.

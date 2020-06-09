@@ -263,32 +263,24 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
     before(:each) do
       @station          = nil
       @sensorthings_url = "http://192.168.33.77:8080/FROST-Server/v1.0/"
-      @interval         = "2019-10-31T20:00:00Z/2019-10-31T22:00:00Z"
-    end
-
-    it "uploads observations for a time range" do
-      VCR.use_cassette("environment_canada/observations_upload_interval") do
-        @station = build_station()
-        @station.download_metadata
-        @station.upload_metadata(@sensorthings_url)
-        @station.download_observations
-
-        @station.upload_observations(@sensorthings_url, @interval)
-
-        expect(WebMock).to have_requested(:post,
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).at_least_once
-      end
+      # When re-recording the VCR interactions, this date interval
+      # MUST be updated to the current date/time.
+      @interval = "2019-06-09T00:00:00Z/2020-06-09T23:59:59Z"
     end
 
     it "filters entities uploaded in an interval according to an allow list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_allowed") do
+        allowed_list = ["min_batry_volt_pst1hr"]
+
         @station = build_station()
         @station.download_metadata
-        @station.upload_metadata(@sensorthings_url)
+        @station.upload_metadata(@sensorthings_url, {
+          allowed: allowed_list
+        })
         @station.download_observations
 
         @station.upload_observations(@sensorthings_url, @interval,
-          allowed: ["min_batry_volt_pst1hr"])
+          allowed: allowed_list)
 
         expect(WebMock).to have_requested(:post,
           %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(1)
@@ -297,16 +289,45 @@ RSpec.describe Transloader::EnvironmentCanadaStation do
 
     it "filters entities uploaded in an interval according to a block list" do
       VCR.use_cassette("environment_canada/observations_upload_interval_blocked") do
+        # By blocking more of the datastreams, the size of the VCR files
+        # are reduced.
+        blocked_list = [
+            "max_batry_volt_pst1hr", "min_batry_volt_pst1hr", "hdr_fwd_pwr",
+            "hdr_refltd_pwr", "hdr_suply_volt", "hdr_oscil_drft",
+            "logr_panl_temp", "rel_hum", "avg_air_temp_pst1hr",
+            "max_air_temp_pst1hr", "max_rel_hum_pst1hr", "min_air_temp_pst1hr",
+            "min_rel_hum_pst1hr", "avg_wnd_spd_10m_pst10mts",
+            "avg_wnd_dir_10m_pst10mts", "avg_wnd_spd_10m_pst1hr",
+            "avg_wnd_dir_10m_pst1hr", "max_wnd_spd_10m_pst1hr",
+            "max_wnd_spd_pst1hr_tm", "wnd_dir_10m_pst1hr_max_spd",
+            "max_wnd_spd_10m_pst10mts", "wnd_dir_10m_pst10mts_max_spd",
+            "avg_wnd_spd_10m_pst2mts", "avg_wnd_dir_10m_pst2mts",
+            "avg_wnd_spd_pcpn_gag_pst10mts", "stn_pres",
+            "avg_cum_pcpn_gag_wt_fltrd_pst5mts", "pcpn_amt_pst1hr",
+            "avg_snw_dpth_pst5mts", "rnfl_amt_pst1hr",
+            "tot_globl_solr_radn_pst1hr", "pcpn_amt_pst3hrs",
+            "pcpn_snc_last_syno_hr", "pcpn_amt_pst6hrs", "max_air_temp_pst6hrs",
+            "min_air_temp_pst6hrs", "pcpn_amt_pst24hrs", "max_air_temp_pst24hrs",
+            "min_air_temp_pst24hrs", "pres_tend_amt_pst3hrs",
+            "pres_tend_char_pst3hrs", "dwpt_temp", "mslp", "wetblb_temp",
+            "avg_cum_pcpn_gag_wt_fltrd_pst5mts_1",
+            "avg_cum_pcpn_gag_wt_fltrd_pst5mts_2",
+            "avg_cum_pcpn_gag_wt_fltrd_pst5mts_3"
+        ]
+
         @station = build_station()
         @station.download_metadata
-        @station.upload_metadata(@sensorthings_url)
+        @station.upload_metadata(@sensorthings_url, {
+          blocked: blocked_list
+        })
         @station.download_observations
 
+
         @station.upload_observations(@sensorthings_url, @interval,
-          blocked: ["min_batry_volt_pst1hr"])
+          blocked: blocked_list)
 
         expect(WebMock).to have_requested(:post,
-          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(52)
+          %r[#{@sensorthings_url}Datastreams\(\d+\)/Observations]).times(2)
       end
     end
   end
