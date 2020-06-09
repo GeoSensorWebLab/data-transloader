@@ -8,7 +8,7 @@ module Transloader
     # Create a `Location` entity for SensorThings API based on this
     # station's metadata.
     def build_location
-      @entity_factory.new_location({
+      entity_factory.new_location({
         name:         @metadata[:name],
         description:  @metadata[:description],
         encodingType: "application/vnd.geo+json",
@@ -37,14 +37,14 @@ module Transloader
         }
       end
 
-      @entity_factory.new_observed_property(entity)
+      entity_factory.new_observed_property(entity)
     end
 
     # Create a `Sensor` entity for SensorThings API based on this
     # station's metadata. If `sensor_description` is nil, then
     # `sensor_name` will be re-used.
     def build_sensor(sensor_name, sensor_description = nil)
-      @entity_factory.new_sensor({
+      entity_factory.new_sensor({
         name:        sensor_name,
         description: sensor_description || sensor_name,
         # This encoding type is a lie, because there are only two types in
@@ -60,7 +60,7 @@ module Transloader
     # Create a `Thing` entity for SensorThings API based on this station
     # and add custom properties.
     def build_thing(properties)
-      @entity_factory.new_thing({
+      entity_factory.new_thing({
         name:        @metadata[:name],
         description: @metadata[:description],
         properties:  properties
@@ -389,7 +389,7 @@ module Transloader
           phenomenonTime = Time.parse(observation[:timestamp]).iso8601(3)
           result = coerce_result(observation[:result], observation_type_for(datastream[:name]))
 
-          observation = @entity_factory.new_observation({
+          observation = entity_factory.new_observation({
             phenomenonTime: phenomenonTime,
             result: result,
             resultTime: phenomenonTime

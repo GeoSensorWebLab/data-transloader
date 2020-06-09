@@ -13,8 +13,6 @@ module Transloader
   # downloaded over HTTP, and the data has a custom format. As the site
   # has no REST API, custom endpoints must be called to force an update
   # of the data files to download.
-  #
-  # This class is called by the main Transloader::Station class.
   class DataGarrisonStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
@@ -28,9 +26,12 @@ module Transloader
     attr_reader :store
 
     def initialize(options = {})
-      super(options)
-      @user_id        = @properties[:user_id]
-      @store          = StationStore.new({
+      @http_client = options[:http_client]
+      @id          = options[:id]
+      @properties  = options[:properties]
+      @metadata    = {}
+      @user_id     = @properties[:user_id]
+      @store       = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      "#{@user_id}-#{options[:id]}",
         database_url: options[:database_url]
@@ -304,7 +305,7 @@ module Transloader
       datastreams.each do |stream|
         datastream_name  = stream[:name]
 
-        datastream = @entity_factory.new_datastream({
+        datastream = entity_factory.new_datastream({
           name:              "Station #{@id} #{datastream_name}",
           description:       "#{NAME} #{@id} #{datastream_name}",
           unitOfMeasurement: uom_for_datastream(datastream_name, stream[:Units]),

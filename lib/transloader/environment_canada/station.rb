@@ -8,8 +8,6 @@ module Transloader
   # Class for downloading and uploading metadata and observation data
   # from Environment Canada Data Mart. The data is downloaded over HTTP,
   # and uses the Surface Weather Observation XML encoding.
-  #
-  # This class is called by the main Transloader::Station class.
   class EnvironmentCanadaStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
@@ -31,8 +29,11 @@ module Transloader
     attr_accessor :id, :metadata, :properties
 
     def initialize(options = {})
-      super(options)
-      @properties ||= {}
+      @http_client           = options[:http_client]
+      @id                    = options[:id]
+      @properties            = options[:properties]
+      @metadata              = {}
+      @properties          ||= {}
       @properties[:provider] = "Environment Canada"
       @store                 = StationStore.new({
         provider:     PROVIDER_NAME,
@@ -160,7 +161,7 @@ module Transloader
       datastreams.each do |stream|
         datastream_name  = stream[:name]
 
-        datastream = @entity_factory.new_datastream({
+        datastream = entity_factory.new_datastream({
           name:              "Station #{@id} #{datastream_name}",
           description:       "#{NAME} #{@id} #{datastream_name}",
           unitOfMeasurement: uom_for_datastream(datastream_name, stream[:uom]),

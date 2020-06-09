@@ -9,8 +9,6 @@ module Transloader
   # Class for downloading and uploading metadata and observation data
   # from Campbell Scientific's sensor data portal. The data is
   # downloaded over HTTP, and the data use the TOA5 format.
-  #
-  # This class is called by the main Transloader::Station class.
   class CampbellScientificStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
@@ -24,8 +22,11 @@ module Transloader
     attr_reader :store
 
     def initialize(options = {})
-      super(options)
-      @store = StationStore.new({
+      @http_client = options[:http_client]
+      @id          = options[:id]
+      @properties  = options[:properties]
+      @metadata    = {}
+      @store       = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
         database_url: options[:database_url]
@@ -229,7 +230,7 @@ module Transloader
       datastreams.each do |stream|
         datastream_name  = stream[:name]
 
-        datastream = @entity_factory.new_datastream({
+        datastream = entity_factory.new_datastream({
           name:              "#{NAME} #{@id} #{datastream_name}",
           description:       "#{NAME} #{@id} #{datastream_name}",
           unitOfMeasurement: uom_for_datastream(datastream_name, stream[:Units]),

@@ -23,8 +23,11 @@ module Transloader
     attr_accessor :id, :metadata, :properties
 
     def initialize(options = {})
-      super(options)
-      @store = StationStore.new({
+      @http_client = options[:http_client]
+      @id          = options[:id]
+      @properties  = options[:properties]
+      @metadata    = {}
+      @store       = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
         database_url: options[:database_url]
@@ -211,7 +214,7 @@ module Transloader
       datastreams.each do |stream|
         datastream_name  = stream[:name]
 
-        datastream = @entity_factory.new_datastream({
+        datastream = entity_factory.new_datastream({
           name:              "#{LONG_NAME} #{@id} #{datastream_name}",
           description:       "#{LONG_NAME} #{@id} #{datastream_name}",
           unitOfMeasurement: uom_for_datastream(datastream_name, stream[:Units]),
