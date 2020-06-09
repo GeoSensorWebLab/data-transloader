@@ -4,6 +4,7 @@ require "time"
 require "uri"
 
 require_relative "../data_file"
+require_relative "../station"
 require_relative "../station_methods"
 
 module Transloader
@@ -14,7 +15,7 @@ module Transloader
   # of the data files to download.
   #
   # This class is called by the main Transloader::Station class.
-  class DataGarrisonStation
+  class DataGarrisonStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
@@ -27,18 +28,14 @@ module Transloader
     attr_reader :store
 
     def initialize(options = {})
-      @http_client    = options[:http_client]
-      @id             = options[:id]
-      @properties     = options[:properties]
+      super(options)
       @user_id        = @properties[:user_id]
       @store          = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      "#{@user_id}-#{options[:id]}",
         database_url: options[:database_url]
       })
-      @metadata       = {}
-      @base_path      = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
-      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
+      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
     end
 
     # Download and extract metadata from HTML, use to build metadata

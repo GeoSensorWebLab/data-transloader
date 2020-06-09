@@ -2,6 +2,7 @@ require "csv"
 require "time"
 
 require_relative "../data_file"
+require_relative "../station"
 require_relative "../station_methods"
 
 module Transloader
@@ -10,7 +11,7 @@ module Transloader
   # downloaded over HTTP, and the data use the TOA5 format.
   #
   # This class is called by the main Transloader::Station class.
-  class CampbellScientificStation
+  class CampbellScientificStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
@@ -23,16 +24,12 @@ module Transloader
     attr_reader :store
 
     def initialize(options = {})
-      @http_client    = options[:http_client]
-      @id             = options[:id]
-      @properties     = options[:properties]
-      @store          = StationStore.new({
+      super(options)
+      @store = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
         database_url: options[:database_url]
       })
-      @metadata       = {}
-      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Download and extract metadata from HTML, use to build metadata

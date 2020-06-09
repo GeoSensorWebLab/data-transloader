@@ -1,6 +1,7 @@
 require "nokogiri"
 require "time"
 
+require_relative "../station"
 require_relative "../station_methods"
 
 module Transloader
@@ -9,7 +10,7 @@ module Transloader
   # and uses the Surface Weather Observation XML encoding.
   #
   # This class is called by the main Transloader::Station class.
-  class EnvironmentCanadaStation
+  class EnvironmentCanadaStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
@@ -30,17 +31,14 @@ module Transloader
     attr_accessor :id, :metadata, :properties
 
     def initialize(options = {})
-      @http_client    = options[:http_client]
-      @id             = options[:id]
-      @properties     = options[:properties] || {}
+      super(options)
+      @properties ||= {}
       @properties[:provider] = "Environment Canada"
-      @store          = StationStore.new({
+      @store                 = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
         database_url: options[:database_url]
       })
-      @metadata       = {}
-      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a

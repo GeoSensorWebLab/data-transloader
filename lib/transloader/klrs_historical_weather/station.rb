@@ -3,6 +3,7 @@ require "set"
 require "time"
 
 require_relative "../data_file"
+require_relative "../station"
 require_relative "../station_methods"
 
 module Transloader
@@ -10,9 +11,7 @@ module Transloader
   # from historical Kluane Lake Research Station (KLRS) data sets. The
   # data is read from local files instead of over HTTP, and the data
   # has the same format as Campbell Scientific weather stations.
-  #
-  # This class is called by the main Transloader::Station class.
-  class KLRSHistoricalWeatherStation
+  class KLRSHistoricalWeatherStation < Station
     include SemanticLogger::Loggable
     include Transloader::StationMethods
 
@@ -24,16 +23,12 @@ module Transloader
     attr_accessor :id, :metadata, :properties
 
     def initialize(options = {})
-      @http_client    = options[:http_client]
-      @id             = options[:id]
-      @properties     = options[:properties]
-      @store          = StationStore.new({
+      super(options)
+      @store = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      options[:id],
         database_url: options[:database_url]
       })
-      @metadata       = {}
-      @entity_factory = SensorThings::EntityFactory.new(http_client: @http_client)
     end
 
     # Extract metadata from one or more local data files, use to build
