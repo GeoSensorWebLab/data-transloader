@@ -31,14 +31,19 @@ module Transloader
     def initialize(options = {})
       @http_client           = options[:http_client]
       @id                    = options[:id]
-      @properties            = options[:properties] || {}
-      @metadata              = {}
-      @properties[:provider] = "Environment Canada"
       @store                 = StationStore.new({
         provider:     PROVIDER_NAME,
-        station:      options[:id],
+        station:      @id,
         database_url: options[:database_url]
       })
+
+      @metadata = @store.metadata
+      # TODO: These checks can be removed when the arguments are
+      # changed to keywords
+      @metadata[:properties] ||= {}
+      properties = options[:properties] || {}
+      @metadata[:properties].merge!(properties)
+      @metadata[:properties][:provider] = "Environment Canada"
     end
 
     # Parse metadata from the Provider properties and the SWOB-ML file for a
@@ -46,7 +51,7 @@ module Transloader
     # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
     def download_metadata(override_metadata: {}, overwrite: false)
-      if (@store.metadata != {} && !overwrite)
+      if (@metadata != {} && !overwrite)
         logger.warn "Existing metadata found, will not overwrite."
         return false
       end
@@ -55,7 +60,7 @@ module Transloader
       # contains information used to generate the URL for the main
       # SWOB-ML data file.
       stations_list_metadata = get_station_row(@id)
-      @properties = @properties.merge(stations_list_metadata.to_hash)
+      properties = @metadata[:properties].merge!(stations_list_metadata.to_hash)
 
       xml = get_observation_xml()
 
@@ -69,15 +74,15 @@ module Transloader
       end
 
       # Convert to Hash
-      @metadata = {
+      @metadata.merge!({
         name:        "#{NAME} #{@id}",
-        description: "#{LONG_NAME} #{@properties["Name"]}",
+        description: "#{LONG_NAME} #{properties["Name"]}",
         elevation:   xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
         updated_at:  Time.now,
         datastreams: datastreams,
         procedure:   xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
-        properties:  @properties
-      }
+        properties:  properties
+      })
 
       if !override_metadata.nil?
         @metadata.merge!(override_metadata)
@@ -97,8 +102,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
-      get_metadata
-
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
@@ -188,7 +191,6 @@ module Transloader
     # `interval`. If `interval` is nil, only the latest will be
     # downloaded. Observations will be sent to the DataStore.
     def download_observations(interval = nil)
-      get_metadata
       xml = get_observation_xml(interval)
 
       if xml.nil?
@@ -225,7 +227,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
-      get_metadata
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.length}"
@@ -251,17 +252,6 @@ module Transloader
       # re-use later.
       body = response.body.force_encoding(Encoding::ISO_8859_1)
       body.encode(Encoding::UTF_8)
-    end
-
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download and
-    # save to a cache file.
-    def get_metadata
-      @metadata = @store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
-      end
     end
 
     # Return the XML document object for the SWOB-ML file.
@@ -334,11 +324,6 @@ module Transloader
         raise Error, "Station \"#{station_id}\" not found in list"
       end
       station_row
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @store.merge_metadata(@metadata)
     end
 
     # Validate the format of the stations.

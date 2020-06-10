@@ -28,8 +28,16 @@ module Transloader
 
     private
 
+    # Cache an EntityFactory used to simplify creation of entities sent
+    # to SensorThings API
     def entity_factory
       @entity_factory ||= SensorThings::EntityFactory.new(http_client: @http_client)
+    end
+
+    # Save the Station metadata to the metadata cache file
+    def save_metadata
+      # TODO: Should this be a replacement instead of a merge?
+      @store.merge_metadata(@metadata)
     end
   end
 end
