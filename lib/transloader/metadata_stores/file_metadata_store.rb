@@ -67,7 +67,7 @@ module Transloader
         check_schema(data)
         data[:metadata]
       else
-        {}
+        ActiveSupport::HashWithIndifferentAccess.new()
       end
     end
   end
