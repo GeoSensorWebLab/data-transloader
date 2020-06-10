@@ -159,7 +159,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             longitude:       -107.0403,
             timezone_offset: "-06:00",
             datastreams:     @station.metadata[:datastreams]
-          }, overwrite: true)
+          })
         end
       end
 
@@ -295,7 +295,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             longitude:       -107.0403,
             timezone_offset: "-06:00",
             datastreams:     @station.metadata[:datastreams]
-          }, overwrite: true)
+          })
         end
       end
 
@@ -524,7 +524,7 @@ RSpec.describe Transloader::DataGarrisonStation do
             longitude:       -107.0403,
             timezone_offset: "-06:00",
             datastreams:     @station.metadata[:datastreams]
-          }, overwrite: true)
+          })
         end
       end
 
@@ -563,7 +563,7 @@ RSpec.describe Transloader::DataGarrisonStation do
                 longitude:       -107.0403,
                 timezone_offset: "-06:00",
                 datastreams:     @station.metadata[:datastreams]
-              }, overwrite: true)
+              })
             end
           end
 
@@ -600,7 +600,7 @@ RSpec.describe Transloader::DataGarrisonStation do
                 longitude:       -107.0403,
                 timezone_offset: "-06:00",
                 datastreams:     @station.metadata[:datastreams]
-              }, overwrite: true)
+              })
             end
           end
 

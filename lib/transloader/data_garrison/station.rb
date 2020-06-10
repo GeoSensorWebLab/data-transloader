@@ -28,14 +28,19 @@ module Transloader
     def initialize(options = {})
       @http_client = options[:http_client]
       @id          = options[:id]
-      @properties  = options[:properties]
-      @metadata    = {}
-      @user_id     = @properties[:user_id]
+      @user_id     = options[:properties][:user_id]
       @store       = StationStore.new({
         provider:     PROVIDER_NAME,
-        station:      "#{@user_id}-#{options[:id]}",
+        station:      "#{@user_id}-#{@id}",
         database_url: options[:database_url]
       })
+      @metadata = @store.metadata
+      # TODO: These checks can be removed when the arguments are
+      # changed to keywords
+      @metadata[:properties] ||= {}
+      properties = options[:properties] || {}
+      @metadata[:properties].merge!(properties)
+
       @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
     end
 
@@ -43,13 +48,9 @@ module Transloader
     # needed for Sensor/Observed Property/Datastream.
     # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata: nil, overwrite: false)
-      if (@store.metadata != {} && !overwrite)
-        logger.warn "Existing metadata found, will not overwrite."
-        return false
-      end
-
-      html = get_station_data_html
+    def download_metadata(override_metadata: nil)
+      properties = @metadata[:properties]
+      html       = get_station_data_html
 
       unit_id = html.xpath('/html/body/table/tr/td/table/tr/td/font')[0].text.to_s
       unit_id = unit_id[/Unit (?<id>\d+)/, "id"]
@@ -159,7 +160,7 @@ module Transloader
       logger.warn "The offset must be manually added to the station metadata file."
 
       # Convert to Hash
-      @metadata = {
+      @metadata.merge!({
         name: "#{NAME} #{@id}",
         description: "#{LONG_NAME} #{@id}",
         latitude: nil,
@@ -206,8 +207,8 @@ module Transloader
         # }
         logger:  logger_metadata,
         data_files:  data_files,
-        properties:  @properties
-      }
+        properties:  properties
+      })
 
       if !override_metadata.nil?
         @metadata.merge!(override_metadata)
@@ -227,8 +228,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
-      get_metadata
-
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
@@ -337,8 +336,6 @@ module Transloader
         logger.warn "Interval download for observations is unsupported for Data Garrison"
       end
 
-      get_metadata
-
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
         all_observations = download_observations_for_file(data_file).sort_by { |obs| obs[0] }
@@ -368,8 +365,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
-      get_metadata
-
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.length}"
@@ -471,17 +466,6 @@ module Transloader
       observations
     end
 
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download and
-    # save to a cache file.
-    def get_metadata
-      @metadata = @store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
-      end
-    end
-
     # Use the HTTP wrapper to fetch the base path and return the
     # response body.
     def get_station_data
@@ -581,11 +565,6 @@ module Transloader
       if update_response.code != "200"
         raise HTTPError.new(update_response, "Error updating Data Garrison TSV file")
       end
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @store.merge_metadata(@metadata)
     end
   end
 end
