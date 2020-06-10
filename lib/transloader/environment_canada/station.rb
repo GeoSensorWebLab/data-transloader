@@ -31,9 +31,8 @@ module Transloader
     def initialize(options = {})
       @http_client           = options[:http_client]
       @id                    = options[:id]
-      @properties            = options[:properties]
+      @properties            = options[:properties] || {}
       @metadata              = {}
-      @properties          ||= {}
       @properties[:provider] = "Environment Canada"
       @store                 = StationStore.new({
         provider:     PROVIDER_NAME,
@@ -302,7 +301,7 @@ module Transloader
     # "AUTO" or "MANNED" will be determined automatically from the
     # station metadata.
     def get_swob_data_from_url(url)
-      case @properties['AUTO/MAN']
+      case @metadata["properties"]["AUTO/MAN"]
       when "AUTO", "Auto", "Manned/Auto"
         type = "AUTO"
       when "MAN", "Manned"
