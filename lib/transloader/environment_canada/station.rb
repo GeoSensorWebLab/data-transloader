@@ -26,12 +26,12 @@ module Transloader
     }
     OBSERVATIONS_URL = "https://dd.weather.gc.ca/observations/swob-ml"
 
-    attr_accessor :id, :metadata, :properties
+    attr_reader :id, :metadata, :properties
 
     def initialize(options = {})
-      @http_client           = options[:http_client]
-      @id                    = options[:id]
-      @store                 = StationStore.new({
+      @http_client = options[:http_client]
+      @id          = options[:id]
+      @store       = StationStore.new({
         provider:     PROVIDER_NAME,
         station:      @id,
         database_url: options[:database_url]

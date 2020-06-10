@@ -22,8 +22,7 @@ module Transloader
     PROVIDER_ID   = "DataGarrison"
     PROVIDER_NAME = "data_garrison"
 
-    attr_accessor :id, :metadata, :properties
-    attr_reader :store
+    attr_reader :id, :metadata, :properties, :store
 
     def initialize(options = {})
       @http_client = options[:http_client]

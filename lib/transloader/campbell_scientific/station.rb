@@ -18,8 +18,7 @@ module Transloader
     PROVIDER_ID   = "CampbellScientific"
     PROVIDER_NAME = "campbell_scientific"
 
-    attr_accessor :id, :metadata, :properties
-    attr_reader :store
+    attr_reader :id, :metadata, :properties, :store
 
     def initialize(options = {})
       @http_client = options[:http_client]

@@ -20,7 +20,7 @@ module Transloader
     PROVIDER_ID   = "KLRSHistoricalEnergy"
     PROVIDER_NAME = "klrs_historical_energy"
 
-    attr_accessor :id, :metadata, :properties
+    attr_reader :id, :metadata, :properties
 
     def initialize(options = {})
       @http_client = options[:http_client]
