@@ -50,12 +50,7 @@ module Transloader
     # metadata hash.
     # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata: {}, overwrite: false)
-      if (@metadata != {} && !overwrite)
-        logger.warn "Existing metadata found, will not overwrite."
-        return false
-      end
-
+    def download_metadata(override_metadata: {})
       # Download additional station metadata from a CSV file. This
       # contains information used to generate the URL for the main
       # SWOB-ML data file.

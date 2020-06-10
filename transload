@@ -61,7 +61,13 @@ end
 def get_metadata(options, http_client)
   $logger.debug "Getting metadata"
   station = get_station(options, http_client)
-  station.download_metadata(overwrite: options.overwrite)
+
+  if (!options.overwrite && station.metadata != {})
+    $logger.warn "Existing metadata found, will not overwrite."
+    return false
+  else
+    station.download_metadata()
+  end
 end
 
 def put_metadata(options, http_client)
