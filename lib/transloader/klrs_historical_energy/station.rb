@@ -25,26 +25,28 @@ module Transloader
     def initialize(options = {})
       @http_client = options[:http_client]
       @id          = options[:id]
-      @properties  = options[:properties]
-      @metadata    = {}
       @store       = StationStore.new({
         provider:     PROVIDER_NAME,
-        station:      options[:id],
+        station:      @id,
         database_url: options[:database_url]
       })
+
+      @metadata = @store.metadata
+      # TODO: These checks can be removed when the arguments are
+      # changed to keywords
+      @metadata[:properties] ||= {}
+      properties = options[:properties] || {}
+      @metadata[:properties].merge!(properties)
     end
 
     # Extract metadata from one or more local data files, use to build
     # metadata needed for Sensor/Observed Property/Datastream.
     # If `override_metadata` is specified, it is merged on top of the
     # existing metadata before being cached.
-    def download_metadata(override_metadata: {}, overwrite: false)
-      if (@store.metadata != {} && !overwrite)
-        logger.warn "Existing metadata found, will not overwrite."
-        return false
-      end
+    def download_metadata(override_metadata: {})
+      properties = @metadata[:properties]
 
-      data_paths  = @properties[:data_paths]
+      data_paths  = properties[:data_paths]
       if data_paths.empty?
         raise Error, "No paths to data files specified. Data files are required to load station metadata."
       end
@@ -75,7 +77,7 @@ module Transloader
         # multiple data files will cause this data to be overwritten
         # with the contents of the last parsed data file.
         raw_config = book.worksheet("Configuration")
-        @properties[:configuration] = {
+        properties[:configuration] = {
           "Session Name"                  => raw_config.row(3)[1],
           "Electrical hook-up"            => raw_config.row(12)[1],
           "Nominal frequency mode"        => raw_config.row(13)[1],
@@ -136,7 +138,7 @@ module Transloader
       logger.warn "The URL may be manually added to the station metadata file under the \"procedure\" key."
 
       # Convert to Hash
-      @metadata = {
+      @metadata.merge!({
         name:            "#{NAME} #{@id}",
         description:     "#{LONG_NAME} #{@id}",
         latitude:        61.02741,
@@ -147,8 +149,8 @@ module Transloader
         procedure:       nil,
         datastreams:     datastreams,
         data_files:      data_files,
-        properties:      @properties
-      }
+        properties:      properties
+      })
 
       if !override_metadata.nil?
         @metadata.merge!(override_metadata)
@@ -168,8 +170,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
-      get_metadata
-
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
@@ -267,8 +267,6 @@ module Transloader
     # into the data store.
     # An interval may be specified to limit the parsing of data.
     def download_observations(interval = nil)
-      get_metadata
-
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
         all_observations = load_observations_for_file(data_file)
@@ -303,8 +301,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
-      get_metadata
-
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.length}"
@@ -374,17 +370,6 @@ module Transloader
       observations
     end
 
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download
-    # and save to a cache file.
-    def get_metadata
-      @metadata = @store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
-      end
-    end
-
     # Parse an observation reading from the data source, and use STA
     # compatible "null" string for "missing" values.
     # This function *does not* try to convert to Floats as some values
@@ -392,11 +377,6 @@ module Transloader
     # "- - -" usage here is specific to these loggers.
     def parse_reading(reading)
       reading == "- - -" ? "null" : reading
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @store.merge_metadata(@metadata)
     end
   end
 end
