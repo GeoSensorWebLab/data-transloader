@@ -24,27 +24,25 @@ module Transloader
     def initialize(options = {})
       @http_client = options[:http_client]
       @id          = options[:id]
-      @properties  = options[:properties]
-      @metadata    = {}
       @store       = StationStore.new({
         provider:     PROVIDER_NAME,
-        station:      options[:id],
+        station:      @id,
         database_url: options[:database_url]
       })
+      @metadata    = @store.metadata
+      @metadata[:properties] ||= {}
+      properties  = options[:properties] || {}
+      @metadata[:properties].merge!(properties)
     end
 
     # Download and extract metadata from HTML, use to build metadata
     # needed for Sensor/Observed Property/Datastream.
     # If `override_metadata` is specified, it is merged on top of the
     # downloaded metadata before being cached.
-    def download_metadata(override_metadata: {}, overwrite: false)
-      if (@store.metadata != {} && !overwrite)
-        logger.warn "Existing metadata found, will not overwrite."
-        return false
-      end
-
+    def download_metadata(override_metadata: {})
+      properties = @metadata[:properties]
       # Check for data files
-      data_urls = @properties[:data_urls]
+      data_urls = properties[:data_urls]
 
       if data_urls.empty?
         raise Error, "No data URLs specified. Data URLs are required to download station metadata."
@@ -97,9 +95,9 @@ module Transloader
         # station metadata values. We are assuming that all data files
         # are from the same station/location and that the values are not
         # different between data files.
-        @properties[:station_model_name]    = doc.metadata(:station_name)
-        @properties[:station_serial_number] = doc.metadata(:datalogger_serial_number)
-        @properties[:station_program]       = doc.metadata(:datalogger_program_name)
+        properties[:station_model_name]    = doc.metadata(:station_name)
+        properties[:station_serial_number] = doc.metadata(:datalogger_serial_number)
+        properties[:station_program]       = doc.metadata(:datalogger_program_name)
 
         # Create datastreams from column headers.
         # Skip the first column header for timestamp.
@@ -124,7 +122,7 @@ module Transloader
       logger.warn "The URL may be manually added to the station metadata file under the \"procedure\" key."
 
       # Convert to Hash
-      @metadata = {
+      @metadata.merge!({
         name:            "#{NAME} #{@id}",
         description:     "#{LONG_NAME} #{@id}",
         latitude:        nil,
@@ -135,8 +133,8 @@ module Transloader
         procedure:       nil,
         datastreams:     datastreams,
         data_files:      data_files,
-        properties:      @properties
-      }
+        properties:      properties
+      })
 
       if !override_metadata.nil?
         @metadata.merge!(override_metadata)
@@ -156,8 +154,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_metadata(server_url, options = {})
-      get_metadata
-
       # Filter Datastreams based on allowed/blocked lists.
       # If both are blank, no filtering will be applied.
       datastreams = filter_datastreams(@metadata[:datastreams], options[:allowed], options[:blocked])
@@ -262,8 +258,6 @@ module Transloader
         logger.warn "Interval download for observations is unsupported for Campbell Scientific"
       end
 
-      get_metadata
-
       @metadata[:data_files].each do |data_file|
         data_filename = data_file[:filename]
         all_observations = download_observations_for_file(data_file).sort_by { |obs| obs[0] }
@@ -293,8 +287,6 @@ module Transloader
     # If `allowed` and `blocked` are both defined, then `blocked` is
     # ignored.
     def upload_observations(destination, interval, options = {})
-      get_metadata
-
       time_interval = Transloader::TimeInterval.new(interval)
       observations  = @store.get_data_in_range(time_interval.start, time_interval.end)
       logger.info "Uploading Observations: #{observations.length}"
@@ -378,28 +370,12 @@ module Transloader
       observations
     end
 
-    # Load the metadata for a station.
-    # If the station data is already cached, use that. If not, download
-    # and save to a cache file.
-    def get_metadata
-      @metadata = @store.metadata
-      if (@metadata == {})
-        @metadata = download_metadata
-        save_metadata
-      end
-    end
-
     # Parse an observation reading from the data source, converting a
     # string to a float or if null (i.e. "NAN") then use STA compatible
     # "null" string.
     # "NAN" usage here is specific to Campbell Scientific loggers.
     def parse_reading(reading)
       reading == "NAN" ? "null" : reading.to_f
-    end
-
-    # Save the Station metadata to the metadata cache file
-    def save_metadata
-      @store.merge_metadata(@metadata)
     end
   end
 end
