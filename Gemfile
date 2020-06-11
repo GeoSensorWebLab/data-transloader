@@ -11,7 +11,7 @@ gem "rdf-turtle"
 gem "ruby-progressbar"
 gem "semantic_logger"
 gem "spreadsheet"
-
+gem "typhoeus"
 
 group :test, optional: true do
   gem "pry"
