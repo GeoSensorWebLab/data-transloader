@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord"
 gem "deep_merge"
+gem "net-http-pipeline"
 gem "nokogiri"
 gem "parallel"
 gem "pg"
