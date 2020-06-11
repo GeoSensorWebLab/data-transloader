@@ -61,6 +61,7 @@ GEM
     rspec-support (3.9.0)
     ruby-ole (1.2.12.2)
     ruby-prof (1.4.1)
+    ruby-progressbar (1.10.1)
     safe_yaml (1.0.5)
     semantic_logger (4.5.0)
       concurrent-ruby (~> 1.0)
@@ -92,6 +93,7 @@ DEPENDENCIES
   rdf-turtle
   rspec
   ruby-prof
+  ruby-progressbar
   semantic_logger
   spreadsheet
   timecop

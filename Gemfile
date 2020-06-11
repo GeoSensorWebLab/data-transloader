@@ -8,6 +8,7 @@ gem "nokogiri"
 gem "parallel"
 gem "pg"
 gem "rdf-turtle"
+gem "ruby-progressbar"
 gem "semantic_logger"
 gem "spreadsheet"
 
