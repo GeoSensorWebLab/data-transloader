@@ -1,4 +1,4 @@
-#!/usr/bun/env ruby
+#!/usr/bin/env ruby
 # Import observation data from a Postgres database and upload using
 # HTTP Pipelining on top of Ruby's net/http to send multiple requests
 # in a batch.

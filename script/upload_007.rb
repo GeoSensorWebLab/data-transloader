@@ -1,4 +1,4 @@
-#!/usr/bun/env ruby
+#!/usr/bin/env ruby
 # Import observation data from a Postgres database and upload using
 # SensorThings API Batch extension. Adjust "$batch_size" for tweaks.
 # This version does a GET check to prevent creation of duplicate

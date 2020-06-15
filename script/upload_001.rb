@@ -1,4 +1,4 @@
-#!/usr/bun/env ruby
+#!/usr/bin/env ruby
 # Import observation data from a Postgres database and upload using the
 # original method: one HTTP request at a time, using the GET/POST check
 # for existing observation entities in SensorThings API.

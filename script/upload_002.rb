@@ -1,4 +1,4 @@
-#!/usr/bun/env ruby
+#!/usr/bin/env ruby
 # Import observation data from a Postgres database and upload using the
 # original method in parallel processes.
 #
