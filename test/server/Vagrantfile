@@ -64,8 +64,8 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  
-  frost_repository = "https://github.com/FraunhoferIOSB/FROST-Server.git"
+
+  frost_wrapper_repo = "https://github.com/GeoSensorWebLab/FROST-wrapper"
   frost_dir = "/home/vagrant/FROST"
 
   config.vm.provision "shell", inline: <<-SHELL
@@ -82,11 +82,13 @@ Vagrant.configure("2") do |config|
       $(lsb_release -cs) \
       stable"
     apt-get update
-    apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
+    apt-get install -y docker-ce docker-ce-cli containerd.io
     usermod -G docker vagrant
-    sudo -u vagrant git clone #{frost_repository} #{frost_dir}
+    sudo curl -s -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    sudo -u vagrant git clone #{frost_wrapper_repo} #{frost_dir}
     cd #{frost_dir}
     sudo -u vagrant sed -i 's/localhost/#{default_ip}/' docker-compose.yaml
-    docker-compose up -d
+    sudo -u vagrant /usr/local/bin/docker-compose up --build -d
   SHELL
 end
