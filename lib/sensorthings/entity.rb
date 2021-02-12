@@ -109,7 +109,7 @@ module SensorThings
       options = {
         body: self.to_json,
         headers: {
-          "Content-Type" => "application/json"
+          "Content-Type" => "application/json;charset=utf-8"
         },
         uri: url
       }
