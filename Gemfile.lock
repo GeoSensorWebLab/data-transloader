@@ -83,20 +83,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
-  deep_merge
-  nokogiri
-  parallel
-  pg
-  pry
-  rdf-turtle
-  rspec
-  ruby-prof
-  semantic_logger
-  spreadsheet
-  timecop
-  vcr
-  webmock
+  activerecord (~> 6.0)
+  deep_merge (~> 1.2)
+  nokogiri (~> 1.10)
+  parallel (~> 1.19)
+  pg (~> 1.2)
+  pry (~> 0.12)
+  rdf-turtle (~> 3.0)
+  rspec (~> 3.9)
+  ruby-prof (~> 1.4)
+  semantic_logger (~> 4.5)
+  spreadsheet (~> 1.2)
+  timecop (~> 0.9)
+  vcr (~> 5.0)
+  webmock (~> 3.7)
 
 RUBY VERSION
    ruby 2.6.6p146
