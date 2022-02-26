@@ -6,7 +6,7 @@ source "https://rubygems.org"
 
 gem "activerecord",    "~> 6.0"
 gem "deep_merge",      "~> 1.2"
-gem "nokogiri",        "~> 1.10"
+gem "nokogiri",        "~> 1.13"
 gem "parallel",        "~> 1.19"
 gem "pg",              "~> 1.2"
 gem "rdf-turtle",      "~> 3.0"
