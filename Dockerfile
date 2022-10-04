@@ -1,5 +1,5 @@
 # Ruby 2.6 is the recommended version
-FROM ruby:2.6
+FROM ruby:2.6.6
 
 # Set the language to ensure encodings are handled properly.
 # Otherwise the transloader tool will have errors parsing.
