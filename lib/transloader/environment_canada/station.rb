@@ -286,7 +286,7 @@ module Transloader
     # "AUTO" or "MANNED" will be determined automatically from the
     # station metadata.
     def get_swob_data_from_url(url)
-      case @metadata["properties"]["AUTO/MAN"]
+      case @metadata[:properties][:"AUTO/MAN"]
       when "AUTO", "Auto", "Manned/Auto"
         type = "AUTO"
       when "MAN", "Manned"
