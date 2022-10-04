@@ -13,11 +13,14 @@ module Transloader
     # it if it is missing. If it already exists, nothing is changed.
     def cache_observation_property(property_name)
       if !@matches.key?(property_name)
-        matching_datastream = @datastream_names.find do |datastream|
-          property_name.include?(datastream)
+        # first check if we have an exact match
+        if @datastream_names.include?(property_name)
+          @matches[property_name] = property_name
+        else
+          @matches[property_name] = @datastream_names.find do |datastream|
+            property_name.include?(datastream)
+          end
         end
-
-        @matches[property_name] = matching_datastream
       end
     end
 
