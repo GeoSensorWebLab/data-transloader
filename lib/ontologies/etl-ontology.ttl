@@ -639,21 +639,21 @@ etl-ontology:EnvironmentCanada:max_wnd_spd_pst1hr_tm rdf:type owl:NamedIndividua
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:min_air_temp_pst1hr
 etl-ontology:EnvironmentCanada:min_air_temp_pst1hr rdf:type owl:NamedIndividual ,
                                                             etl-ontology:SourceProperty ;
-                                                   etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_Air_Temperature_over_past_1_hour ;
+                                                   etl-ontology:matchesObservedProperty etl-ontology:Property:Minimum_Air_Temperature_over_past_1_hour ;
                                                    etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:min_air_temp_pst24hrs
 etl-ontology:EnvironmentCanada:min_air_temp_pst24hrs rdf:type owl:NamedIndividual ,
                                                               etl-ontology:SourceProperty ;
-                                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_Air_Temperature_over_past_24_hours ;
+                                                     etl-ontology:matchesObservedProperty etl-ontology:Property:Minimum_Air_Temperature_over_past_24_hours ;
                                                      etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:min_air_temp_pst6hrs
 etl-ontology:EnvironmentCanada:min_air_temp_pst6hrs rdf:type owl:NamedIndividual ,
                                                              etl-ontology:SourceProperty ;
-                                                    etl-ontology:matchesObservedProperty etl-ontology:Property:Maximum_Air_Temperature_over_past_6_hours ;
+                                                    etl-ontology:matchesObservedProperty etl-ontology:Property:Minimum_Air_Temperature_over_past_6_hours ;
                                                     etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
 
 
@@ -1307,6 +1307,29 @@ etl-ontology:Property:Mean_sea_level_pressure rdf:type owl:NamedIndividual ,
                                               etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_pressure_at_mean_sea_level"^^xsd:anyURI ;
                                               etl-ontology:description "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation."^^xsd:string ;
                                               rdfs:label "Mean Sea Level Pressure" .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Air_Temperature_over_past_1_hour
+etl-ontology:Property:Minimum_Air_Temperature_over_past_1_hour rdf:type owl:NamedIndividual ,
+                                                               etl-ontology:ObservedProperty ;
+                                                      etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
+                                                      etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                      rdfs:label "Minimum Air Temperature over past 1 hour" .
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Air_Temperature_over_past_24_hours
+etl-ontology:Property:Minimum_Air_Temperature_over_past_24_hours rdf:type owl:NamedIndividual ,
+                                                                          etl-ontology:ObservedProperty ;
+                                                                 etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
+                                                                 etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                                 rdfs:label "Minimum Air Temperature over past 24 hours" .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Air_Temperature_over_past_6_hours
+etl-ontology:Property:Minimum_Air_Temperature_over_past_6_hours rdf:type owl:NamedIndividual ,
+                                                                         etl-ontology:ObservedProperty ;
+                                                                etl-ontology:definition "http://mmisw.org/ont/cf/parameter/air_temperature"^^xsd:anyURI ;
+                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
+                                                                rdfs:label "Minimum Air Temperature over past 6 hours" .
+
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Minimum_Battery_Voltage
