@@ -73,6 +73,8 @@ module Transloader
         name:        "#{NAME} #{@id}",
         description: "#{LONG_NAME} #{properties["Name"]}",
         elevation:   xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
+        longitude:   properties[:Longitude],
+        latitude:    properties[:Latitude],
         updated_at:  Time.now,
         datastreams: datastreams,
         procedure:   xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
