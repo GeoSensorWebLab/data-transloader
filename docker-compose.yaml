@@ -1,0 +1,244 @@
+version: "3"
+
+x-defaults:
+  cronjob: &cron-job-defaults
+    image: data-transloader-job:latest
+    build:
+      context: .
+      dockerfile: docker/cron/Dockerfile
+    volumes:
+      - data:/data
+    networks:
+      - sta
+    restart: unless-stopped
+    environment: 
+      # the STA endpoint to load data to
+      STA_URL: http://web:8080/FROST-Server/v1.0/
+      # the moving window to download data for (optional, defaults to 2 days)
+      MOVING_WINDOW: "2 days"
+      # the schedule of the job (optional, defaults to @daily)
+      SCHEDULE: "@hourly"
+      DATA_DIR: /data
+      OVERWRITE_METADATA: "false"
+
+  get-metadata-environment: &get-metadata-environment
+    DATA_DIR: /data
+
+  get-metadata-job-defaults: &get-metadata-job-defaults
+    image: data-transloader:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: *get-metadata-environment
+    restart: "no"
+    volumes:
+      - data:/data
+
+  data-garrision-get-metadata-job-defaults:
+    &data-garrision-get-metadata-job-defaults
+    <<: *get-metadata-job-defaults
+    entrypoint: [/bin/sh, -e, -x, -c]
+    command:
+      - |
+        ruby transload get metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --overwrite
+        sed -i "$${DATA_DIR}/data_garrison/metadata/$${USER_ID}-$${STATION_ID}.json" \
+          -e "s/\"latitude\": null/\"latitude\": $${LATITUDE}/g" \
+          -e "s/\"longitude\": null/\"longitude\": $${LONGITUDE}/g" \
+          -e "s/\"timezone_offset\": null/\"timezone_offset\": \"$${TIMEZONE_OFFSET}\"/g"
+
+  environment-canada-get-metadata-job-defaults:
+    &environment-canada-get-metadata-job-defaults
+    <<: *get-metadata-job-defaults
+    entrypoint: [/bin/sh, -e, -x, -c]
+    command:
+      - |
+        ruby transload get metadata --provider environment_canada --station_id "$${STATION_ID}" --database_url "file://$${DATA_DIR}" --overwrite
+
+services:
+  get-metadata-environment-canada-CWCF: # Berens, River
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWCF
+
+  get-metadata-environment-canada-CWZE: # Carberry, CS
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWZE
+
+  get-metadata-environment-canada-CWZT: # Dauphin, Airport
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWZT
+
+  get-metadata-environment-canada-CWSZ: # Fisher, Branch, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWSZ
+
+  get-metadata-environment-canada-CWWS: # George, Island
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWWS
+
+  get-metadata-environment-canada-CPGH: # Gimli, Climate
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CPGH
+
+  get-metadata-environment-canada-CWJD: # Grand, Rapids, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWJD
+
+  get-metadata-environment-canada-CWOO: # McCreary
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWOO
+
+  get-metadata-environment-canada-CWOJ: # Oak, Point, Marine
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWOJ
+
+  get-metadata-environment-canada-CWPG: # Portage, Southport
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWPG
+
+  get-metadata-environment-canada-CWEQ: # Swan, River, RCS
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWEQ
+
+  get-metadata-environment-canada-CWII: # victoria, Beach, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWII
+
+  get-metadata-environment-canada-CWWP: # Wasagaming
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWWP
+
+  get-metadata-data-garrison-MMF1:
+    <<: *data-garrision-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      USER_ID: "300234068013390"
+      STATION_ID: "300534063017060"
+      LATITUDE: "50.40768"
+      LONGITUDE: "-97.96212"
+      TIMEZONE_OFFSET: "-06:00"
+
+  get-metadata-data-garrison-MMF2:
+    <<: *data-garrision-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      USER_ID: "300234068013390"
+      STATION_ID: "300534061454190"
+      LATITUDE: "52.977050"
+      LONGITUDE: "-100.979630"
+      TIMEZONE_OFFSET: "-06:00"
+
+  transload-data-data-garrison-MMF1:
+    <<: *cron-job-defaults
+    command:
+      [
+        --provider,
+        data_garrison,
+        --user_id,
+        "300234068013390",
+        --station_id,
+        "300534063017060",
+      ]
+
+  transload-data-data-garrison-MMF2:
+    <<: *cron-job-defaults
+    command:
+      [
+        --provider,
+        data_garrison,
+        --user_id,
+        "300234068013390",
+        --station_id,
+        "300534061454190",
+      ]
+
+  transload-data-environment-canada-CWCF: # Berens, River
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWCF]
+
+  transload-data-environment-canada-CWZE: # Carberry, CS
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWZE]
+
+  transload-data-environment-canada-CWZT: # Dauphin, Airport
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWZT]
+
+  transload-data-environment-canada-CWSZ: # Fisher, Branch, (auto)
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWSZ]
+
+  transload-data-environment-canada-CWWS: # George, Island
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWWS]
+
+  transload-data-environment-canada-CPGH: # Gimli, Climate
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CPGH]
+
+  transload-data-environment-canada-CWJD: # Grand, Rapids, (auto)
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWJD]
+
+  transload-data-environment-canada-CWOO: # McCreary
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWOO]
+
+  transload-data-environment-canada-CWOJ: # Oak, Point, Marine
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWOJ]
+
+  transload-data-environment-canada-CWPG: # Portage, Southport
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWPG]
+
+  transload-data-environment-canada-CWEQ: # Swan, River, RCS
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWEQ]
+
+  transload-data-environment-canada-CWII: # victoria, Beach, (auto)
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWII]
+
+  transload-data-environment-canada-CWWP: # Wasagaming
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWWP]
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  sta:
+    external:
+      name: frost-server_default
