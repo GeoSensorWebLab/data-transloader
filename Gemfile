@@ -4,7 +4,7 @@ ruby "2.6.6"
 
 source "https://rubygems.org"
 
-gem "activerecord",    "~> 6.0"
+gem "activerecord",    "~> 6.1"
 gem "deep_merge",      "~> 1.2"
 gem "nokogiri",        "~> 1.10"
 gem "parallel",        "~> 1.19"
