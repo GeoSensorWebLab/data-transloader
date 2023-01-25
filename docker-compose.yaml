@@ -1,6 +1,20 @@
+#
+# Docker compose setup for transloading observations from
+# environment canada and data garrison to a SensorThings API
+#
+# There are two types of services:
+#
+# * get-metadata-jobs that fetch the metadata from the provider for a station and push it
+#   to the STA. The jobs are meant to run once and then exit.
+#
+# * transload-data-jobs are cronjobs that fetch new data from the provider and transload
+#   it to the STA. There is one cronjob per station.
+#
 version: "3"
 
+# Default values/templates for the different services
 x-defaults:
+  # Defaults for the transloader cron job
   cronjob: &cron-job-defaults
     image: data-transloader-job:latest
     build:
@@ -24,6 +38,7 @@ x-defaults:
   get-metadata-environment: &get-metadata-environment
     DATA_DIR: /data
 
+  # Defaults for getting metadata
   get-metadata-job-defaults: &get-metadata-job-defaults
     image: data-transloader:latest
     build:
@@ -34,6 +49,11 @@ x-defaults:
     volumes:
       - data:/data
 
+  # Defaults for getting metadata from data garrison
+  #
+  # geolocation and timezone offset can not determined from
+  # data garrison and have to be supplied using environment
+  # variables
   data-garrision-get-metadata-job-defaults:
     &data-garrision-get-metadata-job-defaults
     <<: *get-metadata-job-defaults
@@ -51,6 +71,7 @@ x-defaults:
           -e "s/\"longitude\": null/\"longitude\": $${LONGITUDE}/g" \
           -e "s/\"timezone_offset\": null/\"timezone_offset\": \"$${TIMEZONE_OFFSET}\"/g"
 
+  # Defaults for getting metadata from environment canada
   environment-canada-get-metadata-job-defaults:
     &environment-canada-get-metadata-job-defaults
     <<: *get-metadata-job-defaults
