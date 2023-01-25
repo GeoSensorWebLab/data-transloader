@@ -66,10 +66,27 @@ x-defaults:
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --overwrite
-        sed -i "$${DATA_DIR}/data_garrison/metadata/$${USER_ID}-$${STATION_ID}.json" \
-          -e "s/\"latitude\": null/\"latitude\": $${LATITUDE}/g" \
-          -e "s/\"longitude\": null/\"longitude\": $${LONGITUDE}/g" \
-          -e "s/\"timezone_offset\": null/\"timezone_offset\": \"$${TIMEZONE_OFFSET}\"/g"
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key longitude \
+          --value "$${LONGITUDE}"
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key latitude \
+          --value "$${LATITUDE}"
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key timezone_offset \
+          --value "$${TIMEZONE_OFFSET}"
 
   # Defaults for getting metadata from environment canada
   environment-canada-get-metadata-job-defaults:
