@@ -16,6 +16,14 @@ docker run -d -e STA_URL="..." -e SCHEDULE="@hourly" -e MOVING_WINDOW="1 day" \
     data-transloader-job:latest --provider environment_canada --station_id CWCF
 ```
 
+## Building
+
+The build has to be done in the root directory of this repository:
+
+```
+docker build -t data-transloader-job:latest -f docker/cron/Dockerfile .
+```
+
 ## Environment Variables
 
 | Environment Variable | Description                                                                                                             | Default Value |
