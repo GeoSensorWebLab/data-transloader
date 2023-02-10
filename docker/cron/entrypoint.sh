@@ -16,5 +16,9 @@ env | sort > /etc/cron.d/transloader-job
 echo >> /etc/cron.d/transloader-job
 echo "${SCHEDULE:-"@daily"} $(id -un) ${COMMAND} > /proc/\$(cat /var/run/crond.pid)/fd/1 2>/proc/\$(cat /var/run/crond.pid)/fd/2" >> /etc/cron.d/transloader-job
 
+# for debugging
+#cat /etc/cron.d/transloader-job
+#date
+
 # give over to cron
 exec cron -f -L 15

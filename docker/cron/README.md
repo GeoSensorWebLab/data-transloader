@@ -32,7 +32,11 @@ docker build -t data-transloader-job:latest -f docker/cron/Dockerfile .
 | `DATA_DIR`           | The directory to store data. Defaults to the volume `/data`.                                                            | `/data`       |
 | `MOVING WINDOW`      | The moving time window of observations to push to th STA, supplied to [`date -d`][man1date] as `"${MOVING_WINDOW} ago"` | `2 days`      |
 | `STA_URL`            | The URL of SensorThings API to push metadata and observations                                                           | ``            |
+| `STA_USER`           | *optional*: username to be used if STA is write protected using basic auth.                                             |               |
+| `STA_PASSWORD`       | *optional*: password to be used if STA is write protected using basic auth.                                             |               |
 | `OVERWRITE_METADATA` | Whether `get metadata` should be executed with each `cron` invocation.                                                  | `false`       |
+
+`STA_USER` and `STA_PASSWORD` must be set both, or none will be used.
 
 [man1date]: https://man7.org/linux/man-pages/man1/date.1.html
 [man5crontab]: https://man7.org/linux/man-pages/man5/crontab.5.html
