@@ -7,9 +7,9 @@ STA_URL=${STA_URL:?"Error: STA_URL not set"}
 
 # build the command by quoting addtional parameters
 COMMAND="cd $(pwd) && ./docker/cron/cronjob.sh"
-for PARAM in "$@"; do 
+for PARAM in "$@"; do
     COMMAND="$COMMAND ${PARAM@Q}"
-done 
+done
 
 # build the crontab
 env > /etc/cron.d/transloader-job
