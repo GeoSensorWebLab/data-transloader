@@ -12,7 +12,7 @@ for PARAM in "$@"; do
 done
 
 # build the crontab
-env > /etc/cron.d/transloader-job
+env | sort > /etc/cron.d/transloader-job
 echo >> /etc/cron.d/transloader-job
 echo "${SCHEDULE:-"@daily"} $(id -un) ${COMMAND} > /proc/\$(cat /var/run/crond.pid)/fd/1 2>/proc/\$(cat /var/run/crond.pid)/fd/2" >> /etc/cron.d/transloader-job
 
