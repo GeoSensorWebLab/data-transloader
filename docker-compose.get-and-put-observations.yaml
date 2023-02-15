@@ -34,6 +34,8 @@ x-defaults:
       SCHEDULE: "34 * * * *"
       DATA_DIR: /data
       OVERWRITE_METADATA: "false"
+      STA_USER: ${STA_USER}
+      STA_PASSWORD: ${STA_PASSWORD}
 
 
 services:

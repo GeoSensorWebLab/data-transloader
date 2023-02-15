@@ -1,6 +1,11 @@
 # Ruby 2.6 is the recommended version
 FROM ruby:2.6.6
 
+RUN set -ex \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends curl jq \
+ && rm -rf /var/lib/apt/lists/*
+
 # Set the language to ensure encodings are handled properly.
 # Otherwise the transloader tool will have errors parsing.
 ENV LC_ALL C.UTF-8

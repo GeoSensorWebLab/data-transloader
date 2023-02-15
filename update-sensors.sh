@@ -38,11 +38,24 @@ function update-sensors() {
         local NAME="${NAMES[$OLDNAME]}"
         local DESCRIPTION="${DESCRIPTIONS[${OLDNAME}]}"
         if [ "${SENSOR_ID}" != "null" ]; then
-            curl -X PATCH -H "Content-Type: application/json" "${STA_URL}/Sensors(${SENSOR_ID})" -d "{
-                \"name\": \"${NAME}\",
-                \"description\": \"${DESCRIPTION}\",
-                \"metadata\": \"${METADATA_URL}\"
-            }"
+            if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
+                curl -X PATCH -H "Content-Type: application/json" \
+                    "${STA_URL}/Sensors(${SENSOR_ID})" \
+                    -d "{
+                        \"name\": \"${NAME}\",
+                        \"description\": \"${DESCRIPTION}\",
+                        \"metadata\": \"${METADATA_URL}\"
+                    }"
+            else
+                curl -X PATCH -u "$${STA_USER}:$${STA_PASSWORD}" \
+                    -H "Content-Type: application/json" \
+                    "${STA_URL}/Sensors(${SENSOR_ID})" \
+                    -d "{
+                        \"name\": \"${NAME}\",
+                        \"description\": \"${DESCRIPTION}\",
+                        \"metadata\": \"${METADATA_URL}\"
+                    }"
+            fi
 
         fi
     done

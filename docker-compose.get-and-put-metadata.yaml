@@ -21,6 +21,8 @@ x-defaults:
     # the STA endpoint to load data to
     STA_URL: http://sta:8080/FROST-Server/v1.0/
     INSTRUMENT_DETAILS_BASE_URL: https://canwin-datahub.ad.umanitoba.ca/data/instrument_details
+    STA_USER: ${STA_USER}
+    STA_PASSWORD: ${STA_PASSWORD}
 
   # Defaults for getting metadata
   get-metadata-job-defaults: &get-metadata-job-defaults
@@ -91,14 +93,24 @@ x-defaults:
           --database_url "file://$${DATA_DIR}" \
           --key description \
           --value "$${DESCRIPTION}" > /dev/null
-        
+
         # push the metadata to the STA
-        ruby transload put metadata \
-          --database_url "file://$${DATA_DIR}" \
-          --destination "$${STA_URL}" \
-          --provider data_garrison \
-          --user_id "$${USER_ID}" \
-          --station_id "$${STATION_ID}"
+        if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
+          ruby transload put metadata \
+            --database_url "file://$${DATA_DIR}" \
+            --destination "$${STA_URL}" \
+            --provider data_garrison \
+            --user_id "$${USER_ID}" \
+            --station_id "$${STATION_ID}"
+        else
+          ruby transload put metadata \
+            --database_url "file://$${DATA_DIR}" \
+            --destination "$${STA_URL}" \
+            --provider data_garrison \
+            --user_id "$${USER_ID}" \
+            --station_id "$${STATION_ID}" \
+            --user "$${STA_USER}:$${STA_PASSWORD}"
+        fi
 
         update-sensors "$${STATION_ID}" "$${STATION_SENSOR_NAME}" "$${INSTRUMENT_DETAILS}"
 
@@ -116,11 +128,21 @@ x-defaults:
           --overwrite
 
         # push the metadata to the STA
-        ruby transload put metadata \
-          --provider environment_canada \
-          --destination "$${STA_URL}" \
-          --station_id "$${STATION_ID}" \
-          --database_url "file://$${DATA_DIR}"
+        if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
+          ruby transload put metadata \
+            --provider environment_canada \
+            --destination "$${STA_URL}" \
+            --station_id "$${STATION_ID}" \
+            --database_url "file://$${DATA_DIR}"
+        else
+          ruby transload put metadata \
+            --provider environment_canada \
+            --destination "$${STA_URL}" \
+            --station_id "$${STATION_ID}" \
+            --database_url "file://$${DATA_DIR}" \
+            --user "$${STA_USER}:$${STA_PASSWORD}"
+        fi
+
 
 services:
   get-metadata-environment-canada-CWCF: # Berens, River
