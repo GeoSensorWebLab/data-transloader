@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 # STA_URL ends with an slash!!!
 #STA_URL="http://localhost:8080/FROST-Server/v1.0/"
