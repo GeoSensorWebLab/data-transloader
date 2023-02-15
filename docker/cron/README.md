@@ -4,7 +4,7 @@ The Docker image runs `cron` as PID 1 and regularly executes the following scrip
 
 ```shell
 ruby transload get metadata ... ${COMMAND} # optional
-ruby transload put metadata ... ${COMMAND}
+ruby transload put metadata ... ${COMMAND} # optional
 ruby transload get observations ... ${COMMAND}
 ruby transload put observations ... ${COMMAND}
 ```

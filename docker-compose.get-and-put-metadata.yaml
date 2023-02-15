@@ -15,28 +15,12 @@ version: "3"
 # Default values/templates for the different services
 x-defaults:
   # Defaults for the transloader cron job
-  cronjob: &cron-job-defaults
-    image: data-transloader-job:latest
-    build:
-      context: .
-      dockerfile: docker/cron/Dockerfile
-    volumes:
-      - data:/data
-    networks:
-      - sta
-    restart: unless-stopped
-    environment: 
-      # the STA endpoint to load data to
-      STA_URL: http://web:8080/FROST-Server/v1.0/
-      # the moving window to download data for (optional, defaults to 2 days)
-      MOVING_WINDOW: "2 days"
-      # the schedule of the job (optional, defaults to @daily)
-      SCHEDULE: "@hourly"
-      DATA_DIR: /data
-      OVERWRITE_METADATA: "false"
 
   get-metadata-environment: &get-metadata-environment
     DATA_DIR: /data
+    # the STA endpoint to load data to
+    STA_URL: http://sta:8080/FROST-Server/v1.0/
+    INSTRUMENT_DETAILS_BASE_URL: https://canwin-datahub.ad.umanitoba.ca/data/instrument_details
 
   # Defaults for getting metadata
   get-metadata-job-defaults: &get-metadata-job-defaults
@@ -45,9 +29,12 @@ x-defaults:
       context: .
       dockerfile: Dockerfile
     environment: *get-metadata-environment
-    restart: "no"
+    restart: "on-failure"
+    networks:
+      - sta
     volumes:
       - data:/data
+      - ./update-sensors.sh:/usr/local/bin/update-sensors
 
   # Defaults for getting metadata from data garrison
   #
@@ -60,33 +47,60 @@ x-defaults:
     entrypoint: [/bin/sh, -e, -x, -c]
     command:
       - |
+        # getting the metadata from the provider
         ruby transload get metadata \
           --provider data_garrison \
           --user_id "$${USER_ID}" \
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --overwrite
+        
+        # customize the metadata
         ruby transload set metadata \
           --provider data_garrison \
           --user_id "$${USER_ID}" \
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --key longitude \
-          --value "$${LONGITUDE}"
+          --value "$${LONGITUDE}" > /dev/null
         ruby transload set metadata \
           --provider data_garrison \
           --user_id "$${USER_ID}" \
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --key latitude \
-          --value "$${LATITUDE}"
+          --value "$${LATITUDE}" > /dev/null
         ruby transload set metadata \
           --provider data_garrison \
           --user_id "$${USER_ID}" \
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --key timezone_offset \
-          --value "$${TIMEZONE_OFFSET}"
+          --value "$${TIMEZONE_OFFSET}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key name \
+          --value "$${NAME}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key description \
+          --value "$${DESCRIPTION}" > /dev/null
+        
+        # push the metadata to the STA
+        ruby transload put metadata \
+          --database_url "file://$${DATA_DIR}" \
+          --destination "$${STA_URL}" \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}"
+
+        update-sensors "$${STATION_ID}" "$${STATION_SENSOR_NAME}" "$${INSTRUMENT_DETAILS}"
 
   # Defaults for getting metadata from environment canada
   environment-canada-get-metadata-job-defaults:
@@ -95,7 +109,18 @@ x-defaults:
     entrypoint: [/bin/sh, -e, -x, -c]
     command:
       - |
-        ruby transload get metadata --provider environment_canada --station_id "$${STATION_ID}" --database_url "file://$${DATA_DIR}" --overwrite
+        # getting the metadata from the provider
+        ruby transload get metadata --provider environment_canada \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --overwrite
+
+        # push the metadata to the STA
+        ruby transload put metadata \
+          --provider environment_canada \
+          --destination "$${STA_URL}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}"
 
 services:
   get-metadata-environment-canada-CWCF: # Berens, River
@@ -185,6 +210,10 @@ services:
       LATITUDE: "50.40768"
       LONGITUDE: "-97.96212"
       TIMEZONE_OFFSET: "-06:00"
+      NAME: St Laurent Li Taan Aen Staansyoon_17060
+      STATION_SENSOR_NAME: Dawson Bay Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: dawbay-met-sensors
+      DESCRIPTION: Manitoba Metis Federation weather station located in St.Laurent
 
   get-metadata-data-garrison-MMF2:
     <<: *data-garrision-get-metadata-job-defaults
@@ -195,82 +224,10 @@ services:
       LATITUDE: "52.977050"
       LONGITUDE: "-100.979630"
       TIMEZONE_OFFSET: "-06:00"
-
-  transload-data-data-garrison-MMF1:
-    <<: *cron-job-defaults
-    command:
-      [
-        --provider,
-        data_garrison,
-        --user_id,
-        "300234068013390",
-        --station_id,
-        "300534063017060",
-      ]
-
-  transload-data-data-garrison-MMF2:
-    <<: *cron-job-defaults
-    command:
-      [
-        --provider,
-        data_garrison,
-        --user_id,
-        "300234068013390",
-        --station_id,
-        "300534061454190",
-      ]
-
-  transload-data-environment-canada-CWCF: # Berens, River
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWCF]
-
-  transload-data-environment-canada-CWZE: # Carberry, CS
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWZE]
-
-  transload-data-environment-canada-CWZT: # Dauphin, Airport
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWZT]
-
-  transload-data-environment-canada-CWSZ: # Fisher, Branch, (auto)
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWSZ]
-
-  transload-data-environment-canada-CWWS: # George, Island
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWWS]
-
-  transload-data-environment-canada-CPGH: # Gimli, Climate
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CPGH]
-
-  transload-data-environment-canada-CWJD: # Grand, Rapids, (auto)
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWJD]
-
-  transload-data-environment-canada-CWOO: # McCreary
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWOO]
-
-  transload-data-environment-canada-CWOJ: # Oak, Point, Marine
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWOJ]
-
-  transload-data-environment-canada-CWPG: # Portage, Southport
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWPG]
-
-  transload-data-environment-canada-CWEQ: # Swan, River, RCS
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWEQ]
-
-  transload-data-environment-canada-CWII: # victoria, Beach, (auto)
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWII]
-
-  transload-data-environment-canada-CWWP: # Wasagaming
-    <<: *cron-job-defaults
-    command: [--provider, environment_canada, --station_id, CWWP]
+      NAME: Dawson Bay Li Taan Aen Staansyoon_54190
+      STATION_SENSOR_NAME: St Laurent Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: st-laurent-met-sensors
+      DESCRIPTION: Manitoba Metis Federation weather station located in Dawson Bay
 
 volumes:
   data:
@@ -279,4 +236,4 @@ volumes:
 networks:
   sta:
     external:
-      name: frost-server_default
+      name: sta_default
