@@ -257,5 +257,5 @@ volumes:
 
 networks:
   sta:
-    external:
-      name: sta_default
+    name: uom-frost_default
+    external: true
