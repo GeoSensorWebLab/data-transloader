@@ -25,7 +25,7 @@ x-defaults:
     networks:
       - sta
     restart: unless-stopped
-    environment: 
+    environment:
       # the STA endpoint to load data to
       STA_URL: http://sta:8080/FROST-Server/v1.0/
       # the moving window to download data for (optional, defaults to 2 days)
