@@ -43,7 +43,7 @@ function update-sensors() {
         local SENSOR_ID="$(get-sensor-id "${OLDNAME}")"
         local NAME="${NAMES[$OLDNAME]}"
         local DESCRIPTION="${DESCRIPTIONS[${OLDNAME}]}"
-        if [ "${SENSOR_ID}" != "null" ]; then
+        if [ -n "${SENSOR_ID}" -a "${SENSOR_ID}" != "null" ]; then
             if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
                 curl -X PATCH \
                     -H "Content-Type: application/json" \
