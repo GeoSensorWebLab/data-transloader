@@ -2,12 +2,13 @@
 
 set -ex
 
-#STA_URL="http://localhost:8080/FROST-Server/v1.0"
+# STA_URL ends with an slash!!!
+#STA_URL="http://localhost:8080/FROST-Server/v1.0/"
 #INSTRUMENT_DETAILS_BASE_URL="https://canwin-datahub.ad.umanitoba.ca/data/instrument_details"
 
 function get-sensor-id() {
     local NAME="$1"
-    curl -sG "${STA_URL}/Sensors" --data-urlencode "\$filter=name eq '${NAME}'" | jq -r '.value[0]["@iot.id"]'ss
+    curl -sG "${STA_URL}Sensors" --data-urlencode "\$filter=name eq '${NAME}'" | jq -r '.value[0]["@iot.id"]'
 }
 
 function update-sensors() {
@@ -39,17 +40,19 @@ function update-sensors() {
         local DESCRIPTION="${DESCRIPTIONS[${OLDNAME}]}"
         if [ "${SENSOR_ID}" != "null" ]; then
             if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
-                curl -X PATCH -H "Content-Type: application/json" \
-                    "${STA_URL}/Sensors(${SENSOR_ID})" \
+                curl -X PATCH \
+                    -H "Content-Type: application/json" \
+                    "${STA_URL}Sensors(${SENSOR_ID})" \
                     -d "{
                         \"name\": \"${NAME}\",
                         \"description\": \"${DESCRIPTION}\",
                         \"metadata\": \"${METADATA_URL}\"
                     }"
             else
-                curl -X PATCH -u "$${STA_USER}:$${STA_PASSWORD}" \
+                curl -X PATCH \
+                    -u "${STA_USER}:${STA_PASSWORD}" \
                     -H "Content-Type: application/json" \
-                    "${STA_URL}/Sensors(${SENSOR_ID})" \
+                    "${STA_URL}Sensors(${SENSOR_ID})" \
                     -d "{
                         \"name\": \"${NAME}\",
                         \"description\": \"${DESCRIPTION}\",
