@@ -56,7 +56,7 @@ x-defaults:
           --station_id "$${STATION_ID}" \
           --database_url "file://$${DATA_DIR}" \
           --overwrite
-        
+
         # customize the metadata
         ruby transload set metadata \
           --provider data_garrison \
@@ -257,5 +257,5 @@ volumes:
 
 networks:
   sta:
-    external:
-      name: sta_default
+    name: uom-frost_default
+    external: true

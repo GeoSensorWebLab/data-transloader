@@ -7,7 +7,7 @@ There is currently no official Docker image on Docker Hub. Please build a Docker
 ## Building the Image
 
 ```terminal
-$ docker build -t data-transloader:latest .
+docker build -t data-transloader:latest .
 ```
 
 ## Running a Container
@@ -15,7 +15,7 @@ $ docker build -t data-transloader:latest .
 To test that the container runs:
 
 ```terminal
-$ docker run -it --rm data-transloader:latest
+docker run -it --rm data-transloader:latest
 ```
 
 This should print the "help" information for the tool. We use `--rm` to delete the container after running, as it is an ephemeral one-time run.
@@ -23,7 +23,7 @@ This should print the "help" information for the tool. We use `--rm` to delete t
 To run the tool in actual usage, a Docker volume should be used to store the data and metadata. ([A bind mount][binds] to the host filesystem may also be used.)
 
 ```terminal
-$ docker volume create etl-data
+docker volume create etl-data
 ```
 
 The tool can then be ran with the usual parameters; be sure to mount the volume so that the metadata is re-used.
