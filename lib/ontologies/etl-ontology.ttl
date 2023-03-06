@@ -231,6 +231,12 @@ etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
                                            etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
 
+###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Backup_Batts
+etl-ontology:DataGarrison:Backup_Batts rdf:type owl:NamedIndividual ,
+                                                    etl-ontology:SourceProperty ;
+                                           etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
+                                           etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
+
 
 ###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Gust_Speed
 etl-ontology:DataGarrison:Gust_Speed rdf:type owl:NamedIndividual ,
@@ -487,8 +493,22 @@ etl-ontology:EnvironmentCanada:avg_wnd_spd_10m_pst2mts rdf:type owl:NamedIndivid
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_pcpn_gag_mt50-60
 etl-ontology:EnvironmentCanada:avg_wnd_spd_pcpn_gag_mt50-60 rdf:type owl:NamedIndividual ,
                                                                      etl-ontology:SourceProperty ;
-                                                            etl-ontology:matchesObservedProperty <http://gswlab.ca/ontologies/etl-ontology#Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge> ;
+                                                            etl-ontology:matchesObservedProperty etl-ontology:Property:10-minute_average_wind_speed_at_the_height_of_the_precipitation_gauge ;
                                                             etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_pk_wnd_tm_pst1hr
+etl-ontology:EnvironmentCanada:max_pk_wnd_tm_pst1hr rdf:type owl:NamedIndividual ,
+                                                             etl-ontology:SourceProperty ;
+                                                    etl-ontology:matchesObservedProperty etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp ;
+                                                    etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:timestamp .
+
+
+###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:max_wnd_gst_spd_10m_pst10mts
+etl-ontology:EnvironmentCanada:max_wnd_gst_spd_10m_pst10mts rdf:type owl:NamedIndividual ,
+                                                             etl-ontology:SourceProperty ;
+                                                    etl-ontology:matchesObservedProperty etl-ontology:Property:Max_10m_wind_gust_speed_over_past_10_minutes ;
+                                                    etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:kilometer_per_hour .
 
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:avg_wnd_spd_pcpn_gag_pst10mts
@@ -1248,6 +1268,12 @@ etl-ontology:Property:Average_wind_speed_at_precipitation_gauge_over_past_10_min
                                                                                      etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity." ;
                                                                                      rdfs:label "Average wind speed at precipitation gauge over past 10 minutes" .
 
+###  http://gswlab.ca/ontologies/etl-ontology#Property:Max_10m_wind_gust_speed_over_past_10_minutes
+etl-ontology:Property:Max_10m_wind_gust_speed_over_past_10_minutes rdf:type owl:NamedIndividual ,
+                                                                    etl-ontology:ObservedProperty ;
+                                                            etl-ontology:definition "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0038/"^^xsd:anyURI ;
+                                                            etl-ontology:description "Speed is the magnitude of velocity. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. The wind speed is the magnitude of the wind velocity." ;
+                                                            rdfs:label "Max wind speed over the last 10 minutes of the hour is >= 15 knots AND the max speed exceeds the 2-minute mean wind speed by >= 5 knots" .
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Battery_Voltage
 etl-ontology:Property:Battery_Voltage rdf:type owl:NamedIndividual ,
