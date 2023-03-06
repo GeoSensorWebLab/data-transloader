@@ -95,7 +95,7 @@ x-defaults:
           --value "$${DESCRIPTION}" > /dev/null
 
         # push the metadata to the STA
-        if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
+        if [ -z "$${STA_USER}" ] || [ -z "$${STA_PASSWORD}" ]; then
           ruby transload put metadata \
             --database_url "file://$${DATA_DIR}" \
             --destination "$${STA_URL}" \
@@ -128,7 +128,7 @@ x-defaults:
           --overwrite
 
         # push the metadata to the STA
-        if [ -z "${STA_USER}" ] || [ -z "${STA_PASSWORD}" ]; then
+        if [ -z "$${STA_USER}" ] || [ -z "$${STA_PASSWORD}" ]; then
           ruby transload put metadata \
             --provider environment_canada \
             --destination "$${STA_URL}" \
