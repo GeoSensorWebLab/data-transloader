@@ -40,7 +40,7 @@ module Transloader
       properties = options[:properties] || {}
       @metadata[:properties].merge!(properties)
 
-      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
+      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=65535&details=7"
     end
 
     # Download and extract metadata from HTML, use to build metadata
