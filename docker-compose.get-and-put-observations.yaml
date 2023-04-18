@@ -29,6 +29,7 @@ x-defaults:
       - sta
     restart: unless-stopped
     env_file:
+      - .env
       - docker-compose.get-and-put-observations.env
 
 services:
@@ -49,6 +50,8 @@ services:
 
   transload-data-data-garrison-MMF2:
     <<: *cron-job-defaults
+    environment:
+      SCHEDULE: "5 * * * *"
     command:
       [
         --provider,
