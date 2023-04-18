@@ -143,7 +143,6 @@ x-defaults:
             --user "$${STA_USER}:$${STA_PASSWORD}"
         fi
 
-
 services:
   get-metadata-environment-canada-CWCF: # Berens, River
     <<: *environment-canada-get-metadata-job-defaults
@@ -233,8 +232,8 @@ services:
       LONGITUDE: "-97.96212"
       TIMEZONE_OFFSET: "-06:00"
       NAME: St Laurent Li Taan Aen Staansyoon_17060
-      STATION_SENSOR_NAME: Dawson Bay Li Taan Aen Staansyoon
-      INSTRUMENT_DETAILS: dawbay-met-sensors
+      STATION_SENSOR_NAME: St Laurent Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: st-laurent-met-sensors
       DESCRIPTION: Manitoba Metis Federation weather station located in St.Laurent
 
   get-metadata-data-garrison-MMF2:
@@ -247,8 +246,8 @@ services:
       LONGITUDE: "-100.979630"
       TIMEZONE_OFFSET: "-06:00"
       NAME: Dawson Bay Li Taan Aen Staansyoon_54190
-      STATION_SENSOR_NAME: St Laurent Li Taan Aen Staansyoon
-      INSTRUMENT_DETAILS: st-laurent-met-sensors
+      STATION_SENSOR_NAME: Dawson Bay Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: dawbay-met-sensors
       DESCRIPTION: Manitoba Metis Federation weather station located in Dawson Bay
 
 volumes:
