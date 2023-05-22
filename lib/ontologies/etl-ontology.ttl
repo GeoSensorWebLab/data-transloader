@@ -231,6 +231,7 @@ etl-ontology:DataGarrison:Backup_Batteries rdf:type owl:NamedIndividual ,
                                            etl-ontology:matchesObservedProperty etl-ontology:Property:Battery_Voltage ;
                                            etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:Volt .
 
+
 ###  http://gswlab.ca/ontologies/etl-ontology#DataGarrison:Backup_Batts
 etl-ontology:DataGarrison:Backup_Batts rdf:type owl:NamedIndividual ,
                                                     etl-ontology:SourceProperty ;
@@ -296,6 +297,7 @@ etl-ontology:EnvironmentCanada:air_temp rdf:type owl:NamedIndividual ,
                                                  etl-ontology:SourceProperty ;
                                         etl-ontology:matchesObservedProperty etl-ontology:Property:Air_Temperature ;
                                         etl-ontology:matchesUnitOfMeasurement etl-ontology:Unit:degree_Celsius .
+
 
 ###  http://gswlab.ca/ontologies/etl-ontology#EnvironmentCanada:air_temp_1
 etl-ontology:EnvironmentCanada:air_temp_1 rdf:type owl:NamedIndividual ,
@@ -1334,7 +1336,7 @@ etl-ontology:Property:Cloud_type_obscuring_phenomena_for_layer_3 rdf:type owl:Na
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Data_Availability
 etl-ontology:Property:Data_Availability rdf:type owl:NamedIndividual ,
                                                  etl-ontology:ObservedProperty ;
-                                        etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
+                                        etl-ontology:definition "https://dd.weather.gc.ca/observations/doc/SWOB-ML_Product_User_Guide_V8.9_e.pdf"^^xsd:anyURI ;
                                         etl-ontology:description "Data availability"^^xsd:string ;
                                         rdfs:label "Data Availability" .
 
@@ -1350,7 +1352,7 @@ etl-ontology:Property:Datalogger_panel_temperature rdf:type owl:NamedIndividual 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Derived_peak_wind_remark
 etl-ontology:Property:Derived_peak_wind_remark rdf:type owl:NamedIndividual ,
                                                         etl-ontology:ObservedProperty ;
-                                               etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
+                                               etl-ontology:definition "https://dd.weather.gc.ca/observations/doc/SWOB-ML_Product_User_Guide_V8.9_e.pdf"^^xsd:anyURI ;
                                                etl-ontology:description "Derived peak wind remark"^^xsd:string ;
                                                rdfs:label "Derived peak wind remark"^^xsd:string .
 
@@ -1414,7 +1416,7 @@ etl-ontology:Property:High_Data_Rate_transmitter_reflected_power rdf:type owl:Na
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Max_wind_speed_past_1_hour_timestamp
 etl-ontology:Property:Max_wind_speed_past_1_hour_timestamp rdf:type owl:NamedIndividual ,
                                                                     etl-ontology:ObservedProperty ;
-                                                           etl-ontology:definition "http://dd.weather.gc.ca/observations/doc/"^^xsd:anyURI ;
+                                                           etl-ontology:definition "https://dd.weather.gc.ca/observations/doc/SWOB-ML_Product_User_Guide_V8.9_e.pdf"^^xsd:anyURI ;
                                                            etl-ontology:description "Timestamp of maximum wind speed over past hour." ;
                                                            rdfs:label "Timestamp of maximum wind speed over past hour" .
 
@@ -1449,6 +1451,7 @@ etl-ontology:Property:Maximum_Air_Temperature_over_past_1_hour rdf:type owl:Name
                                                                etl-ontology:definition "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0023/"^^xsd:anyURI ;
                                                                etl-ontology:description "Air temperature is the bulk temperature of the air, not the surface (skin) temperature."^^xsd:string ;
                                                                rdfs:label "Maximum Air Temperature over past 1 hour" .
+
 
 ###  http://gswlab.ca/ontologies/etl-ontology#Property:Maximum_Air_Temperature_over_past_1_hour_1
 etl-ontology:Property:Maximum_Air_Temperature_over_past_1_hour_1 rdf:type owl:NamedIndividual ,
