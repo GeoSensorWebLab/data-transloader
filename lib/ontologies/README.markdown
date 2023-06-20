@@ -1,12 +1,12 @@
 # Ontologies
 
-The [RDF][] ontology files in this directory provide semantic mappings for metadata from the data providers into a standard vocabulary of entities for SensorThings API.
+The [RDF] ontology files in this directory provide semantic mappings for metadata from the data providers into a standard vocabulary of entities for SensorThings API.
 
 Observed Properties from a provider are namespaced and matched to a single Unit of Measurement and Observed Property. A class in the Data Transloader Ruby library will provide an API for looking up these mappings.
 
 [RDF]: https://en.wikipedia.org/wiki/Resource_Description_Framework
 
-### Example
+## Example
 
 The source data provider `Data Garrison` provides observations for a sensor with the property `Pressure` and units `mbar`. This maps to the RDF Individual `DataGarrison:Pressure`. Properties are namespaced by their provider in case different providers use the same names.
 

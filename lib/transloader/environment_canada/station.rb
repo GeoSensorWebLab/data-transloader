@@ -73,6 +73,8 @@ module Transloader
         name:        "#{NAME} #{@id}",
         description: "#{LONG_NAME} #{properties["Name"]}",
         elevation:   xml.xpath('//po:element[@name="stn_elev"]', NAMESPACES).first.attribute('value').value,
+        longitude:   properties[:Longitude],
+        latitude:    properties[:Latitude],
         updated_at:  Time.now,
         datastreams: datastreams,
         procedure:   xml.xpath('//om:procedure/@xlink:href', NAMESPACES).text,
@@ -286,7 +288,7 @@ module Transloader
     # "AUTO" or "MANNED" will be determined automatically from the
     # station metadata.
     def get_swob_data_from_url(url)
-      case @metadata["properties"]["AUTO/MAN"]
+      case @metadata[:properties][:"AUTO/MAN"]
       when "AUTO", "Auto", "Manned/Auto"
         type = "AUTO"
       when "MAN", "Manned"

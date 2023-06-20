@@ -1,0 +1,150 @@
+#
+# Docker compose setup for transloading observations from
+# environment canada and data garrison to a SensorThings API
+#
+# There are two types of services:
+#
+# * get-metadata-jobs that fetch the metadata from the provider for a station and push it
+#   to the STA. The jobs are meant to run once and then exit.
+#
+# * transload-data-jobs are cronjobs that fetch new data from the provider and transload
+#   it to the STA. There is one cronjob per station.
+#   The scheduling of the transload-data-jobs in done manually using the environment
+#   variable SCHEDULE. The current approach triggers two jobs every 5 minutes for
+#   keeping the load on the hosting machine lower.#
+#
+version: "3"
+
+# Default values/templates for the different services
+x-defaults:
+  # Defaults for the transloader cron job
+  cronjob: &cron-job-defaults
+    image: data-transloader-job:latest
+    build:
+      context: .
+      dockerfile: docker/cron/Dockerfile
+    volumes:
+      - data:/data
+    networks:
+      - sta
+    restart: unless-stopped
+    env_file:
+      - .env
+      - docker-compose.get-and-put-observations.env
+
+services:
+
+  transload-data-data-garrison-MMF1:
+    <<: *cron-job-defaults
+    environment:
+      SCHEDULE: "5 * * * *"
+    command:
+      [
+        --provider,
+        data_garrison,
+        --user_id,
+        "300234068013390",
+        --station_id,
+        "300534063017060",
+      ]
+
+  transload-data-data-garrison-MMF2:
+    <<: *cron-job-defaults
+    environment:
+      SCHEDULE: "5 * * * *"
+    command:
+      [
+        --provider,
+        data_garrison,
+        --user_id,
+        "300234068013390",
+        --station_id,
+        "300534061454190",
+      ]
+
+  transload-data-environment-canada-CWCF: # Berens, River
+    <<: *cron-job-defaults
+    environment:
+      SCHEDULE: "15 * * * *"
+    command: [--provider, environment_canada, --station_id, CWCF]
+
+  transload-data-environment-canada-CWZE: # Carberry, CS
+    <<: *cron-job-defaults
+    environment:
+      SCHEDULE: "15 * * * *"
+    command: [--provider, environment_canada, --station_id, CWZE]
+
+  transload-data-environment-canada-CWZT: # Dauphin, Airport
+    environment:
+      SCHEDULE: "20 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWZT]
+
+  transload-data-environment-canada-CWSZ: # Fisher, Branch, (auto)
+    environment:
+      SCHEDULE: "20 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWSZ]
+
+  transload-data-environment-canada-CWWS: # George, Island
+    environment:
+      SCHEDULE: "25 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWWS]
+
+  transload-data-environment-canada-CPGH: # Gimli, Climate
+    environment:
+      SCHEDULE: "25 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CPGH]
+
+  transload-data-environment-canada-CWJD: # Grand, Rapids, (auto)
+    environment:
+      SCHEDULE: "30 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWJD]
+
+  transload-data-environment-canada-CWOO: # McCreary
+    environment:
+      SCHEDULE: "30 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWOO]
+
+  transload-data-environment-canada-CWOJ: # Oak, Point, Marine
+    environment:
+      SCHEDULE: "35 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWOJ]
+
+  transload-data-environment-canada-CWPG: # Portage, Southport
+    environment:
+      SCHEDULE: "35 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWPG]
+
+  transload-data-environment-canada-CWEQ: # Swan, River, RCS
+    environment:
+      SCHEDULE: "40 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWEQ]
+
+  transload-data-environment-canada-CWII: # victoria, Beach, (auto)
+    environment:
+      SCHEDULE: "40 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWII]
+
+  transload-data-environment-canada-CWWP: # Wasagaming
+    environment:
+      SCHEDULE: "45 * * * *"
+    <<: *cron-job-defaults
+    command: [--provider, environment_canada, --station_id, CWWP]
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  sta:
+    name: uom-frost_default
+    external: true

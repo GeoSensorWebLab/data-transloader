@@ -1,0 +1,260 @@
+#
+# Docker compose setup for transloading observations from
+# environment canada and data garrison to a SensorThings API
+#
+# There are two types of services:
+#
+# * get-metadata-jobs that fetch the metadata from the provider for a station and push it
+#   to the STA. The jobs are meant to run once and then exit.
+#
+# * transload-data-jobs are cronjobs that fetch new data from the provider and transload
+#   it to the STA. There is one cronjob per station.
+#
+version: "3"
+
+# Default values/templates for the different services
+x-defaults:
+  # Defaults for the transloader cron job
+
+  get-metadata-environment: &get-metadata-environment
+    DATA_DIR: /data
+    # the STA endpoint to load data to
+    STA_URL: http://sta:8080/FROST-Server/v1.0/
+    INSTRUMENT_DETAILS_BASE_URL: https://canwin-datahub.ad.umanitoba.ca/data/instrument_details
+    STA_USER: ${STA_USER}
+    STA_PASSWORD: ${STA_PASSWORD}
+
+  # Defaults for getting metadata
+  get-metadata-job-defaults: &get-metadata-job-defaults
+    image: data-transloader:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: *get-metadata-environment
+    restart: "on-failure"
+    networks:
+      - sta
+    volumes:
+      - data:/data
+      - ./update-sensors.sh:/usr/local/bin/update-sensors
+
+  # Defaults for getting metadata from data garrison
+  #
+  # geolocation and timezone offset can not determined from
+  # data garrison and have to be supplied using environment
+  # variables
+  data-garrision-get-metadata-job-defaults:
+    &data-garrision-get-metadata-job-defaults
+    <<: *get-metadata-job-defaults
+    entrypoint: [/bin/sh, -e, -x, -c]
+    command:
+      - |
+        # getting the metadata from the provider
+        ruby transload get metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --overwrite
+
+        # customize the metadata
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key longitude \
+          --value "$${LONGITUDE}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key latitude \
+          --value "$${LATITUDE}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key timezone_offset \
+          --value "$${TIMEZONE_OFFSET}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key name \
+          --value "$${NAME}" > /dev/null
+        ruby transload set metadata \
+          --provider data_garrison \
+          --user_id "$${USER_ID}" \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --key description \
+          --value "$${DESCRIPTION}" > /dev/null
+
+        # push the metadata to the STA
+        if [ -z "$${STA_USER}" ] || [ -z "$${STA_PASSWORD}" ]; then
+          ruby transload put metadata \
+            --database_url "file://$${DATA_DIR}" \
+            --destination "$${STA_URL}" \
+            --provider data_garrison \
+            --user_id "$${USER_ID}" \
+            --station_id "$${STATION_ID}"
+        else
+          ruby transload put metadata \
+            --database_url "file://$${DATA_DIR}" \
+            --destination "$${STA_URL}" \
+            --provider data_garrison \
+            --user_id "$${USER_ID}" \
+            --station_id "$${STATION_ID}" \
+            --user "$${STA_USER}:$${STA_PASSWORD}"
+        fi
+
+        update-sensors "$${STATION_ID}" "$${STATION_SENSOR_NAME}" "$${INSTRUMENT_DETAILS}"
+
+  # Defaults for getting metadata from environment canada
+  environment-canada-get-metadata-job-defaults:
+    &environment-canada-get-metadata-job-defaults
+    <<: *get-metadata-job-defaults
+    entrypoint: [/bin/sh, -e, -x, -c]
+    command:
+      - |
+        # getting the metadata from the provider
+        ruby transload get metadata --provider environment_canada \
+          --station_id "$${STATION_ID}" \
+          --database_url "file://$${DATA_DIR}" \
+          --overwrite
+
+        # push the metadata to the STA
+        if [ -z "$${STA_USER}" ] || [ -z "$${STA_PASSWORD}" ]; then
+          ruby transload put metadata \
+            --provider environment_canada \
+            --destination "$${STA_URL}" \
+            --station_id "$${STATION_ID}" \
+            --database_url "file://$${DATA_DIR}"
+        else
+          ruby transload put metadata \
+            --provider environment_canada \
+            --destination "$${STA_URL}" \
+            --station_id "$${STATION_ID}" \
+            --database_url "file://$${DATA_DIR}" \
+            --user "$${STA_USER}:$${STA_PASSWORD}"
+        fi
+
+services:
+  get-metadata-environment-canada-CWCF: # Berens, River
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWCF
+
+  get-metadata-environment-canada-CWZE: # Carberry, CS
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWZE
+
+  get-metadata-environment-canada-CWZT: # Dauphin, Airport
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWZT
+
+  get-metadata-environment-canada-CWSZ: # Fisher, Branch, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWSZ
+
+  get-metadata-environment-canada-CWWS: # George, Island
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWWS
+
+  get-metadata-environment-canada-CPGH: # Gimli, Climate
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CPGH
+
+  get-metadata-environment-canada-CWJD: # Grand, Rapids, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWJD
+
+  get-metadata-environment-canada-CWOO: # McCreary
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWOO
+
+  get-metadata-environment-canada-CWOJ: # Oak, Point, Marine
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWOJ
+
+  get-metadata-environment-canada-CWPG: # Portage, Southport
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWPG
+
+  get-metadata-environment-canada-CWEQ: # Swan, River, RCS
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWEQ
+
+  get-metadata-environment-canada-CWII: # victoria, Beach, (auto)
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWII
+
+  get-metadata-environment-canada-CWWP: # Wasagaming
+    <<: *environment-canada-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      STATION_ID: CWWP
+
+  get-metadata-data-garrison-MMF1:
+    <<: *data-garrision-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      USER_ID: "300234068013390"
+      STATION_ID: "300534063017060"
+      LATITUDE: "50.40768"
+      LONGITUDE: "-97.96212"
+      TIMEZONE_OFFSET: "-06:00"
+      NAME: St Laurent Li Taan Aen Staansyoon_17060
+      STATION_SENSOR_NAME: St Laurent Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: st-laurent-met-sensors
+      DESCRIPTION: Manitoba Metis Federation weather station located in St.Laurent
+
+  get-metadata-data-garrison-MMF2:
+    <<: *data-garrision-get-metadata-job-defaults
+    environment:
+      <<: *get-metadata-environment
+      USER_ID: "300234068013390"
+      STATION_ID: "300534061454190"
+      LATITUDE: "52.977050"
+      LONGITUDE: "-100.979630"
+      TIMEZONE_OFFSET: "-06:00"
+      NAME: Dawson Bay Li Taan Aen Staansyoon_54190
+      STATION_SENSOR_NAME: Dawson Bay Li Taan Aen Staansyoon
+      INSTRUMENT_DETAILS: dawbay-met-sensors
+      DESCRIPTION: Manitoba Metis Federation weather station located in Dawson Bay
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  sta:
+    name: uom-frost_default
+    external: true

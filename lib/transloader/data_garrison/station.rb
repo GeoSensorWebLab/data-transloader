@@ -40,7 +40,7 @@ module Transloader
       properties = options[:properties] || {}
       @metadata[:properties].merge!(properties)
 
-      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=127&details=7"
+      @base_path = "https://datagarrison.com/users/#{@user_id}/#{@id}/index.php?sens_details=65535&details=7"
     end
 
     # Download and extract metadata from HTML, use to build metadata
@@ -64,7 +64,7 @@ module Transloader
       html.xpath('/html/body/table/tr[position()=2]/td/table/tr/td[position()=2]/div[position()=2]/table/tr[position()=2]/td/table/tr/td/font/a').collect do |element|
         href       = element.attr('href')
         data_desc  = element.text.to_s
-        filename   = data_desc.sub(/ /, '_')
+        filename   = data_desc.gsub(/ /, '_')
 
         if filename == ""
           # Without a filename, the file cannot be downloaded as a TSV
@@ -273,6 +273,8 @@ module Transloader
         # Create Sensor entities
         sensor = build_sensor("Station #{@id} #{stream[:name]} Sensor", "#{NAME} #{@id} #{stream[:name]} Sensor")
 
+        sensor.encoding_type = "text/html"
+        sensor.metadata = "https://datagarrison.com/users/#{@user_id}/#{@id}/"
         # Upload entity and parse response
         sensor.upload_to(server_url)
 

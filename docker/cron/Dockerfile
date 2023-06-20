@@ -1,11 +1,6 @@
 # Ruby 2.6 is the recommended version
 FROM ruby:2.6.6
 
-RUN set -ex \
- && apt-get update \
- && apt-get install -y --no-install-recommends curl jq \
- && rm -rf /var/lib/apt/lists/*
-
 # Set the language to ensure encodings are handled properly.
 # Otherwise the transloader tool will have errors parsing.
 ENV LC_ALL C.UTF-8
@@ -21,5 +16,22 @@ RUN bundle install
 # Copy contents of the repository into the image
 COPY . .
 
-ENTRYPOINT ["ruby", "transload"]
-CMD ["--help"]
+# install cron
+RUN set -ex \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends cron \
+ && rm -rf /var/lib/apt/lists/* \
+ && chmod +x docker/cron/*.sh
+
+
+ENV \
+  SCHEDULE="@daily" \
+  DATA_DIR=/data \
+  MOVING_WINDOW="2 days" \
+  STA_URL= \
+  OVERWRITE_METADATA=false
+
+
+VOLUME /data
+
+ENTRYPOINT [ "./docker/cron/entrypoint.sh" ]
