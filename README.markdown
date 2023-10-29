@@ -1,3 +1,7 @@
+**The latest state of the 52North UoM branch of the data transloader is migrated to https://cwincloud.cc.umanitoba.ca/ccadi/transloader (a private repository!) and will be maintained there.**
+**Hence, this public fork of the data-transloader by 52N will be archived.**
+
+
 # Arctic Sensor Web Data Transloader
 
 [![Build Status](https://travis-ci.org/GeoSensorWebLab/data-transloader.svg?branch=master)](https://travis-ci.org/GeoSensorWebLab/data-transloader)
